@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="model.MainMenuController">
+   <children>
+      <VBox layoutX="358.0" layoutY="127.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="322.0" spacing="50.0" AnchorPane.bottomAnchor="141.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="350.0">
+         <children>
+            <Button fx:id="playBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#playBtnPressed" prefHeight="50.0" prefWidth="300.0" text="Play" />
+            <Button layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" prefWidth="300.0" text="Shop" />
+            <Button layoutX="10.0" layoutY="60.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" prefWidth="300.0" text="Settings" />
+         </children>
+      </VBox>
+      <Label layoutX="324.0" layoutY="170.0" text="Dreamscapes" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="300.0">
+         <font>
+            <Font name="System Bold" size="53.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
