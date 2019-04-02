@@ -2,13 +2,27 @@ package controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import model.ControlledScreen;
+import model.Main;
+import model.ScreenManager;
 
-public class MainMenuController {
+public class MainMenuController implements ControlledScreen {
 
-    @FXML private Button playBtn;
+    private ScreenManager screenManager;
+
+
+    @FXML
+    private Button playBtn;
 
     @FXML
     private void playBtnPressed() {
-        System.out.println("Playing game!!!!!");
+        screenManager.setScreen(Main.mainMenuID);
+        //gameManager.startGame();
     }
+
+    @Override
+    public void setScreenParent(ScreenManager screenManager) {
+        this.screenManager = screenManager;
+    }
+
 }
