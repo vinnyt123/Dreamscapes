@@ -10,9 +10,7 @@ public class MainMenuController implements ControlledScreen {
 
     private GameManager gameManager;
 
-
-    @FXML
-    private Button playBtn;
+    @FXML private Button playBtn;
 
     @FXML
     private void playBtnPressed() {
