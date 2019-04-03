@@ -3,13 +3,12 @@ package controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import model.ControlledScreen;
-import model.GameManager;
 import model.Main;
-import model.ScreenManager;
+import model.GameManager;
 
 public class MainMenuController implements ControlledScreen {
 
-    private ScreenManager screenManager;
+    private GameManager gameManager;
 
 
     @FXML
@@ -17,13 +16,12 @@ public class MainMenuController implements ControlledScreen {
 
     @FXML
     private void playBtnPressed() {
-        screenManager.setScreen(Main.map0ID);
-        new GameManager(playBtn.getScene());
+        gameManager.startGame();
     }
 
     @Override
-    public void setScreenParent(ScreenManager screenManager) {
-        this.screenManager = screenManager;
+    public void setScreenParent(GameManager gameManager) {
+        this.gameManager = gameManager;
     }
 
 }

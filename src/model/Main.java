@@ -20,13 +20,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-        ScreenManager screenManager = new ScreenManager();
-        screenManager.loadScreen(mainMenuID, mainMenuFile);
-        screenManager.loadScreen(map0ID, map0File);
+        GameManager gameManager = new GameManager();
 
+        gameManager.loadScreen(mainMenuID, mainMenuFile);
+        gameManager.loadMap(map0ID, map0File);
 
-        screenManager.setScreen(Main.mainMenuID);
-        primaryStage.setScene(new Scene(screenManager));
+        gameManager.setScreen(Main.mainMenuID);
+        primaryStage.setScene(new Scene(gameManager));
         primaryStage.setTitle("Dreamscapes");
         primaryStage.show();
     }
