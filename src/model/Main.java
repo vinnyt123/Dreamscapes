@@ -10,9 +10,8 @@ public class Main extends Application {
 
     public static String mainMenuID = "Main Menu";
     public static String mainMenuFile = "view/MainMenu.fxml";
-
-
-
+    public static String map0ID = "Map0";
+    public static String map0File = "view/Map0.fxml";
 
     public static void main(String[] args) {
         launch(args);
@@ -22,7 +21,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
 
         ScreenManager screenManager = new ScreenManager();
-        screenManager.loadScreen(Main.mainMenuID, Main.mainMenuFile);
+        screenManager.loadScreen(mainMenuID, mainMenuFile);
+        screenManager.loadScreen(map0ID, map0File);
+
 
         screenManager.setScreen(Main.mainMenuID);
         primaryStage.setScene(new Scene(screenManager));
