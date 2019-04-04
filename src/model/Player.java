@@ -7,8 +7,10 @@ import java.util.HashSet;
 
 public class Player extends Entity {
 
-    private static final double JUMPHEIGHT = -8;
-    private static final double RUNSPEED = 5;
+    private static final double JUMPHEIGHT = -12;
+    static final double WIDTH = 20;
+    static final double HEIGHT = 30;
+    static final double RUNSPEED = 5;
     private boolean inAir = true;
     Controls controls = new Controls();
 
@@ -18,7 +20,9 @@ public class Player extends Entity {
     }
 
     private void createSprite() {
-        Rectangle rectangle = new Rectangle(200,400, 20, 30);
+        Rectangle rectangle = new Rectangle(WIDTH, HEIGHT);
+        setTranslateX(100);
+        setTranslateY(600);
         this.getChildren().addAll(rectangle);
     }
 
@@ -32,8 +36,8 @@ public class Player extends Entity {
 
     public void jump() {
         if(!inAir) {
-            this.inAir = true;
-            setVelocity(new Point2D(getVelocity().getX(), JUMPHEIGHT));
+            inAir = true;
+            setVelocity(new Point2D(0, JUMPHEIGHT));
         }
     }
 

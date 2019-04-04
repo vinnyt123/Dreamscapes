@@ -15,7 +15,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage){
 
         GameManager gameManager = new GameManager();
         Scene scene = new Scene(gameManager);

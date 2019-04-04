@@ -50,15 +50,13 @@ public class GameManager extends StackPane {
     }
 
     public void setUpHashSet() {
-        keysPressed = new HashSet<String>();
+        keysPressed = new HashSet<>();
         this.setOnKeyPressed(e -> {
             keysPressed.add(e.getCode().toString());
             System.out.println(e.getCode().toString());
         });
 
-        this.setOnKeyReleased(e -> {
-            keysPressed.remove(e.getCode().toString());
-        });
+        this.setOnKeyReleased(e -> keysPressed.remove(e.getCode().toString()));
     }
 
 }
