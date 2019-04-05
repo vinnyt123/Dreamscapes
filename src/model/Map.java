@@ -27,6 +27,27 @@ public class Map extends Pane {
 
     public void moveEntities() {
         player.move(walls);
+
+        //Set layout so player is in middle or not if edge of map (currently 2000x2000)
+        setLayoutX(720 - player.getTranslateX());
+        setLayoutY(450 - player.getTranslateY());
+        if(player.getTranslateX() - 720 < 0) {
+            setLayoutX(getLayoutX() + (player.getTranslateX() - 720));
+
+        } else if(player.getTranslateX() + 720 > 2000) {
+            setLayoutX(getLayoutX() + (player.getTranslateX() - 1280));
+        }
+        if(player.getTranslateY() + 450 > 2000) {
+            setLayoutY(getLayoutY() + (player.getTranslateY() - 1550));
+        } else if(player.getTranslateY() - 450 < 0) {
+            System.out.println("out by: " + (player.getTranslateY() - 450));
+            setLayoutY(getLayoutY() + (player.getTranslateY() - 450));
+        }
+        //Javadoc says relocate is better than setting layout but both work
+        //relocate((720 - player.getTranslateX()), (450 - player.getTranslateY()));
+        //or
+        //setLayoutX(720 - player.getTranslateX());
+        //setLayoutY(450 - player.getTranslateY());
     }
 
 }

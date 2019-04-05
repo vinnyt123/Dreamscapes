@@ -21,8 +21,9 @@ public class Player extends Entity {
 
     private void createSprite() {
         Rectangle rectangle = new Rectangle(WIDTH, HEIGHT);
+        //Spawn coords in map
         setTranslateX(100);
-        setTranslateY(600);
+        setTranslateY(1850);
         this.getChildren().addAll(rectangle);
     }
 
