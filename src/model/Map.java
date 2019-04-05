@@ -40,7 +40,6 @@ public class Map extends Pane {
         if(player.getTranslateY() + 450 > 2000) {
             setLayoutY(getLayoutY() + (player.getTranslateY() - 1550));
         } else if(player.getTranslateY() - 450 < 0) {
-            System.out.println("out by: " + (player.getTranslateY() - 450));
             setLayoutY(getLayoutY() + (player.getTranslateY() - 450));
         }
         //Javadoc says relocate is better than setting layout but both work
