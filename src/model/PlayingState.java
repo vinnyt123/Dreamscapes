@@ -49,7 +49,7 @@ public class PlayingState extends StackPane {
 
     public void setMap(String name, Player player) {
         if (loadedMaps.containsKey(name)) {
-            currentMap = new Map(loadedMaps.get(name), player);
+            currentMap = new Map(loadedMaps.get(name), player, 2000, 2000);
             mapLayer.getChildren().clear();
             mapLayer.getChildren().add(currentMap);
         } else {

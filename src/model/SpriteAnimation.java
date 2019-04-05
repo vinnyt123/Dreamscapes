@@ -6,6 +6,8 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+//Basically followed this tutorial https://netopyr.com/2012/03/09/creating-a-sprite-animation-with-javafx/
+//Need to credit source in documentation?
 public class SpriteAnimation extends Transition {
 
     private final ImageView imageView;
@@ -18,19 +20,14 @@ public class SpriteAnimation extends Transition {
 
     private int lastIndex;
 
-    public SpriteAnimation(
-            ImageView imageView,
-            Duration duration,
-            int count,   int columns,
-            int offsetX, int offsetY,
-            int width,   int height) {
+    public SpriteAnimation(ImageView imageView, Duration duration, int count, int columns, int offsetX, int offsetY, int width, int height) {
         this.imageView = imageView;
-        this.count     = count;
-        this.columns   = columns;
-        this.offsetX   = offsetX;
-        this.offsetY   = offsetY;
-        this.width     = width;
-        this.height    = height;
+        this.count = count;
+        this.columns = columns;
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
+        this.width = width;
+        this.height = height;
         setCycleDuration(duration);
         setInterpolator(Interpolator.EASE_BOTH);
     }

@@ -12,11 +12,15 @@ public class Map extends Pane {
 
     private Player player;
     private List<Rectangle> walls = new ArrayList<>();
+    private final int WIDTH;
+    private final int HEIGHT;
 
-    public Map(Node node, Player player) {
+    public Map(Node node, Player player, int width, int height) {
         super(node);
         this.player = player;
         this.getChildren().add(player);
+        this.WIDTH = width;
+        this.HEIGHT = height;
         //Create list of rectangles that are walls/floors
         for(Node item : ((AnchorPane) node).getChildrenUnmodifiable()) {
             if(item instanceof Rectangle) {
@@ -28,17 +32,17 @@ public class Map extends Pane {
     public void moveEntities() {
         player.move(walls);
 
-        //Set layout so player is in middle or not if edge of map (currently 2000x2000)
+        //Set layout so player is in middle or not if edge of map (720 & 450 are half of the viewport x & y)
         setLayoutX(720 - player.getTranslateX());
         setLayoutY(450 - player.getTranslateY());
         if(player.getTranslateX() - 720 < 0) {
             setLayoutX(getLayoutX() + (player.getTranslateX() - 720));
 
-        } else if(player.getTranslateX() + 720 > 2000) {
-            setLayoutX(getLayoutX() + (player.getTranslateX() - 1280));
+        } else if(player.getTranslateX() + 720 > WIDTH) {
+            setLayoutX(getLayoutX() + (player.getTranslateX() - (WIDTH - 720)));
         }
-        if(player.getTranslateY() + 450 > 2000) {
-            setLayoutY(getLayoutY() + (player.getTranslateY() - 1550));
+        if(player.getTranslateY() + 450 > HEIGHT) {
+            setLayoutY(getLayoutY() + (player.getTranslateY() - (HEIGHT - 450)));
         } else if(player.getTranslateY() - 450 < 0) {
             setLayoutY(getLayoutY() + (player.getTranslateY() - 450));
         }
