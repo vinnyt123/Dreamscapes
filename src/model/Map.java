@@ -12,15 +12,15 @@ public class Map extends Pane {
 
     private Player player;
     private List<Rectangle> walls = new ArrayList<>();
-    private final int WIDTH;
-    private final int HEIGHT;
+    private final double WIDTH;
+    private final double HEIGHT;
 
-    public Map(Node node, Player player, int width, int height) {
+    public Map(Node node, Player player) {
         super(node);
         this.player = player;
         this.getChildren().add(player);
-        this.WIDTH = width;
-        this.HEIGHT = height;
+        this.WIDTH = node.getBoundsInParent().getWidth();
+        this.HEIGHT = node.getBoundsInParent().getHeight();
         //Create list of rectangles that are walls/floors
         for(Node item : ((AnchorPane) node).getChildrenUnmodifiable()) {
             if(item instanceof Rectangle) {
