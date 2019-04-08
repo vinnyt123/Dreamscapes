@@ -15,6 +15,7 @@ public class Map extends Pane {
     private Player player;
     private List<Rectangle> walls = new ArrayList<>();
     private List<FlyingEnemy> flyingEnemies = new ArrayList<>();
+    private List<WalkingEnemy> walkingEnemies = new ArrayList<>();
     private final double WIDTH;
     private final double HEIGHT;
 
@@ -28,6 +29,9 @@ public class Map extends Pane {
         for(Node item : ((AnchorPane) node).getChildrenUnmodifiable()) {
             if(item instanceof Rectangle) {
                 walls.add((Rectangle) item);
+                if (item.getId() != null && item.getId().startsWith("enemyPlatform")) {
+                    walkingEnemies.add(new WalkingEnemy((Rectangle) item));
+                }
             } else if (item instanceof Line) {
                 if(item.getId().startsWith("flyingEnemy")) {
                     System.out.println(((Line) item).getStartX() + " " + ((Line) item).getStartY());
@@ -37,12 +41,16 @@ public class Map extends Pane {
             }
         }
         this.getChildren().addAll(flyingEnemies);
+        this.getChildren().addAll(walkingEnemies);
     }
 
     public void moveEntities() {
         player.move(walls);
         for(FlyingEnemy enemy : flyingEnemies) {
             enemy.move(walls, new Point2D(player.getTranslateX() + (Player.WIDTH/2), player.getTranslateY() + (Player.HEIGHT/2)));
+        }
+        for (WalkingEnemy enemy : walkingEnemies) {
+            enemy.move(walls);
         }
 
         //Set layout so player is in middle or not if edge of map (720 & 450 are half of the viewport x & y)
