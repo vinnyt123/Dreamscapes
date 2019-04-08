@@ -11,7 +11,7 @@ import java.util.HashSet;
 
 public class Player extends Entity {
 
-    private static final Image IMAGE = new Image("images/p1_walkR.png");
+    private static final Image WALK_RIGHT_IMAGE = new Image("images/p1_walkR.png");
     private static final double JUMPHEIGHT = -12;
     static final double WIDTH = 35;
     static final double HEIGHT = 50;
@@ -19,10 +19,15 @@ public class Player extends Entity {
     private boolean inAir = true;
     private boolean isRight = true;
     private Controls controls = new Controls();
-    private Animation animationWalk;
+    private Animation animationWalkRight;
+    private boolean hasDoubleJumped = false;
 
     public Player() {
         super();
+        //Spawn coords in map
+        setTranslateX(100);
+        setTranslateY(1650);
+
         createSprite();
     }
 
@@ -31,18 +36,16 @@ public class Player extends Entity {
     //imageView.setEffect(reflection);
     private void createSprite() {
         //Rectangle rectangle = new Rectangle(WIDTH, HEIGHT);
-        //Spawn coords in map
-        setTranslateX(100);
-        setTranslateY(1650);
-        final ImageView imageViewR = new ImageView(IMAGE);
+        final ImageView imageViewR = new ImageView(WALK_RIGHT_IMAGE);
         imageViewR.setViewport(new Rectangle2D(0, 0, 72, 97));
         imageViewR.setFitWidth(WIDTH);
         imageViewR.setFitHeight(HEIGHT);
         //imageView.getTransforms().addAll(new Scale(-1, 1), new Translate(-WIDTH, 0));
-        animationWalk = new SpriteAnimation(imageViewR, Duration.millis(100), 11, 11, 0, 0, 72, 97);
-        animationWalk.setCycleCount(1);
+        animationWalkRight = new SpriteAnimation(imageViewR, Duration.millis(100), 11, 11, 0, 0, 72, 97);
+        animationWalkRight.setCycleCount(1);
         this.getChildren().addAll(imageViewR);
     }
+
 
 
     public void setInAir(boolean inAir) {
@@ -64,7 +67,7 @@ public class Player extends Entity {
         setVelocity(new Point2D(-RUNSPEED, getVelocity().getY()));
         isRight = false;
         if(!inAir) {
-            animationWalk.play();
+            animationWalkRight.play();
         }
     }
 
@@ -72,12 +75,11 @@ public class Player extends Entity {
         setVelocity(new Point2D(RUNSPEED, getVelocity().getY()));
         isRight = true;
         if(!inAir) {
-            animationWalk.play();
+            animationWalkRight.play();
         }
     }
 
     public void attack() {
-
 
     }
 
