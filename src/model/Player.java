@@ -21,13 +21,14 @@ public class Player extends Entity implements IsGravityEffected {
     private Controls controls = new Controls();
     private Animation animationWalkRight;
     private boolean hasDoubleJumped = false;
+    private HashSet<String> keysPressed;
 
-    public Player() {
+    public Player(HashSet<String> keysPressed) {
         super();
+        this.keysPressed = keysPressed;
         //Spawn coords in map
         setTranslateX(100);
         setTranslateY(1650);
-
         createSprite();
     }
 
@@ -88,7 +89,7 @@ public class Player extends Entity implements IsGravityEffected {
     }
 
 
-    public void performActions(HashSet<String> keysPressed) {
+    public void move() {
         if (keysPressed.contains(controls.getCrouchKey())) {
             crouch();
         }
@@ -112,5 +113,12 @@ public class Player extends Entity implements IsGravityEffected {
         if (keysPressed.contains(controls.getAttackKey())) {
             attack();
         }
+
+        applyGravity();
+        translateThis();
+    }
+
+    public Point2D getPosition() {
+        return new Point2D(getTranslateX() + (WIDTH/2), getTranslateY() + (HEIGHT/2));
     }
 }

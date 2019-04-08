@@ -13,9 +13,9 @@ public class WalkingEnemy extends Enemy {
     private Bounds platformBounds;
 
 
-    public WalkingEnemy(Rectangle platform) {
+    public WalkingEnemy(Bounds platformBounds) {
         super();
-        this.platformBounds = platform.getBoundsInParent();
+        this.platformBounds = platformBounds;
         createSprite(platformBounds.getMinX() + platformBounds.getWidth() / 2 - WIDTH / 2, platformBounds.getMinY() - HEIGHT);
         velocity = new Point2D(SPEED, 0);
     }
@@ -27,7 +27,7 @@ public class WalkingEnemy extends Enemy {
         this.getChildren().add(body);
     }
 
-    public void move(List<Rectangle> walls) {
+    public void move() {
         if (this.getBoundsInParent().getMaxX() > platformBounds.getMaxX() || this.getBoundsInParent().getMinX() < platformBounds.getMinX()) {
             velocity = new Point2D(-velocity.getX(), 0);
         }

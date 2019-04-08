@@ -13,44 +13,45 @@ import java.util.List;
 public class Map extends Pane {
 
     private Player player;
-    private List<Rectangle> walls = new ArrayList<>();
-    private List<FlyingEnemy> flyingEnemies = new ArrayList<>();
-    private List<WalkingEnemy> walkingEnemies = new ArrayList<>();
+    private List<GameObject> gameObjects = new ArrayList<GameObject>();
+    private List<Entity> entities = new ArrayList<Entity>();
     private final double WIDTH;
     private final double HEIGHT;
 
     public Map(Node node, Player player) {
         super(node);
         this.player = player;
-        this.getChildren().add(player);
+        entities.add(player);
         this.WIDTH = node.getBoundsInParent().getWidth();
         this.HEIGHT = node.getBoundsInParent().getHeight();
         //Create list of rectangles that are walls/floors. Use line start to create enemy spawn point.
         for(Node item : ((AnchorPane) node).getChildrenUnmodifiable()) {
             if(item instanceof Rectangle) {
-                walls.add((Rectangle) item);
+                gameObjects.add(new Wall((Rectangle) item));
+                this.getChildren().remove(item);
                 if (item.getId() != null && item.getId().startsWith("enemyPlatform")) {
-                    walkingEnemies.add(new WalkingEnemy((Rectangle) item));
+                    entities.add(new WalkingEnemy(item.getBoundsInParent()));
                 }
             } else if (item instanceof Line) {
                 if(item.getId().startsWith("flyingEnemy")) {
                     System.out.println(((Line) item).getStartX() + " " + ((Line) item).getStartY());
-                    flyingEnemies.add(new FlyingEnemy(((Line) item).getStartX(), ((Line) item).getStartY()));
+                    entities.add(new FlyingEnemy(((Line) item).getStartX(), ((Line) item).getStartY(), player));
                     this.getChildren().remove(item);
                 }
             }
         }
-        this.getChildren().addAll(flyingEnemies);
-        this.getChildren().addAll(walkingEnemies);
+        this.getChildren().addAll(entities);
+        this.getChildren().addAll(gameObjects);
     }
 
     public void moveEntities() {
-        player.move(walls);
-        for(FlyingEnemy enemy : flyingEnemies) {
-            enemy.move(walls, new Point2D(player.getTranslateX() + (Player.WIDTH/2), player.getTranslateY() + (Player.HEIGHT/2)));
-        }
-        for (WalkingEnemy enemy : walkingEnemies) {
-            enemy.move(walls);
+        for(Entity entity : entities) {
+            entity.move();
+            /*
+            for (GameObject gameObject : gameObjects) {
+                gameObject.intersect(entity);
+            }
+            */
         }
 
         //Set layout so player is in middle or not if edge of map (720 & 450 are half of the viewport x & y)

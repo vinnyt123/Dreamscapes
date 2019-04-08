@@ -22,6 +22,8 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         gameManager.setUpHashSet();
         primaryStage.setTitle("Dreamscapes");
+        primaryStage.setMaxHeight(900);
+        primaryStage.setMaxWidth(1440);
         primaryStage.show();
     }
 }
