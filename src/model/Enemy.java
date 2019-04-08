@@ -1,4 +1,5 @@
 package model;
 
-public class Enemy {
+public abstract class Enemy extends Entity {
+
 }

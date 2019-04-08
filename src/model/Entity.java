@@ -9,12 +9,10 @@ import java.util.List;
 public abstract class Entity extends Group {
 
     protected Point2D velocity = new Point2D(0,0);
-    private static final double GRAVITY = 0.4;
-    private static final double TERMINAL_VELOCITY = 15;
 
     public void applyGravity() {
-        if(velocity.getY() < TERMINAL_VELOCITY) {
-            velocity = velocity.add(0, GRAVITY);
+        if(velocity.getY() < IsGravityEffected.TERMINAL_VELOCITY && this instanceof IsGravityEffected) {
+            velocity = velocity.add(0, IsGravityEffected.GRAVITY);
         }
     }
 
@@ -29,7 +27,6 @@ public abstract class Entity extends Group {
     public void move(List<Rectangle> walls) {
         applyGravity();
 
-        //System.out.println("velocity x: " + velocity.getX() + " velocity y: " + velocity.getY());
         moveX(walls, velocity.getX());
         moveY(walls, velocity.getY());
     }
@@ -42,7 +39,7 @@ public abstract class Entity extends Group {
             for(Rectangle wall : walls ) {
                 if(getBoundsInParent().intersects(wall.getBoundsInParent())) {
                     if(movingRight) {
-                        if(getTranslateX() + Player.WIDTH == wall.getBoundsInParent().getMinX()) {
+                        if(getTranslateX() + this.getBoundsInParent().getWidth() == wall.getBoundsInParent().getMinX()) {
                             return;
                         }
                     } else {
@@ -63,9 +60,10 @@ public abstract class Entity extends Group {
             for(Rectangle wall : walls) {
                 if(getBoundsInParent().intersects(wall.getBoundsInParent())) {
                     if(movingDown) {
-                        if(getTranslateY() + Player.HEIGHT == wall.getBoundsInParent().getMinY()) {
-                            Player player = (Player) this;
-                            player.setInAir(false);
+                        if(getTranslateY() + this.getBoundsInParent().getHeight() == wall.getBoundsInParent().getMinY()) {
+                            if(this instanceof Player) {
+                                ((Player) this).setInAir(false);
+                            }
                             velocity = new Point2D(velocity.getX(), 0);
                             return;
                         }
@@ -77,8 +75,9 @@ public abstract class Entity extends Group {
                     }
                 } else {
                     //Player fell of platform without jumping
-                    Player player = (Player) this;
-                    player.setInAir(true);
+                    if(this instanceof Player) {
+                        ((Player) this).setInAir(true);
+                    }
                 }
             }
             setTranslateY(getTranslateY() + (movingDown ? 1 : -1));

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 
 <AnchorPane maxHeight="2000.0" maxWidth="2000.0" prefHeight="2000.0" prefWidth="2000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
@@ -27,5 +28,6 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="551.0" layoutY="441.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="544.0" layoutY="225.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="836.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" width="801.0" />
+      <Line fx:id="flyingEnemy1" endX="707.0" endY="1589.0" startX="707.0" startY="1589.0" stroke="WHITE" />
    </children>
 </AnchorPane>

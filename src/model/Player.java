@@ -9,7 +9,7 @@ import javafx.util.Duration;
 
 import java.util.HashSet;
 
-public class Player extends Entity {
+public class Player extends Entity implements IsGravityEffected {
 
     private static final Image IMAGE = new Image("images/p1_walkR.png");
     private static final double JUMPHEIGHT = -12;
@@ -77,7 +77,6 @@ public class Player extends Entity {
     }
 
     public void attack() {
-
 
     }
 
