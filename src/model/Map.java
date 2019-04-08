@@ -42,7 +42,7 @@ public class Map extends Pane {
     public void moveEntities() {
         player.move(walls);
         for(FlyingEnemy enemy : flyingEnemies) {
-            enemy.move(walls, new Point2D(player.getTranslateX() + (Player.WIDTH/2), player.getTranslateY() + (Player.HEIGHT / 2)));
+            enemy.move(walls, new Point2D(player.getTranslateX() + (Player.WIDTH/2), player.getTranslateY() + (Player.HEIGHT/2)));
         }
 
         //Set layout so player is in middle or not if edge of map (720 & 450 are half of the viewport x & y)

@@ -7,9 +7,10 @@ import java.util.List;
 
 public class FlyingEnemy extends Enemy {
 
-    private static final double RANGE = 1000;
-    private static final double SPEED = 5;
-    private static final double TERMINAL_VELOCITY = 5;
+    private static final double RANGE = 500;
+    private static final double SPEED = 4;
+    private static final double WIDTH = 30;
+    private static final double HEIGHT = 30;
 
     public FlyingEnemy(double spawnX, double spawnY) {
         super();
@@ -17,7 +18,7 @@ public class FlyingEnemy extends Enemy {
     }
 
     private void createSprite(double spawnX, double spawnY) {
-        Rectangle body = new Rectangle(30, 30);
+        Rectangle body = new Rectangle(WIDTH, HEIGHT);
         setTranslateX(spawnX);
         setTranslateY(spawnY);
         this.getChildren().add(body);
@@ -26,10 +27,9 @@ public class FlyingEnemy extends Enemy {
     public void move(List<Rectangle> walls, Point2D playerPos) {
         double distance = playerPos.distance(getTranslateX() + 15, getTranslateY() + 15);
         if(distance < RANGE) {
-            if(this.getVelocity().getX() < TERMINAL_VELOCITY || this.getVelocity().getY() < TERMINAL_VELOCITY) {
-                double theta = Math.toDegrees(Math.atan2(playerPos.getY() - this.getTranslateY() + 15,  playerPos.getX() - this.getTranslateX() + 15));
-                this.setVelocity(new Point2D(SPEED * Math.cos(Math.toRadians(theta)), SPEED * Math.sin(Math.toRadians(theta))));
-            }
+            double theta = Math.toDegrees(Math.atan2(playerPos.getY() - this.getTranslateY() - (HEIGHT/2),  playerPos.getX() - this.getTranslateX() - (WIDTH/2)));
+            this.setVelocity(new Point2D(SPEED * Math.cos(Math.toRadians(theta)), SPEED * Math.sin(Math.toRadians(theta))));
+
         } else {
             this.setVelocity(new Point2D(0, 0));
         }
