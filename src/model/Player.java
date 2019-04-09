@@ -16,8 +16,6 @@ public class Player extends Entity implements IsGravityEffected {
     static final double WIDTH = 35;
     static final double HEIGHT = 50;
     static final double RUNSPEED = 5;
-    private boolean inAir = true;
-    private boolean isRight = true;
     private Controls controls = new Controls();
     private Animation animationWalkRight;
     private boolean hasDoubleJumped = false;
@@ -49,34 +47,29 @@ public class Player extends Entity implements IsGravityEffected {
     }
 
 
-
-    public void setInAir(boolean inAir) {
-        this.inAir = inAir;
-    }
-
     public void crouch() {
 
     }
 
     public void jump() {
-        if(!inAir) {
-            inAir = true;
+        if(!this.getInAir()) {
+            this.setInAir(true);
             setVelocity(new Point2D(0, JUMPHEIGHT));
         }
     }
 
     public void moveLeft() {
         setVelocity(new Point2D(-RUNSPEED, getVelocity().getY()));
-        isRight = false;
-        if(!inAir) {
+        this.setRight(false);
+        if(!this.getInAir()) {
             animationWalkRight.play();
         }
     }
 
     public void moveRight() {
         setVelocity(new Point2D(RUNSPEED, getVelocity().getY()));
-        isRight = true;
-        if(!inAir) {
+        this.setRight(true);
+        if(!this.getInAir()) {
             animationWalkRight.play();
         }
     }

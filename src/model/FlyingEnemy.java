@@ -3,8 +3,6 @@ package model;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
 
-import java.util.List;
-
 public class FlyingEnemy extends Enemy {
 
     private static final double RANGE = 500;

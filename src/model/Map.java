@@ -1,7 +1,6 @@
 package model;
 
 import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -29,7 +28,7 @@ public class Map extends Pane {
         this.setPrefHeight(pane.getPrefHeight());
 
         //Create list of rectangles that are walls/floors. Use line start to create enemy spawn point.
-        System.out.println(pane.getChildrenUnmodifiable().size());
+        //System.out.println(pane.getChildrenUnmodifiable().size());
         for(Node item : pane.getChildrenUnmodifiable()) {
             if(item instanceof Rectangle) {
                 gameObjects.add(new Wall((Rectangle) item));
@@ -42,8 +41,8 @@ public class Map extends Pane {
                     flyingEnemies.add(new FlyingEnemy(((Line) item).getStartX(), ((Line) item).getStartY(), player));
                 }
             }
-            System.out.println(item.getClass().getName());
-            System.out.println(pane.getChildrenUnmodifiable().size());
+            //System.out.println(item.getClass().getName());
+            //System.out.println(pane.getChildrenUnmodifiable().size());
         }
 
         this.getChildren().addAll(flyingEnemies);

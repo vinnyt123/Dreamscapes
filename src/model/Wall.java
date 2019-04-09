@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Wall extends GameObject {
 
-    private static double EXTRA_LIL_TRANSLATION = 0.1;
+    private static double EXTRA_LIL_TRANSLATION = 0.01;
 
     public Wall(Rectangle rectangle) {
         Rectangle newRectangle = new Rectangle(rectangle.getLayoutX(), rectangle.getLayoutY(), rectangle.getWidth(), rectangle.getHeight());
@@ -22,18 +22,17 @@ public class Wall extends GameObject {
             entity.undoMove();
             moveX(entity);
             moveY(entity);
+        } else if(entity.getVelocity().getY() > IsGravityEffected.GRAVITY) {
+            entity.setInAir(true);
         }
     }
 
-    //TODO: Fix corner bug when you jump without moving left or right
-    //Move x & y methods automatically do collisions: only move in increments of 1 until hit a wall then stop
     private boolean moveX(Entity entity) {
         double xDistance = entity.getLastMove().getX();
         boolean movingRight = xDistance > 0;
 
         entity.setTranslateX(entity.getTranslateX() + entity.getLastMove().getX());
         if(getBoundsInParent().intersects(entity.getBoundsInParent())) {
-            System.out.println("XXXXXX");
             if(movingRight) {
                 System.out.println("moving right");
                 entity.setTranslateX(entity.getTranslateX() - (entity.getBoundsInParent().getMaxX() - this.getBoundsInParent().getMinX() + EXTRA_LIL_TRANSLATION));
@@ -54,19 +53,13 @@ public class Wall extends GameObject {
         if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
             if (movingDown) {
                 System.out.println("moving down");
-                if (entity instanceof Player) {
-                    ((Player) entity).setInAir(false);
-                }
+                entity.setInAir(false);
                 entity.setTranslateY(entity.getTranslateY() - (entity.getBoundsInParent().getMaxY() - this.getBoundsInParent().getMinY() + EXTRA_LIL_TRANSLATION));
             } else {
                 System.out.println("moving up");
                 entity.setTranslateY(entity.getTranslateY() - (entity.getBoundsInParent().getMinY() - this.getBoundsInParent().getMaxY() - EXTRA_LIL_TRANSLATION));
             }
             entity.setVelocity(new Point2D(entity.velocity.getX(), 0));
-        } else {
-            if (entity instanceof Player) {
-                //((Player) this).setInAir(true);
-            }
         }
     }
 }
