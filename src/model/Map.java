@@ -47,7 +47,7 @@ public class Map extends Pane {
     public void moveEntities() {
         player.move(walls);
         for(FlyingEnemy enemy : flyingEnemies) {
-            enemy.move(walls, new Point2D(player.getTranslateX() + (Player.WIDTH/2), player.getTranslateY() + (Player.HEIGHT/2)));
+            enemy.move(walls, player);
         }
         for (WalkingEnemy enemy : walkingEnemies) {
             enemy.move(walls);

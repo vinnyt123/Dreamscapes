@@ -33,5 +33,6 @@ public class WalkingEnemy extends Enemy {
         }
         setTranslateX(getTranslateX() + velocity.getX());
         setTranslateY(getTranslateY() + velocity.getY());
+        //super.move(walls);
     }
 }
