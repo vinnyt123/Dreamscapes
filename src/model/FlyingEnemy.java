@@ -13,8 +13,12 @@ public class FlyingEnemy extends Enemy {
     private static final double HEIGHT = 30;
     private static final double DAMAGE = 2;
 
-    public FlyingEnemy(double spawnX, double spawnY) {
+    private Player player;
+
+
+    public FlyingEnemy(double spawnX, double spawnY,Player player) {
         super();
+        this.player = player;
         createSprite(spawnX, spawnY);
     }
 
@@ -25,7 +29,8 @@ public class FlyingEnemy extends Enemy {
         this.getChildren().add(body);
     }
 
-    public void move(List<Rectangle> walls, Player player) {
+    @Override
+    public void move() {
         //Move flying enemy towards player
         Point2D playerPos = new Point2D(player.getTranslateX() + (Player.WIDTH/2), player.getTranslateY() + (Player.HEIGHT/2));
         double distance = playerPos.distance(getTranslateX() + (WIDTH/2), getTranslateY() + (HEIGHT/2));
@@ -40,6 +45,7 @@ public class FlyingEnemy extends Enemy {
         if(this.getBoundsInParent().intersects(player.getBoundsInParent())) {
             //knock-back player
         }
-        super.move(walls);
+
+        applyVelocity();
     }
 }

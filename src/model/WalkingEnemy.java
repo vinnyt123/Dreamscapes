@@ -27,7 +27,7 @@ public class WalkingEnemy extends Enemy {
         this.getChildren().add(body);
     }
 
-    public void move(List<Rectangle> walls) {
+    public void move() {
         if (this.getBoundsInParent().getMaxX() > platformBounds.getMaxX() || this.getBoundsInParent().getMinX() < platformBounds.getMinX()) {
             velocity = new Point2D(-velocity.getX(), 0);
         }

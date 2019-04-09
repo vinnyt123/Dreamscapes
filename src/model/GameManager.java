@@ -6,8 +6,8 @@ import java.util.HashSet;
 
 public class GameManager extends StackPane {
 
-    private HashSet<String> keysPressed;
-    private Player player = new Player();
+    private HashSet<String> keysPressed  = new HashSet<>();
+    private Player player = new Player(keysPressed);
     private AnimationTimer gameLoop;
     private MainMenuState mainMenuState;
     private PlayingState playingState;
@@ -43,14 +43,12 @@ public class GameManager extends StackPane {
     private void setUpGameLoop() {
         gameLoop = new AnimationTimer() {
             public void handle(long currentNanoTime) {
-                player.performActions(keysPressed);
                 playingState.getCurrentMap().moveEntities();
             }
         };
     }
 
     public void setUpHashSet() {
-        keysPressed = new HashSet<>();
         this.setOnKeyPressed(e -> {
             keysPressed.add(e.getCode().toString());
             System.out.println(e.getCode().toString());

@@ -12,7 +12,7 @@ import java.util.List;
 public class Map extends Pane {
 
     private Player player;
-    private List<Rectangle> walls = new ArrayList<>();
+    private List<GameObject> gameObjects = new ArrayList<>();
     private List<FlyingEnemy> flyingEnemies = new ArrayList<>();
     private List<WalkingEnemy> walkingEnemies = new ArrayList<>();
     private final double WIDTH;
@@ -27,30 +27,41 @@ public class Map extends Pane {
         //Create list of rectangles that are walls/floors. Use line start to create enemy spawn point.
         for(Node item : ((AnchorPane) node).getChildrenUnmodifiable()) {
             if(item instanceof Rectangle) {
-                walls.add((Rectangle) item);
+                gameObjects.add(new Wall((Rectangle) item));
+                this.getChildren().remove(item);
                 if (item.getId() != null && item.getId().startsWith("enemyPlatform")) {
                     walkingEnemies.add(new WalkingEnemy((Rectangle) item));
                 }
             } else if (item instanceof Line) {
                 if(item.getId().startsWith("flyingEnemy")) {
                     //System.out.println(((Line) item).getStartX() + " " + ((Line) item).getStartY());
-                    flyingEnemies.add(new FlyingEnemy(((Line) item).getStartX(), ((Line) item).getStartY()));
+                    flyingEnemies.add(new FlyingEnemy(((Line) item).getStartX(), ((Line) item).getStartY(), player));
                     this.getChildren().remove(item);
                 }
             }
         }
         this.getChildren().addAll(flyingEnemies);
         this.getChildren().addAll(walkingEnemies);
+        this.getChildren().addAll(gameObjects);
     }
 
     public void moveEntities() {
-        player.move(walls);
+        player.move();
         for(FlyingEnemy enemy : flyingEnemies) {
-            enemy.move(walls, player);
+            enemy.move();
         }
         for (WalkingEnemy enemy : walkingEnemies) {
-            enemy.move(walls);
+            enemy.move();
         }
+
+        for (GameObject gameObject : gameObjects) {
+            gameObject.intersect(player);
+            for (FlyingEnemy flyingEnemy : flyingEnemies) {
+                gameObject.intersect(flyingEnemy);
+            }
+        }
+
+
         moveCamera();
     }
 
