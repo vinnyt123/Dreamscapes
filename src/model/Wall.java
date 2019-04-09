@@ -8,9 +8,11 @@ import java.util.List;
 
 public class Wall extends GameObject {
 
+    private static double EXTRA_LIL_TRANSLATION = 0.1;
+
     public Wall(Rectangle rectangle) {
         Rectangle newRectangle = new Rectangle(rectangle.getLayoutX(), rectangle.getLayoutY(), rectangle.getWidth(), rectangle.getHeight());
-        //newRectangle.setFill(rectangle.getFill());
+        newRectangle.setFill(rectangle.getFill());
         this.getChildren().add(newRectangle);
     }
 
@@ -34,10 +36,10 @@ public class Wall extends GameObject {
             System.out.println("XXXXXX");
             if(movingRight) {
                 System.out.println("moving right");
-                entity.setTranslateX(entity.getTranslateX() - (entity.getBoundsInParent().getMaxX() - this.getBoundsInParent().getMinX() + 1));
+                entity.setTranslateX(entity.getTranslateX() - (entity.getBoundsInParent().getMaxX() - this.getBoundsInParent().getMinX() + EXTRA_LIL_TRANSLATION));
             } else {
                 System.out.println("moving left");
-                entity.setTranslateX(entity.getTranslateX() - (entity.getBoundsInParent().getMinX() - this.getBoundsInParent().getMaxX() - 1));
+                entity.setTranslateX(entity.getTranslateX() - (entity.getBoundsInParent().getMinX() - this.getBoundsInParent().getMaxX() - EXTRA_LIL_TRANSLATION));
             }
             return true;
         }
@@ -55,10 +57,10 @@ public class Wall extends GameObject {
                 if (entity instanceof Player) {
                     ((Player) entity).setInAir(false);
                 }
-                entity.setTranslateY(entity.getTranslateY() - (entity.getBoundsInParent().getMaxY() - this.getBoundsInParent().getMinY() + 1));
+                entity.setTranslateY(entity.getTranslateY() - (entity.getBoundsInParent().getMaxY() - this.getBoundsInParent().getMinY() + EXTRA_LIL_TRANSLATION));
             } else {
                 System.out.println("moving up");
-                entity.setTranslateY(entity.getTranslateY() - (entity.getBoundsInParent().getMinY() - this.getBoundsInParent().getMaxY() - 1));
+                entity.setTranslateY(entity.getTranslateY() - (entity.getBoundsInParent().getMinY() - this.getBoundsInParent().getMaxY() - EXTRA_LIL_TRANSLATION));
             }
             entity.setVelocity(new Point2D(entity.velocity.getX(), 0));
         } else {

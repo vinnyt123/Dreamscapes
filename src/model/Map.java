@@ -53,20 +53,19 @@ public class Map extends Pane {
 
     public void moveEntities() {
         player.move();
-        //for(FlyingEnemy enemy : flyingEnemies) {
-           // enemy.move();
-        //}
-        //for (WalkingEnemy enemy : walkingEnemies) {
-        //    enemy.move();
-        //}
+        for(FlyingEnemy enemy : flyingEnemies) {
+            enemy.move();
+        }
+        for (WalkingEnemy enemy : walkingEnemies) {
+            enemy.move();
+        }
 
         for (GameObject gameObject : gameObjects) {
             gameObject.intersect(player);
-           // for (FlyingEnemy flyingEnemy : flyingEnemies) {
-             //   gameObject.intersect(flyingEnemy);
-           // }
+           for (FlyingEnemy flyingEnemy : flyingEnemies) {
+               gameObject.intersect(flyingEnemy);
+           }
         }
-
 
         moveCamera();
     }

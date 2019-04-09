@@ -7,7 +7,6 @@ import java.util.HashSet;
 public class GameManager extends StackPane {
 
     private HashSet<String> keysPressed  = new HashSet<>();
-    private Player player = new Player(keysPressed);
     private AnimationTimer gameLoop;
     private MainMenuState mainMenuState;
     private PlayingState playingState;
@@ -15,7 +14,7 @@ public class GameManager extends StackPane {
     public GameManager() {
         super();
         mainMenuState = new MainMenuState();
-        playingState = new PlayingState(player);
+        playingState = new PlayingState(keysPressed);
         setUpGameLoop();
         switchToMenu();
     }
@@ -27,6 +26,7 @@ public class GameManager extends StackPane {
     }
 
     public void switchToPlayingGame() {
+        playingState.newGame();
         this.getChildren().clear();
         this.getChildren().add(playingState);
         gameLoop.start();

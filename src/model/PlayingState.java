@@ -7,6 +7,7 @@ import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class PlayingState extends StackPane {
 
@@ -16,15 +17,18 @@ public class PlayingState extends StackPane {
 
     private HashMap<String, Pane> loadedMaps = new HashMap<>();
 
+    private HashSet<String> keysPressed;
+    private Player player;
+
     private Node pauseMenuLayer;
     private Pane mapLayer = new Pane();
 
     private Map currentMap;
 
-    public PlayingState(Player player) {
+    public PlayingState(HashSet<String> keysPressed) {
+        this.keysPressed = keysPressed;
         loadMap(map0ID, map0File);
         loadPauseMenu();
-        setMap(map0ID, player);
         this.getChildren().addAll(mapLayer, pauseMenuLayer);
     }
 
@@ -55,6 +59,11 @@ public class PlayingState extends StackPane {
         } else {
             System.out.println("Map " + name + " has not been loaded.");
         }
+    }
+
+    public void newGame() {
+        player = new Player(keysPressed);
+        setMap(map0ID, player);
     }
 
     public Map getCurrentMap() {
