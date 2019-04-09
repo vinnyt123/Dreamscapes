@@ -14,7 +14,7 @@ public class PlayingState extends StackPane {
     public static String map0File = "view/Map0.fxml";
     public static String pauseMenuFile = "view/PauseMenu.fxml";
 
-    private HashMap<String, Node> loadedMaps = new HashMap<>();
+    private HashMap<String, Pane> loadedMaps = new HashMap<>();
 
     private Node pauseMenuLayer;
     private Pane mapLayer = new Pane();

@@ -19,19 +19,20 @@ public class Map extends Pane {
     private final double WIDTH;
     private final double HEIGHT;
 
-    public Map(Node node, Player player) {
-        super(node);
+    public Map(Pane pane, Player player) {
+        super();
         this.player = player;
         this.getChildren().add(player);
-        this.WIDTH = node.getBoundsInParent().getWidth();
-        this.HEIGHT = node.getBoundsInParent().getHeight();
+        this.WIDTH = pane.getBoundsInParent().getWidth();
+        this.HEIGHT = pane.getBoundsInParent().getHeight();
+        this.setPrefWidth(pane.getPrefWidth());
+        this.setPrefHeight(pane.getPrefHeight());
 
-        List<Node> itemsToRemove = new ArrayList<>();
         //Create list of rectangles that are walls/floors. Use line start to create enemy spawn point.
-        for(Node item : ((AnchorPane) node).getChildrenUnmodifiable()) {
+        System.out.println(pane.getChildrenUnmodifiable().size());
+        for(Node item : pane.getChildrenUnmodifiable()) {
             if(item instanceof Rectangle) {
                 gameObjects.add(new Wall((Rectangle) item));
-                itemsToRemove.add(item);
                 if (item.getId() != null && item.getId().startsWith("enemyPlatform")) {
                     walkingEnemies.add(new WalkingEnemy((Rectangle) item));
                 }
@@ -39,14 +40,15 @@ public class Map extends Pane {
                 if(item.getId().startsWith("flyingEnemy")) {
                     //System.out.println(((Line) item).getStartX() + " " + ((Line) item).getStartY());
                     flyingEnemies.add(new FlyingEnemy(((Line) item).getStartX(), ((Line) item).getStartY(), player));
-                    this.getChildren().remove(item);
                 }
             }
+            System.out.println(item.getClass().getName());
+            System.out.println(pane.getChildrenUnmodifiable().size());
         }
+
         this.getChildren().addAll(flyingEnemies);
         this.getChildren().addAll(walkingEnemies);
         this.getChildren().addAll(gameObjects);
-        this.getChildren().removeAll(itemsToRemove);
     }
 
     public void moveEntities() {
