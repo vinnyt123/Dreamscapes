@@ -42,5 +42,4 @@ public class FlyingEnemy extends Enemy {
         }
         super.move(walls);
     }
-
 }
