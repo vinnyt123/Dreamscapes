@@ -1,6 +1,5 @@
 package model;
 
-import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -34,7 +33,7 @@ public class Map extends Pane {
                 }
             } else if (item instanceof Line) {
                 if(item.getId().startsWith("flyingEnemy")) {
-                    System.out.println(((Line) item).getStartX() + " " + ((Line) item).getStartY());
+                    //System.out.println(((Line) item).getStartX() + " " + ((Line) item).getStartY());
                     flyingEnemies.add(new FlyingEnemy(((Line) item).getStartX(), ((Line) item).getStartY()));
                     this.getChildren().remove(item);
                 }
@@ -52,7 +51,10 @@ public class Map extends Pane {
         for (WalkingEnemy enemy : walkingEnemies) {
             enemy.move(walls);
         }
+        moveCamera();
+    }
 
+    private void moveCamera() {
         //Set layout so player is in middle or not if edge of map (720 & 450 are half of the viewport x & y)
         //TODO: instead of using 720 & 450 get size of stage and use half of those - support resizing - will need
         //to add listener on stage resize property so it updates when resized though
@@ -75,5 +77,4 @@ public class Map extends Pane {
         //setLayoutX(720 - player.getTranslateX());
         //setLayoutY(450 - player.getTranslateY());
     }
-
 }
