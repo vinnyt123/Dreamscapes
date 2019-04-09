@@ -4,6 +4,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.shape.Rectangle;
 
+import java.awt.*;
 import java.util.List;
 
 public abstract class Entity extends Group {
@@ -28,12 +29,18 @@ public abstract class Entity extends Group {
     public void applyVelocity() {
         setTranslateX(getTranslateX() + velocity.getX());
         setTranslateY(getTranslateY() + velocity.getY());
+        System.out.println(velocity.getX() + "  " +  velocity.getY());
         lastMove = velocity;
         setVelocity(new Point2D(0, velocity.getY()));
+
     }
 
     public Point2D getLastMove() {
         return lastMove;
+    }
+
+    public void setLastMove(Point2D point2D) {
+        lastMove = point2D;
     }
 
     public abstract void move();
@@ -41,6 +48,5 @@ public abstract class Entity extends Group {
     public void undoMove() {
         setTranslateX(getTranslateX() - lastMove.getX());
         setTranslateY(getTranslateY() - lastMove.getY());
-        velocity = lastMove;
     }
 }

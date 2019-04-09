@@ -15,6 +15,7 @@ public class Map extends Pane {
     private List<GameObject> gameObjects = new ArrayList<>();
     private List<FlyingEnemy> flyingEnemies = new ArrayList<>();
     private List<WalkingEnemy> walkingEnemies = new ArrayList<>();
+
     private final double WIDTH;
     private final double HEIGHT;
 
@@ -24,11 +25,13 @@ public class Map extends Pane {
         this.getChildren().add(player);
         this.WIDTH = node.getBoundsInParent().getWidth();
         this.HEIGHT = node.getBoundsInParent().getHeight();
+
+        List<Node> itemsToRemove = new ArrayList<>();
         //Create list of rectangles that are walls/floors. Use line start to create enemy spawn point.
         for(Node item : ((AnchorPane) node).getChildrenUnmodifiable()) {
             if(item instanceof Rectangle) {
                 gameObjects.add(new Wall((Rectangle) item));
-                this.getChildren().remove(item);
+                itemsToRemove.add(item);
                 if (item.getId() != null && item.getId().startsWith("enemyPlatform")) {
                     walkingEnemies.add(new WalkingEnemy((Rectangle) item));
                 }
@@ -43,22 +46,23 @@ public class Map extends Pane {
         this.getChildren().addAll(flyingEnemies);
         this.getChildren().addAll(walkingEnemies);
         this.getChildren().addAll(gameObjects);
+        this.getChildren().removeAll(itemsToRemove);
     }
 
     public void moveEntities() {
         player.move();
-        for(FlyingEnemy enemy : flyingEnemies) {
-            enemy.move();
-        }
-        for (WalkingEnemy enemy : walkingEnemies) {
-            enemy.move();
-        }
+        //for(FlyingEnemy enemy : flyingEnemies) {
+           // enemy.move();
+        //}
+        //for (WalkingEnemy enemy : walkingEnemies) {
+        //    enemy.move();
+        //}
 
         for (GameObject gameObject : gameObjects) {
             gameObject.intersect(player);
-            for (FlyingEnemy flyingEnemy : flyingEnemies) {
-                gameObject.intersect(flyingEnemy);
-            }
+           // for (FlyingEnemy flyingEnemy : flyingEnemies) {
+             //   gameObject.intersect(flyingEnemy);
+           // }
         }
 
 
