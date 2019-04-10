@@ -51,6 +51,10 @@ public class Map extends Pane {
     }
 
     public void moveEntities() {
+        if(player.health < 0) {
+            System.out.println("DEAD");
+            ((GameManager) player.getScene().getRoot()).switchToMenu();
+        }
         player.move();
         for(FlyingEnemy enemy : flyingEnemies) {
             enemy.move();

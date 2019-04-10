@@ -1,8 +1,6 @@
 package model;
 
 import javafx.animation.AnimationTimer;
-import javafx.scene.Node;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.StackPane;
 import java.util.HashSet;
 
