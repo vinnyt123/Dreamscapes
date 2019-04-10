@@ -2,9 +2,10 @@ package controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import model.GameManager;
+
 
 public class PauseMenuController {
 
@@ -12,9 +13,11 @@ public class PauseMenuController {
     @FXML private AnchorPane pauseMenuBlock;
 
     @FXML
-    private void pauseButtonPressed() {
-        pauseMenuBlock.setVisible(true);
-        ((GameManager) pauseButton.getScene().getRoot()).pauseGame();
+    private void pauseButtonPressed(KeyEvent e) {
+        if(e.getCode().toString().equals("P")) {
+            pauseMenuBlock.setVisible(true);
+            ((GameManager) pauseButton.getScene().getRoot()).pauseGame();
+        }
     }
 
     @FXML

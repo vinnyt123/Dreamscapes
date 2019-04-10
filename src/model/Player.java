@@ -3,17 +3,20 @@ package model;
 import javafx.animation.Animation;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class Player extends Entity implements IsGravityEffected {
 
     private static final Image WALK_RIGHT_IMAGE = new Image("images/p1_walkR.png");
     private static final double JUMPHEIGHT = -12;
+    private List<Weapon> playerWeapons = new ArrayList<>();
+    private Weapon currentWeapon;
     static final double WIDTH = 35;
     static final double HEIGHT = 50;
     static final double RUNSPEED = 5;
@@ -26,11 +29,17 @@ public class Player extends Entity implements IsGravityEffected {
         super();
         this.keysPressed = keysPressed;
         health = 50;
+        currentWeapon = new WeaponFists(this);
+        playerWeapons.add(currentWeapon);
         //Spawn coords in map
         setTranslateX(100);
         setTranslateY(1650);
 
         createSprite();
+    }
+
+    public Weapon getCurrentWeapon() {
+        return currentWeapon;
     }
 
     //Cool effect for if the player is standing in water or something (creates reflection)
@@ -102,7 +111,6 @@ public class Player extends Entity implements IsGravityEffected {
             } else {
                 setVelocity(new Point2D((velocity.getX() > 0) ? velocity.getX() - 1: velocity.getX() + 1, velocity.getY()));
                 setVelocity(new Point2D(velocity.getX(), (velocity.getX() < 0) ? velocity.getX()+ IsGravityEffected.GRAVITY : -velocity.getX() + IsGravityEffected.GRAVITY));
-                //System.out.println("x velocity: " + velocity.getX() + " y velocity: " + velocity.getY());
 
             }
             applyGravity();

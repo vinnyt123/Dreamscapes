@@ -11,6 +11,6 @@
             <Button layoutX="42.0" layoutY="114.0" mnemonicParsing="false" onAction="#resumeButtonPressed" prefHeight="103.0" prefWidth="350.0" text="Resume" />
          </children>
       </AnchorPane>
-      <Button fx:id="pauseButton" layoutX="1358.0" layoutY="17.0" mnemonicParsing="false" onAction="#pauseButtonPressed" text="Pause" />
+      <Button fx:id="pauseButton" layoutX="1358.0" layoutY="17.0" mnemonicParsing="false" onKeyPressed="#pauseButtonPressed" text="Pause" />
    </children>
 </AnchorPane>

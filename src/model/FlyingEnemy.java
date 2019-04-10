@@ -19,7 +19,7 @@ public class FlyingEnemy extends Enemy {
     private Player player;
 
 
-    public FlyingEnemy(double spawnX, double spawnY,Player player) {
+    public FlyingEnemy(double spawnX, double spawnY, Player player) {
         super();
         this.player = player;
         health = HEALTH;
@@ -49,7 +49,6 @@ public class FlyingEnemy extends Enemy {
             }
             else {
                 setVelocity(new Point2D((velocity.getX() > 0) ? velocity.getX() - 1 : velocity.getX() + 1, (velocity.getY() > 0) ? velocity.getY() - 1 : velocity.getY() + 1));
-                System.out.println(velocity);
             }
             applyVelocity();
             return;
