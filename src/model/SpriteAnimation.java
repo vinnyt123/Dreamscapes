@@ -10,7 +10,7 @@ import javafx.util.Duration;
 //Need to credit source in documentation?
 public class SpriteAnimation extends Transition {
 
-    private final ImageView imageView;
+    private ImageView imageView;
     private final int count;
     private final int columns;
     private final int offsetX;
@@ -19,6 +19,10 @@ public class SpriteAnimation extends Transition {
     private final int height;
 
     private int lastIndex;
+
+    public ImageView getImageView() {
+        return imageView;
+    }
 
     public SpriteAnimation(ImageView imageView, Duration duration, int count, int columns, int offsetX, int offsetY, int width, int height) {
         this.imageView = imageView;

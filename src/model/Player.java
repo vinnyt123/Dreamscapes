@@ -1,29 +1,33 @@
 package model;
 
-import javafx.animation.Animation;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class Player extends Entity implements IsGravityEffected {
 
     private static final Image WALK_RIGHT_IMAGE = new Image("images/p1_walkR.png");
     private static final double JUMPHEIGHT = -12;
-    private List<Weapon> playerWeapons = new ArrayList<>();
-    private Weapon currentWeapon;
+    private static final long DAMAGE_COOLDOWN = 500;
+    private static final double RUNSPEED = 5;
     static final double WIDTH = 35;
     static final double HEIGHT = 50;
-    static final double RUNSPEED = 5;
+
+    private ColorAdjust colorAdjust = new ColorAdjust();
+    private Timer timer = new Timer();
+    private List<Weapon> playerWeapons = new ArrayList<>();
+    private Weapon currentWeapon;
+    private boolean isFlashing = false;
     private Controls controls = new Controls();
-    private Animation animationWalkRight;
+    private SpriteAnimation animationWalkRight;
     private boolean hasDoubleJumped = false;
     private HashSet<String> keysPressed;
+    private ImageView imageViewR;
 
     public Player(HashSet<String> keysPressed) {
         super();
@@ -38,16 +42,12 @@ public class Player extends Entity implements IsGravityEffected {
         createSprite();
     }
 
-    public Weapon getCurrentWeapon() {
-        return currentWeapon;
-    }
-
     //Cool effect for if the player is standing in water or something (creates reflection)
     //Reflection reflection = new Reflection();
     //imageView.setEffect(reflection);
     private void createSprite() {
         //Rectangle rectangle = new Rectangle(WIDTH, HEIGHT);
-        final ImageView imageViewR = new ImageView(WALK_RIGHT_IMAGE);
+        imageViewR = new ImageView(WALK_RIGHT_IMAGE);
         imageViewR.setViewport(new Rectangle2D(0, 0, 72, 97));
         imageViewR.setFitWidth(WIDTH);
         imageViewR.setFitHeight(HEIGHT);
@@ -93,25 +93,28 @@ public class Player extends Entity implements IsGravityEffected {
 
     }
 
-    public void knockBack(boolean isRight, double distance) {
+    public void knockBack(double xDistance, double yDistance) {
         isKnockback = true;
-        if(isRight) {
-            setVelocity(new Point2D(distance, - distance + 4));
-        } else {
-            setVelocity(new Point2D(-distance, - distance + 4));
-        }
+        setVelocity(new Point2D(xDistance, yDistance));
+        colorAdjust.setSaturation(1);
+        animationWalkRight.getImageView().setEffect(colorAdjust);
+        isFlashing = true;
+        timer.schedule(new coolDownTimer(), DAMAGE_COOLDOWN);
+    }
+
+    public boolean isFlashing() {
+        return isFlashing;
     }
 
     @Override
     public void move() {
 
         if(isKnockback) {
-            if(velocity.getX() == 0) {
+            if(Math.round(velocity.getX()) == 0) {
                 isKnockback = false;
             } else {
-                setVelocity(new Point2D((velocity.getX() > 0) ? velocity.getX() - 1: velocity.getX() + 1, velocity.getY()));
-                setVelocity(new Point2D(velocity.getX(), (velocity.getX() < 0) ? velocity.getX()+ IsGravityEffected.GRAVITY : -velocity.getX() + IsGravityEffected.GRAVITY));
-
+                //TODO: fix bug where y doesn't matter as it's set back to 0 in wall move
+                setVelocity(new Point2D((velocity.getX() > 0) ? velocity.getX() - 1: velocity.getX() + 1, (velocity.getY() > 0) ? velocity.getY() - 1: velocity.getY() + 1));
             }
             applyGravity();
             applyVelocity();
@@ -144,5 +147,12 @@ public class Player extends Entity implements IsGravityEffected {
 
         applyGravity();
         applyVelocity();
+    }
+
+    private class coolDownTimer extends TimerTask {
+        public void run() {
+            colorAdjust.setSaturation(0);
+            isFlashing = false;
+        }
     }
 }
