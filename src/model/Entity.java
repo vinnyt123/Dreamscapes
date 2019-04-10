@@ -10,6 +10,8 @@ import java.util.List;
 public abstract class Entity extends Group {
 
     protected Point2D velocity = new Point2D(0,0);
+    protected double health;
+    protected boolean isKnockback = false;
     private Point2D lastMove;
     private boolean inAir = true;
     private boolean isRight = true;
@@ -46,7 +48,9 @@ public abstract class Entity extends Group {
         setTranslateX(getTranslateX() + velocity.getX());
         setTranslateY(getTranslateY() + velocity.getY());
         lastMove = velocity;
-        setVelocity(new Point2D(0, velocity.getY()));
+        if(!isKnockback) {
+            setVelocity(new Point2D(0, velocity.getY()));
+        }
 
     }
 

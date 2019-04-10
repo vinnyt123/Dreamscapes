@@ -3,6 +3,7 @@ package model;
 import javafx.animation.Animation;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
@@ -24,6 +25,7 @@ public class Player extends Entity implements IsGravityEffected {
     public Player(HashSet<String> keysPressed) {
         super();
         this.keysPressed = keysPressed;
+        health = 50;
         //Spawn coords in map
         setTranslateX(100);
         setTranslateY(1650);
@@ -82,8 +84,32 @@ public class Player extends Entity implements IsGravityEffected {
 
     }
 
+    public void knockBack(boolean isRight, double distance) {
+        isKnockback = true;
+        if(isRight) {
+            setVelocity(new Point2D(distance, - distance + 4));
+        } else {
+            setVelocity(new Point2D(-distance, - distance + 4));
+        }
+    }
+
     @Override
     public void move() {
+
+        if(isKnockback) {
+            if(velocity.getX() == 0) {
+                isKnockback = false;
+            } else {
+                setVelocity(new Point2D((velocity.getX() > 0) ? velocity.getX() - 1: velocity.getX() + 1, velocity.getY()));
+                setVelocity(new Point2D(velocity.getX(), (velocity.getX() < 0) ? velocity.getX()+ IsGravityEffected.GRAVITY : -velocity.getX() + IsGravityEffected.GRAVITY));
+                //System.out.println("x velocity: " + velocity.getX() + " y velocity: " + velocity.getY());
+
+            }
+            applyGravity();
+            applyVelocity();
+            return;
+        }
+
         if (keysPressed.contains(controls.getCrouchKey())) {
             crouch();
         }

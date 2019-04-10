@@ -4,18 +4,18 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
 
-import java.util.List;
-
 public class WalkingEnemy extends Enemy {
     private static final double SPEED = 2;
     private static final double WIDTH = 30;
     private static final double HEIGHT = 30;
+    private static final double HEALTH = 10;
     private Bounds platformBounds;
 
 
     public WalkingEnemy(Rectangle platform) {
         super();
         this.platformBounds = platform.getBoundsInParent();
+        health = HEALTH;
         createSprite(platformBounds.getMinX() + platformBounds.getWidth() / 2 - WIDTH / 2, platformBounds.getMinY() - HEIGHT);
         velocity = new Point2D(SPEED, 0);
     }

@@ -34,10 +34,10 @@ public class Wall extends GameObject {
         entity.setTranslateX(entity.getTranslateX() + entity.getLastMove().getX());
         if(getBoundsInParent().intersects(entity.getBoundsInParent())) {
             if(movingRight) {
-                System.out.println("moving right");
+                //System.out.println("moving right");
                 entity.setTranslateX(entity.getTranslateX() - (entity.getBoundsInParent().getMaxX() - this.getBoundsInParent().getMinX() + EXTRA_LIL_TRANSLATION));
             } else {
-                System.out.println("moving left");
+                //System.out.println("moving left");
                 entity.setTranslateX(entity.getTranslateX() - (entity.getBoundsInParent().getMinX() - this.getBoundsInParent().getMaxX() - EXTRA_LIL_TRANSLATION));
             }
             return true;
@@ -52,11 +52,11 @@ public class Wall extends GameObject {
         entity.setTranslateY(entity.getTranslateY() + entity.getLastMove().getY());
         if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
             if (movingDown) {
-                System.out.println("moving down");
+                //System.out.println("moving down");
                 entity.setInAir(false);
                 entity.setTranslateY(entity.getTranslateY() - (entity.getBoundsInParent().getMaxY() - this.getBoundsInParent().getMinY() + EXTRA_LIL_TRANSLATION));
             } else {
-                System.out.println("moving up");
+                //System.out.println("moving up");
                 entity.setTranslateY(entity.getTranslateY() - (entity.getBoundsInParent().getMinY() - this.getBoundsInParent().getMaxY() - EXTRA_LIL_TRANSLATION));
             }
             entity.setVelocity(new Point2D(entity.velocity.getX(), 0));
