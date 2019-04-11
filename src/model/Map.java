@@ -47,6 +47,7 @@ public class Map extends Pane {
     }
 
     public void moveEntities() {
+        //TODO: make this a listener on a simpledouble health
         if(player.health < 0) {
             System.out.println("DEAD");
             ((GameManager) player.getScene().getRoot()).switchToMenu();
@@ -54,6 +55,7 @@ public class Map extends Pane {
         player.move();
         for(Enemy enemy : enemies) {
             enemy.move();
+            enemy.intersect(player);
         }
 
         for (GameObject gameObject : gameObjects) {

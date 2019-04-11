@@ -9,9 +9,10 @@ import java.util.List;
 
 public abstract class Entity extends Group {
 
-    protected Point2D velocity = new Point2D(0,0);
-    protected double health;
-    protected boolean isKnockback = false;
+    Point2D velocity = new Point2D(0,0);
+    boolean isFlashing = false;
+    double health;
+    boolean isKnockback = false;
     private Point2D lastMove;
     private boolean inAir = true;
     private boolean isRight = true;
@@ -26,6 +27,10 @@ public abstract class Entity extends Group {
         if(velocity.getY() < IsGravityEffected.TERMINAL_VELOCITY) {
             velocity = velocity.add(0, IsGravityEffected.GRAVITY);
         }
+    }
+
+    public boolean isFlashing() {
+        return isFlashing;
     }
 
     public void setInAir(boolean inAir) {
@@ -56,10 +61,6 @@ public abstract class Entity extends Group {
 
     public Point2D getLastMove() {
         return lastMove;
-    }
-
-    public void setLastMove(Point2D point2D) {
-        lastMove = point2D;
     }
 
     public void undoMove() {

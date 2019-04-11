@@ -22,7 +22,6 @@ public class Player extends Entity implements IsGravityEffected {
     private Timer timer = new Timer();
     private List<Weapon> playerWeapons = new ArrayList<>();
     private Weapon currentWeapon;
-    private boolean isFlashing = false;
     private Controls controls = new Controls();
     private SpriteAnimation animationWalkRight;
     private boolean hasDoubleJumped = false;

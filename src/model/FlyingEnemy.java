@@ -11,11 +11,8 @@ public class FlyingEnemy extends Enemy {
     private static final double HEIGHT = 30;
     private static final double DAMAGE = 4;
     private static final double KNOCKBACK_PLAYER = 8;
-    private static final double KNOCKBACK_THIS = 8;
+    private static final double KNOCKBACK_THIS = 9;
     private static final double HEALTH = 10;
-    private boolean knockX = false;
-    private boolean knockY = false;
-    private double theta;
 
     private Player player;
 
@@ -23,7 +20,10 @@ public class FlyingEnemy extends Enemy {
     public FlyingEnemy(double spawnX, double spawnY, Player player) {
         super();
         this.player = player;
+        knockback_player = KNOCKBACK_PLAYER;
+        damage = DAMAGE;
         health = HEALTH;
+        knockback_this = KNOCKBACK_THIS;
         createSprite(spawnX, spawnY);
     }
 
@@ -52,35 +52,6 @@ public class FlyingEnemy extends Enemy {
             this.setVelocity(new Point2D(0, 0));
         }
 
-        //If enemy hits player, give some damage and knock both back
-        if(this.getBoundsInParent().intersects(player.getBoundsInParent())) {
-            player.health -= DAMAGE;
-            setKnockBack(-Math.cos(Math.toRadians(theta)) * KNOCKBACK_THIS, -Math.sin(Math.toRadians(theta)) * KNOCKBACK_THIS);
-            player.knockBack(Math.cos(Math.toRadians(theta)) * KNOCKBACK_PLAYER, Math.sin(Math.toRadians(theta)) * KNOCKBACK_PLAYER);
-        }
         applyVelocity();
-    }
-
-    private void knockBack() {
-        if(Math.round(velocity.getX()) == 0) {
-            knockX = true;
-        }
-        if(Math.round(velocity.getY()) == 0) {
-            knockY = true;
-        }
-        if(knockX && knockY) {
-            isKnockback = false;
-            knockX = false;
-            knockY = false;
-        }
-        else {
-            setVelocity(new Point2D((velocity.getX() > 0) ? velocity.getX() - 1 : velocity.getX() + 1, (velocity.getY() > 0) ? velocity.getY() - 1 : velocity.getY() + 1));
-        }
-        applyVelocity();
-    }
-
-    private void setKnockBack(double xDistance, double yDistance) {
-        isKnockback = true;
-        setVelocity(new Point2D(xDistance, yDistance));
     }
 }
