@@ -29,5 +29,6 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="544.0" layoutY="225.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="836.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" width="801.0" />
       <Line fx:id="flyingEnemy1" endX="707.0" endY="1589.0" startX="707.0" startY="1589.0" stroke="WHITE" />
+      <Rectangle id="trampoline1" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="12.0" layoutX="374.0" layoutY="1796.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
    </children>
 </AnchorPane>

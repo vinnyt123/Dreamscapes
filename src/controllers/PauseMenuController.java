@@ -15,9 +15,13 @@ public class PauseMenuController {
     @FXML
     private void pauseButtonPressed(KeyEvent e) {
         if(e.getCode().toString().equals("P")) {
-            pauseMenuBlock.setVisible(true);
-            ((GameManager) pauseButton.getScene().getRoot()).pauseGame();
+            pauseGame();
         }
+    }
+
+    @FXML
+    private void pauseButtonClicked() {
+        pauseGame();
     }
 
     @FXML
@@ -30,5 +34,10 @@ public class PauseMenuController {
     private void resumeButtonPressed() {
         pauseMenuBlock.setVisible(false);
         ((GameManager) pauseButton.getScene().getRoot()).resumeGame();
+    }
+
+    private void pauseGame() {
+        pauseMenuBlock.setVisible(true);
+        ((GameManager) pauseButton.getScene().getRoot()).pauseGame();
     }
 }
