@@ -34,6 +34,8 @@ public class Map extends Pane {
                 gameObjects.add(new Wall((Rectangle) item));
                 if (item.getId() != null && item.getId().startsWith("enemyPlatform")) {
                     walkingEnemies.add(new WalkingEnemy((Rectangle) item));
+                } else if (item.getId() != null && item.getId().startsWith("trampoline")) {
+
                 }
             } else if (item instanceof Line) {
                 if(item.getId().startsWith("flyingEnemy")) {
