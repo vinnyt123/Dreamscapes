@@ -17,7 +17,7 @@ public class Controls {
         crouchKey = "DOWN";
         leftKey = "LEFT";
         rightKey = "RIGHT";
-        attackKey = "SPACE";
+        attackKey = "DOWN";
         switchKey = "F";
     }
 

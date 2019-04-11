@@ -2,29 +2,27 @@ package model;
 
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 import java.util.*;
 
-public class Player extends Entity implements IsGravityEffected {
+public class Player extends Entity {
 
     private static final Image WALK_RIGHT_IMAGE = new Image("images/p1_walkR.png");
     private static final double JUMPHEIGHT = -12;
-    private static final long DAMAGE_COOLDOWN = 800;
+    static final long DAMAGE_COOLDOWN = 800;
     private static final double RUNSPEED = 5;
     static final double WIDTH = 35;
     static final double HEIGHT = 50;
 
-    private ColorAdjust colorAdjust = new ColorAdjust();
-    private Timer timer = new Timer();
     private List<Weapon> playerWeapons = new ArrayList<>();
     private Weapon currentWeapon;
     private Controls controls = new Controls();
     private SpriteAnimation animationWalkRight;
     private boolean hasDoubleJumped = false;
+    boolean isAttacking = false;
     private HashSet<String> keysPressed;
     private ImageView imageViewR;
 
@@ -57,6 +55,10 @@ public class Player extends Entity implements IsGravityEffected {
     }
 
 
+    public Weapon getCurrentWeapon() {
+        return currentWeapon;
+    }
+
     public void crouch() {
 
     }
@@ -85,7 +87,7 @@ public class Player extends Entity implements IsGravityEffected {
     }
 
     public void attack() {
-
+        isAttacking = true;
     }
 
     public void switchWeapon() {
@@ -146,12 +148,5 @@ public class Player extends Entity implements IsGravityEffected {
 
         applyGravity();
         applyVelocity();
-    }
-
-    private class coolDownTimer extends TimerTask {
-        public void run() {
-            colorAdjust.setSaturation(0);
-            isFlashing = false;
-        }
     }
 }

@@ -1,11 +1,13 @@
 package model;
 
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Map extends Pane {
@@ -16,6 +18,8 @@ public class Map extends Pane {
 
     private final double WIDTH;
     private final double HEIGHT;
+    static double GRAVITY = 0.4;
+    static double TERMINAL_VELOCITY = 15;
 
     public Map(Pane pane, Player player) {
         super();
@@ -52,11 +56,23 @@ public class Map extends Pane {
             System.out.println("DEAD");
             ((GameManager) player.getScene().getRoot()).switchToMenu();
         }
+
         player.move();
-        for(Enemy enemy : enemies) {
+        Iterator<Enemy> it = enemies.iterator();
+        while (it.hasNext()) {
+            Enemy enemy = it.next();
+            if(enemy.health < 0) {
+                this.getChildren().remove(enemy);
+                it.remove();
+            }
             enemy.move();
             enemy.intersect(player);
+            if(player.isAttacking && player.getCurrentWeapon().getRange() > getDistance(player, enemy) && !enemy.isFlashing) {
+                enemy.setKnockBack(true);
+                enemy.health -= player.getCurrentWeapon().getDamage();
+            }
         }
+        player.isAttacking = false;
 
         for (GameObject gameObject : gameObjects) {
             gameObject.intersect(player);
@@ -90,5 +106,11 @@ public class Map extends Pane {
         //or
         //setLayoutX(720 - player.getTranslateX());
         //setLayoutY(450 - player.getTranslateY());
+    }
+
+    private double getDistance(Player player, Enemy enemy) {
+        Point2D playerPos = new Point2D(player.getTranslateX() + Player.WIDTH /2, player.getTranslateY() + Player.HEIGHT /2);
+        Point2D enemyPos = new Point2D(enemy.getTranslateX() + enemy.width/2, enemy.getTranslateY() + enemy.width/2);
+        return playerPos.distance(enemyPos);
     }
 }

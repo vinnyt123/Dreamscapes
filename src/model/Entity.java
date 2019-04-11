@@ -2,14 +2,19 @@ package model;
 
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.shape.Rectangle;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public abstract class Entity extends Group {
 
     Point2D velocity = new Point2D(0,0);
+    ColorAdjust colorAdjust = new ColorAdjust();
+    Timer timer = new Timer();
     boolean isFlashing = false;
     double health;
     boolean isKnockback = false;
@@ -24,8 +29,8 @@ public abstract class Entity extends Group {
     }
 
     public void applyGravity() {
-        if(velocity.getY() < IsGravityEffected.TERMINAL_VELOCITY) {
-            velocity = velocity.add(0, IsGravityEffected.GRAVITY);
+        if(velocity.getY() < Map.TERMINAL_VELOCITY) {
+            velocity = velocity.add(0, Map.GRAVITY);
         }
     }
 
@@ -56,7 +61,6 @@ public abstract class Entity extends Group {
         if(!isKnockback) {
             setVelocity(new Point2D(0, velocity.getY()));
         }
-
     }
 
     public Point2D getLastMove() {
@@ -66,5 +70,12 @@ public abstract class Entity extends Group {
     public void undoMove() {
         setTranslateX(getTranslateX() - lastMove.getX());
         setTranslateY(getTranslateY() - lastMove.getY());
+    }
+
+    class coolDownTimer extends TimerTask {
+        public void run() {
+            colorAdjust.setSaturation(0);
+            isFlashing = false;
+        }
     }
 }

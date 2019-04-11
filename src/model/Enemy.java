@@ -8,6 +8,8 @@ public abstract class Enemy extends Entity {
     double knockback_player;
     double knockback_this;
     double theta;
+    double width;
+    double height;
     private boolean knockX = false;
     private boolean knockY = false;
 
@@ -31,15 +33,19 @@ public abstract class Enemy extends Entity {
         applyVelocity();
     }
 
-    private void setKnockBack(double xDistance, double yDistance) {
+    void setKnockBack(boolean isDamage) {
         isKnockback = true;
-        setVelocity(new Point2D(xDistance, yDistance));
+        setVelocity(new Point2D(-Math.cos(Math.toRadians(theta)) * knockback_this, -Math.sin(Math.toRadians(theta)) * knockback_this));
+        if(isDamage) {
+            isFlashing = true;
+            timer.schedule(new coolDownTimer(), Player.DAMAGE_COOLDOWN);
+        }
     }
 
     void intersect(Player player) {
         if(this.getBoundsInParent().intersects(player.getBoundsInParent()) && !player.isFlashing()) {
             player.health -= damage;
-            setKnockBack(-Math.cos(Math.toRadians(theta)) * knockback_this, -Math.sin(Math.toRadians(theta)) * knockback_this);
+            setKnockBack(false);
             player.knockBack(Math.cos(Math.toRadians(theta)) * knockback_player, Math.sin(Math.toRadians(theta)) * knockback_player);
         }
     }
