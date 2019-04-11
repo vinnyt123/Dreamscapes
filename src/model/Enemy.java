@@ -12,6 +12,7 @@ public abstract class Enemy extends Entity {
     double height;
     private boolean knockX = false;
     private boolean knockY = false;
+    private static long DAMAGE_COOLDOWN = 200;
 
     public abstract void move();
 
@@ -35,10 +36,12 @@ public abstract class Enemy extends Entity {
 
     void setKnockBack(boolean isDamage) {
         isKnockback = true;
-        setVelocity(new Point2D(-Math.cos(Math.toRadians(theta)) * knockback_this, -Math.sin(Math.toRadians(theta)) * knockback_this));
         if(isDamage) {
             isFlashing = true;
-            timer.schedule(new coolDownTimer(), Player.DAMAGE_COOLDOWN);
+            timer.schedule(new coolDownTimer(), DAMAGE_COOLDOWN);
+            setVelocity(new Point2D(-Math.cos(Math.toRadians(theta)) * knockback_this * 1.5, -Math.sin(Math.toRadians(theta)) * knockback_this * 1.5));
+        } else {
+            setVelocity(new Point2D(-Math.cos(Math.toRadians(theta)) * knockback_this, -Math.sin(Math.toRadians(theta)) * knockback_this));
         }
     }
 
