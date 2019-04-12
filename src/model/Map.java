@@ -52,7 +52,7 @@ public class Map extends Pane {
 
     public void moveEntities() {
         //TODO: make this a listener on a simpledouble health
-        if(player.health < 0) {
+        if(player.health.get() < 0) {
             System.out.println("DEAD");
             ((GameManager) player.getScene().getRoot()).switchToMenu();
         }
@@ -61,7 +61,7 @@ public class Map extends Pane {
         Iterator<Enemy> it = enemies.iterator();
         while (it.hasNext()) {
             Enemy enemy = it.next();
-            if(enemy.health < 0) {
+            if(enemy.health.get() <= 0.0) {
                 this.getChildren().remove(enemy);
                 it.remove();
             }
@@ -69,7 +69,7 @@ public class Map extends Pane {
             enemy.intersect(player);
             if(player.isAttacking && player.getCurrentWeapon().getRange() > getDistance(player, enemy) && !enemy.isFlashing) {
                 enemy.setKnockBack(true);
-                enemy.health -= player.getCurrentWeapon().getDamage();
+                enemy.health.setValue(enemy.health.getValue() - player.getCurrentWeapon().getDamage());
             }
         }
         player.isAttacking = false;

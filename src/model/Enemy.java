@@ -47,7 +47,7 @@ public abstract class Enemy extends Entity {
 
     void intersect(Player player) {
         if(this.getBoundsInParent().intersects(player.getBoundsInParent()) && !player.isFlashing()) {
-            player.health -= damage;
+            player.health.setValue(player.health.getValue() - damage);
             setKnockBack(false);
             player.knockBack(Math.cos(Math.toRadians(theta)) * knockback_player, Math.sin(Math.toRadians(theta)) * knockback_player);
         }

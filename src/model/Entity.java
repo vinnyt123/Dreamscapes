@@ -1,5 +1,7 @@
 package model;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.effect.ColorAdjust;
@@ -16,7 +18,7 @@ public abstract class Entity extends Group {
     ColorAdjust colorAdjust = new ColorAdjust();
     Timer timer = new Timer();
     boolean isFlashing = false;
-    double health;
+    DoubleProperty health = new SimpleDoubleProperty();
     boolean isKnockback = false;
     private Point2D lastMove;
     private boolean inAir = true;

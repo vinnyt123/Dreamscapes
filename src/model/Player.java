@@ -1,5 +1,6 @@
 package model;
 
+import controllers.PauseMenuController;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
@@ -29,21 +30,24 @@ public class Player extends Entity {
     public Player(HashSet<String> keysPressed) {
         super();
         this.keysPressed = keysPressed;
-        health = 50;
+        health.setValue(1);
         currentWeapon = new WeaponFists(this);
         playerWeapons.add(currentWeapon);
         //Spawn coords in map
         setTranslateX(100);
         setTranslateY(1650);
 
-        createSprite();
+        //createSprite();
     }
 
     //Cool effect for if the player is standing in water or something (creates reflection)
     //Reflection reflection = new Reflection();
     //imageView.setEffect(reflection);
-    private void createSprite() {
-        //Rectangle rectangle = new Rectangle(WIDTH, HEIGHT);
+    public void createSprite() {
+        GameManager gm = (GameManager) getScene().getRoot();
+        PauseMenuController pm = gm.getPlayingState().getLoader().getController();
+        pm.getHealthBar().progressProperty().bind(health);
+
         imageViewR = new ImageView(WALK_RIGHT_IMAGE);
         imageViewR.setViewport(new Rectangle2D(0, 0, 72, 97));
         imageViewR.setFitWidth(WIDTH);

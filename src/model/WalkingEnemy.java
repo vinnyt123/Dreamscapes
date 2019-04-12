@@ -15,7 +15,7 @@ public class WalkingEnemy extends Enemy {
     public WalkingEnemy(Rectangle platform) {
         super();
         this.platformBounds = platform.getBoundsInParent();
-        health = HEALTH;
+        health.setValue(HEALTH);
         createSprite(platformBounds.getMinX() + platformBounds.getWidth() / 2 - WIDTH / 2, platformBounds.getMinY() - HEIGHT);
         velocity = new Point2D(SPEED, 0);
     }

@@ -29,7 +29,13 @@ public class GameManager extends StackPane {
         playingState.newGame();
         this.getChildren().clear();
         this.getChildren().add(playingState);
+        playingState.getPlayer().createSprite();
         gameLoop.start();
+    }
+
+
+    public PlayingState getPlayingState() {
+        return playingState;
     }
 
     public void pauseGame() {

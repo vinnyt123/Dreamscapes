@@ -9,7 +9,7 @@ public class FlyingEnemy extends Enemy {
     private static final double SPEED = 3;
     private static final double WIDTH = 30;
     private static final double HEIGHT = 30;
-    private static final double DAMAGE = 4;
+    private static final double DAMAGE = 0.1;
     private static final double KNOCKBACK_PLAYER = 8;
     private static final double KNOCKBACK_THIS = 9;
     private static final double HEALTH = 10;
@@ -22,7 +22,7 @@ public class FlyingEnemy extends Enemy {
         this.player = player;
         knockback_player = KNOCKBACK_PLAYER;
         damage = DAMAGE;
-        health = HEALTH;
+        health.setValue(HEALTH);
         width = WIDTH;
         height = HEIGHT;
         knockback_this = KNOCKBACK_THIS;

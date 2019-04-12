@@ -16,7 +16,7 @@ public class PlayingState extends StackPane {
     public static String pauseMenuFile = "view/PauseMenu.fxml";
 
     private HashMap<String, Pane> loadedMaps = new HashMap<>();
-
+    private FXMLLoader loader;
     private HashSet<String> keysPressed;
     private Player player;
 
@@ -33,7 +33,7 @@ public class PlayingState extends StackPane {
     }
 
     public void loadMap(String mapID, String mapFile) {
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(mapFile));
+        loader = new FXMLLoader(getClass().getClassLoader().getResource(mapFile));
         try {
             loadedMaps.put(mapID, loader.load());
         } catch (IOException e) {
@@ -43,7 +43,7 @@ public class PlayingState extends StackPane {
     }
 
     private void loadPauseMenu() {
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(pauseMenuFile));
+        loader = new FXMLLoader(getClass().getClassLoader().getResource(pauseMenuFile));
         try {
             pauseMenuLayer = loader.load();
         } catch (IOException e) {
@@ -61,6 +61,10 @@ public class PlayingState extends StackPane {
         }
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
     public void newGame() {
         player = new Player(keysPressed);
         setMap(map0ID, player);
@@ -68,6 +72,10 @@ public class PlayingState extends StackPane {
 
     public Map getCurrentMap() {
         return currentMap;
+    }
+
+    public FXMLLoader getLoader() {
+        return loader;
     }
 
 }
