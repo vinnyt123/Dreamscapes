@@ -36,6 +36,7 @@ public abstract class Enemy extends Entity {
 
     void setKnockBack(boolean isDamage) {
         isKnockback = true;
+        colorAdjust.setSaturation(1);
         if(isDamage) {
             isFlashing = true;
             timer.schedule(new coolDownTimer(), DAMAGE_COOLDOWN);

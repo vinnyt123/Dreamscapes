@@ -21,8 +21,8 @@ public abstract class Entity extends Group {
     DoubleProperty health = new SimpleDoubleProperty();
     boolean isKnockback = false;
     private Point2D lastMove;
-    private boolean inAir = true;
-    private boolean isRight = true;
+    boolean inAir = true;
+    boolean isRight = true;
 
     public abstract void move();
 
