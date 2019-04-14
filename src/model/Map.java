@@ -2,6 +2,8 @@ package model;
 
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -14,7 +16,9 @@ public class Map extends Pane {
 
     private Player player;
     private List<GameObject> gameObjects = new ArrayList<>();
+    private  List<ImageView> backgrounds = new ArrayList<>();
     private List<Enemy> enemies = new ArrayList<>();
+    private static final Image BACKGROUND = new Image("images/bg.png");
 
     private final double WIDTH;
     private final double HEIGHT;
@@ -25,8 +29,8 @@ public class Map extends Pane {
         super();
         this.player = player;
         this.getChildren().add(player);
-        this.WIDTH = pane.getBoundsInParent().getWidth();
-        this.HEIGHT = pane.getBoundsInParent().getHeight();
+        this.WIDTH = 2000;
+        this.HEIGHT = 2000;
         this.setPrefWidth(pane.getPrefWidth());
         this.setPrefHeight(pane.getPrefHeight());
 
@@ -43,15 +47,28 @@ public class Map extends Pane {
                     //System.out.println(((Line) item).getStartX() + " " + ((Line) item).getStartY());
                     enemies.add(new FlyingEnemy(((Line) item).getStartX(), ((Line) item).getStartY(), player));
                 }
+            } else if(item instanceof ImageView) {
+                item.toBack();
+                backgrounds.add((ImageView) item);
             }
         }
+        /*ImageView imageView = new ImageView(BACKGROUND);
+        imageView.setFitWidth(WIDTH);
+        imageView.setFitHeight(HEIGHT);
+        imageView.toBack();
+        this.getChildren().add(imageView);*/
 
+
+        this.getChildren().addAll(backgrounds);
         this.getChildren().addAll(enemies);
         this.getChildren().addAll(gameObjects);
+        //Remove and re-add player to ensure they're on top of image view
+        this.getChildren().remove(player);
+        this.getChildren().add(player);
     }
 
     public void moveEntities() {
-        //TODO: make this a listener on a simpledouble health
+        //TODO: make this a listener on a simple-double health
         if(player.health.get() < 0) {
             System.out.println("DEAD");
             ((GameManager) player.getScene().getRoot()).switchToMenu();
@@ -106,6 +123,14 @@ public class Map extends Pane {
         //or
         //setLayoutX(720 - player.getTranslateX());
         //setLayoutY(450 - player.getTranslateY());
+        for(ImageView imageView : backgrounds) {
+            if(imageView.getId().startsWith("trees")) {
+                imageView.setLayoutX(getLayoutX() * 0.3);
+            } else {
+                imageView.setLayoutX(getLayoutX() * 0.2);
+                imageView.setLayoutY(getLayoutY() * 0.2);
+            }
+        }
     }
 
     private double getDistance(Player player, Enemy enemy) {
