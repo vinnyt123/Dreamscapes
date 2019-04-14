@@ -2,7 +2,6 @@ package model;
 
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
@@ -18,7 +17,6 @@ public class Map extends Pane {
     private List<GameObject> gameObjects = new ArrayList<>();
     private  List<ImageView> backgrounds = new ArrayList<>();
     private List<Enemy> enemies = new ArrayList<>();
-    private static final Image BACKGROUND = new Image("images/bg.png");
 
     private final double WIDTH;
     private final double HEIGHT;
@@ -52,12 +50,6 @@ public class Map extends Pane {
                 backgrounds.add((ImageView) item);
             }
         }
-        /*ImageView imageView = new ImageView(BACKGROUND);
-        imageView.setFitWidth(WIDTH);
-        imageView.setFitHeight(HEIGHT);
-        imageView.toBack();
-        this.getChildren().add(imageView);*/
-
 
         this.getChildren().addAll(backgrounds);
         this.getChildren().addAll(enemies);
@@ -67,7 +59,7 @@ public class Map extends Pane {
         this.getChildren().add(player);
     }
 
-    public void moveEntities() {
+    void moveEntities() {
         //TODO: make this a listener on a simple-double health
         if(player.health.get() < 0) {
             System.out.println("DEAD");
@@ -123,19 +115,22 @@ public class Map extends Pane {
         //or
         //setLayoutX(720 - player.getTranslateX());
         //setLayoutY(450 - player.getTranslateY());
-        for(ImageView imageView : backgrounds) {
-            if(imageView.getId().startsWith("trees")) {
-                imageView.setLayoutX(getLayoutX() * 0.3);
-            } else {
-                imageView.setLayoutX(getLayoutX() * 0.2);
-                imageView.setLayoutY(getLayoutY() * 0.2);
-            }
-        }
+
+        scrollBackgrounds();
     }
 
     private double getDistance(Player player, Enemy enemy) {
         Point2D playerPos = new Point2D(player.getTranslateX() + Player.WIDTH /2, player.getTranslateY() + Player.HEIGHT /2);
         Point2D enemyPos = new Point2D(enemy.getTranslateX() + enemy.width/2, enemy.getTranslateY() + enemy.width/2);
         return playerPos.distance(enemyPos);
+    }
+
+    private void scrollBackgrounds() {
+        for(ImageView imageView : backgrounds) {
+            if(imageView.getId().startsWith("back")) {
+                imageView.setLayoutX(720 - player.getTranslateX() *0.2 - 1000);
+                imageView.setLayoutY(450 - player.getTranslateY() *0.2 - 500);
+            }
+        }
     }
 }

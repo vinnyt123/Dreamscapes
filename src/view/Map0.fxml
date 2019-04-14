@@ -8,19 +8,9 @@
 
 <AnchorPane maxHeight="2000.0" maxWidth="2000.0" prefHeight="2000.0" prefWidth="2000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="ba" fitHeight="2500.0" fitWidth="3094.0" layoutX="-192.0" layoutY="-349.0" pickOnBounds="true">
+      <ImageView fx:id="back" fitHeight="2500.0" fitWidth="3094.0" layoutX="-192.0" layoutY="-349.0" pickOnBounds="true">
          <image>
-            <Image url="@../images/ba.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="trees" fitHeight="662.0" fitWidth="2554.0" layoutX="60.0" layoutY="1538.0" pickOnBounds="true" preserveRatio="true" smooth="false">
-         <image>
-            <Image url="@../images/tree.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="clouds" fitHeight="2324.0" fitWidth="2600.0" layoutX="-29.0" layoutY="-651.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/cloud.png" />
+            <Image url="@../images/backgroundSpace_01.1.png" />
          </image>
       </ImageView>
       <Rectangle id="trampoline1" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="12.0" layoutX="374.0" layoutY="1796.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
