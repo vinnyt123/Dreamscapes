@@ -30,14 +30,20 @@ public class Map extends Pane {
         //System.out.println(pane.getChildrenUnmodifiable().size());
         for(Node item : pane.getChildrenUnmodifiable()) {
             if(item instanceof Rectangle) {
-                gameObjects.add(new Wall((Rectangle) item));
+                if (item.getId() == null) {
+                    gameObjects.add(new Wall((Rectangle) item));
+                } else {
+                    if (item.getId().startsWith("trampoline")) {
+                        gameObjects.add(new Trampoline((Rectangle) item));
+                    }
+                }
                 /*if (item.getId() != null && item.getId().startsWith("enemyPlatform")) {
                     enemies.add(new WalkingEnemy((Rectangle) item));
                 }*/
             } else if (item instanceof Line) {
                 if(item.getId().startsWith("flyingEnemy")) {
                     //System.out.println(((Line) item).getStartX() + " " + ((Line) item).getStartY());
-                    enemies.add(new FlyingEnemy(((Line) item).getStartX(), ((Line) item).getStartY(), player));
+                    //enemies.add(new FlyingEnemy(((Line) item).getStartX(), ((Line) item).getStartY(), player));
                 }
             }
         }
