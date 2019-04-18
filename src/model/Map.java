@@ -1,28 +1,34 @@
 package model;
 
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Map extends Pane {
 
     private Player player;
     private List<GameObject> gameObjects = new ArrayList<>();
+    private  List<ImageView> backgrounds = new ArrayList<>();
     private List<Enemy> enemies = new ArrayList<>();
 
     private final double WIDTH;
     private final double HEIGHT;
+    static double GRAVITY = 0.4;
+    static double TERMINAL_VELOCITY = 15;
 
     public Map(Pane pane, Player player) {
         super();
         this.player = player;
         this.getChildren().add(player);
-        this.WIDTH = pane.getBoundsInParent().getWidth();
-        this.HEIGHT = pane.getBoundsInParent().getHeight();
+        this.WIDTH = 2000;
+        this.HEIGHT = 2000;
         this.setPrefWidth(pane.getPrefWidth());
         this.setPrefHeight(pane.getPrefHeight());
 
@@ -45,22 +51,43 @@ public class Map extends Pane {
                     //System.out.println(((Line) item).getStartX() + " " + ((Line) item).getStartY());
                     //enemies.add(new FlyingEnemy(((Line) item).getStartX(), ((Line) item).getStartY(), player));
                 }
+            } else if(item instanceof ImageView) {
+                item.toBack();
+                backgrounds.add((ImageView) item);
             }
         }
 
+        this.getChildren().addAll(backgrounds);
         this.getChildren().addAll(enemies);
         this.getChildren().addAll(gameObjects);
+        //Remove and re-add player to ensure they're on top of image view
+        this.getChildren().remove(player);
+        this.getChildren().add(player);
     }
 
-    public void moveEntities() {
-        if(player.health < 0) {
+    void moveEntities() {
+        //TODO: make this a listener on a simple-double health
+        if(player.health.get() < 0) {
             System.out.println("DEAD");
             ((GameManager) player.getScene().getRoot()).switchToMenu();
         }
+
         player.move();
-        for(Enemy enemy : enemies) {
+        Iterator<Enemy> it = enemies.iterator();
+        while (it.hasNext()) {
+            Enemy enemy = it.next();
+            if(enemy.health.get() <= 0.0) {
+                this.getChildren().remove(enemy);
+                it.remove();
+            }
             enemy.move();
+            enemy.intersect(player);
+            if(player.isAttacking && player.getCurrentWeapon().getRange() > getDistance(player, enemy) && !enemy.isFlashing) {
+                enemy.setKnockBack(true);
+                enemy.health.setValue(enemy.health.getValue() - player.getCurrentWeapon().getDamage());
+            }
         }
+        player.isAttacking = false;
 
         for (GameObject gameObject : gameObjects) {
             gameObject.intersect(player);
@@ -94,5 +121,22 @@ public class Map extends Pane {
         //or
         //setLayoutX(720 - player.getTranslateX());
         //setLayoutY(450 - player.getTranslateY());
+
+        scrollBackgrounds();
+    }
+
+    private double getDistance(Player player, Enemy enemy) {
+        Point2D playerPos = new Point2D(player.getTranslateX() + Player.WIDTH /2, player.getTranslateY() + Player.HEIGHT /2);
+        Point2D enemyPos = new Point2D(enemy.getTranslateX() + enemy.width/2, enemy.getTranslateY() + enemy.width/2);
+        return playerPos.distance(enemyPos);
+    }
+
+    private void scrollBackgrounds() {
+        for(ImageView imageView : backgrounds) {
+            if(imageView.getId().startsWith("back")) {
+                imageView.setLayoutX(720 - player.getTranslateX() *0.2 - 1000);
+                imageView.setLayoutY(450 - player.getTranslateY() *0.2 - 500);
+            }
+        }
     }
 }

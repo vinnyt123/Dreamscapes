@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="2000.0" maxWidth="2000.0" prefHeight="2000.0" prefWidth="2000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="2000.0" maxWidth="2000.0" prefHeight="2000.0" prefWidth="2000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <ImageView fx:id="back" fitHeight="2500.0" fitWidth="3094.0" layoutX="-192.0" layoutY="-349.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/backgroundSpace_01.1.png" />
+         </image>
+      </ImageView>
+      <Rectangle id="trampoline1" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="12.0" layoutX="374.0" layoutY="1796.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutY="1922.0" stroke="BLACK" strokeType="INSIDE" width="2000.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="225.0" layoutY="1808.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle id="enemyPlatform1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="603.0" layoutY="1710.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
@@ -29,6 +37,5 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="544.0" layoutY="225.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="836.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" width="801.0" />
       <Line fx:id="flyingEnemy1" endX="707.0" endY="1589.0" startX="707.0" startY="1589.0" stroke="WHITE" />
-      <Rectangle id="trampoline1" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="12.0" layoutX="374.0" layoutY="1796.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
    </children>
 </AnchorPane>

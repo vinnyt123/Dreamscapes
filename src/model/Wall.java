@@ -22,7 +22,7 @@ public class Wall extends GameObject {
             entity.undoMove();
             moveX(entity);
             moveY(entity);
-        } else if(entity.getVelocity().getY() > IsGravityEffected.GRAVITY) {
+        } else if(entity.getVelocity().getY() > Map.GRAVITY) {
             entity.setInAir(true);
         }
     }

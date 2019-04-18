@@ -1,20 +1,28 @@
 package model;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.shape.Rectangle;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public abstract class Entity extends Group {
 
-    protected Point2D velocity = new Point2D(0,0);
-    protected double health;
-    protected boolean isKnockback = false;
+    Point2D velocity = new Point2D(0,0);
+    ColorAdjust colorAdjust = new ColorAdjust();
+    Timer timer = new Timer();
+    boolean isFlashing = false;
+    DoubleProperty health = new SimpleDoubleProperty();
+    boolean isKnockback = false;
     private Point2D lastMove;
-    private boolean inAir = true;
-    private boolean isRight = true;
+    boolean inAir = true;
+    boolean isRight = true;
 
     public abstract void move();
 
@@ -23,9 +31,13 @@ public abstract class Entity extends Group {
     }
 
     public void applyGravity() {
-        if(velocity.getY() < IsGravityEffected.TERMINAL_VELOCITY) {
-            velocity = velocity.add(0, IsGravityEffected.GRAVITY);
+        if(velocity.getY() < Map.TERMINAL_VELOCITY) {
+            velocity = velocity.add(0, Map.GRAVITY);
         }
+    }
+
+    public boolean isFlashing() {
+        return isFlashing;
     }
 
     public void setInAir(boolean inAir) {
@@ -51,19 +63,21 @@ public abstract class Entity extends Group {
         if(!isKnockback) {
             setVelocity(new Point2D(0, velocity.getY()));
         }
-
     }
 
     public Point2D getLastMove() {
         return lastMove;
     }
 
-    public void setLastMove(Point2D point2D) {
-        lastMove = point2D;
-    }
-
     public void undoMove() {
         setTranslateX(getTranslateX() - lastMove.getX());
         setTranslateY(getTranslateY() - lastMove.getY());
+    }
+
+    class coolDownTimer extends TimerTask {
+        public void run() {
+            colorAdjust.setSaturation(0);
+            isFlashing = false;
+        }
     }
 }
