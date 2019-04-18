@@ -15,8 +15,9 @@ public class Map extends Pane {
 
     private Player player;
     private List<GameObject> gameObjects = new ArrayList<>();
-    private  List<ImageView> backgrounds = new ArrayList<>();
+    private List<ImageView> backgrounds = new ArrayList<>();
     private List<Enemy> enemies = new ArrayList<>();
+    private ImageView darkness;
 
     private final double WIDTH;
     private final double HEIGHT;
@@ -37,17 +38,16 @@ public class Map extends Pane {
         for(Node item : pane.getChildrenUnmodifiable()) {
             if(item instanceof Rectangle) {
                 gameObjects.add(new Wall((Rectangle) item));
-                /*if (item.getId() != null && item.getId().startsWith("enemyPlatform")) {
-                    enemies.add(new WalkingEnemy((Rectangle) item));
-                }*/
             } else if (item instanceof Line) {
                 if(item.getId().startsWith("flyingEnemy")) {
-                    //System.out.println(((Line) item).getStartX() + " " + ((Line) item).getStartY());
                     enemies.add(new FlyingEnemy(((Line) item).getStartX(), ((Line) item).getStartY(), player));
                 }
             } else if(item instanceof ImageView) {
-                item.toBack();
-                backgrounds.add((ImageView) item);
+                if(item.getId().startsWith("darkness")) {
+                    darkness = (ImageView) item;
+                } else {
+                    backgrounds.add((ImageView) item);
+                }
             }
         }
 
@@ -57,6 +57,7 @@ public class Map extends Pane {
         //Remove and re-add player to ensure they're on top of image view
         this.getChildren().remove(player);
         this.getChildren().add(player);
+        this.getChildren().add(darkness);
     }
 
     void moveEntities() {
@@ -132,5 +133,7 @@ public class Map extends Pane {
                 imageView.setLayoutY(450 - player.getTranslateY() *0.2 - 500);
             }
         }
+        darkness.setLayoutX(player.getTranslateX() - darkness.getBoundsInParent().getWidth() / 2);
+        darkness.setLayoutY(player.getTranslateY() - darkness.getBoundsInParent().getHeight() / 2);
     }
 }
