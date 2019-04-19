@@ -87,7 +87,7 @@ public class Map extends Pane {
             }
             enemy.move();
             enemy.intersect(player);
-            if(player.isAttacking && player.getCurrentWeapon().getRange() > getDistance(player, enemy) && !enemy.isFlashing) {
+            if(player.isAttacking && player.getCurrentWeapon().getAttackBounds(player.isRight).intersects(enemy.getBoundsInParent()) && !enemy.isFlashing) {
                 enemy.setKnockBack(true);
                 enemy.health.setValue(enemy.health.getValue() - player.getCurrentWeapon().getDamage());
             }
