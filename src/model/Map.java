@@ -4,6 +4,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
@@ -37,7 +38,14 @@ public class Map extends Pane {
         //System.out.println(pane.getChildrenUnmodifiable().size());
         for(Node item : pane.getChildrenUnmodifiable()) {
             if(item instanceof Rectangle) {
-                gameObjects.add(new Wall((Rectangle) item));
+                if (item.getId() != null) {
+                    if ((item).getId().startsWith("door")) {
+                        gameObjects.add(new Door(item.getId().substring(item.getId().indexOf("_") + 1), (Rectangle) item));
+                    }
+                } else {
+                    gameObjects.add(new Wall((Rectangle) item));
+                }
+
             } else if (item instanceof Line) {
                 if(item.getId().startsWith("flyingEnemy")) {
                     enemies.add(new FlyingEnemy(((Line) item).getStartX(), ((Line) item).getStartY(), player));
@@ -48,6 +56,8 @@ public class Map extends Pane {
                 } else {
                     backgrounds.add((ImageView) item);
                 }
+            } else if (item instanceof Circle) {
+                player.spawnAt(new Point2D(((Circle) item).getLayoutX(),((Circle) item).getLayoutY()));
             }
         }
 
@@ -133,7 +143,9 @@ public class Map extends Pane {
                 imageView.setLayoutY(450 - player.getTranslateY() * 0.2 - 500);
             }
         }
-        //darkness.setLayoutX(player.getTranslateX() - darkness.getBoundsInParent().getWidth() / 2);
-        //darkness.setLayoutY(player.getTranslateY() - darkness.getBoundsInParent().getHeight() / 2);
+        if (darkness != null) {
+            darkness.setLayoutX(player.getTranslateX() - darkness.getBoundsInParent().getWidth() / 2);
+            darkness.setLayoutY(player.getTranslateY() - darkness.getBoundsInParent().getHeight() / 2);
+        }
     }
 }
