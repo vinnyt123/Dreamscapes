@@ -3,10 +3,11 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="2000.0" maxWidth="2000.0" prefHeight="2000.0" prefWidth="2000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="2000.0" maxWidth="2000.0" prefHeight="2000.0" prefWidth="2000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="back" fitHeight="2500.0" fitWidth="3094.0" layoutX="-192.0" layoutY="-349.0" pickOnBounds="true">
          <image>
@@ -16,7 +17,7 @@
       <Rectangle id="trampoline1" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="12.0" layoutX="374.0" layoutY="1796.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutY="1922.0" stroke="BLACK" strokeType="INSIDE" width="2000.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="225.0" layoutY="1808.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-      <Rectangle id="enemyPlatform1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="603.0" layoutY="1710.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="603.0" layoutY="1710.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="949.0" layoutY="1622.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="344.0" layoutX="1378.0" layoutY="1578.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="2000.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
@@ -36,11 +37,13 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="551.0" layoutY="441.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="544.0" layoutY="225.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="836.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" width="801.0" />
-      <ImageView fx:id="darkness" fitHeight="3418.0" fitWidth="3646.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="darkness" fitHeight="3418.0" fitWidth="3646.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/overlay.png" />
          </image>
       </ImageView>
       <Line fx:id="flyingEnemy1" endX="707.0" endY="1589.0" startX="707.0" startY="1589.0" stroke="WHITE" />
+      <Rectangle fx:id="door_Map1" arcHeight="5.0" arcWidth="5.0" fill="#ff1f9d" height="200.0" layoutX="1896.0" layoutY="1729.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+      <Circle fill="#25ff1f" layoutX="149.0" layoutY="1721.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>
