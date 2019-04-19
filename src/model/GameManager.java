@@ -20,6 +20,8 @@ public class GameManager extends StackPane {
     }
 
     public void switchToMenu() {
+        //Had to re-make playing state here as for some reason the background image was getting removed from loaded maps map
+        playingState = new PlayingState(keysPressed);
         this.getChildren().clear();
         this.getChildren().add(mainMenuState);
         gameLoop.stop();

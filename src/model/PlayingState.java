@@ -19,10 +19,8 @@ public class PlayingState extends StackPane {
     private FXMLLoader loader;
     private HashSet<String> keysPressed;
     private Player player;
-
     private Node pauseMenuLayer;
     private Pane mapLayer = new Pane();
-
     private Map currentMap;
 
     public PlayingState(HashSet<String> keysPressed) {

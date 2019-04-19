@@ -15,6 +15,7 @@ public class Player extends Entity {
     private static final double JUMPHEIGHT = -12;
     private static final long DAMAGE_COOLDOWN = 800;
     private static final double RUNSPEED = 5;
+    private static final double ATTACKSLIDE = 5;
     static final double WIDTH = 35;
     static final double HEIGHT = 50;
     private SpriteAnimation walkRight;
@@ -25,6 +26,9 @@ public class Player extends Entity {
     private SpriteAnimation damageLeft;
     private SpriteAnimation standRight;
     private SpriteAnimation standLeft;
+    private SpriteAnimation attackRight;
+    private SpriteAnimation attackLeft;
+    private SpriteAnimation attackSwipeRight;
     private SpriteAnimation animation;
 
     private List<Weapon> playerWeapons = new ArrayList<>();
@@ -66,6 +70,9 @@ public class Player extends Entity {
         damageLeft = new SpriteAnimation(imageView, Duration.millis(100), 2, 2, 72, 97, 485);
         standRight = new SpriteAnimation(imageView, Duration.millis(100), 2, 2, 72, 97, 582);
         standLeft = new SpriteAnimation(imageView, Duration.millis(100), 2, 2, 72, 97, 679);
+        attackRight = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 72, 97, 776);
+        attackLeft = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 72, 97, 873);
+        attackSwipeRight = new SpriteAnimation(imageView, Duration.millis(200), 4, 4, 72, 97, 970);
         animation = jumpRight;
         animation.getImageView().setEffect(colorAdjust);
         animation.setCycleCount(1);
@@ -100,18 +107,21 @@ public class Player extends Entity {
 
     public void attack() {
         isAttacking = true;
+        knockBack((isRight) ? ATTACKSLIDE : -ATTACKSLIDE, velocity.getY(), false);
     }
 
     public void switchWeapon() {
 
     }
 
-    public void knockBack(double xDistance, double yDistance) {
+    public void knockBack(double xDistance, double yDistance, boolean isDamage) {
         isKnockback = true;
         setVelocity(new Point2D(xDistance, yDistance));
-        colorAdjust.setSaturation(1);
-        isFlashing = true;
-        timer.schedule(new coolDownTimer(), DAMAGE_COOLDOWN);
+        if (isDamage) {
+            colorAdjust.setSaturation(1);
+            isFlashing = true;
+            timer.schedule(new coolDownTimer(), DAMAGE_COOLDOWN);
+        }
     }
 
     public boolean isFlashing() {
@@ -167,6 +177,10 @@ public class Player extends Entity {
             animation = damageRight;
         } else if(isFlashing) {
             animation = damageLeft;
+        } else if (isAttacking && isRight) {
+            animation = attackRight;
+        } else if (isAttacking) {
+            animation = attackLeft;
         } else if(keysPressed.isEmpty() && !inAir && isRight) {
             animation = standRight;
         } else if(keysPressed.isEmpty() && !inAir) {
