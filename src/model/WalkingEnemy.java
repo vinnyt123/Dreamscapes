@@ -16,7 +16,7 @@ public class WalkingEnemy extends Enemy {
         super();
         this.platformBounds = platform.getBoundsInParent();
         health.setValue(HEALTH);
-        createSprite(platformBounds.getMinX() + platformBounds.getWidth() / 2 - WIDTH / 2, platformBounds.getMinY() - HEIGHT);
+                createSprite(platformBounds.getMinX() + platformBounds.getWidth() / 2 - WIDTH / 2, platformBounds.getMinY() - HEIGHT - 0.1);
         velocity = new Point2D(SPEED, 0);
     }
 
@@ -29,9 +29,9 @@ public class WalkingEnemy extends Enemy {
 
     public void move() {
         if (this.getBoundsInParent().getMaxX() > platformBounds.getMaxX() || this.getBoundsInParent().getMinX() < platformBounds.getMinX()) {
-            velocity = new Point2D(-velocity.getX(), 0);
+            velocity = new Point2D(-velocity.getX(), velocity.getY());
         }
-        setTranslateX(getTranslateX() + velocity.getX());
-        setTranslateY(getTranslateY() + velocity.getY());
-        }
+        applyGravity();
+        applyVelocity();
+    }
 }

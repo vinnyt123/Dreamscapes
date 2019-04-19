@@ -60,9 +60,6 @@ public abstract class Entity extends Group {
         setTranslateX(getTranslateX() + velocity.getX());
         setTranslateY(getTranslateY() + velocity.getY());
         lastMove = velocity;
-        if(!isKnockback) {
-            setVelocity(new Point2D(0, velocity.getY()));
-        }
     }
 
     public Point2D getLastMove() {

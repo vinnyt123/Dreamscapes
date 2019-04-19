@@ -1,6 +1,7 @@
 package model;
 
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -14,6 +15,8 @@ public class PlayingState extends StackPane {
     public static String map0ID = "Map0";
     public static String map0File = "view/Map0.fxml";
     public static String pauseMenuFile = "view/PauseMenu.fxml";
+    public static String map1ID = "Map1";
+    public static String map1File = "view/Map1.fxml";
 
     private HashMap<String, Pane> loadedMaps = new HashMap<>();
     private FXMLLoader loader;
@@ -26,6 +29,7 @@ public class PlayingState extends StackPane {
     public PlayingState(HashSet<String> keysPressed) {
         this.keysPressed = keysPressed;
         loadMap(map0ID, map0File);
+        loadMap(map1ID, map1File);
         loadPauseMenu();
         this.getChildren().addAll(mapLayer, pauseMenuLayer);
     }
@@ -49,7 +53,7 @@ public class PlayingState extends StackPane {
         }
     }
 
-    public void setMap(String name, Player player) {
+    public void setMap(String name) {
         if (loadedMaps.containsKey(name)) {
             currentMap = new Map(loadedMaps.get(name), player);
             mapLayer.getChildren().clear();
@@ -65,7 +69,7 @@ public class PlayingState extends StackPane {
 
     public void newGame() {
         player = new Player(keysPressed);
-        setMap(map0ID, player);
+        setMap(map0ID);
     }
 
     public Map getCurrentMap() {
