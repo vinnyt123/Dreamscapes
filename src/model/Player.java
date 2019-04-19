@@ -1,6 +1,8 @@
 package model;
 
 import controllers.PauseMenuController;
+import javafx.animation.Animation;
+import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
@@ -12,6 +14,7 @@ import java.util.*;
 public class Player extends Entity {
 
     private static final Image SPRITE_SHEET = new Image("images/sprite_sheet.png");
+    private ImageView imageViewAttack;
     private static final double JUMPHEIGHT = -12;
     private static final long DAMAGE_COOLDOWN = 800;
     private static final double RUNSPEED = 5;
@@ -29,8 +32,10 @@ public class Player extends Entity {
     private SpriteAnimation attackRight;
     private SpriteAnimation attackLeft;
     private SpriteAnimation attackSwipeRight;
+    private SpriteAnimation attackSwipeLeft;
     private SpriteAnimation animation;
 
+    private int attackCount = 0;
     private List<Weapon> playerWeapons = new ArrayList<>();
     private Weapon currentWeapon;
     private Controls controls = new Controls();
@@ -57,7 +62,12 @@ public class Player extends Entity {
         PauseMenuController pm = gm.getPlayingState().getLoader().getController();
         pm.getHealthBar().progressProperty().bind(health);
 
-        ImageView imageView = new ImageView(SPRITE_SHEET);
+        imageView = new ImageView(SPRITE_SHEET);
+        imageViewAttack = new ImageView(SPRITE_SHEET);
+        imageViewAttack.setViewport(new Rectangle2D(0, 0, 32, 32));
+        imageViewAttack.setFitWidth(32);
+        imageViewAttack.setFitHeight(32);
+        imageViewAttack.setLayoutY(getLayoutY() + HEIGHT/4);
         imageView.setViewport(new Rectangle2D(0, 0, 72, 97));
         imageView.setFitWidth(WIDTH);
         imageView.setFitHeight(HEIGHT);
@@ -72,13 +82,15 @@ public class Player extends Entity {
         standLeft = new SpriteAnimation(imageView, Duration.millis(100), 2, 2, 72, 97, 679);
         attackRight = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 72, 97, 776);
         attackLeft = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 72, 97, 873);
-        attackSwipeRight = new SpriteAnimation(imageView, Duration.millis(200), 4, 4, 72, 97, 970);
+        attackSwipeRight = new SpriteAnimation(imageViewAttack, Duration.millis(200), 4, 4, 32, 32, 970);
+        attackSwipeLeft = new SpriteAnimation(imageViewAttack, Duration.millis(200), 4, 4, 32, 32, 1002);
+        attackSwipeRight.setOnFinished(e -> this.getChildren().remove(imageViewAttack));
+        attackSwipeLeft.setOnFinished(e -> this.getChildren().remove(imageViewAttack));
         animation = jumpRight;
         animation.getImageView().setEffect(colorAdjust);
         animation.setCycleCount(1);
         this.getChildren().addAll(imageView);
     }
-
 
     public Weapon getCurrentWeapon() {
         return currentWeapon;
@@ -106,8 +118,19 @@ public class Player extends Entity {
     }
 
     public void attack() {
-        isAttacking = true;
-        knockBack((isRight) ? ATTACKSLIDE : -ATTACKSLIDE, velocity.getY(), false);
+        if(attackCount == 1) {
+            isAttacking = true;
+            knockBack((isRight) ? ATTACKSLIDE : -ATTACKSLIDE, velocity.getY(), false);
+            if(isRight && !(attackSwipeRight.getStatus() == Animation.Status.RUNNING) && !(attackSwipeLeft.getStatus() == Animation.Status.RUNNING)) {
+                imageViewAttack.setLayoutX(getLayoutX() + WIDTH/2);
+                this.getChildren().add(imageViewAttack);
+                attackSwipeRight.play();
+            } else if(!(attackSwipeRight.getStatus() == Animation.Status.RUNNING) && !(attackSwipeLeft.getStatus() == Animation.Status.RUNNING)) {
+                imageViewAttack.setLayoutX(getLayoutX() - WIDTH/2);
+                this.getChildren().add(imageViewAttack);
+                attackSwipeLeft.play();
+            }
+        }
     }
 
     public void switchWeapon() {
@@ -135,7 +158,6 @@ public class Player extends Entity {
             if(Math.round(velocity.getX()) == 0) {
                 isKnockback = false;
             } else {
-                //TODO: fix bug where y doesn't matter as it's set back to 0 in wall move
                 setVelocity(new Point2D((velocity.getX() > 0) ? velocity.getX() - 1: velocity.getX() + 1, (velocity.getY() > 0) ? velocity.getY() - 1: velocity.getY() + 1));
             }
             applyGravity();
@@ -164,7 +186,10 @@ public class Player extends Entity {
         }
 
         if (keysPressed.contains(controls.getAttackKey())) {
+            attackCount++;
             attack();
+        } else {
+            attackCount = 0;
         }
 
         applyGravity();

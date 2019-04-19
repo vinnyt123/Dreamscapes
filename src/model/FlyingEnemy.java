@@ -23,7 +23,6 @@ public class FlyingEnemy extends Enemy {
 
     private Player player;
 
-
     public FlyingEnemy(double spawnX, double spawnY, Player player) {
         super();
         this.player = player;
@@ -40,7 +39,7 @@ public class FlyingEnemy extends Enemy {
         setTranslateX(spawnX);
         setTranslateY(spawnY);
 
-        ImageView imageView = new ImageView(SPRITE_SHEET);
+        imageView = new ImageView(SPRITE_SHEET);
         imageView.setViewport(new Rectangle2D(0, 0, 72, 36));
         imageView.setFitWidth(WIDTH);
         imageView.setFitHeight(HEIGHT);

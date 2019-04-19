@@ -44,7 +44,7 @@ public class Map extends Pane {
                 }
             } else if(item instanceof ImageView) {
                 if(item.getId().startsWith("darkness")) {
-                    darkness = (ImageView) item;
+                    //darkness = (ImageView) item;
                 } else {
                     backgrounds.add((ImageView) item);
                 }
@@ -57,7 +57,7 @@ public class Map extends Pane {
         //Remove and re-add player to ensure they're on top of image view
         this.getChildren().remove(player);
         this.getChildren().add(player);
-        this.getChildren().add(darkness);
+        //this.getChildren().add(darkness);
     }
 
     void moveEntities() {
@@ -129,11 +129,11 @@ public class Map extends Pane {
     private void scrollBackgrounds() {
         for(ImageView imageView : backgrounds) {
             if(imageView.getId().startsWith("back")) {
-                imageView.setLayoutX(720 - player.getTranslateX() *0.2 - 1000);
-                imageView.setLayoutY(450 - player.getTranslateY() *0.2 - 500);
+                imageView.setLayoutX(720 - player.getTranslateX() * 0.2 - 1000);
+                imageView.setLayoutY(450 - player.getTranslateY() * 0.2 - 500);
             }
         }
-        darkness.setLayoutX(player.getTranslateX() - darkness.getBoundsInParent().getWidth() / 2);
-        darkness.setLayoutY(player.getTranslateY() - darkness.getBoundsInParent().getHeight() / 2);
+        //darkness.setLayoutX(player.getTranslateX() - darkness.getBoundsInParent().getWidth() / 2);
+        //darkness.setLayoutY(player.getTranslateY() - darkness.getBoundsInParent().getHeight() / 2);
     }
 }
