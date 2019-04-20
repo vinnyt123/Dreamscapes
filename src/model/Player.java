@@ -223,10 +223,7 @@ public class Player extends Entity {
         animation.play();
     }
 
-    public void spawnAt(Point2D playerSpawn) {
-        this.setTranslateX(playerSpawn.getX());
-        this.setTranslateY(playerSpawn.getY());
-    }
+
 
     @Override
     public void applyVelocity() {

@@ -85,4 +85,9 @@ public abstract class Entity extends Group {
             isFlashing = false;
         }
     }
+
+    public void spawnAt(Point2D spawn) {
+        this.setTranslateX(spawn.getX());
+        this.setTranslateY(spawn.getY());
+    }
 }

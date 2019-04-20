@@ -39,8 +39,12 @@ public class Map extends Pane {
         for(Node item : pane.getChildrenUnmodifiable()) {
             if(item instanceof Rectangle) {
                 if (item.getId() != null) {
-                    if ((item).getId().startsWith("door")) {
+                    String itemId = item.getId();
+                    if (itemId.startsWith("door")) {
                         gameObjects.add(new Door(item.getId().substring(item.getId().indexOf("_") + 1), (Rectangle) item));
+                    } else if (itemId.startsWith("enemyPlatform")) {
+                        gameObjects.add(new Wall((Rectangle) item));
+                        enemies.add(new WalkingEnemy((Rectangle) item, player));
                     }
                 } else {
                     gameObjects.add(new Wall((Rectangle) item));

@@ -21,11 +21,8 @@ public class FlyingEnemy extends Enemy {
     private SpriteAnimation flyRight;
     private SpriteAnimation flyLeft;
 
-    private Player player;
-
     public FlyingEnemy(double spawnX, double spawnY, Player player) {
-        super();
-        this.player = player;
+        super(player);
         knockback_player = KNOCKBACK_PLAYER;
         damage = DAMAGE;
         health.setValue(HEALTH);
@@ -66,7 +63,6 @@ public class FlyingEnemy extends Enemy {
             isRight = player.getTranslateX() > getTranslateX();
             theta = Math.toDegrees(Math.atan2(playerPos.getY() - this.getTranslateY() - (HEIGHT/2),  playerPos.getX() - this.getTranslateX() - (WIDTH/2)));
             this.setVelocity(new Point2D(SPEED * Math.cos(Math.toRadians(theta)), SPEED * Math.sin(Math.toRadians(theta))));
-
         } else {
             this.setVelocity(new Point2D(0, 0));
         }

@@ -13,8 +13,13 @@ public abstract class Enemy extends Entity {
     private boolean knockX = false;
     private boolean knockY = false;
     private static long DAMAGE_COOLDOWN = 200;
+    Player player;
 
     public abstract void move();
+
+    public Enemy(Player player) {
+        this.player = player;
+    }
 
     void knockBack() {
         if(Math.round(velocity.getX()) == 0) {
@@ -27,9 +32,20 @@ public abstract class Enemy extends Entity {
             isKnockback = false;
             knockX = false;
             knockY = false;
-        }
-        else {
-            setVelocity(new Point2D((velocity.getX() > 0) ? velocity.getX() - 1 : velocity.getX() + 1, (velocity.getY() > 0) ? velocity.getY() - 1 : velocity.getY() + 1));
+        } else {
+            if (velocity.getX() > 0) {
+                velocity = new Point2D(velocity.getX() - 1,velocity.getY());
+            } else if (velocity.getX() < 0) {
+                velocity = new Point2D(velocity.getX() + 1,velocity.getY());
+            }
+
+            if (velocity.getY() > 0) {
+                velocity = new Point2D(velocity.getX(), velocity.getY() - 1);
+            } else if (velocity.getX() < 0) {
+                velocity = new Point2D(velocity.getX(),velocity.getY() + 1);
+            }
+
+            //setVelocity(new Point2D((velocity.getX() > 0) ? velocity.getX() - 1 : velocity.getX() + 1, (velocity.getY() > 0) ? velocity.getY() - 1 : velocity.getY() + 1));
         }
         applyVelocity();
     }
