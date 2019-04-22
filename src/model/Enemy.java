@@ -41,7 +41,7 @@ public abstract class Enemy extends Entity {
 
             if (velocity.getY() > 0) {
                 velocity = new Point2D(velocity.getX(), velocity.getY() - 1);
-            } else if (velocity.getX() < 0) {
+            } else if (velocity.getY() < 0) {
                 velocity = new Point2D(velocity.getX(),velocity.getY() + 1);
             }
 

@@ -22,6 +22,7 @@ public class WalkingEnemy extends Enemy {
     private static final double KNOCKBACK_THIS = 9;
     private SpriteAnimation flyLeft;
     private boolean movingRight = true;
+    private boolean isFalling = false;
 
 
     public WalkingEnemy(Rectangle platform, Player player) {
@@ -54,19 +55,36 @@ public class WalkingEnemy extends Enemy {
         System.out.println(getTranslateX() + " " + getTranslateY());
         System.out.println(velocity);
         System.out.println("XXXXXXX");
+
+        if (velocity.getY() == 0) {
+            isFalling = false;
+        } else {
+            isFalling = true;
+        }
+
         if (isKnockback) {
             knockBack();
         }
 
         if (!isKnockback) {
             if ((movingRight && (this.getBoundsInParent().getMaxX() > platformBounds.getMaxX())) || (movingRight && (this.getBoundsInParent().getMaxX() > platformBounds.getMaxX() + WIDTH))) {
-                velocity = new Point2D(-SPEED, velocity.getY());
                 movingRight = false;
             } else if ((!movingRight && this.getBoundsInParent().getMinX() < platformBounds.getMinX()) || (!movingRight && this.getBoundsInParent().getMinX() < platformBounds.getMinX() - this.width)) {
-                velocity = new Point2D(SPEED, velocity.getY());
                 movingRight = true;
             }
+
+            if (movingRight) {
+                velocity = new Point2D(SPEED, velocity.getY());
+            } else {
+                velocity = new Point2D(-SPEED, velocity.getY());
+            }
+
+            if (player.isFlashing) {
+                velocity = new Point2D(0,velocity.getY());
+            }
         }
+
+
 
         Point2D playerPos = new Point2D(player.getTranslateX() + (Player.WIDTH/2), player.getTranslateY() + (Player.HEIGHT/2));
         theta = Math.toDegrees(Math.atan2(playerPos.getY() - this.getTranslateY() - (HEIGHT/2),  playerPos.getX() - this.getTranslateX() - (WIDTH/2)));
@@ -74,6 +92,14 @@ public class WalkingEnemy extends Enemy {
         playAnimation();
         applyGravity();
         applyVelocity();
+    }
+
+    public void updatePlatform(Bounds bounds) {
+        platformBounds = bounds;
+    }
+
+    public void changeDirection() {
+        movingRight = !movingRight;
     }
 
     private void playAnimation() {

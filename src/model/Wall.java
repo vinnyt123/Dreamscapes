@@ -40,6 +40,9 @@ public class Wall extends GameObject {
                 //System.out.println("moving left");
                 entity.setTranslateX(entity.getTranslateX() - (entity.getBounds().getMinX() - this.getBoundsInParent().getMaxX() - EXTRA_LIL_TRANSLATION));
             }
+            if (entity instanceof WalkingEnemy) {
+                ((WalkingEnemy) entity).changeDirection();
+            }
             return true;
         }
         return false;
@@ -60,6 +63,10 @@ public class Wall extends GameObject {
                 entity.setTranslateY(entity.getTranslateY() - (entity.getBounds().getMinY() - this.getBoundsInParent().getMaxY() - EXTRA_LIL_TRANSLATION));
             }
             entity.setVelocity(new Point2D(entity.velocity.getX(), 0));
+
+            if (entity instanceof WalkingEnemy) {
+                ((WalkingEnemy) entity).updatePlatform(this.getBoundsInParent());
+            }
         }
     }
 }
