@@ -34,4 +34,8 @@ public class WalkingEnemy extends Enemy {
         applyGravity();
         applyVelocity();
     }
+
+    public void deadAnimation() {
+
+    }
 }

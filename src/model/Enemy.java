@@ -15,6 +15,7 @@ public abstract class Enemy extends Entity {
     private static long DAMAGE_COOLDOWN = 200;
 
     public abstract void move();
+    public abstract void deadAnimation();
 
     void knockBack() {
         if(Math.round(velocity.getX()) == 0) {
@@ -47,7 +48,7 @@ public abstract class Enemy extends Entity {
     }
 
     void intersect(Player player) {
-        if(this.getBoundsInParent().intersects(player.getBoundsInParent()) && !player.isFlashing()) {
+        if(this.getBoundsInParent().intersects(player.getBoundsInParent()) && !player.isFlashing() && !isDying && !isDead) {
             player.health.setValue(player.health.getValue() - damage);
             setKnockBack(false);
             player.knockBack(Math.cos(Math.toRadians(theta)) * knockback_player, Math.sin(Math.toRadians(theta)) * knockback_player, true);

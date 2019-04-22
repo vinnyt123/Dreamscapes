@@ -81,12 +81,15 @@ public class Map extends Pane {
         Iterator<Enemy> it = enemies.iterator();
         while (it.hasNext()) {
             Enemy enemy = it.next();
-            if(enemy.health.get() <= 0.0) {
+            if(enemy.isDead) {
                 this.getChildren().remove(enemy);
                 it.remove();
+            } else if(enemy.health.get() < 0 && !enemy.isDying) {
+                enemy.deadAnimation();
+            } else {
+                enemy.move();
+                enemy.intersect(player);
             }
-            enemy.move();
-            enemy.intersect(player);
             if(player.isAttacking && player.getCurrentWeapon().getAttackBounds(player.isRight).intersects(enemy.getBoundsInParent()) && !enemy.isFlashing) {
                 enemy.setKnockBack(true);
                 enemy.health.setValue(enemy.health.getValue() - player.getCurrentWeapon().getDamage());
