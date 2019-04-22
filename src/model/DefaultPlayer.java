@@ -14,6 +14,7 @@ public class DefaultPlayer extends PlayerSprite {
     ImageView imageView;
     private ImageView imageViewAttack;
     private static final Image SPRITE_SHEET = new Image("images/sprite_sheet.png");
+    private static final Image SPRITE_SHEET_BOOTS = new Image("images/sprite_sheet_boots.png");
 
     private SpriteAnimation currentAnimation;
 
@@ -140,5 +141,15 @@ public class DefaultPlayer extends PlayerSprite {
     @Override
     public Bounds getBounds() {
         return imageView.getBoundsInParent();
+    }
+
+    @Override
+    public void addBoots() {
+        imageView.setImage(SPRITE_SHEET_BOOTS);
+    }
+
+    @Override
+    public void removeBoots() {
+
     }
 }

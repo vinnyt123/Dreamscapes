@@ -27,4 +27,8 @@ public abstract class PlayerSprite extends Group {
     public abstract void damageLeft();
 
     public abstract Bounds getBounds();
+
+    public abstract void addBoots();
+
+    public abstract void removeBoots();
 }

@@ -185,4 +185,8 @@ public class Player extends Entity {
             setVelocity(new Point2D(0, velocity.getY()));
         }
     }
+
+    public void addDoubleJumpBoots() {
+        playerSprite.addBoots();
+    }
 }
