@@ -111,4 +111,8 @@ public class WalkingEnemy extends Enemy {
         }
 
     }
+
+    public void deadAnimation() {
+
+    }
 }

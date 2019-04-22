@@ -8,15 +8,14 @@ import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Rectangle;
 
-import java.awt.*;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public abstract class Entity extends Group {
 
+    static final long DYING_TIME = 2500;
+    ImageView imageView;
     Point2D velocity = new Point2D(0,0);
     ColorAdjust colorAdjust = new ColorAdjust();
     Timer timer = new Timer();
@@ -26,6 +25,8 @@ public abstract class Entity extends Group {
     private Point2D lastMove;
     boolean inAir = true;
     boolean isRight = true;
+    boolean isDead = false;
+    boolean isDying = false;
 
     public abstract void move();
 
@@ -80,6 +81,12 @@ public abstract class Entity extends Group {
         public void run() {
             colorAdjust.setSaturation(0);
             isFlashing = false;
+        }
+    }
+
+    class dyingTimer extends TimerTask {
+        public void run() {
+            isDead = true;
         }
     }
 

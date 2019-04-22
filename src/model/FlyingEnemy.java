@@ -22,6 +22,10 @@ public class FlyingEnemy extends Enemy {
     private SpriteAnimation flyRight;
     private SpriteAnimation flyLeft;
     private ImageView imageView;
+    private SpriteAnimation dieRight;
+    private SpriteAnimation dieLeft;
+
+    private Player player;
 
     public FlyingEnemy(double spawnX, double spawnY, Player player) {
         super(player);
@@ -44,6 +48,8 @@ public class FlyingEnemy extends Enemy {
         imageView.setFitHeight(HEIGHT);
         flyLeft = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 72, 36, 0);
         flyRight = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 72, 36, 36);
+        dieLeft = new SpriteAnimation(imageView, Duration.millis(400), 2, 2, 72, 36, 72);
+        dieRight = new SpriteAnimation(imageView, Duration.millis(400), 2, 2, 72, 36, 108);
         animation = flyLeft;
         animation.getImageView().setEffect(colorAdjust);
         animation.setCycleCount(1);
@@ -57,6 +63,11 @@ public class FlyingEnemy extends Enemy {
         System.out.println(getTranslateX());
         if(isKnockback) {
             knockBack();
+            return;
+        } else if(isDying) {
+            setVelocity(new Point2D(0, velocity.getY()));
+            applyGravity();
+            applyVelocity();
             return;
         }
 
@@ -87,5 +98,16 @@ public class FlyingEnemy extends Enemy {
             animation = flyLeft;
         }
         animation.play();
+    }
+
+    public void deadAnimation() {
+        isDying = true;
+        if(isRight) {
+            animation = dieRight;
+        } else {
+            animation = dieLeft;
+        }
+        animation.play();
+        timer.schedule(new dyingTimer(), Entity.DYING_TIME);
     }
 }
