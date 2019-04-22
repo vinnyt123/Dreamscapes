@@ -52,12 +52,12 @@ public class Map extends Pane {
                 }
             } else if(item instanceof ImageView) {
                 if(item.getId().startsWith("darkness")) {
-                    //darkness = (ImageView) item;
+                    darkness = (ImageView) item;
                 } else {
                     backgrounds.add((ImageView) item);
                 }
             } else if (item instanceof Circle) {
-                player.spawnAt(new Point2D(((Circle) item).getLayoutX(),((Circle) item).getLayoutY()));
+                player.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
             }
         }
 
@@ -73,7 +73,6 @@ public class Map extends Pane {
     void moveEntities() {
         //TODO: make this a listener on a simple-double health
         if(player.health.get() < 0) {
-            System.out.println("DEAD");
             ((GameManager) player.getScene().getRoot()).switchToMenu();
         }
 
@@ -90,9 +89,9 @@ public class Map extends Pane {
                 enemy.move();
                 enemy.intersect(player);
             }
-            if(player.isAttacking && player.getCurrentWeapon().getAttackBounds(player.isRight).intersects(enemy.getBoundsInParent()) && !enemy.isFlashing) {
-                enemy.setKnockBack(true);
+            if(player.isAttacking && player.getCurrentWeapon().getAttackBounds(player.isRight).intersects(enemy.getBoundsInParent()) && !enemy.isFlashing &&!enemy.isDying) {
                 enemy.health.setValue(enemy.health.getValue() - player.getCurrentWeapon().getDamage());
+                enemy.setKnockBack(true);
             }
         }
         player.isAttacking = false;
@@ -133,17 +132,11 @@ public class Map extends Pane {
         scrollBackgrounds();
     }
 
-    private double getDistance(Player player, Enemy enemy) {
-        Point2D playerPos = new Point2D(player.getTranslateX() + Player.WIDTH /2, player.getTranslateY() + Player.HEIGHT /2);
-        Point2D enemyPos = new Point2D(enemy.getTranslateX() + enemy.width/2, enemy.getTranslateY() + enemy.width/2);
-        return playerPos.distance(enemyPos);
-    }
-
     private void scrollBackgrounds() {
         for(ImageView imageView : backgrounds) {
             if(imageView.getId().startsWith("back")) {
-                imageView.setLayoutX(720 - player.getTranslateX() * 0.2 - 1000);
-                imageView.setLayoutY(450 - player.getTranslateY() * 0.2 - 500);
+                imageView.setLayoutX(720 - player.getTranslateX() * -0.24 - 1000);
+                imageView.setLayoutY(450 - player.getTranslateY() * -0.1 - 500);
             }
         }
         if (darkness != null) {
