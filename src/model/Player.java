@@ -2,6 +2,7 @@ package model;
 
 import controllers.PauseMenuController;
 import javafx.animation.Animation;
+import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
@@ -13,28 +14,14 @@ import java.util.*;
 
 public class Player extends Entity {
 
-    private static final Image SPRITE_SHEET = new Image("images/sprite_sheet.png");
-    private ImageView imageViewAttack;
     private static final double JUMPHEIGHT = -12;
     private static final long DAMAGE_COOLDOWN = 800;
     private static final double RUNSPEED = 5;
     private static final double ATTACKSLIDE = 5;
     static final double WIDTH = 35;
     static final double HEIGHT = 50;
-    private SpriteAnimation walkRight;
-    private SpriteAnimation walkLeft;
-    private SpriteAnimation jumpRight;
-    private SpriteAnimation jumpLeft;
-    private SpriteAnimation damageRight;
-    private SpriteAnimation damageLeft;
-    private SpriteAnimation standRight;
-    private SpriteAnimation standLeft;
-    private SpriteAnimation attackRight;
-    private SpriteAnimation attackLeft;
-    private SpriteAnimation attackSwipeRight;
-    private SpriteAnimation attackSwipeLeft;
-    private SpriteAnimation animation;
 
+    private PlayerSprite playerSprite = new DefaultPlayer();
     private int attackCount = 0;
     private List<Weapon> playerWeapons = new ArrayList<>();
     private Weapon currentWeapon;
@@ -49,9 +36,6 @@ public class Player extends Entity {
         health.setValue(1);
         currentWeapon = new WeaponFists(this);
         playerWeapons.add(currentWeapon);
-        //Spawn coords in map
-        setTranslateX(100);
-        setTranslateY(1650);
     }
 
     //Cool effect for if the player is standing in water or something (creates reflection)
@@ -62,34 +46,7 @@ public class Player extends Entity {
         PauseMenuController pm = gm.getPlayingState().getLoader().getController();
         pm.getHealthBar().progressProperty().bind(health);
 
-        imageView = new ImageView(SPRITE_SHEET);
-        imageViewAttack = new ImageView(SPRITE_SHEET);
-        imageViewAttack.setViewport(new Rectangle2D(0, 0, 32, 32));
-        imageViewAttack.setFitWidth(32);
-        imageViewAttack.setFitHeight(32);
-        imageViewAttack.setLayoutY(getLayoutY() + HEIGHT/4);
-        imageView.setViewport(new Rectangle2D(0, 0, 72, 97));
-        imageView.setFitWidth(WIDTH);
-        imageView.setFitHeight(HEIGHT);
-        //imageView.getTransforms().addAll(new Scale(-1, 1), new Translate(-WIDTH, 0));
-        walkRight = new SpriteAnimation(imageView, Duration.millis(100), 11, 11, 72, 97, 0);
-        walkLeft = new SpriteAnimation(imageView, Duration.millis(100), 11, 11, 72, 97, 97);
-        jumpRight = new SpriteAnimation(imageView, Duration.millis(100), 2, 2, 72, 97, 194);
-        jumpLeft = new SpriteAnimation(imageView, Duration.millis(100), 2, 2, 72, 97, 291);
-        damageRight = new SpriteAnimation(imageView, Duration.millis(100), 2, 2, 72, 97, 388);
-        damageLeft = new SpriteAnimation(imageView, Duration.millis(100), 2, 2, 72, 97, 485);
-        standRight = new SpriteAnimation(imageView, Duration.millis(100), 2, 2, 72, 97, 582);
-        standLeft = new SpriteAnimation(imageView, Duration.millis(100), 2, 2, 72, 97, 679);
-        attackRight = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 72, 97, 776);
-        attackLeft = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 72, 97, 873);
-        attackSwipeRight = new SpriteAnimation(imageViewAttack, Duration.millis(200), 4, 4, 32, 32, 970);
-        attackSwipeLeft = new SpriteAnimation(imageViewAttack, Duration.millis(200), 4, 4, 32, 32, 1002);
-        attackSwipeRight.setOnFinished(e -> this.getChildren().remove(imageViewAttack));
-        attackSwipeLeft.setOnFinished(e -> this.getChildren().remove(imageViewAttack));
-        animation = jumpRight;
-        animation.getImageView().setEffect(colorAdjust);
-        animation.setCycleCount(1);
-        this.getChildren().addAll(imageView);
+        this.getChildren().addAll(playerSprite);
     }
 
     public Weapon getCurrentWeapon() {
@@ -121,15 +78,7 @@ public class Player extends Entity {
         if(attackCount == 1) {
             isAttacking = true;
             velocity = new Point2D((isRight) ? ATTACKSLIDE : -ATTACKSLIDE, velocity.getY());
-            if(isRight && !(attackSwipeRight.getStatus() == Animation.Status.RUNNING) && !(attackSwipeLeft.getStatus() == Animation.Status.RUNNING)) {
-                imageViewAttack.setLayoutX(getLayoutX() + WIDTH/2);
-                this.getChildren().add(imageViewAttack);
-                attackSwipeRight.play();
-            } else if(!(attackSwipeRight.getStatus() == Animation.Status.RUNNING) && !(attackSwipeLeft.getStatus() == Animation.Status.RUNNING)) {
-                imageViewAttack.setLayoutX(getLayoutX() - WIDTH/2);
-                this.getChildren().add(imageViewAttack);
-                attackSwipeLeft.play();
-            }
+
         }
     }
 
@@ -197,30 +146,34 @@ public class Player extends Entity {
         playAnimation();
     }
 
+    @Override
+    public Bounds getBounds() {
+        return new BoundingBox(playerSprite.getBounds().getMinX() + getTranslateX(),
+                playerSprite.getBounds().getMinY() + getTranslateY(), playerSprite.getBounds().getWidth(), playerSprite.getBounds().getHeight());
+    }
+
     private void playAnimation() {
         if(isFlashing && isRight) {
-            animation = damageRight;
+            playerSprite.damageRight();
         } else if(isFlashing) {
-            animation = damageLeft;
+            playerSprite.damageLeft();
         } else if (isAttacking && isRight) {
-            animation = attackRight;
+            playerSprite.attackRight();
         } else if (isAttacking) {
-            animation = attackLeft;
+            playerSprite.attackLeft();
         } else if(keysPressed.isEmpty() && !inAir && isRight) {
-            animation = standRight;
+            playerSprite.standRight();
         } else if(keysPressed.isEmpty() && !inAir) {
-            animation = standLeft;
+            playerSprite.standLeft();
         } else if(inAir && isRight) {
-            animation = jumpRight;
+            playerSprite.jumpRight();
         } else if(inAir) {
-            animation = jumpLeft;
+            playerSprite.jumpLeft();
         } else if(keysPressed.contains(controls.getRightKey())) {
-            animation = walkRight;
+            playerSprite.walkRight();
         } else if(!inAir && keysPressed.contains(controls.getLeftKey())) {
-            animation = walkLeft;
+            playerSprite.walkLeft();
         }
-
-        animation.play();
     }
 
 

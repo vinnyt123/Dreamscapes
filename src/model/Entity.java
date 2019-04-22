@@ -17,7 +17,6 @@ import java.util.TimerTask;
 
 public abstract class Entity extends Group {
 
-    ImageView imageView;
     Point2D velocity = new Point2D(0,0);
     ColorAdjust colorAdjust = new ColorAdjust();
     Timer timer = new Timer();
@@ -40,9 +39,7 @@ public abstract class Entity extends Group {
         }
     }
 
-    public Bounds getBounds() {
-        return new BoundingBox(this.getBoundsInParent().getMinX(), this.getBoundsInParent().getMinY(), imageView.getBoundsInParent().getWidth(), imageView.getBoundsInParent().getHeight());
-    }
+    public abstract Bounds getBounds();
 
     public boolean isFlashing() {
         return isFlashing;

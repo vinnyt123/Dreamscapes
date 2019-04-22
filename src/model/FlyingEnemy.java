@@ -1,5 +1,6 @@
 package model;
 
+import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
@@ -20,6 +21,7 @@ public class FlyingEnemy extends Enemy {
     private SpriteAnimation animation;
     private SpriteAnimation flyRight;
     private SpriteAnimation flyLeft;
+    private ImageView imageView;
 
     public FlyingEnemy(double spawnX, double spawnY, Player player) {
         super(player);
@@ -51,6 +53,8 @@ public class FlyingEnemy extends Enemy {
 
     @Override
     public void move() {
+
+        System.out.println(getTranslateX());
         if(isKnockback) {
             knockBack();
             return;
@@ -69,6 +73,11 @@ public class FlyingEnemy extends Enemy {
 
         applyVelocity();
         playAnimation();
+    }
+
+    @Override
+    public Bounds getBounds() {
+        return this.getBoundsInParent();
     }
 
     private void playAnimation() {

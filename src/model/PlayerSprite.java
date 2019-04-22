@@ -1,17 +1,30 @@
 package model;
 
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Bounds;
 import javafx.scene.Group;
-
-import javax.swing.text.Element;
-import javax.swing.text.html.ImageView;
 
 public abstract class PlayerSprite extends Group {
 
-    public abstract void moveLeft();
+    public abstract void walkLeft();
 
-    public abstract void moveRight();
+    public abstract void walkRight();
 
-    public abstract void jump();
+    public abstract void jumpLeft();
 
-    public abstract void attack();
+    public abstract void jumpRight();
+
+    public abstract void attackLeft();
+
+    public abstract void attackRight();
+
+    public abstract void standRight();
+
+    public abstract void standLeft();
+
+    public abstract void damageRight();
+
+    public abstract void damageLeft();
+
+    public abstract Bounds getBounds();
 }

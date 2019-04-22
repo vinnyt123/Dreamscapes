@@ -22,6 +22,7 @@ public class WalkingEnemy extends Enemy {
     private static final double KNOCKBACK_THIS = 9;
     private SpriteAnimation walkLeft;
     private boolean movingRight = true;
+    private ImageView imageView;
 
 
     public WalkingEnemy(Rectangle platform, Player player) {
@@ -81,6 +82,11 @@ public class WalkingEnemy extends Enemy {
         playAnimation();
         applyGravity();
         applyVelocity();
+    }
+
+    @Override
+    public Bounds getBounds() {
+        return this.getBoundsInParent();
     }
 
     public void updatePlatform(Bounds bounds) {
