@@ -120,7 +120,7 @@ public class Player extends Entity {
     public void attack() {
         if(attackCount == 1) {
             isAttacking = true;
-            knockBack((isRight) ? ATTACKSLIDE : -ATTACKSLIDE, velocity.getY(), false);
+            velocity = new Point2D((isRight) ? ATTACKSLIDE : -ATTACKSLIDE, velocity.getY());
             if(isRight && !(attackSwipeRight.getStatus() == Animation.Status.RUNNING) && !(attackSwipeLeft.getStatus() == Animation.Status.RUNNING)) {
                 imageViewAttack.setLayoutX(getLayoutX() + WIDTH/2);
                 this.getChildren().add(imageViewAttack);

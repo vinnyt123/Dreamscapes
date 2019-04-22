@@ -20,8 +20,8 @@ public class Wall extends GameObject {
     public void intersect(Entity entity) {
         if(getBoundsInParent().intersects(entity.getBounds())) {
             entity.undoMove();
-            moveX(entity);
             moveY(entity);
+            moveX(entity);
         } else if(entity.getVelocity().getY() > Map.GRAVITY) {
             entity.setInAir(true);
         }
@@ -34,10 +34,8 @@ public class Wall extends GameObject {
         entity.setTranslateX(entity.getTranslateX() + entity.getLastMove().getX());
         if(getBoundsInParent().intersects(entity.getBounds())) {
             if(movingRight) {
-                //System.out.println("moving right");
                 entity.setTranslateX(entity.getTranslateX() - (entity.getBounds().getMaxX() - this.getBoundsInParent().getMinX() + EXTRA_LIL_TRANSLATION));
             } else {
-                //System.out.println("moving left");
                 entity.setTranslateX(entity.getTranslateX() - (entity.getBounds().getMinX() - this.getBoundsInParent().getMaxX() - EXTRA_LIL_TRANSLATION));
             }
             if (entity instanceof WalkingEnemy) {
@@ -51,7 +49,6 @@ public class Wall extends GameObject {
     private void moveY(Entity entity) {
         double yDistance = entity.getLastMove().getY();
         boolean movingDown = yDistance > 0;
-
         entity.setTranslateY(entity.getTranslateY() + entity.getLastMove().getY());
         if (getBoundsInParent().intersects(entity.getBounds())) {
             if (movingDown) {

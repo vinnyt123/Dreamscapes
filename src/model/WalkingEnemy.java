@@ -15,14 +15,13 @@ public class WalkingEnemy extends Enemy {
     private static final double HEALTH = 10;
     private static final double DAMAGE = 0.1;
     private Bounds platformBounds;
-    private static final Image SPRITE_SHEET = new Image("images/fly_sheet.png");
+    private static final Image SPRITE_SHEET = new Image("images/snail_sheet.png");
     private SpriteAnimation animation;
-    private SpriteAnimation flyRight;
+    private SpriteAnimation walkRight;
     private static final double KNOCKBACK_PLAYER = 8;
     private static final double KNOCKBACK_THIS = 9;
-    private SpriteAnimation flyLeft;
+    private SpriteAnimation walkLeft;
     private boolean movingRight = true;
-    private boolean isFalling = false;
 
 
     public WalkingEnemy(Rectangle platform, Player player) {
@@ -42,25 +41,15 @@ public class WalkingEnemy extends Enemy {
         imageView.setViewport(new Rectangle2D(0, 0, 72, 36));
         imageView.setFitWidth(WIDTH);
         imageView.setFitHeight(HEIGHT);
-        flyLeft = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 72, 36, 0);
-        flyRight = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 72, 36, 36);
-        animation = flyLeft;
+        walkLeft = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 53, 30, 0);
+        walkRight = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 53, 30, 29);
+        animation = walkLeft;
         animation.getImageView().setEffect(colorAdjust);
         animation.setCycleCount(1);
         this.getChildren().add(imageView);
     }
 
     public void move() {
-        System.out.println(isKnockback);
-        System.out.println(getTranslateX() + " " + getTranslateY());
-        System.out.println(velocity);
-        System.out.println("XXXXXXX");
-
-        if (velocity.getY() == 0) {
-            isFalling = false;
-        } else {
-            isFalling = true;
-        }
 
         if (isKnockback) {
             knockBack();
@@ -103,11 +92,17 @@ public class WalkingEnemy extends Enemy {
     }
 
     private void playAnimation() {
-        if(this.getVelocity().getX() > 0) {
-            animation = flyRight;
+        if(movingRight) {
+            animation = walkRight;
         } else {
-            animation = flyLeft;
+            animation = walkLeft;
         }
-        animation.play();
+
+        if (inAir) {
+            animation.stop();
+        } else {
+            animation.play();
+        }
+
     }
 }
