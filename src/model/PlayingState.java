@@ -1,7 +1,6 @@
 package model;
 
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -18,66 +17,66 @@ public class PlayingState extends StackPane {
     public static String map1ID = "Map1";
     public static String map1File = "view/Map1.fxml";
 
-    private HashMap<String, Pane> loadedMaps = new HashMap<>();
+    private HashMap<String, String> mapsMap = new HashMap<>();
     private FXMLLoader loader;
+    private FXMLLoader pauseLoader;
     private HashSet<String> keysPressed;
     private Player player;
     private Node pauseMenuLayer;
     private Pane mapLayer = new Pane();
+    private Pane loaderRoot;
     private Map currentMap;
 
-    public PlayingState(HashSet<String> keysPressed) {
+    PlayingState(HashSet<String> keysPressed) {
         this.keysPressed = keysPressed;
-        loadMap(map0ID, map0File);
-        loadMap(map1ID, map1File);
         loadPauseMenu();
+        mapsMap.put(map0ID, map0File);
+        mapsMap.put(map1ID, map1File);
         this.getChildren().addAll(mapLayer, pauseMenuLayer);
     }
 
-    public void loadMap(String mapID, String mapFile) {
-        loader = new FXMLLoader(getClass().getClassLoader().getResource(mapFile));
-        try {
-            loadedMaps.put(mapID, loader.load());
-        } catch (IOException e) {
-            System.out.println("ligma");
-            e.printStackTrace();
-        }
-    }
-
     private void loadPauseMenu() {
-        loader = new FXMLLoader(getClass().getClassLoader().getResource(pauseMenuFile));
+        pauseLoader = new FXMLLoader(getClass().getClassLoader().getResource(pauseMenuFile));
         try {
-            pauseMenuLayer = loader.load();
+            pauseMenuLayer = pauseLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void setMap(String name) {
-        if (loadedMaps.containsKey(name)) {
-            currentMap = new Map(loadedMaps.get(name), player);
-            mapLayer.getChildren().clear();
-            mapLayer.getChildren().add(currentMap);
-        } else {
-            System.out.println("Map " + name + " has not been loaded.");
+    void setMap(String name) {
+        loader = new FXMLLoader(getClass().getClassLoader().getResource(mapsMap.get(name)));
+        try {
+            loaderRoot = loader.load();
+            currentMap = new Map(loaderRoot, player);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        mapLayer.getChildren().clear();
+        mapLayer.getChildren().add(currentMap);
+
     }
 
     public Player getPlayer() {
         return player;
     }
 
-    public void newGame() {
+    void newGame() {
         player = new Player(keysPressed);
         setMap(map0ID);
     }
 
-    public Map getCurrentMap() {
+    Map getCurrentMap() {
         return currentMap;
     }
 
-    public FXMLLoader getLoader() {
-        return loader;
+    FXMLLoader getPauseLoader() {
+        return pauseLoader;
     }
 
+    void restartMap() {
+        currentMap = new Map(loaderRoot, player);
+        mapLayer.getChildren().clear();
+        mapLayer.getChildren().add(currentMap);
+    }
 }

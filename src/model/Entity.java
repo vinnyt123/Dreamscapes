@@ -2,12 +2,10 @@ package model;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.image.ImageView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -15,7 +13,6 @@ import java.util.TimerTask;
 public abstract class Entity extends Group {
 
     static final long DYING_TIME = 2500;
-    ImageView imageView;
     Point2D velocity = new Point2D(0,0);
     ColorAdjust colorAdjust = new ColorAdjust();
     Timer timer = new Timer();

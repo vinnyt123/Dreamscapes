@@ -2,6 +2,7 @@ package controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -13,6 +14,11 @@ public class PauseMenuController {
     @FXML private Button pauseButton;
     @FXML private AnchorPane pauseMenuBlock;
     @FXML private ProgressBar healthBar;
+    @FXML private Label deathCount;
+
+    public Label getDeathCount() {
+        return deathCount;
+    }
 
     @FXML
     private void pauseButtonPressed(KeyEvent e) {

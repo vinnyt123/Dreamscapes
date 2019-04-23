@@ -20,7 +20,6 @@ public class Map extends Pane {
     private List<Enemy> enemies = new ArrayList<>();
     private List<Item> items = new ArrayList<>();
     private ImageView darkness;
-
     private final double WIDTH;
     private final double HEIGHT;
     static double GRAVITY = 0.4;
@@ -36,7 +35,6 @@ public class Map extends Pane {
         this.setPrefHeight(pane.getPrefHeight());
 
         //Create list of rectangles that are walls/floors. Use line start to create enemy spawn point.
-        //System.out.println(pane.getChildrenUnmodifiable().size());
         for(Node item : pane.getChildrenUnmodifiable()) {
             if(item instanceof Rectangle) {
                 if (item.getId() != null) {
@@ -73,15 +71,17 @@ public class Map extends Pane {
         this.getChildren().addAll(gameObjects);
         this.getChildren().addAll(items);
         //Remove and re-add player to ensure they're on top of image view
-        this.getChildren().remove(player);
-        this.getChildren().add(player);
+        this.getChildren().remove(this.player);
+        this.getChildren().add(this.player);
         //this.getChildren().add(darkness);
     }
 
     void moveEntities() {
-        //TODO: make this a listener on a simple-double health
         if(player.health.get() < 0) {
-            ((GameManager) player.getScene().getRoot()).switchToMenu();
+            player.deathCount.setValue(player.deathCount.get() + 1);
+            player.getPlayerSprite().standRight();
+            player.health.setValue(1.0);
+            ((GameManager) player.getScene().getRoot()).restartLevel();
         }
 
         player.move();

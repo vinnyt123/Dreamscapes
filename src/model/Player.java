@@ -1,14 +1,11 @@
 package model;
 
 import controllers.PauseMenuController;
-import javafx.animation.Animation;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.util.Duration;
 
 import java.util.*;
 
@@ -20,8 +17,9 @@ public class Player extends Entity {
     private static final double ATTACKSLIDE = 5;
     static final double WIDTH = 35;
     static final double HEIGHT = 50;
-
+    IntegerProperty deathCount = new SimpleIntegerProperty();
     private PlayerSprite playerSprite = new DefaultPlayer();
+
     private int attackCount = 0;
     private int jumpCount = 0;
     private List<Weapon> playerWeapons = new ArrayList<>();
@@ -30,22 +28,28 @@ public class Player extends Entity {
     boolean isAttacking = false;
     private HashSet<String> keysPressed;
     private boolean hasBoots = false;
-
     public Player(HashSet<String> keysPressed) {
         super();
         this.keysPressed = keysPressed;
+        deathCount.setValue(0);
         health.setValue(1);
         currentWeapon = new WeaponFists(this);
         playerWeapons.add(currentWeapon);
     }
 
+    public PlayerSprite getPlayerSprite() {
+        return playerSprite;
+    }
+
     //Cool effect for if the player is standing in water or something (creates reflection)
     //Reflection reflection = new Reflection();
+
     //imageView.setEffect(reflection);
     public void createSprite() {
         GameManager gm = (GameManager) getScene().getRoot();
-        PauseMenuController pm = gm.getPlayingState().getLoader().getController();
+        PauseMenuController pm = gm.getPlayingState().getPauseLoader().getController();
         pm.getHealthBar().progressProperty().bind(health);
+        pm.getDeathCount().textProperty().bind(deathCount.asString());
 
         this.getChildren().addAll(playerSprite);
     }
@@ -110,7 +114,6 @@ public class Player extends Entity {
 
     @Override
     public void move() {
-
         if(isKnockback) {
             if(Math.round(velocity.getX()) == 0) {
                 isKnockback = false;

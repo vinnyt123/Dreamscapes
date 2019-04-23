@@ -1,16 +1,11 @@
 package model;
 
-import javafx.animation.Animation;
-import javafx.animation.RotateTransition;
-import javafx.animation.Transition;
 import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-import static model.Player.HEIGHT;
-import static model.Player.WIDTH;
 
 public class DefaultPlayer extends PlayerSprite {
 

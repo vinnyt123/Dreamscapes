@@ -20,8 +20,6 @@ public class GameManager extends StackPane {
     }
 
     public void switchToMenu() {
-        //Had to re-make playing state here as for some reason the background image was getting removed from loaded maps map
-        playingState = new PlayingState(keysPressed);
         this.getChildren().clear();
         this.getChildren().add(mainMenuState);
         gameLoop.stop();
@@ -33,6 +31,10 @@ public class GameManager extends StackPane {
         this.getChildren().add(playingState);
         playingState.getPlayer().createSprite();
         gameLoop.start();
+    }
+
+    void restartLevel() {
+        playingState.restartMap();
     }
 
 
@@ -59,7 +61,7 @@ public class GameManager extends StackPane {
     public void setUpHashSet() {
         this.setOnKeyPressed(e -> {
             keysPressed.add(e.getCode().toString());
-            System.out.println(e.getCode().toString());
+            //System.out.println(e.getCode().toString());
         });
 
         this.setOnKeyReleased(e -> keysPressed.remove(e.getCode().toString()));
