@@ -40,10 +40,6 @@ public abstract class Entity extends Group {
 
     public abstract Bounds getBounds();
 
-    public boolean isFlashing() {
-        return isFlashing;
-    }
-
     public void setInAir(boolean inAir) {
         this.inAir = inAir;
     }
