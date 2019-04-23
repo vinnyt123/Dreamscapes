@@ -15,8 +15,6 @@ public class DefaultPlayer extends PlayerSprite {
     private ImageView imageViewAttack;
     private static final Image SPRITE_SHEET = new Image("images/sprite_sheet.png");
 
-    private SpriteAnimation currentAnimation;
-
     private SpriteAnimation walkRight;
     private SpriteAnimation walkLeft;
     private SpriteAnimation jumpRight;
@@ -55,12 +53,8 @@ public class DefaultPlayer extends PlayerSprite {
         attackLeft = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 72, 97, 873);
         attackSwipeRight = new SpriteAnimation(imageViewAttack, Duration.millis(200), 4, 4, 32, 32, 970);
         attackSwipeLeft = new SpriteAnimation(imageViewAttack, Duration.millis(200), 4, 4, 32, 32, 1002);
-        attackSwipeRight.setOnFinished(e -> {
-                System.out.println("finished");
-                this.getChildren().remove(imageViewAttack);});
+        attackSwipeRight.setOnFinished(e -> this.getChildren().remove(imageViewAttack));
         attackSwipeLeft.setOnFinished(e -> this.getChildren().remove(imageViewAttack));
-
-        currentAnimation = standRight;
 
         this.getChildren().add(imageView);
 
@@ -71,25 +65,21 @@ public class DefaultPlayer extends PlayerSprite {
 
     @Override
     public void walkLeft() {
-        currentAnimation = walkLeft;
         walkLeft.play();
     }
 
     @Override
     public void walkRight() {
-        currentAnimation = walkRight;
         walkRight.play();
     }
 
     @Override
     public void jumpLeft() {
-        currentAnimation = jumpLeft;
         jumpLeft.play();
     }
 
     @Override
     public void jumpRight() {
-        currentAnimation = jumpRight;
         jumpRight.play();
     }
 
@@ -115,25 +105,21 @@ public class DefaultPlayer extends PlayerSprite {
 
     @Override
     public void standRight() {
-        currentAnimation = standRight;
         standRight.play();
     }
 
     @Override
     public void standLeft() {
-        currentAnimation = standLeft;
         standLeft.play();
     }
 
     @Override
     public void damageRight() {
-        currentAnimation = damageRight;
         damageRight.play();
     }
 
     @Override
     public void damageLeft() {
-        currentAnimation = damageLeft;
         damageLeft.play();
     }
 
