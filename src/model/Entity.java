@@ -27,6 +27,7 @@ public abstract class Entity extends Group {
     boolean isRight = true;
     boolean isDead = false;
     boolean isDying = false;
+    boolean hasDoubleJumped = false;
 
     public abstract void move();
 
@@ -75,6 +76,10 @@ public abstract class Entity extends Group {
     public void undoMove() {
         setTranslateX(getTranslateX() - lastMove.getX());
         setTranslateY(getTranslateY() - lastMove.getY());
+    }
+
+    public void setDoubleJumped(boolean doubleJumped) {
+        this.hasDoubleJumped = doubleJumped;
     }
 
     class coolDownTimer extends TimerTask {

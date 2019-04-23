@@ -54,6 +54,7 @@ public class Wall extends GameObject {
             if (movingDown) {
                 //System.out.println("moving down");
                 entity.setInAir(false);
+                entity.setDoubleJumped(false);
                 entity.setTranslateY(entity.getTranslateY() - (entity.getBounds().getMaxY() - this.getBoundsInParent().getMinY() + EXTRA_LIL_TRANSLATION));
             } else {
                 //System.out.println("moving up");

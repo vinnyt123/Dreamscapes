@@ -1,5 +1,8 @@
 package model;
 
+import javafx.animation.Animation;
+import javafx.animation.RotateTransition;
+import javafx.animation.Transition;
 import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
@@ -11,9 +14,9 @@ import static model.Player.WIDTH;
 
 public class DefaultPlayer extends PlayerSprite {
 
-    ImageView imageView;
     private ImageView imageViewAttack;
     private static final Image SPRITE_SHEET = new Image("images/sprite_sheet.png");
+    private static final Image SPRITE_SHEET_BOOTS = new Image("images/sprite_sheet_boots.png");
 
     private SpriteAnimation walkRight;
     private SpriteAnimation walkLeft;
@@ -27,6 +30,8 @@ public class DefaultPlayer extends PlayerSprite {
     private SpriteAnimation attackLeft;
     private SpriteAnimation attackSwipeRight;
     private SpriteAnimation attackSwipeLeft;
+
+
 
     public DefaultPlayer() {
         super();
@@ -55,6 +60,10 @@ public class DefaultPlayer extends PlayerSprite {
         attackSwipeLeft = new SpriteAnimation(imageViewAttack, Duration.millis(200), 4, 4, 32, 32, 1002);
         attackSwipeRight.setOnFinished(e -> this.getChildren().remove(imageViewAttack));
         attackSwipeLeft.setOnFinished(e -> this.getChildren().remove(imageViewAttack));
+        damageLeft.setOnFinished(e -> colorAdjust.setSaturation(0));
+        damageRight.setOnFinished(e -> colorAdjust.setSaturation(0));
+
+        imageView.setEffect(colorAdjust);
 
         this.getChildren().add(imageView);
 
@@ -115,16 +124,29 @@ public class DefaultPlayer extends PlayerSprite {
 
     @Override
     public void damageRight() {
+        colorAdjust.setSaturation(1);
         damageRight.play();
     }
 
     @Override
     public void damageLeft() {
+        colorAdjust.setSaturation(1);
         damageLeft.play();
     }
 
     @Override
     public Bounds getBounds() {
         return imageView.getBoundsInParent();
+    }
+
+
+    @Override
+    public void addBoots() {
+        imageView.setImage(SPRITE_SHEET_BOOTS);
+    }
+
+    @Override
+    public void removeBoots() {
+
     }
 }

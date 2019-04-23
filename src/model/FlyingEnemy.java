@@ -25,7 +25,8 @@ public class FlyingEnemy extends Enemy {
     private SpriteAnimation dieRight;
     private SpriteAnimation dieLeft;
 
-    FlyingEnemy(double spawnX, double spawnY, Player player) {
+
+    public FlyingEnemy(double spawnX, double spawnY, Player player) {
         super(player);
         knockback_player = KNOCKBACK_PLAYER;
         damage = DAMAGE;

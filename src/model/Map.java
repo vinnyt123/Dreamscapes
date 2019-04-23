@@ -18,6 +18,7 @@ public class Map extends Pane {
     private List<GameObject> gameObjects = new ArrayList<>();
     private List<ImageView> backgrounds = new ArrayList<>();
     private List<Enemy> enemies = new ArrayList<>();
+    private List<Item> items = new ArrayList<>();
     private ImageView darkness;
 
     private final double WIDTH;
@@ -45,6 +46,8 @@ public class Map extends Pane {
                     } else if (itemId.startsWith("enemyPlatform")) {
                         gameObjects.add(new Wall((Rectangle) item));
                         enemies.add(new WalkingEnemy((Rectangle) item, player));
+                    } else if (itemId.startsWith("doubleJumpBoots")) {
+                        items.add(new DoubleJumpBoots(item));
                     }
                 } else {
                     gameObjects.add(new Wall((Rectangle) item));
@@ -68,6 +71,7 @@ public class Map extends Pane {
         this.getChildren().addAll(backgrounds);
         this.getChildren().addAll(enemies);
         this.getChildren().addAll(gameObjects);
+        this.getChildren().addAll(items);
         //Remove and re-add player to ensure they're on top of image view
         this.getChildren().remove(player);
         this.getChildren().add(player);
@@ -105,6 +109,15 @@ public class Map extends Pane {
            for (Enemy enemy : enemies) {
                gameObject.intersect(enemy);
            }
+        }
+
+        Iterator<Item> it2 = items.iterator();
+        while (it2.hasNext()) {
+            Item item = it2.next();
+            if (item.intersect(player)) {
+                this.getChildren().remove(item);
+                it2.remove();
+            }
         }
 
         moveCamera();

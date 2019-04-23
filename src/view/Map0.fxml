@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="2000.0" maxWidth="2000.0" prefHeight="2000.0" prefWidth="2000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="2000.0" maxWidth="2000.0" prefHeight="2000.0" prefWidth="2000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="back" fitHeight="2500.0" fitWidth="3094.0" layoutX="-192.0" layoutY="-349.0" pickOnBounds="true">
          <image>
@@ -40,10 +40,11 @@
       <Line fx:id="flyingEnemy1" endX="707.0" endY="1589.0" startX="707.0" startY="1589.0" stroke="WHITE" />
       <Rectangle fx:id="door_Map1" arcHeight="5.0" arcWidth="5.0" fill="#ff1f9d" height="200.0" layoutX="1896.0" layoutY="1729.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
       <Circle fill="#25ff1f" layoutX="167.0" layoutY="1831.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
-      <ImageView fx:id="darkness" fitHeight="3418.0" fitWidth="3646.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="darkness" fitHeight="3418.0" fitWidth="3646.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/overlay.png" />
          </image>
       </ImageView>
+      <Rectangle fx:id="doubleJumpBoots1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="1025.0" layoutY="1583.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
    </children>
 </AnchorPane>
