@@ -20,8 +20,8 @@ public class Wall extends GameObject {
     public void intersect(Entity entity) {
         if(getBoundsInParent().intersects(entity.getBounds())) {
             entity.undoMove();
-            moveY(entity);
             moveX(entity);
+            moveY(entity);
         } else if(entity.getVelocity().getY() > Map.GRAVITY) {
             entity.setInAir(true);
         }
@@ -40,7 +40,9 @@ public class Wall extends GameObject {
             }
             if (entity instanceof WalkingEnemy) {
                 ((WalkingEnemy) entity).changeDirection();
+                System.out.println(entity.velocity);
             }
+            entity.setVelocity(new Point2D(0, entity.getVelocity().getY()));
             return true;
         }
         return false;
