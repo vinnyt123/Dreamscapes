@@ -23,12 +23,13 @@ public class Player extends Entity {
 
     private PlayerSprite playerSprite = new DefaultPlayer();
     private int attackCount = 0;
+    private int jumpCount = 0;
     private List<Weapon> playerWeapons = new ArrayList<>();
     private Weapon currentWeapon;
     private Controls controls = new Controls();
-    private boolean hasDoubleJumped = false;
     boolean isAttacking = false;
     private HashSet<String> keysPressed;
+    private boolean hasBoots = false;
 
     public Player(HashSet<String> keysPressed) {
         super();
@@ -61,6 +62,14 @@ public class Player extends Entity {
         if(!this.getInAir()) {
             this.setInAir(true);
             setVelocity(new Point2D(0, JUMPHEIGHT));
+        } else if (hasBoots && !hasDoubleJumped && jumpCount == 1) {
+            hasDoubleJumped = true;
+            if (isRight) {
+                playerSprite.flipRight();
+            } else {
+                playerSprite.flipLeft();
+            }
+            setVelocity(new Point2D(0, JUMPHEIGHT));
         }
     }
 
@@ -78,7 +87,6 @@ public class Player extends Entity {
         if(attackCount == 1) {
             isAttacking = true;
             velocity = new Point2D((isRight) ? ATTACKSLIDE : -ATTACKSLIDE, velocity.getY());
-
         }
     }
 
@@ -119,7 +127,10 @@ public class Player extends Entity {
         }
 
         if (keysPressed.contains(controls.getJumpKey())) {
+            jumpCount++;
             jump();
+        } else {
+            jumpCount = 0;
         }
 
         if (keysPressed.contains(controls.getLeftKey())) {
@@ -188,5 +199,6 @@ public class Player extends Entity {
 
     public void addDoubleJumpBoots() {
         playerSprite.addBoots();
+        hasBoots = true;
     }
 }

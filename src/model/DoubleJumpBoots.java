@@ -2,6 +2,7 @@ package model;
 
 import javafx.scene.Node;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 
 
 public class DoubleJumpBoots extends Item  {
@@ -17,6 +18,7 @@ public class DoubleJumpBoots extends Item  {
     public boolean intersect(Player player) {
         if (this.getBoundsInParent().intersects(player.getBoundsInParent())) {
             player.addDoubleJumpBoots();
+            //((Pane) this.getScene().getRoot()).getChildren().add()
             return true;
         }
         return false;

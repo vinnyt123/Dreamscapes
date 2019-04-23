@@ -111,9 +111,12 @@ public class Map extends Pane {
            }
         }
 
-        for (Item item : items) {
+        Iterator<Item> it2 = items.iterator();
+        while (it2.hasNext()) {
+            Item item = it2.next();
             if (item.intersect(player)) {
-                items.remove(item);
+                this.getChildren().remove(item);
+                it2.remove();
             }
         }
 

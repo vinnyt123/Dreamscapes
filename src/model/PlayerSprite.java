@@ -28,6 +28,10 @@ public abstract class PlayerSprite extends Group {
 
     public abstract Bounds getBounds();
 
+    public abstract void flipLeft();
+
+    public abstract void flipRight();
+
     public abstract void addBoots();
 
     public abstract void removeBoots();

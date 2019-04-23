@@ -1,5 +1,8 @@
 package model;
 
+import javafx.animation.Animation;
+import javafx.animation.RotateTransition;
+import javafx.animation.Transition;
 import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
@@ -30,6 +33,8 @@ public class DefaultPlayer extends PlayerSprite {
     private SpriteAnimation attackLeft;
     private SpriteAnimation attackSwipeRight;
     private SpriteAnimation attackSwipeLeft;
+
+    private RotateTransition rotateTransition;
 
     public DefaultPlayer() {
         super();
@@ -64,6 +69,10 @@ public class DefaultPlayer extends PlayerSprite {
         currentAnimation = standRight;
 
         this.getChildren().add(imageView);
+
+        rotateTransition = new RotateTransition();
+        rotateTransition.setDuration(Duration.millis(500));
+        rotateTransition.setNode(this);
 
         /*animation = jumpRight;
         animation.getImageView().setEffect(colorAdjust);
@@ -141,6 +150,18 @@ public class DefaultPlayer extends PlayerSprite {
     @Override
     public Bounds getBounds() {
         return imageView.getBoundsInParent();
+    }
+
+    @Override
+    public void flipLeft() {
+        rotateTransition.setByAngle(-360);
+        rotateTransition.play();
+    }
+
+    @Override
+    public void flipRight() {
+        rotateTransition.setByAngle(360);
+        rotateTransition.play();
     }
 
     @Override
