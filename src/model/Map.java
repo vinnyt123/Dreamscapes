@@ -2,6 +2,7 @@ package model;
 
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
@@ -59,7 +60,8 @@ public class Map extends Pane {
                 if(item.getId().startsWith("darkness")) {
                     darkness = (ImageView) item;
                 } else {
-                    backgrounds.add((ImageView) item);
+                    Image image = ((ImageView) item).getImage();
+                    backgrounds.add(new ImageView(image));
                 }
             } else if (item instanceof Circle) {
                 player.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
@@ -79,7 +81,6 @@ public class Map extends Pane {
     void moveEntities() {
         if(player.health.get() < 0) {
             player.deathCount.setValue(player.deathCount.get() + 1);
-            player.getPlayerSprite().standRight();
             player.health.setValue(1.0);
             ((GameManager) player.getScene().getRoot()).restartLevel();
         }
@@ -151,10 +152,9 @@ public class Map extends Pane {
 
     private void scrollBackgrounds() {
         for(ImageView imageView : backgrounds) {
-            if(imageView.getId().startsWith("back")) {
-                imageView.setLayoutX(720 - player.getTranslateX() * -0.24 - 1000);
-                imageView.setLayoutY(450 - player.getTranslateY() * -0.1 - 500);
-            }
+            imageView.setLayoutX(720 - player.getTranslateX() * -0.24 - 1000);
+            imageView.setLayoutY(450 - player.getTranslateY() * -0.1 - 500);
+
         }
         if (darkness != null) {
             darkness.setLayoutX(player.getTranslateX() - darkness.getBoundsInParent().getWidth() / 2);

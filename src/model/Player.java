@@ -37,10 +37,6 @@ public class Player extends Entity {
         playerWeapons.add(currentWeapon);
     }
 
-    public PlayerSprite getPlayerSprite() {
-        return playerSprite;
-    }
-
     //Cool effect for if the player is standing in water or something (creates reflection)
     //Reflection reflection = new Reflection();
 
