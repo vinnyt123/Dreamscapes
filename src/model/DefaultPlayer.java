@@ -14,7 +14,6 @@ import static model.Player.WIDTH;
 
 public class DefaultPlayer extends PlayerSprite {
 
-    ImageView imageView;
     private ImageView imageViewAttack;
     private static final Image SPRITE_SHEET = new Image("images/sprite_sheet.png");
     private static final Image SPRITE_SHEET_BOOTS = new Image("images/sprite_sheet_boots.png");
@@ -34,7 +33,7 @@ public class DefaultPlayer extends PlayerSprite {
     private SpriteAnimation attackSwipeRight;
     private SpriteAnimation attackSwipeLeft;
 
-    private RotateTransition rotateTransition;
+
 
     public DefaultPlayer() {
         super();
@@ -65,14 +64,13 @@ public class DefaultPlayer extends PlayerSprite {
                 System.out.println("finished");
                 this.getChildren().remove(imageViewAttack);});
         attackSwipeLeft.setOnFinished(e -> this.getChildren().remove(imageViewAttack));
+        damageLeft.setOnFinished(e -> colorAdjust.setSaturation(0));
+        damageRight.setOnFinished(e -> colorAdjust.setSaturation(0));
 
         currentAnimation = standRight;
+        imageView.setEffect(colorAdjust);
 
         this.getChildren().add(imageView);
-
-        rotateTransition = new RotateTransition();
-        rotateTransition.setDuration(Duration.millis(500));
-        rotateTransition.setNode(this);
 
         /*animation = jumpRight;
         animation.getImageView().setEffect(colorAdjust);
@@ -138,12 +136,14 @@ public class DefaultPlayer extends PlayerSprite {
     @Override
     public void damageRight() {
         currentAnimation = damageRight;
+        colorAdjust.setSaturation(1);
         damageRight.play();
     }
 
     @Override
     public void damageLeft() {
         currentAnimation = damageLeft;
+        colorAdjust.setSaturation(1);
         damageLeft.play();
     }
 
@@ -152,17 +152,6 @@ public class DefaultPlayer extends PlayerSprite {
         return imageView.getBoundsInParent();
     }
 
-    @Override
-    public void flipLeft() {
-        rotateTransition.setByAngle(-360);
-        rotateTransition.play();
-    }
-
-    @Override
-    public void flipRight() {
-        rotateTransition.setByAngle(360);
-        rotateTransition.play();
-    }
 
     @Override
     public void addBoots() {
