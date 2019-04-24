@@ -91,7 +91,7 @@ public class FlyingEnemy extends Enemy {
     }
 
     private void playAnimation() {
-        if(isRight) {
+        if (isRight) {
             animation = flyRight;
         } else {
             animation = flyLeft;
@@ -101,6 +101,7 @@ public class FlyingEnemy extends Enemy {
 
     public void deadAnimation() {
         isDying = true;
+        colorAdjust.setSaturation(1);
         if(isRight) {
             animation = dieRight;
         } else {

@@ -18,6 +18,8 @@ public class WalkingEnemy extends Enemy {
     private static final Image SPRITE_SHEET = new Image("images/snail_sheet.png");
     private SpriteAnimation animation;
     private SpriteAnimation walkRight;
+    private SpriteAnimation dieRight;
+    private SpriteAnimation dieLeft;
     private static final double KNOCKBACK_PLAYER = 8;
     private static final double KNOCKBACK_THIS = 9;
     private SpriteAnimation walkLeft;
@@ -44,6 +46,8 @@ public class WalkingEnemy extends Enemy {
         imageView.setFitHeight(HEIGHT);
         walkLeft = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 53, 30, 0);
         walkRight = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 53, 30, 29);
+        dieLeft = new SpriteAnimation(imageView, Duration.millis(1000), 2, 2, 53, 30, 87);
+        dieRight = new SpriteAnimation(imageView, Duration.millis(1000), 2, 2, 53, 30, 58);
         animation = walkLeft;
         animation.getImageView().setEffect(colorAdjust);
         animation.setCycleCount(1);
@@ -54,6 +58,11 @@ public class WalkingEnemy extends Enemy {
 
         if (isKnockback) {
             knockBack();
+        } else if(isDying) {
+            setVelocity(new Point2D(0, velocity.getY()));
+            applyGravity();
+            applyVelocity();
+            return;
         }
 
         if (!isKnockback) {
@@ -113,6 +122,19 @@ public class WalkingEnemy extends Enemy {
     }
 
     public void deadAnimation() {
+        isDying = true;
+        if(movingRight) {
+            animation = dieRight;
+            System.out.println("x");
+        } else {
+            animation = dieLeft;
+            System.out.println("y");
+        }
+        animation.play();
+        timer.schedule(new dyingTimer(), Entity.DYING_TIME);
+    }
 
+    public void setMovingRight(Boolean movingRight) {
+        this.movingRight = movingRight;
     }
 }

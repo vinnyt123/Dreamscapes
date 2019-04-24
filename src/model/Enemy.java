@@ -61,6 +61,13 @@ public abstract class Enemy extends Entity {
         } else {
             setVelocity(new Point2D(-Math.cos(Math.toRadians(theta)) * knockback_this, -Math.sin(Math.toRadians(theta)) * knockback_this));
         }
+        if (this instanceof WalkingEnemy) {
+            if (velocity.getX() > 0) {
+                ((WalkingEnemy) this).setMovingRight(true);
+            } else {
+                ((WalkingEnemy) this).setMovingRight(false);
+            }
+        }
     }
 
     void intersect(Player player) {

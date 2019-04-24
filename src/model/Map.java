@@ -71,8 +71,8 @@ public class Map extends Pane {
         this.getChildren().addAll(gameObjects);
         this.getChildren().addAll(items);
         //Remove and re-add player to ensure they're on top of image view
-        this.getChildren().remove(this.player);
-        this.getChildren().add(this.player);
+        this.getChildren().remove(player);
+        this.getChildren().add(player);
         //this.getChildren().add(darkness);
     }
 
