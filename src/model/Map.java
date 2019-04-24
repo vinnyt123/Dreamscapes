@@ -47,6 +47,8 @@ public class Map extends Pane {
                         enemies.add(new WalkingEnemy((Rectangle) item, player));
                     } else if (itemId.startsWith("doubleJumpBoots")) {
                         items.add(new DoubleJumpBoots(item));
+                    } else if (itemId.startsWith("spikes")) {
+                        gameObjects.add(new Spikes((Rectangle) item));
                     }
                 } else {
                     gameObjects.add(new Wall((Rectangle) item));
@@ -80,6 +82,7 @@ public class Map extends Pane {
         if(player.health.get() < 0) {
             player.deathCount.setValue(player.deathCount.get() + 1);
             player.health.setValue(1.0);
+            player.velocity = new Point2D(0, 0);
             ((GameManager) player.getScene().getRoot()).restartLevel();
         }
 

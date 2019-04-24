@@ -13,7 +13,7 @@ public class FlyingEnemy extends Enemy {
     private static final double SPEED = 3;
     private static final double WIDTH = 60;
     private static final double HEIGHT = 30;
-    private static final double DAMAGE = 0.5;
+    private static final double DAMAGE = 0.21;
     private static final double KNOCKBACK_PLAYER = 8;
     private static final double KNOCKBACK_THIS = 9;
     private static final double HEALTH = 10;

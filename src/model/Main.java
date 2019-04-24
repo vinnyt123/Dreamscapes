@@ -22,6 +22,7 @@ public class Main extends Application {
         GameManager gameManager = new GameManager();
         Scene scene = new Scene(gameManager);
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.setOnCloseRequest(event -> {
             Platform.exit();
             System.exit(0);
