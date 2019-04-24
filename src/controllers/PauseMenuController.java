@@ -15,6 +15,7 @@ public class PauseMenuController {
     @FXML private AnchorPane pauseMenuBlock;
     @FXML private ProgressBar healthBar;
     @FXML private Label deathCount;
+    @FXML private Label timeCount;
 
     public Label getDeathCount() {
         return deathCount;
@@ -25,6 +26,10 @@ public class PauseMenuController {
         if(e.getCode().toString().equals("P")) {
             pauseGame();
         }
+    }
+
+    public Label getTimeCount() {
+        return timeCount;
     }
 
     public ProgressBar getHealthBar() {

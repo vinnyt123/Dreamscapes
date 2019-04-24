@@ -1,5 +1,9 @@
 package model;
 
+import controllers.PauseMenuController;
+import javafx.application.Platform;
+import javafx.beans.property.*;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -8,6 +12,8 @@ import javafx.scene.layout.StackPane;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class PlayingState extends StackPane {
 
@@ -17,6 +23,9 @@ public class PlayingState extends StackPane {
     public static String map1ID = "Map1";
     public static String map1File = "view/Map1.fxml";
 
+    private PauseMenuController pm;
+    private Timer gameTimer;
+    private long secondsPassed = 0;
     private HashMap<String, String> mapsMap = new HashMap<>();
     private FXMLLoader loader;
     private FXMLLoader pauseLoader;
@@ -42,9 +51,23 @@ public class PlayingState extends StackPane {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        pm = pauseLoader.getController();
+    }
+
+    private String secondsConverter(long seconds) {
+        long minutes = seconds / 60;
+        String time = "";
+        time += minutes + ":";
+        if((seconds - 60 * minutes) < 10) {
+            time += "0";
+        }
+        return time + ((seconds - 60 * minutes));
     }
 
     void setMap(String name) {
+        if(name.equals(map0ID)) {
+            secondsPassed = 0;
+        }
         loader = new FXMLLoader(getClass().getClassLoader().getResource(mapsMap.get(name)));
         try {
             loaderRoot = loader.load();
@@ -64,6 +87,23 @@ public class PlayingState extends StackPane {
     void newGame() {
         player = new Player(keysPressed);
         setMap(map0ID);
+        startTimer();
+    }
+
+    void startTimer() {
+        gameTimer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                secondsPassed++;
+                Platform.runLater(() -> pm.getTimeCount().setText(secondsConverter(secondsPassed)));
+            }
+        };
+        gameTimer.scheduleAtFixedRate(task, 1000, 1000);
+    }
+
+    void pauseTimer() {
+            gameTimer.cancel();
     }
 
     Map getCurrentMap() {

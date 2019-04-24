@@ -53,9 +53,7 @@ public class Map extends Pane {
                 }
 
             } else if (item instanceof Line) {
-                if(item.getId().startsWith("flyingEnemy")) {
-                    enemies.add(new FlyingEnemy(((Line) item).getStartX(), ((Line) item).getStartY(), player));
-                }
+                enemies.add(new FlyingEnemy(((Line) item).getStartX(), ((Line) item).getStartY(), player));
             } else if(item instanceof ImageView) {
                 if(item.getId().startsWith("darkness")) {
                     darkness = (ImageView) item;

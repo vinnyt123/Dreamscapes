@@ -15,10 +15,16 @@
          </children>
       </AnchorPane>
       <Button fx:id="pauseButton" layoutX="1358.0" layoutY="17.0" mnemonicParsing="false" onAction="#pauseButtonClicked" onKeyPressed="#pauseButtonPressed" text="Pause" />
-      <ProgressBar fx:id="healthBar" layoutX="22.0" layoutY="29.0" prefHeight="25.0" prefWidth="365.0" progress="0.0" />
-      <Label layoutX="22.0" layoutY="15.0" text="Health" />
-      <Label layoutX="22.0" layoutY="62.0" text="Deaths" />
-      <Label fx:id="deathCount" layoutX="23.0" layoutY="79.0" text="0">
+      <ProgressBar fx:id="healthBar" layoutX="26.0" layoutY="29.0" prefHeight="25.0" prefWidth="365.0" progress="0.0" />
+      <Label layoutX="26.0" layoutY="15.0" text="Health" />
+      <Label layoutX="26.0" layoutY="107.0" text="Deaths" />
+      <Label fx:id="deathCount" layoutX="26.0" layoutY="124.0" text="0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="26.0" layoutY="65.0" text="Elapsed Time" />
+      <Label fx:id="timeCount" layoutX="26.0" layoutY="82.0" text="0:00">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

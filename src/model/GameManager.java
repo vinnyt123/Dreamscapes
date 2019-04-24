@@ -43,10 +43,12 @@ public class GameManager extends StackPane {
     }
 
     public void pauseGame() {
+        playingState.pauseTimer();
         gameLoop.stop();
     }
 
     public void resumeGame() {
+        playingState.startTimer();
         gameLoop.start();
     }
 
