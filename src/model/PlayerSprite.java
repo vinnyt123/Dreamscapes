@@ -12,6 +12,7 @@ public abstract class PlayerSprite extends Group {
 
     private RotateTransition rotateTransition;
     ColorAdjust colorAdjust;
+
     ImageView imageView;
 
     public PlayerSprite() {
@@ -57,4 +58,18 @@ public abstract class PlayerSprite extends Group {
     public abstract void addBoots();
 
     public abstract void removeBoots();
+
+    void redFlashOn() {
+        colorAdjust.setContrast(0.1);
+        colorAdjust.setHue(1.0);
+        colorAdjust.setBrightness(-0.1);
+        colorAdjust.setSaturation(0.3);
+    }
+
+    void redFlashOff() {
+        colorAdjust.setContrast(0);
+        colorAdjust.setHue(0);
+        colorAdjust.setBrightness(0);
+        colorAdjust.setSaturation(0);
+    }
 }

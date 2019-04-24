@@ -1,7 +1,9 @@
 package model;
 
+import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
@@ -26,17 +28,15 @@ public class DefaultPlayer extends PlayerSprite {
     private SpriteAnimation attackSwipeRight;
     private SpriteAnimation attackSwipeLeft;
 
-
-
-    public DefaultPlayer() {
+    DefaultPlayer() {
         super();
 
         imageView = new ImageView(SPRITE_SHEET);
         imageViewAttack = new ImageView(SPRITE_SHEET);
         imageViewAttack.setViewport(new Rectangle2D(0, 0, 32, 32));
         imageViewAttack.setFitWidth(32);
-        imageViewAttack.setFitHeight(32);
-        imageViewAttack.setLayoutY(getLayoutY() + Player.HEIGHT/4);
+        imageViewAttack.setFitHeight(48);
+        imageViewAttack.setLayoutY(getLayoutY() + Player.HEIGHT/10);
         imageView.setViewport(new Rectangle2D(0, 0, 72, 97));
         imageView.setFitWidth(Player.WIDTH);
         imageView.setFitHeight(Player.HEIGHT);
@@ -55,10 +55,11 @@ public class DefaultPlayer extends PlayerSprite {
         attackSwipeLeft = new SpriteAnimation(imageViewAttack, Duration.millis(200), 4, 4, 32, 32, 1002);
         attackSwipeRight.setOnFinished(e -> this.getChildren().remove(imageViewAttack));
         attackSwipeLeft.setOnFinished(e -> this.getChildren().remove(imageViewAttack));
-        damageLeft.setOnFinished(e -> colorAdjust.setSaturation(0));
-        damageRight.setOnFinished(e -> colorAdjust.setSaturation(0));
 
         imageView.setEffect(colorAdjust);
+
+        /*Reflection reflection = new Reflection();
+        imageView.setEffect(reflection);*/
 
         this.getChildren().add(imageView);
 
@@ -119,18 +120,20 @@ public class DefaultPlayer extends PlayerSprite {
 
     @Override
     public void damageRight() {
-        colorAdjust.setSaturation(1);
         damageRight.play();
     }
 
     @Override
     public void damageLeft() {
-        colorAdjust.setSaturation(1);
         damageLeft.play();
     }
 
     @Override
+    //Can just change these bounds to slightly smaller than image view bounds to make player appear slightly inside platforms
     public Bounds getBounds() {
+        if(imageView.getEffect() instanceof Reflection) {
+            return new BoundingBox(imageView.getBoundsInParent().getMinX(), imageView.getBoundsInParent().getMinY(), imageView.getBoundsInParent().getWidth(), 0.6 * imageView.getBoundsInParent().getHeight());
+        }
         return imageView.getBoundsInParent();
     }
 

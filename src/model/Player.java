@@ -1,6 +1,7 @@
 package model;
 
 import controllers.PauseMenuController;
+import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.BoundingBox;
@@ -14,7 +15,7 @@ public class Player extends Entity {
     private static final double JUMPHEIGHT = -12;
     private static final long DAMAGE_COOLDOWN = 800;
     private static final double RUNSPEED = 5;
-    private static final double ATTACKSLIDE = 5;
+    private static final double ATTACKSLIDE = 8;
     static final double WIDTH = 35;
     static final double HEIGHT = 50;
     IntegerProperty deathCount = new SimpleIntegerProperty();
@@ -39,9 +40,6 @@ public class Player extends Entity {
     }
 
     //Cool effect for if the player is standing in water or something (creates reflection)
-    //Reflection reflection = new Reflection();
-
-    //imageView.setEffect(reflection);
     public void createSprite() {
         GameManager gm = (GameManager) getScene().getRoot();
         PauseMenuController pm = gm.getPlayingState().getPauseLoader().getController();
@@ -99,7 +97,6 @@ public class Player extends Entity {
         isKnockback = true;
         setVelocity(new Point2D(xDistance, yDistance));
         if (isDamage) {
-            colorAdjust.setSaturation(1);
             isFlashing = true;
             timer.schedule(new coolDownTimer(), DAMAGE_COOLDOWN);
         }
@@ -159,6 +156,32 @@ public class Player extends Entity {
                 playerSprite.getBounds().getMinY() + getTranslateY(), playerSprite.getBounds().getWidth(), playerSprite.getBounds().getHeight());
     }
 
+    void redFlash() {
+        Timer flashTimer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                playerSprite.redFlashOn();
+            }
+        };
+        TimerTask task2 = new TimerTask() {
+            @Override
+            public void run() {
+                playerSprite.redFlashOff();
+            }
+        };
+        TimerTask task3 = new TimerTask() {
+            @Override
+            public void run() {
+                playerSprite.redFlashOff();
+                flashTimer.cancel();
+            }
+        };
+        flashTimer.scheduleAtFixedRate(task, 0, 100);
+        flashTimer.scheduleAtFixedRate(task2, 100, 100);
+        flashTimer.schedule(task3, 800);
+    }
+
     private void playAnimation() {
         if(isFlashing && isRight) {
             playerSprite.damageRight();
@@ -182,8 +205,6 @@ public class Player extends Entity {
             playerSprite.walkLeft();
         }
     }
-
-
 
     @Override
     public void applyVelocity() {

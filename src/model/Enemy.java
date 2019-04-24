@@ -54,7 +54,6 @@ public abstract class Enemy extends Entity {
     void setKnockBack(boolean isDamage) {
         isKnockback = true;
         if(isDamage) {
-            colorAdjust.setSaturation(1);
             isFlashing = true;
             timer.schedule(new coolDownTimer(), DAMAGE_COOLDOWN);
             setVelocity(new Point2D(-Math.cos(Math.toRadians(theta)) * knockback_this * 1.5, -Math.sin(Math.toRadians(theta)) * knockback_this * 1.5));
@@ -72,6 +71,7 @@ public abstract class Enemy extends Entity {
 
     void intersect(Player player) {
         if(this.getBoundsInParent().intersects(player.getBoundsInParent()) && !player.isFlashing && !isDying && !isDead) {
+            player.redFlash();
             player.health.setValue(player.health.getValue() - damage);
             setKnockBack(false);
             player.knockBack(Math.cos(Math.toRadians(theta)) * knockback_player, Math.sin(Math.toRadians(theta)) * knockback_player, true);

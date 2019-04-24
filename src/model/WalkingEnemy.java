@@ -49,7 +49,6 @@ public class WalkingEnemy extends Enemy {
         dieLeft = new SpriteAnimation(imageView, Duration.millis(1000), 2, 2, 53, 30, 87);
         dieRight = new SpriteAnimation(imageView, Duration.millis(1000), 2, 2, 53, 30, 58);
         animation = walkLeft;
-        animation.getImageView().setEffect(colorAdjust);
         animation.setCycleCount(1);
         this.getChildren().add(imageView);
     }

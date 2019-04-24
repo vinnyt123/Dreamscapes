@@ -1,6 +1,5 @@
 package model;
 
-import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
 
 public class Spikes extends GameObject {
@@ -22,6 +21,7 @@ public class Spikes extends GameObject {
             moveY(entity);
             entity.setInAir(true);
             if(entity instanceof Player) {
+                ((Player) entity).redFlash();
                 ((Player) entity).knockBack(entity.getLastMove().getX() * -2, entity.getLastMove().getY() * -1, true);
             }
             entity.health.setValue(entity.health.getValue() - DAMAGE);

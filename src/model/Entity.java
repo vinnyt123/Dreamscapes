@@ -14,10 +14,9 @@ public abstract class Entity extends Group {
 
     static final long DYING_TIME = 2500;
     Point2D velocity = new Point2D(0,0);
-    ColorAdjust colorAdjust = new ColorAdjust();
     Timer timer = new Timer();
-    boolean isFlashing = false;
     DoubleProperty health = new SimpleDoubleProperty();
+    boolean isFlashing = false;
     boolean isKnockback = false;
     private Point2D lastMove;
     boolean inAir = true;
@@ -27,6 +26,7 @@ public abstract class Entity extends Group {
     boolean hasDoubleJumped = false;
 
     public abstract void move();
+    public abstract Bounds getBounds();
 
     public void setRight(boolean right) {
         isRight = right;
@@ -37,8 +37,6 @@ public abstract class Entity extends Group {
             velocity = velocity.add(0, Map.GRAVITY);
         }
     }
-
-    public abstract Bounds getBounds();
 
     public void setInAir(boolean inAir) {
         this.inAir = inAir;
@@ -77,7 +75,6 @@ public abstract class Entity extends Group {
 
     class coolDownTimer extends TimerTask {
         public void run() {
-            colorAdjust.setSaturation(0);
             isFlashing = false;
         }
     }

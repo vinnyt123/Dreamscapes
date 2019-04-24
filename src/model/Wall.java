@@ -1,10 +1,8 @@
 package model;
 
 
-import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
 
-import java.util.List;
 
 public class Wall extends GameObject {
 

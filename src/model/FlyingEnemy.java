@@ -50,7 +50,6 @@ public class FlyingEnemy extends Enemy {
         dieLeft = new SpriteAnimation(imageView, Duration.millis(400), 2, 2, 72, 36, 72);
         dieRight = new SpriteAnimation(imageView, Duration.millis(400), 2, 2, 72, 36, 108);
         animation = flyLeft;
-        animation.getImageView().setEffect(colorAdjust);
         animation.setCycleCount(1);
 
         this.getChildren().add(imageView);
@@ -101,7 +100,6 @@ public class FlyingEnemy extends Enemy {
 
     public void deadAnimation() {
         isDying = true;
-        colorAdjust.setSaturation(1);
         if(isRight) {
             animation = dieRight;
         } else {
