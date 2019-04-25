@@ -1,7 +1,6 @@
 package model;
 
 import controllers.PauseMenuController;
-import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.BoundingBox;
@@ -156,32 +155,6 @@ public class Player extends Entity {
                 playerSprite.getBounds().getMinY() + getTranslateY(), playerSprite.getBounds().getWidth(), playerSprite.getBounds().getHeight());
     }
 
-    void redFlash() {
-        Timer flashTimer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                playerSprite.redFlashOn();
-            }
-        };
-        TimerTask task2 = new TimerTask() {
-            @Override
-            public void run() {
-                playerSprite.redFlashOff();
-            }
-        };
-        TimerTask task3 = new TimerTask() {
-            @Override
-            public void run() {
-                playerSprite.redFlashOff();
-                flashTimer.cancel();
-            }
-        };
-        flashTimer.scheduleAtFixedRate(task, 0, 100);
-        flashTimer.scheduleAtFixedRate(task2, 100, 100);
-        flashTimer.schedule(task3, 800);
-    }
-
     private void playAnimation() {
         if(isFlashing && isRight) {
             playerSprite.damageRight();
@@ -214,8 +187,28 @@ public class Player extends Entity {
         }
     }
 
-    public void addDoubleJumpBoots() {
+    void addDoubleJumpBoots() {
         playerSprite.addBoots();
         hasBoots = true;
+    }
+
+    void redFlash() {
+        Timer flashTimer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                for(int i = 0; i < 3; i++) {
+                    playerSprite.redFlashOn();
+                    try {
+                        Thread.sleep(100);
+                        playerSprite.redFlashOff();
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        flashTimer.schedule(task, 0);
     }
 }

@@ -46,7 +46,7 @@
       </ImageView>
       <Rectangle fx:id="doubleJumpBoots1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="1025.0" layoutY="1583.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="1378.0" layoutY="1922.0" stroke="BLACK" strokeType="INSIDE" width="623.0" />
-      <Rectangle fx:id="spikes" arcHeight="5.0" arcWidth="5.0" fill="#ff1f28" height="59.0" layoutX="1168.0" layoutY="1942.0" stroke="BLACK" strokeType="INSIDE" width="215.0" />
+      <Rectangle fx:id="lava" arcHeight="5.0" arcWidth="5.0" fill="#ffb921" height="59.0" layoutX="1168.0" layoutY="1942.0" stroke="BLACK" strokeType="INSIDE" width="215.0" />
       <Rectangle fx:id="spikes1" arcHeight="5.0" arcWidth="5.0" fill="#ff1f28" height="79.0" layoutX="949.0" layoutY="1848.0" stroke="BLACK" strokeType="INSIDE" width="21.0" />
    </children>
 </AnchorPane>

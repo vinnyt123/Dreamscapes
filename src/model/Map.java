@@ -49,6 +49,8 @@ public class Map extends Pane {
                         items.add(new DoubleJumpBoots(item));
                     } else if (itemId.startsWith("spikes")) {
                         gameObjects.add(new Spikes((Rectangle) item));
+                    } else if(itemId.startsWith("lava")) {
+                        gameObjects.add(new Lava((Rectangle) item));
                     }
                 } else {
                     gameObjects.add(new Wall((Rectangle) item));
@@ -91,6 +93,7 @@ public class Map extends Pane {
         while (it.hasNext()) {
             Enemy enemy = it.next();
             if(enemy.isDead) {
+                enemy.remove();
                 this.getChildren().remove(enemy);
                 it.remove();
             } else if(enemy.health.get() < 0 && !enemy.isDying) {
@@ -100,6 +103,7 @@ public class Map extends Pane {
                 enemy.intersect(player);
             }
             if(player.isAttacking && player.getCurrentWeapon().getAttackBounds(player.isRight).intersects(enemy.getBoundsInParent()) && !enemy.isFlashing &&!enemy.isDying) {
+                enemy.redFlash();
                 enemy.health.setValue(enemy.health.getValue() - player.getCurrentWeapon().getDamage());
                 enemy.setKnockBack(true);
             }

@@ -24,7 +24,7 @@ public class WalkingEnemy extends Enemy {
     private static final double KNOCKBACK_THIS = 9;
     private SpriteAnimation walkLeft;
     private boolean movingRight = true;
-    private ImageView imageView;
+
 
 
     public WalkingEnemy(Rectangle platform, Player player) {
@@ -41,6 +41,7 @@ public class WalkingEnemy extends Enemy {
 
     private void createSprite() {
         imageView = new ImageView(SPRITE_SHEET);
+        imageView.setEffect(colorAdjust);
         imageView.setViewport(new Rectangle2D(0, 0, 72, 36));
         imageView.setFitWidth(WIDTH);
         imageView.setFitHeight(HEIGHT);
@@ -54,7 +55,6 @@ public class WalkingEnemy extends Enemy {
     }
 
     public void move() {
-
         if (isKnockback) {
             knockBack();
         } else if(isDying) {
@@ -77,7 +77,7 @@ public class WalkingEnemy extends Enemy {
                 velocity = new Point2D(-SPEED, velocity.getY());
             }
 
-            if (player.isFlashing) {
+            if (isFlashing) {
                 velocity = new Point2D(0,velocity.getY());
             }
         }

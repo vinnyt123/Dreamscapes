@@ -2,16 +2,15 @@ package model;
 
 import javafx.scene.shape.Rectangle;
 
-public class Spikes extends GameObject {
+public class Lava extends GameObject {
 
     private static final double DAMAGE = 0.51;
 
-    Spikes(Rectangle rectangle) {
+    Lava(Rectangle rectangle) {
         Rectangle newRectangle = new Rectangle(rectangle.getLayoutX(), rectangle.getLayoutY(), rectangle.getWidth(), rectangle.getHeight());
         newRectangle.setFill(rectangle.getFill());
         this.getChildren().add(newRectangle);
     }
-
 
     @Override
     public void intersect(Entity entity) {
@@ -22,9 +21,7 @@ public class Spikes extends GameObject {
             entity.setInAir(true);
             if(entity instanceof Player) {
                 ((Player) entity).redFlash();
-                ((Player) entity).knockBack((entity.getLastMove().getX() < 0) ? 10 : -10, (entity.getLastMove().getY()<0) ? 5 : -5, true);
-            } else if( entity instanceof Enemy) {
-                ((Enemy) entity).redFlash();
+                ((Player) entity).knockBack(0, -10, true);
             }
             entity.health.setValue(entity.health.getValue() - DAMAGE);
         } else if(entity.getVelocity().getY() > Map.GRAVITY) {

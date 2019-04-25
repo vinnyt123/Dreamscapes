@@ -131,9 +131,7 @@ public class DefaultPlayer extends PlayerSprite {
     @Override
     //Can just change these bounds to slightly smaller than image view bounds to make player appear slightly inside platforms
     public Bounds getBounds() {
-        if(imageView.getEffect() instanceof Reflection) {
-            return new BoundingBox(imageView.getBoundsInParent().getMinX(), imageView.getBoundsInParent().getMinY(), imageView.getBoundsInParent().getWidth(), 0.6 * imageView.getBoundsInParent().getHeight());
-        }
+        //return new BoundingBox(imageView.getBoundsInParent().getMinX(), imageView.getBoundsInParent().getMinY(), imageView.getBoundsInParent().getWidth(), imageView.getBoundsInParent().getHeight() - 10);
         return imageView.getBoundsInParent();
     }
 
