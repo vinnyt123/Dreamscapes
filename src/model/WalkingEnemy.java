@@ -3,10 +3,8 @@ package model;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public class WalkingEnemy extends Enemy {
@@ -25,13 +23,13 @@ public class WalkingEnemy extends Enemy {
     private static final double KNOCKBACK_THIS = 9;
     private SpriteAnimation walkLeft;
     private boolean movingRight = true;
-    private WalkingEnemySpawer walkingEnemySpawer;
+    private walkingEnemySpawner walkingEnemySpawner;
 
 
 
-    public WalkingEnemy(Player player, WalkingEnemySpawer walkingEnemySpawer) {
+    public WalkingEnemy(Player player, walkingEnemySpawner walkingEnemySpawner) {
         super(player);
-        this.walkingEnemySpawer = walkingEnemySpawer;
+        this.walkingEnemySpawner = walkingEnemySpawner;
         knockback_player = KNOCKBACK_PLAYER;
         knockback_this = KNOCKBACK_THIS;
         damage = DAMAGE;
@@ -129,18 +127,16 @@ public class WalkingEnemy extends Enemy {
         isDying = true;
         if(movingRight) {
             animation = dieRight;
-            System.out.println("x");
         } else {
             animation = dieLeft;
-            System.out.println("y");
         }
         animation.play();
         timer.schedule(new dyingTimer(), Entity.DYING_TIME);
     }
 
     public void decrementSpawnerCount() {
-        if (walkingEnemySpawer != null) {
-            walkingEnemySpawer.enemyDied();
+        if (walkingEnemySpawner != null) {
+            walkingEnemySpawner.enemyDied();
         }
     }
 

@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Map extends Pane {
 
-    private List<WalkingEnemySpawer> spawners = new ArrayList<>();
+    private List<walkingEnemySpawner> spawners = new ArrayList<>();
     private Player player;
     private List<GameObject> gameObjects = new ArrayList<>();
     private List<ImageView> backgrounds = new ArrayList<>();
@@ -34,12 +34,12 @@ public class Map extends Pane {
         super();
         this.player = player;
         this.getChildren().add(player);
-        this.WIDTH = pane.getBoundsInParent().getWidth();
-        this.HEIGHT = pane.getBoundsInParent().getHeight();
-        System.out.println(WIDTH);
-        System.out.println(HEIGHT);
+        this.WIDTH = pane.getBoundsInParent().getWidth() - 30;
+        this.HEIGHT = pane.getBoundsInParent().getHeight() - 30;
         this.setPrefWidth(pane.getPrefWidth());
         this.setPrefHeight(pane.getPrefHeight());
+
+        this.getStylesheets().add("/images/Styles.css");
 
         //Create list of rectangles that are walls/floors. Use line start to create enemy spawn point.
         for(Node item : pane.getChildrenUnmodifiable()) {
@@ -55,11 +55,11 @@ public class Map extends Pane {
                     } else if(itemId.startsWith("lava")) {
                         gameObjects.add(new Lava((Rectangle) item));
                     } else if(itemId.startsWith("enemySpawner")) {
-                        WalkingEnemySpawer walkingEnemySpawner;
+                        walkingEnemySpawner walkingEnemySpawner;
                         if (itemId.endsWith("Left")) {
-                            walkingEnemySpawner = new WalkingEnemySpawer(player, true);
+                            walkingEnemySpawner = new walkingEnemySpawner(player, true);
                         } else {
-                            walkingEnemySpawner = new WalkingEnemySpawer(player, false);
+                            walkingEnemySpawner = new walkingEnemySpawner(player, false);
                         }
                         walkingEnemySpawner.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
                         enemies.add(walkingEnemySpawner);
@@ -76,7 +76,10 @@ public class Map extends Pane {
                     darkness = (ImageView) item;
                 } else {
                     Image image = ((ImageView) item).getImage();
-                    backgrounds.add(new ImageView(image));
+                    ImageView imageView = new ImageView(image);
+                    imageView.setFitWidth(WIDTH);
+                    imageView.setFitHeight(HEIGHT);
+                    backgrounds.add(imageView);
                 }
             } else if (item instanceof Circle) {
                 if (item.getId() != null && item.getId().startsWith("walkingEnemy")) {
@@ -101,13 +104,8 @@ public class Map extends Pane {
 
     void moveEntities() {
         if(player.health.get() <= 0) {
-            player.deathCount.setValue(player.deathCount.get() + 1);
-            player.health.setValue(1.0);
-            player.velocity = new Point2D(0, 0);
+            player.resetPlayer();
             ((GameManager) player.getScene().getRoot()).restartLevel();
-            player.isFlashing = false;
-            player.isAttacking = false;
-            player.playAnimation();
             return;
         }
         player.move();
@@ -142,7 +140,7 @@ public class Map extends Pane {
            }
         }
 
-        for (WalkingEnemySpawer spawner : spawners) {
+        for (walkingEnemySpawner spawner : spawners) {
             WalkingEnemy walkingEnemy = spawner.update();
             if (walkingEnemy != null) {
                 enemies.add(walkingEnemy);
@@ -190,8 +188,8 @@ public class Map extends Pane {
 
     private void scrollBackgrounds() {
         for(ImageView imageView : backgrounds) {
-            imageView.setLayoutX(VIEWPORTWIDTH - player.getTranslateX() * -0.24 - 1000);
-            imageView.setLayoutY(VIEWPORTHEIGHT - player.getTranslateY() * -0.1 - 500);
+            imageView.setTranslateX(player.getTranslateX() * 0.04 * (backgrounds.indexOf(imageView) + 1));
+            imageView.setTranslateY(0);
 
         }
         if (darkness != null) {

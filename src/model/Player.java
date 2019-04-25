@@ -1,6 +1,7 @@
 package model;
 
 import controllers.PauseMenuController;
+import javafx.animation.Animation;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.BoundingBox;
@@ -15,12 +16,14 @@ public class Player extends Entity {
     private static final long DAMAGE_COOLDOWN = 800;
     private static final double RUNSPEED = 5;
     private static final double ATTACKSLIDE = 8;
-    static final double WIDTH = 35;
-    static final double HEIGHT = 50;
+    static final double WIDTH = 64;
+    static final double HEIGHT = 64;
     IntegerProperty deathCount = new SimpleIntegerProperty();
+
     private PlayerSprite playerSprite = new DefaultPlayer();
 
     private int attackCount = 0;
+
     private int jumpCount = 0;
     private List<Weapon> playerWeapons = new ArrayList<>();
     private Weapon currentWeapon;
@@ -28,7 +31,6 @@ public class Player extends Entity {
     boolean isAttacking = false;
     private HashSet<String> keysPressed;
     private boolean hasBoots = false;
-
     public Player(HashSet<String> keysPressed) {
         super();
         this.keysPressed = keysPressed;
@@ -39,15 +41,17 @@ public class Player extends Entity {
     }
 
     //Cool effect for if the player is standing in water or something (creates reflection)
+
     public void createSprite() {
         GameManager gm = (GameManager) getScene().getRoot();
         PauseMenuController pm = gm.getPlayingState().getPauseLoader().getController();
         pm.getHealthBar().progressProperty().bind(health);
         pm.getDeathCount().textProperty().bind(deathCount.asString());
 
+        System.out.println(gm.getScene().getStylesheets());
+
         this.getChildren().addAll(playerSprite);
     }
-
     public Weapon getCurrentWeapon() {
         return currentWeapon;
     }
@@ -146,7 +150,9 @@ public class Player extends Entity {
 
         applyGravity();
         applyVelocity();
-        playAnimation();
+        if(!playerSprite.isAttacking() && !playerSprite.isDamaged()) {
+            playAnimation();
+        }
     }
 
     @Override
@@ -155,7 +161,9 @@ public class Player extends Entity {
                 playerSprite.getBounds().getMinY() + getTranslateY(), playerSprite.getBounds().getWidth(), playerSprite.getBounds().getHeight());
     }
 
-    public void playAnimation() {
+    void playAnimation() {
+        //System.out.println("is attacking: " + isAttacking + " is flashing: " + isFlashing);
+        //System.out.println("in air: " + inAir + " is right: " + isRight + " controls pressed: " + controls.isAnyKeyPressed(keysPressed));
         if(isFlashing && isRight) {
             playerSprite.damageRight();
         } else if(isFlashing) {
@@ -164,9 +172,9 @@ public class Player extends Entity {
             playerSprite.attackRight();
         } else if (isAttacking) {
             playerSprite.attackLeft();
-        } else if(keysPressed.isEmpty() && !inAir && isRight) {
+        } else if(!(controls.isAnyKeyPressed(keysPressed)) && !inAir && isRight) {
             playerSprite.standRight();
-        } else if(keysPressed.isEmpty() && !inAir) {
+        } else if(!(controls.isAnyKeyPressed(keysPressed)) && !inAir) {
             playerSprite.standLeft();
         } else if(inAir && isRight) {
             playerSprite.jumpRight();
@@ -178,6 +186,11 @@ public class Player extends Entity {
             playerSprite.walkLeft();
         } else if (health.get() <= 0) {
             playerSprite.standRight();
+        }
+
+        if(!(playerSprite.getCurrentAnimation().getStatus() == Animation.Status.RUNNING)) {
+            playerSprite.stopAll();
+            playerSprite.getCurrentAnimation().play();
         }
     }
 
@@ -212,5 +225,18 @@ public class Player extends Entity {
             }
         };
         flashTimer.schedule(task, 0);
+    }
+
+    void resetPlayer() {
+        deathCount.setValue(deathCount.get() + 1);
+        health.setValue(1.0);
+        velocity = new Point2D(0, 0);
+        isFlashing = false;
+        isAttacking = false;
+        inAir = true;
+        isRight = true;
+        playAnimation();
+        playerSprite.setAttacking(false);
+        playerSprite.setDamaged(false);
     }
 }

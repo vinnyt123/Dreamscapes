@@ -11,8 +11,25 @@ import javafx.util.Duration;
 public abstract class PlayerSprite extends Group {
 
     private RotateTransition rotateTransition;
-    ColorAdjust colorAdjust;
 
+    boolean attacking = false;
+
+    boolean damaged = false;
+    SpriteAnimation currentAnimation;
+
+    SpriteAnimation walkRight;
+
+    SpriteAnimation walkLeft;
+
+    SpriteAnimation jumpRight;
+    SpriteAnimation jumpLeft;
+    SpriteAnimation damageRight;
+    SpriteAnimation damageLeft;
+    SpriteAnimation standRight;
+    SpriteAnimation standLeft;
+    SpriteAnimation attackRight;
+    SpriteAnimation attackLeft;
+    ColorAdjust colorAdjust;
     ImageView imageView;
 
     public PlayerSprite() {
@@ -22,7 +39,6 @@ public abstract class PlayerSprite extends Group {
 
         colorAdjust = new ColorAdjust();
     }
-
     public abstract void walkLeft();
 
     public abstract void walkRight();
@@ -60,16 +76,50 @@ public abstract class PlayerSprite extends Group {
     public abstract void removeBoots();
 
     void redFlashOn() {
-        colorAdjust.setContrast(0.1);
-        colorAdjust.setHue(1.0);
-        colorAdjust.setBrightness(-0.1);
-        colorAdjust.setSaturation(0.3);
+        colorAdjust.setContrast(1);
+        //colorAdjust.setHue(-0.2);
+        //colorAdjust.setBrightness(-0.1);
+        //colorAdjust.setSaturation(0.3);
     }
 
     void redFlashOff() {
         colorAdjust.setContrast(0);
-        colorAdjust.setHue(0);
-        colorAdjust.setBrightness(0);
-        colorAdjust.setSaturation(0);
+        //colorAdjust.setHue(0);
+        //colorAdjust.setBrightness(0);
+        //colorAdjust.setSaturation(0);
+    }
+
+    SpriteAnimation getCurrentAnimation() {
+        return currentAnimation;
+    }
+
+    void stopAll() {
+        currentAnimation.stop();
+        walkRight.stop();
+        walkLeft.stop();
+        jumpRight.stop();
+        jumpLeft.stop();
+        damageRight.stop();
+        damageLeft.stop();
+        standRight.stop();
+        standLeft.stop();
+        attackRight.stop();
+        attackLeft.stop();
+    }
+
+    boolean isAttacking() {
+        return attacking;
+    }
+
+    boolean isDamaged() {
+        return damaged;
+    }
+
+    public void setAttacking(boolean attacking) {
+        this.attacking = attacking;
+    }
+
+    public void setDamaged(boolean damaged) {
+        this.damaged = damaged;
     }
 }
