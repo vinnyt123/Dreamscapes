@@ -4,7 +4,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Spikes extends GameObject {
 
-    private static final double DAMAGE = 0.51;
+    private static final double DAMAGE = 0.26;
 
     Spikes(Rectangle rectangle) {
         Rectangle newRectangle = new Rectangle(rectangle.getLayoutX(), rectangle.getLayoutY(), rectangle.getWidth(), rectangle.getHeight());
