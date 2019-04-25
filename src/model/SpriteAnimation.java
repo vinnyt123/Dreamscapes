@@ -31,6 +31,7 @@ public class SpriteAnimation extends Transition {
         this.height = height;
         this.offsetY = offsetY;
         setCycleDuration(duration);
+        this.setCycleCount(1);
         setInterpolator(Interpolator.EASE_BOTH);
     }
 
@@ -39,7 +40,7 @@ public class SpriteAnimation extends Transition {
         if (index != lastIndex) {
             final int x = (index % columns) * width;
             final int y = (index / columns) * height + offsetY;
-            imageView.setViewport(new Rectangle2D(x, y, width, height));
+            imageView.setViewport(new Rectangle2D(x, y, width-1, height));
             lastIndex = index;
         }
     }

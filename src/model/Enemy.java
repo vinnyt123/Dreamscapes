@@ -77,7 +77,7 @@ public abstract class Enemy extends Entity {
     }
 
     void intersect(Player player) {
-        if(this.getBoundsInParent().intersects(player.getBoundsInParent()) && !player.isFlashing && !isDying && !isDead) {
+        if(this.getBoundsInParent().intersects(player.getBounds()) && !player.isFlashing && !isDying && !isDead) {
             player.redFlash();
             player.health.setValue(player.health.getValue() - damage);
             setKnockBack(false);

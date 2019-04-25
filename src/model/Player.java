@@ -1,6 +1,7 @@
 package model;
 
 import controllers.PauseMenuController;
+import javafx.animation.Animation;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.BoundingBox;
@@ -15,8 +16,8 @@ public class Player extends Entity {
     private static final long DAMAGE_COOLDOWN = 800;
     private static final double RUNSPEED = 5;
     private static final double ATTACKSLIDE = 8;
-    static final double WIDTH = 35;
-    static final double HEIGHT = 50;
+    static final double WIDTH = 64;
+    static final double HEIGHT = 64;
     IntegerProperty deathCount = new SimpleIntegerProperty();
     private PlayerSprite playerSprite = new DefaultPlayer();
 
@@ -146,7 +147,9 @@ public class Player extends Entity {
 
         applyGravity();
         applyVelocity();
-        playAnimation();
+        if(!playerSprite.isAttacking() && !playerSprite.isDamaged()) {
+            playAnimation();
+        }
     }
 
     @Override
@@ -156,6 +159,8 @@ public class Player extends Entity {
     }
 
     private void playAnimation() {
+        //System.out.println("is attacking: " + isAttacking + " is flashing: " + isFlashing);
+        //System.out.println("in air: " + inAir + " is right: " + isRight + " controls pressed: " + controls.isAnyKeyPressed(keysPressed));
         if(isFlashing && isRight) {
             playerSprite.damageRight();
         } else if(isFlashing) {
@@ -164,9 +169,9 @@ public class Player extends Entity {
             playerSprite.attackRight();
         } else if (isAttacking) {
             playerSprite.attackLeft();
-        } else if(keysPressed.isEmpty() && !inAir && isRight) {
+        } else if(!(controls.isAnyKeyPressed(keysPressed)) && !inAir && isRight) {
             playerSprite.standRight();
-        } else if(keysPressed.isEmpty() && !inAir) {
+        } else if(!(controls.isAnyKeyPressed(keysPressed)) && !inAir) {
             playerSprite.standLeft();
         } else if(inAir && isRight) {
             playerSprite.jumpRight();
@@ -176,6 +181,11 @@ public class Player extends Entity {
             playerSprite.walkRight();
         } else if(!inAir && keysPressed.contains(controls.getLeftKey())) {
             playerSprite.walkLeft();
+        }
+
+        if(!(playerSprite.getCurrentAnimation().getStatus() == Animation.Status.RUNNING)) {
+            playerSprite.stopAll();
+            playerSprite.getCurrentAnimation().play();
         }
     }
 

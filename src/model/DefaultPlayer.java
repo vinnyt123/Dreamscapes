@@ -3,7 +3,6 @@ package model;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
@@ -11,50 +10,32 @@ import javafx.util.Duration;
 
 public class DefaultPlayer extends PlayerSprite {
 
-    private ImageView imageViewAttack;
-    private static final Image SPRITE_SHEET = new Image("images/sprite_sheet.png");
-    private static final Image SPRITE_SHEET_BOOTS = new Image("images/sprite_sheet_boots.png");
-
-    private SpriteAnimation walkRight;
-    private SpriteAnimation walkLeft;
-    private SpriteAnimation jumpRight;
-    private SpriteAnimation jumpLeft;
-    private SpriteAnimation damageRight;
-    private SpriteAnimation damageLeft;
-    private SpriteAnimation standRight;
-    private SpriteAnimation standLeft;
-    private SpriteAnimation attackRight;
-    private SpriteAnimation attackLeft;
-    private SpriteAnimation attackSwipeRight;
-    private SpriteAnimation attackSwipeLeft;
+    private static final Image SPRITE_SHEET = new Image("images/sheet.png");
+    private static final Image SPRITE_SHEET_BOOTS = new Image("images/sheet_boots.png");
 
     DefaultPlayer() {
         super();
 
         imageView = new ImageView(SPRITE_SHEET);
-        imageViewAttack = new ImageView(SPRITE_SHEET);
-        imageViewAttack.setViewport(new Rectangle2D(0, 0, 32, 32));
-        imageViewAttack.setFitWidth(32);
-        imageViewAttack.setFitHeight(48);
-        imageViewAttack.setLayoutY(getLayoutY() + Player.HEIGHT/10);
-        imageView.setViewport(new Rectangle2D(0, 0, 72, 97));
+        imageView.setViewport(new Rectangle2D(0, 0, 32, 32));
         imageView.setFitWidth(Player.WIDTH);
         imageView.setFitHeight(Player.HEIGHT);
-        //imageView.getTransforms().addAll(new Scale(-1, 1), new Translate(-WIDTH, 0));
-        walkRight = new SpriteAnimation(imageView, Duration.millis(100), 11, 11, 72, 97, 0);
-        walkLeft = new SpriteAnimation(imageView, Duration.millis(100), 11, 11, 72, 97, 97);
-        jumpRight = new SpriteAnimation(imageView, Duration.millis(100), 2, 2, 72, 97, 194);
-        jumpLeft = new SpriteAnimation(imageView, Duration.millis(100), 2, 2, 72, 97, 291);
-        damageRight = new SpriteAnimation(imageView, Duration.millis(100), 2, 2, 72, 97, 388);
-        damageLeft = new SpriteAnimation(imageView, Duration.millis(100), 2, 2, 72, 97, 485);
-        standRight = new SpriteAnimation(imageView, Duration.millis(100), 2, 2, 72, 97, 582);
-        standLeft = new SpriteAnimation(imageView, Duration.millis(100), 2, 2, 72, 97, 679);
-        attackRight = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 72, 97, 776);
-        attackLeft = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 72, 97, 873);
-        attackSwipeRight = new SpriteAnimation(imageViewAttack, Duration.millis(200), 4, 4, 32, 32, 970);
-        attackSwipeLeft = new SpriteAnimation(imageViewAttack, Duration.millis(200), 4, 4, 32, 32, 1002);
-        attackSwipeRight.setOnFinished(e -> this.getChildren().remove(imageViewAttack));
-        attackSwipeLeft.setOnFinished(e -> this.getChildren().remove(imageViewAttack));
+        standRight = new SpriteAnimation(imageView, Duration.millis(1800), 13, 13, 32, 32, 0);
+        standLeft = new SpriteAnimation(imageView, Duration.millis(1800), 13, 13, 32, 32, 257);
+
+        walkRight = new SpriteAnimation(imageView, Duration.millis(200), 8, 8, 32, 32, 32);
+        walkLeft = new SpriteAnimation(imageView, Duration.millis(200), 8, 8, 32, 32, 288);
+
+        jumpRight = new SpriteAnimation(imageView, Duration.millis(400), 2, 2, 32, 32, 512);
+        jumpLeft = new SpriteAnimation(imageView, Duration.millis(400), 2, 2, 32, 32, 544);
+
+        attackRight = new SpriteAnimation(imageView, Duration.millis(400), 10, 10, 32, 32, 128);
+        attackLeft = new SpriteAnimation(imageView, Duration.millis(400), 10, 10, 32, 32, 384);
+
+        damageRight = new SpriteAnimation(imageView, Duration.millis(400), 4, 4, 32, 32, 192);
+        damageLeft = new SpriteAnimation(imageView, Duration.millis(400), 4, 4, 32, 32, 448);
+
+        currentAnimation = standRight;
 
         imageView.setEffect(colorAdjust);
 
@@ -70,69 +51,85 @@ public class DefaultPlayer extends PlayerSprite {
 
     @Override
     public void walkLeft() {
-        walkLeft.play();
+        //walkLeft.play();
+        currentAnimation = walkLeft;
+        //currentAnimation.play();
     }
 
     @Override
     public void walkRight() {
-        walkRight.play();
+        //walkRight.play();
+        currentAnimation = walkRight;
+        //currentAnimation.play();
     }
 
     @Override
     public void jumpLeft() {
-        jumpLeft.play();
+        //jumpLeft.play();
+        currentAnimation = jumpLeft;
+        //currentAnimation.play();
     }
 
     @Override
     public void jumpRight() {
-        jumpRight.play();
+        //jumpRight.play();
+        currentAnimation = jumpRight;
+        //currentAnimation.play();
     }
 
     @Override
     public void attackLeft() {
-        if (!this.getChildren().contains(imageViewAttack)) {
-            this.getChildren().add(imageViewAttack);
-            imageViewAttack.setLayoutX(-Player.WIDTH / 2);
-        }
-        attackSwipeLeft.play();
-        attackLeft.play();
+        //currentAnimation.stop();
+        //stopAll();
+        attacking = true;
+        currentAnimation = attackLeft;
+        currentAnimation.setOnFinished(e -> attacking = false);
+        //currentAnimation.play();
     }
 
     @Override
     public void attackRight() {
-        if (!this.getChildren().contains(imageViewAttack)) {
-            this.getChildren().add(imageViewAttack);
-            imageViewAttack.setLayoutX(Player.WIDTH / 2);
-        }
-        attackSwipeRight.play();
-        attackRight.play();
+        //currentAnimation.stop();
+        //stopAll();
+        attacking = true;
+        currentAnimation = attackRight;
+        currentAnimation.setOnFinished(e -> attacking = false);
+        //currentAnimation.play();
     }
 
     @Override
     public void standRight() {
-        standRight.play();
+        //standRight.play();
+        currentAnimation = standRight;
+        //currentAnimation.play();
     }
 
     @Override
     public void standLeft() {
-        standLeft.play();
+        //standLeft.play();
+        currentAnimation = standLeft;
+        //currentAnimation.play();
     }
 
     @Override
     public void damageRight() {
-        damageRight.play();
+        damaged = true;
+        currentAnimation = damageRight;
+        currentAnimation.setOnFinished(e -> damaged = false);
     }
 
     @Override
     public void damageLeft() {
-        damageLeft.play();
+        damaged = true;
+        currentAnimation = damageLeft;
+        currentAnimation.setOnFinished(e -> damaged = false);
     }
 
     @Override
     //Can just change these bounds to slightly smaller than image view bounds to make player appear slightly inside platforms
     public Bounds getBounds() {
-        //return new BoundingBox(imageView.getBoundsInParent().getMinX(), imageView.getBoundsInParent().getMinY(), imageView.getBoundsInParent().getWidth(), imageView.getBoundsInParent().getHeight() - 10);
-        return imageView.getBoundsInParent();
+        return new BoundingBox(imageView.getBoundsInParent().getMinX() + 20, imageView.getBoundsInParent().getMinY() + 20, imageView.getBoundsInParent().getWidth() - 40, imageView.getBoundsInParent().getHeight() - 25);
+        //return imageView.getBoundsInParent();
     }
 
 

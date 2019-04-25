@@ -1,5 +1,7 @@
 package model;
 
+import java.util.HashSet;
+
 public class Controls {
 
     private String jumpKey;
@@ -19,6 +21,10 @@ public class Controls {
         rightKey = "RIGHT";
         attackKey = "DOWN";
         switchKey = "F";
+    }
+
+    boolean isAnyKeyPressed(HashSet<String> keysPressed) {
+        return keysPressed.contains(jumpKey) || keysPressed.contains(leftKey) || keysPressed.contains(rightKey) || keysPressed.contains(attackKey);
     }
 
     public String getCrouchKey() {
