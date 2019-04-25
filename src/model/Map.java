@@ -15,6 +15,7 @@ import java.util.List;
 
 public class Map extends Pane {
 
+    private List<WalkingEnemySpawer> spawners = new ArrayList<>();
     private Player player;
     private List<GameObject> gameObjects = new ArrayList<>();
     private List<ImageView> backgrounds = new ArrayList<>();
@@ -47,15 +48,22 @@ public class Map extends Pane {
                     String itemId = item.getId();
                     if (itemId.startsWith("door")) {
                         gameObjects.add(new Door(item.getId().substring(item.getId().indexOf("_") + 1), (Rectangle) item));
-                    } else if (itemId.startsWith("enemyPlatform")) {
-                        gameObjects.add(new Wall((Rectangle) item));
-                        enemies.add(new WalkingEnemy((Rectangle) item, player));
                     } else if (itemId.startsWith("doubleJumpBoots")) {
                         items.add(new DoubleJumpBoots(item));
                     } else if (itemId.startsWith("spikes")) {
                         gameObjects.add(new Spikes((Rectangle) item));
                     } else if(itemId.startsWith("lava")) {
                         gameObjects.add(new Lava((Rectangle) item));
+                    } else if(itemId.startsWith("enemySpawner")) {
+                        WalkingEnemySpawer walkingEnemySpawner;
+                        if (itemId.endsWith("Left")) {
+                            walkingEnemySpawner = new WalkingEnemySpawer(player, true);
+                        } else {
+                            walkingEnemySpawner = new WalkingEnemySpawer(player, false);
+                        }
+                        walkingEnemySpawner.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
+                        enemies.add(walkingEnemySpawner);
+                        spawners.add(walkingEnemySpawner);
                     }
                 } else {
                     gameObjects.add(new Wall((Rectangle) item));
@@ -71,7 +79,13 @@ public class Map extends Pane {
                     backgrounds.add(new ImageView(image));
                 }
             } else if (item instanceof Circle) {
-                player.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
+                if (item.getId() != null && item.getId().startsWith("walkingEnemy")) {
+                    WalkingEnemy walkingEnemy = new WalkingEnemy(player, null);
+                    enemies.add(walkingEnemy);
+                    walkingEnemy.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
+                } else {
+                    player.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
+                }
             }
         }
 
@@ -101,6 +115,9 @@ public class Map extends Pane {
         while (it.hasNext()) {
             Enemy enemy = it.next();
             if(enemy.isDead) {
+                if (enemy instanceof WalkingEnemy) {
+                    ((WalkingEnemy) enemy).decrementSpawnerCount();
+                }
                 enemy.remove();
                 this.getChildren().remove(enemy);
                 it.remove();
@@ -123,6 +140,14 @@ public class Map extends Pane {
            for (Enemy enemy : enemies) {
                gameObject.intersect(enemy);
            }
+        }
+
+        for (WalkingEnemySpawer spawner : spawners) {
+            WalkingEnemy walkingEnemy = spawner.update();
+            if (walkingEnemy != null) {
+                enemies.add(walkingEnemy);
+                this.getChildren().add(walkingEnemy);
+            }
         }
 
         Iterator<Item> it2 = items.iterator();

@@ -67,21 +67,23 @@ public abstract class Enemy extends Entity {
         } else {
             setVelocity(new Point2D(-Math.cos(Math.toRadians(theta)) * knockback_this, -Math.sin(Math.toRadians(theta)) * knockback_this));
         }
-        if (this instanceof WalkingEnemy) {
+        /*if (this instanceof WalkingEnemy) {
             if (velocity.getX() > 0) {
                 ((WalkingEnemy) this).setMovingRight(true);
             } else {
                 ((WalkingEnemy) this).setMovingRight(false);
             }
-        }
+        }*/
     }
 
     void intersect(Player player) {
         if(this.getBoundsInParent().intersects(player.getBoundsInParent()) && !player.isFlashing && !isDying && !isDead) {
-            player.redFlash();
-            player.health.setValue(player.health.getValue() - damage);
-            setKnockBack(false);
-            player.knockBack(Math.cos(Math.toRadians(theta)) * knockback_player, Math.sin(Math.toRadians(theta)) * knockback_player, true);
+            if (damage > 0) {
+                player.redFlash();
+                player.health.setValue(player.health.getValue() - damage);
+                setKnockBack(false);
+                player.knockBack(Math.cos(Math.toRadians(theta)) * knockback_player, Math.sin(Math.toRadians(theta)) * knockback_player, true);
+            }
         }
     }
 

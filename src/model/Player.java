@@ -199,7 +199,7 @@ public class Player extends Entity {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                for(int i = 0; i < 3; i++) {
+                for (int i = 0; i < 3; i++) {
                     playerSprite.redFlashOn();
                     try {
                         Thread.sleep(100);

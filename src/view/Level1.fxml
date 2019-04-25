@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane prefHeight="4000.0" prefWidth="6000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle id="door1" arcHeight="5.0" arcWidth="5.0" fill="#ff13b4" height="110.0" layoutX="81.0" layoutY="3816.0" stroke="BLACK" strokeType="INSIDE" width="47.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="70.0" layoutX="2.0" layoutY="3929.0" stroke="BLACK" strokeType="INSIDE" width="6000.0" />
+      <Circle id="playerSpawn1" fill="DODGERBLUE" layoutX="159.0" layoutY="3837.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="125.0" layoutX="510.0" layoutY="3812.0" stroke="BLACK" strokeType="INSIDE" width="864.0" />
+      <Circle id="walkingEnemy1" fill="#1fff5a" layoutX="1275.0" layoutY="3746.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="280.0" layoutX="1375.0" layoutY="3652.0" stroke="BLACK" strokeType="INSIDE" width="372.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="280.0" layoutX="2004.0" layoutY="3654.0" stroke="BLACK" strokeType="INSIDE" width="540.0" />
+      <Rectangle id="lava1" arcHeight="5.0" arcWidth="5.0" fill="#ff231f" height="283.0" layoutX="1738.0" layoutY="3652.0" stroke="BLACK" strokeType="INSIDE" width="268.0" />
+      <Circle id="walkingEnemy1" fill="#1fff5a" layoutX="2089.0" layoutY="3604.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="walkingEnemy1" fill="#1fff5a" layoutX="2431.0" layoutY="3603.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="3930.0" layoutX="2.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="76.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="2962.0" layoutY="3657.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="3355.0" layoutY="3658.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <Rectangle id="spikes1" arcHeight="5.0" arcWidth="5.0" fill="#e8ff1f" height="397.0" layoutX="3240.0" layoutY="3540.0" stroke="BLACK" strokeType="INSIDE" width="54.0" />
+      <Rectangle id="enemySpawner_Left" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="120.0" layoutX="840.0" layoutY="3692.0" stroke="BLACK" strokeType="INSIDE" width="67.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="2637.0" layoutY="3668.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+   </children>
+</AnchorPane>
