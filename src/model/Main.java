@@ -21,9 +21,6 @@ public class Main extends Application {
 
         GameManager gameManager = new GameManager();
         Scene scene = new Scene(gameManager);
-        //System.out.println(scene);
-        //scene.getStylesheets().add("/images/Styles.css");
-        scene.getStylesheets().add(getClass().getResource("/images/Styles.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.setOnCloseRequest(event -> {
@@ -31,7 +28,6 @@ public class Main extends Application {
             System.exit(0);
         });
         gameManager.setUpHashSet();
-        //System.out.println(gameManager.getScene().getStylesheets());
         primaryStage.setTitle("Dreamscapes");
         primaryStage.show();
     }

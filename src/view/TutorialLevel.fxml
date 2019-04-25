@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="2000.0" maxWidth="6000.0" minHeight="2000.0" minWidth="5999.0" prefHeight="2000.0" prefWidth="5999.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="background11" fitHeight="1971.0" fitWidth="6000.0" pickOnBounds="true">
+      <ImageView fx:id="background11" fitHeight="2000.0" fitWidth="6000.0" pickOnBounds="true">
          <image>
             <Image url="@../images/Backgrounds_tutorial/Background4.png" />
          </image>
@@ -22,22 +22,22 @@
             <BoxBlur height="0.0" iterations="0" width="0.0" />
          </effect>
       </ImageView>
-      <ImageView fx:id="background21y" fitHeight="1971.0" fitWidth="6000.0" pickOnBounds="true">
+      <ImageView fx:id="background21y" fitHeight="2000.0" fitWidth="6000.0" pickOnBounds="true">
          <image>
             <Image url="@../images/Backgrounds_tutorial/Background5.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="background1" fitHeight="1990.0" fitWidth="6000.0" pickOnBounds="true">
+      <ImageView fx:id="background1" fitHeight="2000.0" fitWidth="6000.0" pickOnBounds="true">
          <image>
             <Image url="@../images/Backgrounds_tutorial/Background2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="background2" fitHeight="1980.0" fitWidth="6000.0" pickOnBounds="true">
+      <ImageView fx:id="background2" fitHeight="2000.0" fitWidth="6000.0" pickOnBounds="true">
          <image>
             <Image url="@../images/Backgrounds_tutorial/Background3.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="background111" fitHeight="1961.0" fitWidth="6000.0" pickOnBounds="true">
+      <ImageView fx:id="background111" fitHeight="2000.0" fitWidth="6000.0" pickOnBounds="true">
          <image>
             <Image url="@../images/Backgrounds_tutorial/Background6.png" />
          </image>
@@ -95,5 +95,10 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="2290.0" layoutY="1318.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1930.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="76.0" />
       <Rectangle id="spikes2" arcHeight="5.0" arcWidth="5.0" fill="#e8ff1f" height="63.0" layoutX="2922.0" layoutY="1142.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <ImageView fx:id="still" fitHeight="2000.0" fitWidth="6000.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/Tutorial_platforms/allwalls.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

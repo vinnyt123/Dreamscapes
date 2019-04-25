@@ -48,8 +48,6 @@ public class Player extends Entity {
         pm.getHealthBar().progressProperty().bind(health);
         pm.getDeathCount().textProperty().bind(deathCount.asString());
 
-        System.out.println(gm.getScene().getStylesheets());
-
         this.getChildren().addAll(playerSprite);
     }
     public Weapon getCurrentWeapon() {

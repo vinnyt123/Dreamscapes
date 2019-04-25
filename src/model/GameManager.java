@@ -63,7 +63,6 @@ public class GameManager extends StackPane {
     public void setUpHashSet() {
         this.setOnKeyPressed(e -> {
             keysPressed.add(e.getCode().toString());
-            //System.out.println(e.getCode().toString());
         });
 
         this.setOnKeyReleased(e -> keysPressed.remove(e.getCode().toString()));

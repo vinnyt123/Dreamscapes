@@ -19,6 +19,7 @@ public class Map extends Pane {
     private Player player;
     private List<GameObject> gameObjects = new ArrayList<>();
     private List<ImageView> backgrounds = new ArrayList<>();
+    private ImageView foreground = new ImageView();
     private List<Enemy> enemies = new ArrayList<>();
     private List<Item> items = new ArrayList<>();
     private ImageView darkness;
@@ -26,20 +27,20 @@ public class Map extends Pane {
     private final double HEIGHT;
     static double GRAVITY = 0.4;
     static double TERMINAL_VELOCITY = 15;
-    private static final double VIEWPORTWIDTH = 720;
-    private static final double VIEWPORTHEIGHT = 450;
+    private static final double VIEWPORTWIDTH = 740;
+    private static final double VIEWPORTHEIGHT = 480;
 
 
     public Map(Pane pane, Player player) {
         super();
         this.player = player;
         this.getChildren().add(player);
-        this.WIDTH = pane.getBoundsInParent().getWidth() - 30;
-        this.HEIGHT = pane.getBoundsInParent().getHeight() - 30;
-        this.setPrefWidth(pane.getPrefWidth());
-        this.setPrefHeight(pane.getPrefHeight());
-
-        this.getStylesheets().add("/images/Styles.css");
+        /*this.WIDTH = pane.getBoundsInParent().getWidth();
+        this.HEIGHT = pane.getBoundsInParent().getHeight();*/
+        this.WIDTH = 6000;
+        this.HEIGHT = 2000;
+        //this.setPrefWidth(pane.getPrefWidth());
+        //this.setPrefHeight(pane.getPrefHeight());
 
         //Create list of rectangles that are walls/floors. Use line start to create enemy spawn point.
         for(Node item : pane.getChildrenUnmodifiable()) {
@@ -74,6 +75,13 @@ public class Map extends Pane {
             } else if(item instanceof ImageView) {
                 if(item.getId().startsWith("darkness")) {
                     darkness = (ImageView) item;
+                } else if(item.getId().startsWith("still")) {
+                    Image image = ((ImageView) item).getImage();
+                    foreground = new ImageView(image);
+                    foreground.setFitWidth(WIDTH);
+                    foreground.setFitHeight(HEIGHT);
+                } else if(item.getId().startsWith("platform")) {
+                    gameObjects.add(new Wall(((ImageView) item).getImage(), item.getLayoutX(), item.getLayoutY()));
                 } else {
                     Image image = ((ImageView) item).getImage();
                     ImageView imageView = new ImageView(image);
@@ -96,6 +104,7 @@ public class Map extends Pane {
         this.getChildren().addAll(enemies);
         this.getChildren().addAll(gameObjects);
         this.getChildren().addAll(items);
+        this.getChildren().add(foreground);
         //Remove and re-add player to ensure they're on top of image view
         this.getChildren().remove(player);
         this.getChildren().add(player);
