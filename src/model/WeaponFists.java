@@ -6,11 +6,10 @@ import javafx.geometry.Bounds;
 public class WeaponFists extends Weapon {
 
     private Player player;
-    private static final double RANGE_ABOVE = 14;
-    private static final double RANGE_WIDTH = 50;
-    private static final double RANGE_HEIGHT = 70;
+    private static final double RANGE_ABOVE = 16;
+    private static final double RANGE_WIDTH = 54;
+    private static final double RANGE_HEIGHT = 80;
     private static final double DAMAGE = 3;
-    private Bounds bounds;
 
     public WeaponFists(Player player) {
         super();
@@ -19,6 +18,7 @@ public class WeaponFists extends Weapon {
     }
 
     public Bounds getAttackBounds(boolean isRight) {
+        Bounds bounds;
         if(isRight) {
             bounds = new BoundingBox(player.getBounds().getMaxX(), player.getBounds().getMinY() - RANGE_ABOVE, RANGE_WIDTH, RANGE_HEIGHT);
         } else {

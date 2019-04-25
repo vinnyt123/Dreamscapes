@@ -14,7 +14,7 @@ public class Player extends Entity {
     private static final double JUMPHEIGHT = -12;
     private static final long DAMAGE_COOLDOWN = 800;
     private static final double RUNSPEED = 5;
-    private static final double ATTACKSLIDE = 5;
+    private static final double ATTACKSLIDE = 8;
     static final double WIDTH = 35;
     static final double HEIGHT = 50;
     IntegerProperty deathCount = new SimpleIntegerProperty();
@@ -39,9 +39,6 @@ public class Player extends Entity {
     }
 
     //Cool effect for if the player is standing in water or something (creates reflection)
-    //Reflection reflection = new Reflection();
-
-    //imageView.setEffect(reflection);
     public void createSprite() {
         GameManager gm = (GameManager) getScene().getRoot();
         PauseMenuController pm = gm.getPlayingState().getPauseLoader().getController();
@@ -99,7 +96,6 @@ public class Player extends Entity {
         isKnockback = true;
         setVelocity(new Point2D(xDistance, yDistance));
         if (isDamage) {
-            colorAdjust.setSaturation(1);
             isFlashing = true;
             timer.schedule(new coolDownTimer(), DAMAGE_COOLDOWN);
         }
@@ -185,8 +181,6 @@ public class Player extends Entity {
         }
     }
 
-
-
     @Override
     public void applyVelocity() {
         super.applyVelocity();
@@ -195,8 +189,28 @@ public class Player extends Entity {
         }
     }
 
-    public void addDoubleJumpBoots() {
+    void addDoubleJumpBoots() {
         playerSprite.addBoots();
         hasBoots = true;
+    }
+
+    void redFlash() {
+        Timer flashTimer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                for(int i = 0; i < 3; i++) {
+                    playerSprite.redFlashOn();
+                    try {
+                        Thread.sleep(100);
+                        playerSprite.redFlashOff();
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        flashTimer.schedule(task, 0);
     }
 }

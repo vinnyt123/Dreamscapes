@@ -42,6 +42,7 @@ public class FlyingEnemy extends Enemy {
         setTranslateY(spawnY);
 
         imageView = new ImageView(SPRITE_SHEET);
+        imageView.setEffect(colorAdjust);
         imageView.setViewport(new Rectangle2D(0, 0, 72, 36));
         imageView.setFitWidth(WIDTH);
         imageView.setFitHeight(HEIGHT);
@@ -50,7 +51,6 @@ public class FlyingEnemy extends Enemy {
         dieLeft = new SpriteAnimation(imageView, Duration.millis(400), 2, 2, 72, 36, 72);
         dieRight = new SpriteAnimation(imageView, Duration.millis(400), 2, 2, 72, 36, 108);
         animation = flyLeft;
-        animation.getImageView().setEffect(colorAdjust);
         animation.setCycleCount(1);
 
         this.getChildren().add(imageView);
@@ -58,8 +58,6 @@ public class FlyingEnemy extends Enemy {
 
     @Override
     public void move() {
-
-        //System.out.println(getTranslateX());
         if(isKnockback) {
             knockBack();
             return;
@@ -73,7 +71,7 @@ public class FlyingEnemy extends Enemy {
         //Move flying enemy towards player
         Point2D playerPos = new Point2D(player.getTranslateX() + (Player.WIDTH/2), player.getTranslateY() + (Player.HEIGHT/2));
         double distance = playerPos.distance(getTranslateX() + (WIDTH/2), getTranslateY() + (HEIGHT/2));
-        if(distance < RANGE && !player.isFlashing) {
+        if(distance < RANGE && !isFlashing) {
             isRight = player.getTranslateX() > getTranslateX();
             theta = Math.toDegrees(Math.atan2(playerPos.getY() - this.getTranslateY() - (HEIGHT/2),  playerPos.getX() - this.getTranslateX() - (WIDTH/2)));
             this.setVelocity(new Point2D(SPEED * Math.cos(Math.toRadians(theta)), SPEED * Math.sin(Math.toRadians(theta))));
@@ -101,7 +99,6 @@ public class FlyingEnemy extends Enemy {
 
     public void deadAnimation() {
         isDying = true;
-        colorAdjust.setSaturation(1);
         if(isRight) {
             animation = dieRight;
         } else {
