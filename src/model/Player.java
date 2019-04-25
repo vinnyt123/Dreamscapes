@@ -159,7 +159,7 @@ public class Player extends Entity {
                 playerSprite.getBounds().getMinY() + getTranslateY(), playerSprite.getBounds().getWidth(), playerSprite.getBounds().getHeight());
     }
 
-    private void playAnimation() {
+    public void playAnimation() {
         if(isFlashing && isRight) {
             playerSprite.damageRight();
         } else if(isFlashing) {
@@ -180,6 +180,8 @@ public class Player extends Entity {
             playerSprite.walkRight();
         } else if(!inAir && keysPressed.contains(controls.getLeftKey())) {
             playerSprite.walkLeft();
+        } else if (health.get() <= 0) {
+            playerSprite.standRight();
         }
     }
 

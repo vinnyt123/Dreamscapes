@@ -22,6 +22,8 @@ public class PlayingState extends StackPane {
     public static String pauseMenuFile = "view/PauseMenu.fxml";
     public static String map1ID = "Map1";
     public static String map1File = "view/Map1.fxml";
+    public static String tutorialID = "Tutorial";
+    public static String tutorialFile = "view/TutorialLevel.fxml";
 
     private PauseMenuController pm;
     private Timer gameTimer;
@@ -41,6 +43,7 @@ public class PlayingState extends StackPane {
         loadPauseMenu();
         mapsMap.put(map0ID, map0File);
         mapsMap.put(map1ID, map1File);
+        mapsMap.put(tutorialID, tutorialFile);
         this.getChildren().addAll(mapLayer, pauseMenuLayer);
     }
 
@@ -86,7 +89,7 @@ public class PlayingState extends StackPane {
 
     void newGame() {
         player = new Player(keysPressed);
-        setMap(map0ID);
+        setMap(tutorialID);
         startTimer();
     }
 

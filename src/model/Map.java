@@ -25,13 +25,18 @@ public class Map extends Pane {
     private final double HEIGHT;
     static double GRAVITY = 0.4;
     static double TERMINAL_VELOCITY = 15;
+    private static final double VIEWPORTWIDTH = 720;
+    private static final double VIEWPORTHEIGHT = 450;
+
 
     public Map(Pane pane, Player player) {
         super();
         this.player = player;
         this.getChildren().add(player);
-        this.WIDTH = 2000;
-        this.HEIGHT = 2000;
+        this.WIDTH = pane.getBoundsInParent().getWidth();
+        this.HEIGHT = pane.getBoundsInParent().getHeight();
+        System.out.println(WIDTH);
+        System.out.println(HEIGHT);
         this.setPrefWidth(pane.getPrefWidth());
         this.setPrefHeight(pane.getPrefHeight());
 
@@ -79,13 +84,16 @@ public class Map extends Pane {
     }
 
     void moveEntities() {
-        if(player.health.get() < 0) {
+        if(player.health.get() <= 0) {
             player.deathCount.setValue(player.deathCount.get() + 1);
             player.health.setValue(1.0);
             player.velocity = new Point2D(0, 0);
             ((GameManager) player.getScene().getRoot()).restartLevel();
+            player.isFlashing = false;
+            player.isAttacking = false;
+            player.playAnimation();
+            return;
         }
-
         player.move();
         Iterator<Enemy> it = enemies.iterator();
         while (it.hasNext()) {
@@ -129,18 +137,18 @@ public class Map extends Pane {
         //Set layout so player is in middle or not if edge of map (720 & 450 are half of the viewport x & y)
         //TODO: instead of using 720 & 450 get size of stage and use half of those - support resizing - will need
         //to add listener on stage resize property so it updates when resized though
-        setLayoutX(720 - player.getTranslateX());
-        setLayoutY(450 - player.getTranslateY());
-        if(player.getTranslateX() - 720 < 0) {
-            setLayoutX(getLayoutX() + (player.getTranslateX() - 720));
+        setLayoutX(VIEWPORTWIDTH - player.getTranslateX());
+        setLayoutY(VIEWPORTHEIGHT - player.getTranslateY());
+        if(player.getTranslateX() - VIEWPORTWIDTH < 0) {
+            setLayoutX(getLayoutX() + (player.getTranslateX() - VIEWPORTWIDTH));
 
-        } else if(player.getTranslateX() + 720 > WIDTH) {
-            setLayoutX(getLayoutX() + (player.getTranslateX() - (WIDTH - 720)));
+        } else if(player.getTranslateX() + VIEWPORTWIDTH > WIDTH) {
+            setLayoutX(getLayoutX() + (player.getTranslateX() - (WIDTH - VIEWPORTWIDTH)));
         }
-        if(player.getTranslateY() + 450 > HEIGHT) {
-            setLayoutY(getLayoutY() + (player.getTranslateY() - (HEIGHT - 450)));
-        } else if(player.getTranslateY() - 450 < 0) {
-            setLayoutY(getLayoutY() + (player.getTranslateY() - 450));
+        if(player.getTranslateY() + VIEWPORTHEIGHT > HEIGHT) {
+            setLayoutY(getLayoutY() + (player.getTranslateY() - (HEIGHT - VIEWPORTHEIGHT)));
+        } else if(player.getTranslateY() - VIEWPORTHEIGHT < 0) {
+            setLayoutY(getLayoutY() + (player.getTranslateY() - VIEWPORTHEIGHT));
         }
         //Javadoc says relocate is better than setting layout but both work
         //relocate((720 - player.getTranslateX()), (450 - player.getTranslateY()));
@@ -153,8 +161,8 @@ public class Map extends Pane {
 
     private void scrollBackgrounds() {
         for(ImageView imageView : backgrounds) {
-            imageView.setLayoutX(720 - player.getTranslateX() * -0.24 - 1000);
-            imageView.setLayoutY(450 - player.getTranslateY() * -0.1 - 500);
+            imageView.setLayoutX(VIEWPORTWIDTH - player.getTranslateX() * -0.24 - 1000);
+            imageView.setLayoutY(VIEWPORTHEIGHT - player.getTranslateY() * -0.1 - 500);
 
         }
         if (darkness != null) {
