@@ -3,6 +3,7 @@ package model;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
@@ -24,20 +25,22 @@ public class WalkingEnemy extends Enemy {
     private static final double KNOCKBACK_THIS = 9;
     private SpriteAnimation walkLeft;
     private boolean movingRight = true;
+    private WalkingEnemySpawer walkingEnemySpawer;
 
 
 
-    public WalkingEnemy(Rectangle platform, Player player) {
+    public WalkingEnemy(Player player, WalkingEnemySpawer walkingEnemySpawer) {
         super(player);
+        this.walkingEnemySpawer = walkingEnemySpawer;
         knockback_player = KNOCKBACK_PLAYER;
         knockback_this = KNOCKBACK_THIS;
         damage = DAMAGE;
-        this.platformBounds = platform.getBoundsInParent();
         health.setValue(HEALTH);
-        this.spawnAt(new Point2D(platformBounds.getMinX() + platformBounds.getWidth() / 2 - WIDTH / 2, platformBounds.getMinY() - HEIGHT - 0.1));
+
         createSprite();
         velocity = new Point2D(SPEED, 0);
     }
+
 
     private void createSprite() {
         imageView = new ImageView(SPRITE_SHEET);
@@ -65,20 +68,22 @@ public class WalkingEnemy extends Enemy {
         }
 
         if (!isKnockback) {
-            if ((movingRight && (this.getBoundsInParent().getMaxX() > platformBounds.getMaxX())) || (movingRight && (this.getBoundsInParent().getMaxX() > platformBounds.getMaxX() + WIDTH))) {
-                movingRight = false;
-            } else if ((!movingRight && this.getBoundsInParent().getMinX() < platformBounds.getMinX()) || (!movingRight && this.getBoundsInParent().getMinX() < platformBounds.getMinX() - this.width)) {
-                movingRight = true;
-            }
+            if (platformBounds != null) {
+                if ((movingRight && (this.getBoundsInParent().getMaxX() > platformBounds.getMaxX())) || (movingRight && (this.getBoundsInParent().getMaxX() > platformBounds.getMaxX() + WIDTH))) {
+                    movingRight = false;
+                } else if ((!movingRight && this.getBoundsInParent().getMinX() < platformBounds.getMinX()) || (!movingRight && this.getBoundsInParent().getMinX() < platformBounds.getMinX() - this.width)) {
+                    movingRight = true;
+                }
 
-            if (movingRight) {
-                velocity = new Point2D(SPEED, velocity.getY());
-            } else {
-                velocity = new Point2D(-SPEED, velocity.getY());
-            }
+                if (movingRight) {
+                    velocity = new Point2D(SPEED, velocity.getY());
+                } else {
+                    velocity = new Point2D(-SPEED, velocity.getY());
+                }
 
-            if (isFlashing) {
-                velocity = new Point2D(0,velocity.getY());
+                if (isFlashing) {
+                    velocity = new Point2D(0, velocity.getY());
+                }
             }
         }
 
@@ -133,7 +138,17 @@ public class WalkingEnemy extends Enemy {
         timer.schedule(new dyingTimer(), Entity.DYING_TIME);
     }
 
+    public void decrementSpawnerCount() {
+        if (walkingEnemySpawer != null) {
+            walkingEnemySpawer.enemyDied();
+        }
+    }
+
     public void setMovingRight(Boolean movingRight) {
         this.movingRight = movingRight;
+    }
+
+    public boolean getMovingRight() {
+        return movingRight;
     }
 }

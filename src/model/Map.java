@@ -15,6 +15,7 @@ import java.util.List;
 
 public class Map extends Pane {
 
+    private List<WalkingEnemySpawer> spawners = new ArrayList<>();
     private Player player;
     private List<GameObject> gameObjects = new ArrayList<>();
     private List<ImageView> backgrounds = new ArrayList<>();
@@ -25,13 +26,18 @@ public class Map extends Pane {
     private final double HEIGHT;
     static double GRAVITY = 0.4;
     static double TERMINAL_VELOCITY = 15;
+    private static final double VIEWPORTWIDTH = 720;
+    private static final double VIEWPORTHEIGHT = 450;
+
 
     public Map(Pane pane, Player player) {
         super();
         this.player = player;
         this.getChildren().add(player);
-        this.WIDTH = 2000;
-        this.HEIGHT = 2000;
+        this.WIDTH = pane.getBoundsInParent().getWidth();
+        this.HEIGHT = pane.getBoundsInParent().getHeight();
+        System.out.println(WIDTH);
+        System.out.println(HEIGHT);
         this.setPrefWidth(pane.getPrefWidth());
         this.setPrefHeight(pane.getPrefHeight());
 
@@ -42,15 +48,22 @@ public class Map extends Pane {
                     String itemId = item.getId();
                     if (itemId.startsWith("door")) {
                         gameObjects.add(new Door(item.getId().substring(item.getId().indexOf("_") + 1), (Rectangle) item));
-                    } else if (itemId.startsWith("enemyPlatform")) {
-                        gameObjects.add(new Wall((Rectangle) item));
-                        enemies.add(new WalkingEnemy((Rectangle) item, player));
                     } else if (itemId.startsWith("doubleJumpBoots")) {
                         items.add(new DoubleJumpBoots(item));
                     } else if (itemId.startsWith("spikes")) {
                         gameObjects.add(new Spikes((Rectangle) item));
                     } else if(itemId.startsWith("lava")) {
                         gameObjects.add(new Lava((Rectangle) item));
+                    } else if(itemId.startsWith("enemySpawner")) {
+                        WalkingEnemySpawer walkingEnemySpawner;
+                        if (itemId.endsWith("Left")) {
+                            walkingEnemySpawner = new WalkingEnemySpawer(player, true);
+                        } else {
+                            walkingEnemySpawner = new WalkingEnemySpawer(player, false);
+                        }
+                        walkingEnemySpawner.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
+                        enemies.add(walkingEnemySpawner);
+                        spawners.add(walkingEnemySpawner);
                     }
                 } else {
                     gameObjects.add(new Wall((Rectangle) item));
@@ -66,7 +79,13 @@ public class Map extends Pane {
                     backgrounds.add(new ImageView(image));
                 }
             } else if (item instanceof Circle) {
-                player.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
+                if (item.getId() != null && item.getId().startsWith("walkingEnemy")) {
+                    WalkingEnemy walkingEnemy = new WalkingEnemy(player, null);
+                    enemies.add(walkingEnemy);
+                    walkingEnemy.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
+                } else {
+                    player.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
+                }
             }
         }
 
@@ -81,18 +100,24 @@ public class Map extends Pane {
     }
 
     void moveEntities() {
-        if(player.health.get() < 0) {
+        if(player.health.get() <= 0) {
             player.deathCount.setValue(player.deathCount.get() + 1);
             player.health.setValue(1.0);
             player.velocity = new Point2D(0, 0);
             ((GameManager) player.getScene().getRoot()).restartLevel();
+            player.isFlashing = false;
+            player.isAttacking = false;
+            player.playAnimation();
+            return;
         }
-
         player.move();
         Iterator<Enemy> it = enemies.iterator();
         while (it.hasNext()) {
             Enemy enemy = it.next();
             if(enemy.isDead) {
+                if (enemy instanceof WalkingEnemy) {
+                    ((WalkingEnemy) enemy).decrementSpawnerCount();
+                }
                 enemy.remove();
                 this.getChildren().remove(enemy);
                 it.remove();
@@ -117,6 +142,14 @@ public class Map extends Pane {
            }
         }
 
+        for (WalkingEnemySpawer spawner : spawners) {
+            WalkingEnemy walkingEnemy = spawner.update();
+            if (walkingEnemy != null) {
+                enemies.add(walkingEnemy);
+                this.getChildren().add(walkingEnemy);
+            }
+        }
+
         Iterator<Item> it2 = items.iterator();
         while (it2.hasNext()) {
             Item item = it2.next();
@@ -133,18 +166,18 @@ public class Map extends Pane {
         //Set layout so player is in middle or not if edge of map (720 & 450 are half of the viewport x & y)
         //TODO: instead of using 720 & 450 get size of stage and use half of those - support resizing - will need
         //to add listener on stage resize property so it updates when resized though
-        setLayoutX(720 - player.getTranslateX());
-        setLayoutY(450 - player.getTranslateY());
-        if(player.getTranslateX() - 720 < 0) {
-            setLayoutX(getLayoutX() + (player.getTranslateX() - 720));
+        setLayoutX(VIEWPORTWIDTH - player.getTranslateX());
+        setLayoutY(VIEWPORTHEIGHT - player.getTranslateY());
+        if(player.getTranslateX() - VIEWPORTWIDTH < 0) {
+            setLayoutX(getLayoutX() + (player.getTranslateX() - VIEWPORTWIDTH));
 
-        } else if(player.getTranslateX() + 720 > WIDTH) {
-            setLayoutX(getLayoutX() + (player.getTranslateX() - (WIDTH - 720)));
+        } else if(player.getTranslateX() + VIEWPORTWIDTH > WIDTH) {
+            setLayoutX(getLayoutX() + (player.getTranslateX() - (WIDTH - VIEWPORTWIDTH)));
         }
-        if(player.getTranslateY() + 450 > HEIGHT) {
-            setLayoutY(getLayoutY() + (player.getTranslateY() - (HEIGHT - 450)));
-        } else if(player.getTranslateY() - 450 < 0) {
-            setLayoutY(getLayoutY() + (player.getTranslateY() - 450));
+        if(player.getTranslateY() + VIEWPORTHEIGHT > HEIGHT) {
+            setLayoutY(getLayoutY() + (player.getTranslateY() - (HEIGHT - VIEWPORTHEIGHT)));
+        } else if(player.getTranslateY() - VIEWPORTHEIGHT < 0) {
+            setLayoutY(getLayoutY() + (player.getTranslateY() - VIEWPORTHEIGHT));
         }
         //Javadoc says relocate is better than setting layout but both work
         //relocate((720 - player.getTranslateX()), (450 - player.getTranslateY()));
@@ -157,8 +190,8 @@ public class Map extends Pane {
 
     private void scrollBackgrounds() {
         for(ImageView imageView : backgrounds) {
-            imageView.setLayoutX(720 - player.getTranslateX() * -0.24 - 1000);
-            imageView.setLayoutY(450 - player.getTranslateY() * -0.1 - 500);
+            imageView.setLayoutX(VIEWPORTWIDTH - player.getTranslateX() * -0.24 - 1000);
+            imageView.setLayoutY(VIEWPORTHEIGHT - player.getTranslateY() * -0.1 - 500);
 
         }
         if (darkness != null) {

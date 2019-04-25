@@ -16,12 +16,16 @@ public abstract class GameObject extends Group {
         if(getBoundsInParent().intersects(entity.getBounds())) {
             if(movingRight) {
                 entity.setTranslateX(entity.getTranslateX() - (entity.getBounds().getMaxX() - this.getBoundsInParent().getMinX() + EXTRA_LIL_TRANSLATION));
+                if (entity instanceof WalkingEnemy && ((WalkingEnemy) entity).getMovingRight()) {
+                    ((WalkingEnemy) entity).changeDirection();
+                }
             } else {
                 entity.setTranslateX(entity.getTranslateX() - (entity.getBounds().getMinX() - this.getBoundsInParent().getMaxX() - EXTRA_LIL_TRANSLATION));
+                if (entity instanceof WalkingEnemy && !((WalkingEnemy) entity).getMovingRight()) {
+                    ((WalkingEnemy) entity).changeDirection();
+                }
             }
-            if (entity instanceof WalkingEnemy) {
-                ((WalkingEnemy) entity).changeDirection();
-            }
+
             entity.setVelocity(new Point2D(0, entity.getVelocity().getY()));
         }
         return movingRight;

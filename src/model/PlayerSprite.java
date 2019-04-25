@@ -64,7 +64,7 @@ public abstract class PlayerSprite extends Group {
     public void flipLeft() {
         rotateTransition.setByAngle(-360);
         rotateTransition.play();
-    }
+}
 
     public void flipRight() {
         rotateTransition.setByAngle(360);

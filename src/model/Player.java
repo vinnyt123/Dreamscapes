@@ -181,6 +181,8 @@ public class Player extends Entity {
             playerSprite.walkRight();
         } else if(!inAir && keysPressed.contains(controls.getLeftKey())) {
             playerSprite.walkLeft();
+        } else if (health.get() <= 0) {
+            playerSprite.standRight();
         }
 
         if(!(playerSprite.getCurrentAnimation().getStatus() == Animation.Status.RUNNING)) {
@@ -207,7 +209,7 @@ public class Player extends Entity {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                for(int i = 0; i < 3; i++) {
+                for (int i = 0; i < 3; i++) {
                     playerSprite.redFlashOn();
                     try {
                         Thread.sleep(100);
