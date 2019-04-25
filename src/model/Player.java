@@ -19,9 +19,11 @@ public class Player extends Entity {
     static final double WIDTH = 64;
     static final double HEIGHT = 64;
     IntegerProperty deathCount = new SimpleIntegerProperty();
+
     private PlayerSprite playerSprite = new DefaultPlayer();
 
     private int attackCount = 0;
+
     private int jumpCount = 0;
     private List<Weapon> playerWeapons = new ArrayList<>();
     private Weapon currentWeapon;
@@ -29,7 +31,6 @@ public class Player extends Entity {
     boolean isAttacking = false;
     private HashSet<String> keysPressed;
     private boolean hasBoots = false;
-
     public Player(HashSet<String> keysPressed) {
         super();
         this.keysPressed = keysPressed;
@@ -40,15 +41,17 @@ public class Player extends Entity {
     }
 
     //Cool effect for if the player is standing in water or something (creates reflection)
+
     public void createSprite() {
         GameManager gm = (GameManager) getScene().getRoot();
         PauseMenuController pm = gm.getPlayingState().getPauseLoader().getController();
         pm.getHealthBar().progressProperty().bind(health);
         pm.getDeathCount().textProperty().bind(deathCount.asString());
 
+        System.out.println(gm.getScene().getStylesheets());
+
         this.getChildren().addAll(playerSprite);
     }
-
     public Weapon getCurrentWeapon() {
         return currentWeapon;
     }
@@ -158,7 +161,7 @@ public class Player extends Entity {
                 playerSprite.getBounds().getMinY() + getTranslateY(), playerSprite.getBounds().getWidth(), playerSprite.getBounds().getHeight());
     }
 
-    private void playAnimation() {
+    void playAnimation() {
         //System.out.println("is attacking: " + isAttacking + " is flashing: " + isFlashing);
         //System.out.println("in air: " + inAir + " is right: " + isRight + " controls pressed: " + controls.isAnyKeyPressed(keysPressed));
         if(isFlashing && isRight) {
@@ -222,5 +225,18 @@ public class Player extends Entity {
             }
         };
         flashTimer.schedule(task, 0);
+    }
+
+    void resetPlayer() {
+        deathCount.setValue(deathCount.get() + 1);
+        health.setValue(1.0);
+        velocity = new Point2D(0, 0);
+        isFlashing = false;
+        isAttacking = false;
+        inAir = true;
+        isRight = true;
+        playAnimation();
+        playerSprite.setAttacking(false);
+        playerSprite.setDamaged(false);
     }
 }

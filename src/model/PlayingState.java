@@ -27,7 +27,7 @@ public class PlayingState extends StackPane {
     public static String level1ID = "Level1";
     public static String level1File = "view/Level1.fxml";
 
-    public static final String STARTING_LEVEL = level1ID;
+    public static final String STARTING_LEVEL = tutorialID;
 
     private PauseMenuController pm;
     private Timer gameTimer;

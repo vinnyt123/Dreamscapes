@@ -5,9 +5,8 @@ import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.util.Duration;
 
-public class WalkingEnemySpawer extends Enemy {
+public class walkingEnemySpawner extends Enemy {
 
     private static final Image SPRITE_SHEET_RIGHT = new Image("images/Spawner.png");
     private static final Image SPRITE_SHEET_LEFT = new Image("images/SpawnerLeft.png");
@@ -21,9 +20,9 @@ public class WalkingEnemySpawer extends Enemy {
     private int maxNumberOfEnemies = 5;
     private int numberOfEnemies = 0;
     private boolean isFacingLeft = true;
-    private final int SPAWNHEIGHT = 5;
+    private final int SPAWN_HEIGHT = 5;
 
-    public WalkingEnemySpawer(Player player, boolean isFacingLeft) {
+    public walkingEnemySpawner(Player player, boolean isFacingLeft) {
         super(player);
         knockback_player = 0;
         knockback_this = 0;
@@ -56,7 +55,7 @@ public class WalkingEnemySpawer extends Enemy {
         if (count % (secondsBetweenSpawn * 60) == 0 && numberOfEnemies < maxNumberOfEnemies) {
             numberOfEnemies++;
             WalkingEnemy newWalkingEnemy = new WalkingEnemy(player, this);
-            newWalkingEnemy.setVelocity(new Point2D(0,SPAWNHEIGHT));
+            newWalkingEnemy.setVelocity(new Point2D(0, SPAWN_HEIGHT));
             if (isFacingLeft) {
                 newWalkingEnemy.spawnAt(new Point2D(this.getBoundsInParent().getMinX(), this.getBoundsInParent().getMinY() + this.getBoundsInParent().getHeight()/2));
                 newWalkingEnemy.changeDirection();

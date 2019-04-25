@@ -11,15 +11,16 @@ import javafx.util.Duration;
 public abstract class PlayerSprite extends Group {
 
     private RotateTransition rotateTransition;
+
     boolean attacking = false;
 
     boolean damaged = false;
-
     SpriteAnimation currentAnimation;
 
     SpriteAnimation walkRight;
 
     SpriteAnimation walkLeft;
+
     SpriteAnimation jumpRight;
     SpriteAnimation jumpLeft;
     SpriteAnimation damageRight;
@@ -29,8 +30,8 @@ public abstract class PlayerSprite extends Group {
     SpriteAnimation attackRight;
     SpriteAnimation attackLeft;
     ColorAdjust colorAdjust;
-
     ImageView imageView;
+
     public PlayerSprite() {
         rotateTransition = new RotateTransition();
         rotateTransition.setDuration(Duration.millis(500));
@@ -38,7 +39,6 @@ public abstract class PlayerSprite extends Group {
 
         colorAdjust = new ColorAdjust();
     }
-
     public abstract void walkLeft();
 
     public abstract void walkRight();
@@ -113,5 +113,13 @@ public abstract class PlayerSprite extends Group {
 
     boolean isDamaged() {
         return damaged;
+    }
+
+    public void setAttacking(boolean attacking) {
+        this.attacking = attacking;
+    }
+
+    public void setDamaged(boolean damaged) {
+        this.damaged = damaged;
     }
 }
