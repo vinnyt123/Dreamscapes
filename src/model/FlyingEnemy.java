@@ -1,5 +1,6 @@
 package model;
 
+import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
@@ -12,12 +13,12 @@ public class FlyingEnemy extends Enemy {
     private static final double RANGE = 500;
     private static final double SPEED = 3;
     private static final double WIDTH = 60;
-    private static final double HEIGHT = 30;
+    private static final double HEIGHT = 60;
     private static final double DAMAGE = 0.21;
     private static final double KNOCKBACK_PLAYER = 8;
     private static final double KNOCKBACK_THIS = 9;
     private static final double HEALTH = 10;
-    private static final Image SPRITE_SHEET = new Image("images/fly_sheet.png");
+    private static final Image SPRITE_SHEET = new Image("images/eye_sheet.png");
     private SpriteAnimation animation;
     private SpriteAnimation flyRight;
     private SpriteAnimation flyLeft;
@@ -46,10 +47,10 @@ public class FlyingEnemy extends Enemy {
         imageView.setViewport(new Rectangle2D(0, 0, 72, 36));
         imageView.setFitWidth(WIDTH);
         imageView.setFitHeight(HEIGHT);
-        flyLeft = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 72, 36, 0);
-        flyRight = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 72, 36, 36);
-        dieLeft = new SpriteAnimation(imageView, Duration.millis(400), 2, 2, 72, 36, 72);
-        dieRight = new SpriteAnimation(imageView, Duration.millis(400), 2, 2, 72, 36, 108);
+        flyLeft = new SpriteAnimation(imageView, Duration.millis(400), 4, 4, 150, 150, 0);
+        flyRight = new SpriteAnimation(imageView, Duration.millis(400), 4, 4, 150, 150, 150);
+        dieLeft = new SpriteAnimation(imageView, Duration.millis(400), 2, 2, 150, 150, 300);
+        dieRight = new SpriteAnimation(imageView, Duration.millis(400), 2, 2, 150, 150, 450);
         animation = flyLeft;
         animation.setCycleCount(1);
 
@@ -85,7 +86,7 @@ public class FlyingEnemy extends Enemy {
 
     @Override
     public Bounds getBounds() {
-        return this.getBoundsInParent();
+        return new BoundingBox(getBoundsInParent().getMinX() + 10, getBoundsInParent().getMinY() + 10, getBoundsInParent().getWidth() - 20, getBoundsInParent().getHeight() - 30);
     }
 
     private void playAnimation() {

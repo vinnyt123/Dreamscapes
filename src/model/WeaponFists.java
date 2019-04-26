@@ -9,7 +9,7 @@ public class WeaponFists extends Weapon {
     private static final double RANGE_ABOVE = 16;
     private static final double RANGE_WIDTH = 54;
     private static final double RANGE_HEIGHT = 80;
-    private static final double DAMAGE = 30;
+    private static final double DAMAGE = 3;
 
     public WeaponFists(Player player) {
         super();
