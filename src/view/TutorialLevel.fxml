@@ -65,23 +65,23 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="249.0" layoutX="2202.0" layoutY="807.0" stroke="BLACK" strokeType="INSIDE" width="1010.0" />
       <Rectangle id="lava2" arcHeight="5.0" arcWidth="5.0" fill="#ff231f" height="220.0" layoutX="3210.0" layoutY="805.0" stroke="BLACK" strokeType="INSIDE" width="756.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="33.0" layoutX="3213.0" layoutY="1024.0" stroke="BLACK" strokeType="INSIDE" width="754.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="249.0" layoutX="3966.0" layoutY="809.0" stroke="BLACK" strokeType="INSIDE" width="1320.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="249.0" layoutX="3966.0" layoutY="809.0" stroke="BLACK" strokeType="INSIDE" width="1144.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="434.0" layoutX="3967.0" layoutY="374.0" stroke="BLACK" strokeType="INSIDE" width="229.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="4437.0" layoutY="377.0" stroke="BLACK" strokeType="INSIDE" width="322.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="3492.0" layoutY="421.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="234.0" layoutX="5036.0" layoutY="575.0" stroke="BLACK" strokeType="INSIDE" width="252.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="434.0" layoutX="5036.0" layoutY="375.0" stroke="BLACK" strokeType="INSIDE" width="76.0" />
       <Rectangle id="spikes3" arcHeight="5.0" arcWidth="5.0" fill="#e8ff1f" height="59.0" layoutX="4565.0" layoutY="317.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
       <Rectangle id="spikes4" arcHeight="5.0" arcWidth="5.0" fill="#e8ff1f" height="59.0" layoutX="4197.0" layoutY="754.0" stroke="BLACK" strokeType="INSIDE" width="840.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1930.0" layoutX="5922.0" stroke="BLACK" strokeType="INSIDE" width="76.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="5668.0" layoutY="843.0" stroke="BLACK" strokeType="INSIDE" width="250.0" />
-      <Rectangle id="spikes5" arcHeight="5.0" arcWidth="5.0" fill="#e8ff1f" height="59.0" layoutX="5670.0" layoutY="777.0" stroke="BLACK" strokeType="INSIDE" width="56.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="5535.0" layoutY="882.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+      <Rectangle id="spikes5" arcHeight="5.0" arcWidth="5.0" fill="#e8ff1f" height="59.0" layoutX="5648.0" layoutY="825.0" stroke="BLACK" strokeType="INSIDE" width="56.0" />
       <Rectangle id="lava3" arcHeight="5.0" arcWidth="5.0" fill="#ff231f" height="220.0" layoutX="2493.0" layoutY="1707.0" stroke="BLACK" strokeType="INSIDE" width="3436.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="4862.0" layoutY="1167.0" stroke="BLACK" strokeType="INSIDE" width="500.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="4912.0" layoutY="1207.0" stroke="BLACK" strokeType="INSIDE" width="376.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="4183.0" layoutY="1539.0" stroke="BLACK" strokeType="INSIDE" width="340.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="504.0" layoutX="4157.0" layoutY="1059.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="4426.0" layoutY="1167.0" stroke="BLACK" strokeType="INSIDE" width="330.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="3860.0" layoutY="1682.0" stroke="BLACK" strokeType="INSIDE" width="866.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="516.0" layoutX="4729.0" layoutY="1190.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="4415.0" layoutY="1215.0" stroke="BLACK" strokeType="INSIDE" width="330.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="3852.0" layoutY="1682.0" stroke="BLACK" strokeType="INSIDE" width="866.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="488.0" layoutX="4718.0" layoutY="1219.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="4089.0" layoutY="1538.0" stroke="BLACK" strokeType="INSIDE" width="68.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="2871.0" layoutY="1520.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="3027.0" layoutY="1377.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
