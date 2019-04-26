@@ -48,6 +48,7 @@ public class Boss extends Enemy {
         createSprite();
     }
 
+    //TODO: make sprite not blurry by scaling the image in photoshop then using that, rather than scaling in java
     private void createSprite() {
         imageView = new ImageView(SPRITE_SHEET);
         imageView.setSmooth(false);

@@ -30,10 +30,13 @@ public class Map extends Pane {
     private static final double VIEWPORTWIDTH = 740;
     private static final double VIEWPORTHEIGHT = 480;
 
+    private String mapId;
 
-    public Map(Pane pane, Player player) {
+
+    public Map(Pane pane, Player player, String mapId) {
         super();
         this.player = player;
+        this.mapId = mapId;
         this.getChildren().add(player);
         this.WIDTH = pane.getBoundsInParent().getWidth();
         this.HEIGHT = pane.getBoundsInParent().getHeight();
@@ -172,7 +175,9 @@ public class Map extends Pane {
             }
         }
 
-        moveCamera();
+        if(!mapId.startsWith("BossArena")) {
+            moveCamera();
+        }
     }
 
     private void moveCamera() {
@@ -209,5 +214,9 @@ public class Map extends Pane {
             darkness.setLayoutX(player.getTranslateX() - darkness.getBoundsInParent().getWidth() / 2);
             darkness.setLayoutY(player.getTranslateY() - darkness.getBoundsInParent().getHeight() / 2);
         }
+    }
+
+    public String getMapId() {
+        return mapId;
     }
 }

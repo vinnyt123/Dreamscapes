@@ -82,7 +82,7 @@ public class PlayingState extends StackPane {
         loader = new FXMLLoader(getClass().getClassLoader().getResource(mapsMap.get(name)));
         try {
             loaderRoot = loader.load();
-            currentMap = new Map(loaderRoot, player);
+            currentMap = new Map(loaderRoot, player, name);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -125,7 +125,7 @@ public class PlayingState extends StackPane {
     }
 
     void restartMap() {
-        currentMap = new Map(loaderRoot, player);
+        currentMap = new Map(loaderRoot, player, currentMap.getMapId());
         mapLayer.getChildren().clear();
         mapLayer.getChildren().add(currentMap);
     }
