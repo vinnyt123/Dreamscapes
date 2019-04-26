@@ -55,12 +55,18 @@ public class Map extends Pane {
                         gameObjects.add(new Spikes((Rectangle) item));
                     } else if(itemId.startsWith("lava")) {
                         gameObjects.add(new Lava((Rectangle) item));
+                    } else if (itemId.startsWith("potion")) {
+                        items.add(new HealthPotion(item));
                     } else if(itemId.startsWith("enemySpawner")) {
                         WalkingEnemySpawner walkingEnemySpawner;
                         if (itemId.endsWith("Left")) {
-                            walkingEnemySpawner = new WalkingEnemySpawner(player, true);
+                            if (itemId.contains("__")) {
+                                walkingEnemySpawner = new WalkingEnemySpawner(player, true, new Point2D(2000, 200));
+                            } else {
+                                walkingEnemySpawner = new WalkingEnemySpawner(player, true, new Point2D(1500, 500));
+                            }
                         } else {
-                            walkingEnemySpawner = new WalkingEnemySpawner(player, false);
+                            walkingEnemySpawner = new WalkingEnemySpawner(player, false, new Point2D(1500, 500));
                         }
                         walkingEnemySpawner.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
                         enemies.add(walkingEnemySpawner);
@@ -71,7 +77,7 @@ public class Map extends Pane {
                 }
 
             } else if (item instanceof Line) {
-                enemies.add(new FlyingEnemy(((Line) item).getStartX(), ((Line) item).getStartY(), player));
+                enemies.add(new FlyingEnemy(((Line) item).getLayoutX(), ((Line) item).getLayoutY(), player));
             } else if(item instanceof ImageView) {
                 if(item.getId().startsWith("darkness")) {
                     darkness = (ImageView) item;
@@ -91,6 +97,7 @@ public class Map extends Pane {
                 }
             } else if (item instanceof Circle) {
                 if (item.getId() != null && item.getId().startsWith("walkingEnemy")) {
+                    System.out.println(item.getId());
                     WalkingEnemy walkingEnemy = new WalkingEnemy(player, null);
                     enemies.add(walkingEnemy);
                     walkingEnemy.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));

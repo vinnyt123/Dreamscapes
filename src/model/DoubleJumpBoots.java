@@ -11,7 +11,6 @@ public class DoubleJumpBoots extends Item  {
 
     public DoubleJumpBoots(Node node) {
         super(TILE_IMAGE, node);
-
     }
 
     @Override

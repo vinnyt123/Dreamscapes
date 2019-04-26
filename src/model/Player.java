@@ -31,6 +31,7 @@ public class Player extends Entity {
     boolean isAttacking = false;
     private HashSet<String> keysPressed;
     private boolean hasBoots = false;
+
     public Player(HashSet<String> keysPressed) {
         super();
         this.keysPressed = keysPressed;

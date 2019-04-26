@@ -25,17 +25,20 @@ public class WalkingEnemySpawner extends Enemy {
     private double secondsBetweenSpawn = 1;
     private final int maxNumberOfEnemies = 20;
     private int numberOfEnemies = 0;
-    private boolean isFacingLeft = true;
+    private boolean isFacingLeft;
     private final int SPAWN_HEIGHT = -5;
     private final int SPAWN_XVEL = 5;
-    private final double RANGE = 1500d;
+    private Point2D range;
     private Wall wall = null;
     private StackPane stackPane;
     private FadeTransition deadAnimation;
     private final int DYING_TIME = 1000;
+    private Bounds bounds;
 
-    public WalkingEnemySpawner(Player player, boolean isFacingLeft) {
+
+    public WalkingEnemySpawner(Player player, boolean isFacingLeft, Point2D range) {
         super(player);
+        this.range = range;
         this.isFacingLeft = isFacingLeft;
         knockback_player = 0;
         knockback_this = 0;
@@ -73,10 +76,20 @@ public class WalkingEnemySpawner extends Enemy {
 
 
     public WalkingEnemy update() {
-        System.out.println(distanceTo(player));
-        if (this.distanceTo(player) < RANGE) {
-            count++;
 
+        boolean withinRangeX;
+        double distanceX = player.getTranslateX() - this.getTranslateX();
+        double distanceY = player.getTranslateY() - this.getTranslateY();
+        if (isFacingLeft) {
+            withinRangeX = (distanceX) < 0 && Math.abs(distanceX) < range.getX();
+        } else {
+            withinRangeX = (distanceX) > 0 && Math.abs(distanceX) < range.getX();
+        }
+        boolean withinRangeY = Math.abs(distanceY) < range.getY();
+
+        if (withinRangeX && withinRangeY) {
+            count++;
+            System.out.println("tick " + range.getX());
             if (count % (secondsBetweenSpawn * 60) == 0 && numberOfEnemies < maxNumberOfEnemies) {
                 numberOfEnemies++;
                 WalkingEnemy newWalkingEnemy = new WalkingEnemy(player, this);
@@ -99,7 +112,7 @@ public class WalkingEnemySpawner extends Enemy {
 
     @Override
     public Bounds getBounds() {
-        return this.getBoundsInParent();
+        return bounds;
     }
 
     @Override
@@ -122,7 +135,8 @@ public class WalkingEnemySpawner extends Enemy {
     }
 
     public void setUpCollisions() {
-        wall.setBounds(new BoundingBox(this.getBoundsInParent().getMinX(), this.getBoundsInParent().getMinY(), WIDTH - 40, HEIGHT));
+        bounds = new BoundingBox(this.getBoundsInParent().getMinX(), this.getBoundsInParent().getMinY(), WIDTH, HEIGHT - 25);
+        wall.setBounds(new BoundingBox(this.getBoundsInParent().getMinX(), this.getBoundsInParent().getMinY(), WIDTH - 70, HEIGHT));
     }
 
     /*@Override

@@ -94,4 +94,8 @@ public abstract class Entity extends Group {
         Point2D entityPosition = new Point2D(entity.getTranslateX(), entity.getTranslateY());
         return thisPosition.distance(entityPosition);
     }
+
+    public DoubleProperty getHealth() {
+        return health;
+    }
 }
