@@ -19,8 +19,8 @@ public abstract class Item extends Group {
 
     public Item(Image tileImage, Node node) {
         ImageView imageView = new ImageView(tileImage);
-        imageView.setFitHeight(TILE_SIZE);
-        imageView.setFitWidth(TILE_SIZE);
+        imageView.setFitHeight(TILE_SIZE - 5);
+        imageView.setFitWidth(TILE_SIZE - 5);
         Pane tileBorder = new Pane();
         tileBorder.setPrefWidth(TILE_SIZE);
         tileBorder.setPrefHeight(TILE_SIZE);
@@ -30,6 +30,8 @@ public abstract class Item extends Group {
                 "-fx-border-radius : 3px;" +
                 "-fx-background-color : MAGENTA;");
         this.getChildren().addAll(tileBorder, imageView);
+        imageView.setTranslateX(getTranslateX() + 2.5);
+        imageView.setTranslateY(getTranslateY() + 2.5);
         this.setLayoutX(node.getLayoutX());
         this.setLayoutY(node.getLayoutY());
     }

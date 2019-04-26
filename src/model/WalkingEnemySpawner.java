@@ -77,19 +77,13 @@ public class WalkingEnemySpawner extends Enemy {
 
     public WalkingEnemy update() {
 
-        boolean withinRangeX;
         double distanceX = player.getTranslateX() - this.getTranslateX();
         double distanceY = player.getTranslateY() - this.getTranslateY();
-        if (isFacingLeft) {
-            withinRangeX = (distanceX) < 0 && Math.abs(distanceX) < range.getX();
-        } else {
-            withinRangeX = (distanceX) > 0 && Math.abs(distanceX) < range.getX();
-        }
+        boolean withinRangeX = (distanceX) < 0 && Math.abs(distanceX) < range.getX();
         boolean withinRangeY = Math.abs(distanceY) < range.getY();
 
         if (withinRangeX && withinRangeY) {
             count++;
-            System.out.println("tick " + range.getX());
             if (count % (secondsBetweenSpawn * 60) == 0 && numberOfEnemies < maxNumberOfEnemies) {
                 numberOfEnemies++;
                 WalkingEnemy newWalkingEnemy = new WalkingEnemy(player, this);

@@ -16,14 +16,15 @@ public class HealthPotion extends Item {
     public HealthPotion(Node node) {
         super(TILE_IMAGE, node);
         healthRestoreTranstion = new Timeline();
-
     }
 
     @Override
     public boolean intersect(Player player) {
-        if (player.getBounds().intersects(this.getBoundsInParent())) {
+        if (player.getBounds().intersects(this.getBoundsInParent()) && player.getHealth().get() != 1.0) {
             healthRestoreTranstion.getKeyFrames().add(new KeyFrame(Duration.millis(2000),
                     new KeyValue(player.getHealth(), 1.0)));
+            healthRestoreTranstion.setCycleCount(1);
+            healthRestoreTranstion.play();
             return true;
         } else {
             return false;

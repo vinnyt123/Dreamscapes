@@ -31,12 +31,14 @@ public class Map extends Pane {
     private static final double VIEWPORTHEIGHT = 480;
 
     private String mapId;
+    private String mapFrom;
 
 
-    public Map(Pane pane, Player player, String mapId) {
+    public Map(Pane pane, Player player, String mapId, String mapFrom) {
         super();
         this.player = player;
         this.mapId = mapId;
+        this.mapFrom = mapFrom;
         this.getChildren().add(player);
         this.WIDTH = pane.getBoundsInParent().getWidth();
         this.HEIGHT = pane.getBoundsInParent().getHeight();
@@ -49,7 +51,7 @@ public class Map extends Pane {
                 if (item.getId() != null) {
                     String itemId = item.getId();
                     if (itemId.startsWith("door")) {
-                        gameObjects.add(new Door(item.getId().substring(item.getId().indexOf("_") + 1), (Rectangle) item));
+                        gameObjects.add(new Door(item.getId().substring(item.getId().indexOf("_") + 1), (Rectangle) item, mapId));
                     } else if (itemId.startsWith("doubleJumpBoots")) {
                         items.add(new DoubleJumpBoots(item));
                     } else if (itemId.startsWith("spikes")) {
@@ -62,7 +64,7 @@ public class Map extends Pane {
                         WalkingEnemySpawner walkingEnemySpawner;
                         if (itemId.endsWith("Left")) {
                             if (itemId.contains("__")) {
-                                walkingEnemySpawner = new WalkingEnemySpawner(player, true, new Point2D(2000, 200));
+                                walkingEnemySpawner = new WalkingEnemySpawner(player, true, new Point2D(2200, 200));
                             } else {
                                 walkingEnemySpawner = new WalkingEnemySpawner(player, true, new Point2D(1500, 500));
                             }
@@ -87,9 +89,9 @@ public class Map extends Pane {
                     foreground = new ImageView(image);
                     foreground.setFitWidth(WIDTH);
                     foreground.setFitHeight(HEIGHT);
-                } else if(item.getId().startsWith("platform")) {
-                    gameObjects.add(new Wall(((ImageView) item).getImage(), item.getLayoutX(), item.getLayoutY()));
-                } else {
+                } //else if(item.getId().startsWith("platform")) {
+                   // gameObjects.add(new Wall(((ImageView) item).getImage(), item.getLayoutX(), item.getLayoutY()));
+                else {
                     Image image = ((ImageView) item).getImage();
                     ImageView imageView = new ImageView(image);
                     imageView.setFitWidth(WIDTH);
@@ -97,15 +99,18 @@ public class Map extends Pane {
                     backgrounds.add(imageView);
                 }
             } else if (item instanceof Circle) {
-                if (item.getId() != null && item.getId().startsWith("walkingEnemy")) {
-                    System.out.println(item.getId());
-                    WalkingEnemy walkingEnemy = new WalkingEnemy(player, null);
-                    enemies.add(walkingEnemy);
-                    walkingEnemy.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
-                } else if (item.getId() != null && item.getId().startsWith("boss")){
-                    enemies.add(new Boss(player, item.getLayoutX(), item.getLayoutY()));
-                } else {
-                    player.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
+                if (item.getId() != null) {
+                    if (item.getId().startsWith("walkingEnemy")) {
+                        WalkingEnemy walkingEnemy = new WalkingEnemy(player, null);
+                        enemies.add(walkingEnemy);
+                        walkingEnemy.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
+                    } else if (item.getId().startsWith("boss")) {
+                        enemies.add(new Boss(player, item.getLayoutX(), item.getLayoutY()));
+                    } else if (item.getId().startsWith("playerSpawn")) {
+                        if ((mapFrom != null && item.getId().endsWith(mapFrom)) || (mapFrom == null && item.getId().equals("playerSpawn"))) {
+                            player.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
+                        }
+                    }
                 }
             }
         }
