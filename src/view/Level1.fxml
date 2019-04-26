@@ -2,9 +2,10 @@
 
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane prefHeight="4000.0" prefWidth="6000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="4000.0" prefWidth="6000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Rectangle id="door1" arcHeight="5.0" arcWidth="5.0" fill="#ff13b4" height="110.0" layoutX="81.0" layoutY="3816.0" stroke="BLACK" strokeType="INSIDE" width="47.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="70.0" layoutX="2.0" layoutY="3929.0" stroke="BLACK" strokeType="INSIDE" width="6000.0" />
@@ -22,5 +23,6 @@
       <Rectangle id="spikes1" arcHeight="5.0" arcWidth="5.0" fill="#e8ff1f" height="397.0" layoutX="3240.0" layoutY="3540.0" stroke="BLACK" strokeType="INSIDE" width="54.0" />
       <Rectangle id="enemySpawner_Left" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="120.0" layoutX="840.0" layoutY="3692.0" stroke="BLACK" strokeType="INSIDE" width="67.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="2637.0" layoutY="3668.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <Line endX="640.0" endY="3627.0" startX="640.0" startY="3627.0" />
    </children>
 </AnchorPane>
