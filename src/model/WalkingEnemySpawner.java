@@ -73,7 +73,6 @@ public class WalkingEnemySpawner extends Enemy {
 
 
     public WalkingEnemy update() {
-        System.out.println(distanceTo(player));
         if (this.distanceTo(player) < RANGE) {
             count++;
 

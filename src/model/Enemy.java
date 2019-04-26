@@ -101,11 +101,11 @@ public abstract class Enemy extends Entity {
     }
 
     void redFlashOn() {
-        colorAdjust.setContrast(1);
+        colorAdjust.setBrightness(-1);
     }
 
     void redFlashOff() {
-        colorAdjust.setContrast(0);
+        colorAdjust.setBrightness(0);
     }
 
     void remove() {

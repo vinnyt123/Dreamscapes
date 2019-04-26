@@ -37,8 +37,6 @@ public class Map extends Pane {
         this.getChildren().add(player);
         this.WIDTH = pane.getBoundsInParent().getWidth();
         this.HEIGHT = pane.getBoundsInParent().getHeight();
-        /*this.WIDTH = 6000;
-        this.HEIGHT = 2000;*/
         //this.setPrefWidth(pane.getPrefWidth());
         //this.setPrefHeight(pane.getPrefHeight());
 
@@ -94,6 +92,8 @@ public class Map extends Pane {
                     WalkingEnemy walkingEnemy = new WalkingEnemy(player, null);
                     enemies.add(walkingEnemy);
                     walkingEnemy.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
+                } else if (item.getId() != null && item.getId().startsWith("boss")){
+                    enemies.add(new Boss(player, item.getLayoutX(), item.getLayoutY()));
                 } else {
                     player.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
                 }
@@ -177,8 +177,6 @@ public class Map extends Pane {
 
     private void moveCamera() {
         //Set layout so player is in middle or not if edge of map (720 & 450 are half of the viewport x & y)
-        //TODO: instead of using 720 & 450 get size of stage and use half of those - support resizing - will need
-        //to add listener on stage resize property so it updates when resized though
         setLayoutX(VIEWPORTWIDTH - player.getTranslateX());
         setLayoutY(VIEWPORTHEIGHT - player.getTranslateY());
         if(player.getTranslateX() - VIEWPORTWIDTH < 0) {
