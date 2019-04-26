@@ -68,6 +68,6 @@
       <Rectangle id="potion2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="1529.0" layoutY="3736.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
       <Rectangle id="potion2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="4724.0" layoutY="2087.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
       <Circle id="playerSpawn_Tutorial" fill="DODGERBLUE" layoutX="116.0" layoutY="3862.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle id="playerSpawn" fill="DODGERBLUE" layoutX="5826.0" layoutY="578.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="playerSpawn" fill="DODGERBLUE" layoutX="394.0" layoutY="3861.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>

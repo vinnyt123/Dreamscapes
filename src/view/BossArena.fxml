@@ -9,7 +9,7 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="960.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="960.0" layoutX="1400.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutY="860.0" stroke="BLACK" strokeType="INSIDE" width="1480.0" />
-      <Circle id="playerSpawn" fill="DODGERBLUE" layoutX="271.0" layoutY="238.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="playerSpawn" fill="DODGERBLUE" layoutX="278.0" layoutY="589.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="boss" fill="DODGERBLUE" layoutX="596.0" layoutY="374.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>

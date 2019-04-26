@@ -79,7 +79,7 @@ public class WalkingEnemySpawner extends Enemy {
 
         double distanceX = player.getTranslateX() - this.getTranslateX();
         double distanceY = player.getTranslateY() - this.getTranslateY();
-        boolean withinRangeX = (distanceX) < 0 && Math.abs(distanceX) < range.getX();
+        boolean withinRangeX = Math.abs(distanceX) < range.getX();
         boolean withinRangeY = Math.abs(distanceY) < range.getY();
 
         if (withinRangeX && withinRangeY) {
