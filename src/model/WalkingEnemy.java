@@ -1,5 +1,6 @@
 package model;
 
+import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
@@ -9,25 +10,27 @@ import javafx.util.Duration;
 
 public class WalkingEnemy extends Enemy {
     private static final double SPEED = 2;
-    private static final double WIDTH = 30;
-    private static final double HEIGHT = 30;
+    private static final double WIDTH = 60;
+    private static final double HEIGHT = 47;
     private static final double HEALTH = 10;
     private static final double DAMAGE = 0.1;
     private Bounds platformBounds;
-    private static final Image SPRITE_SHEET = new Image("images/snail_sheet.png");
+    private static final Image SPRITE_SHEET = new Image("images/slime_sheet.png");
     private SpriteAnimation animation;
+    private SpriteAnimation walkLeft;
     private SpriteAnimation walkRight;
     private SpriteAnimation dieRight;
     private SpriteAnimation dieLeft;
+    private SpriteAnimation attackRight;
+    private SpriteAnimation attackLeft;
     private static final double KNOCKBACK_PLAYER = 8;
-    private static final double KNOCKBACK_THIS = 9;
-    private SpriteAnimation walkLeft;
+    private static final double KNOCKBACK_THIS = 5;
     private boolean movingRight = true;
-    private walkingEnemySpawner walkingEnemySpawner;
+    private WalkingEnemySpawner walkingEnemySpawner;
 
 
 
-    public WalkingEnemy(Player player, walkingEnemySpawner walkingEnemySpawner) {
+    public WalkingEnemy(Player player, WalkingEnemySpawner walkingEnemySpawner) {
         super(player);
         this.walkingEnemySpawner = walkingEnemySpawner;
         knockback_player = KNOCKBACK_PLAYER;
@@ -46,10 +49,12 @@ public class WalkingEnemy extends Enemy {
         imageView.setViewport(new Rectangle2D(0, 0, 72, 36));
         imageView.setFitWidth(WIDTH);
         imageView.setFitHeight(HEIGHT);
-        walkLeft = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 53, 30, 0);
-        walkRight = new SpriteAnimation(imageView, Duration.millis(200), 2, 2, 53, 30, 29);
-        dieLeft = new SpriteAnimation(imageView, Duration.millis(1000), 2, 2, 53, 30, 87);
-        dieRight = new SpriteAnimation(imageView, Duration.millis(1000), 2, 2, 53, 30, 58);
+        walkLeft = new SpriteAnimation(imageView, Duration.millis(200), 4, 4, 32, 25, 0);
+        walkRight = new SpriteAnimation(imageView, Duration.millis(200), 4, 4, 32, 25, 25);
+        dieLeft = new SpriteAnimation(imageView, Duration.millis(1000), 4, 4, 32, 25, 50);
+        dieRight = new SpriteAnimation(imageView, Duration.millis(1000), 4, 4, 32, 25, 125);
+        attackLeft = new SpriteAnimation(imageView, Duration.millis(500), 5, 5, 32, 25, 75);
+        attackRight = new SpriteAnimation(imageView, Duration.millis(500), 5, 5, 32, 25, 100);
         animation = walkLeft;
         animation.setCycleCount(1);
         this.getChildren().add(imageView);
@@ -97,7 +102,7 @@ public class WalkingEnemy extends Enemy {
 
     @Override
     public Bounds getBounds() {
-        return this.getBoundsInParent();
+        return new BoundingBox(getBoundsInParent().getMinX() + 8, getBoundsInParent().getMinY() + 10, getBoundsInParent().getWidth() - 18, getBoundsInParent().getHeight() - 15);
     }
 
     public void updatePlatform(Bounds bounds) {
@@ -109,11 +114,18 @@ public class WalkingEnemy extends Enemy {
     }
 
     private void playAnimation() {
-        if(movingRight) {
+        if(isAttacking && movingRight) {
+            animation = attackRight;
+            animation.setOnFinished(e -> isAttacking = false);
+        } else if(isAttacking) {
+            animation = attackLeft;
+            animation.setOnFinished(e -> isAttacking = false);
+        } else if(movingRight) {
             animation = walkRight;
         } else {
             animation = walkLeft;
         }
+
 
         if (inAir) {
             animation.stop();
@@ -130,9 +142,10 @@ public class WalkingEnemy extends Enemy {
         } else {
             animation = dieLeft;
         }
+        animation.setOnFinished(e -> isDead = true);
         animation.play();
-        timer.schedule(new dyingTimer(), Entity.DYING_TIME);
     }
+
 
     public void decrementSpawnerCount() {
         if (walkingEnemySpawner != null) {

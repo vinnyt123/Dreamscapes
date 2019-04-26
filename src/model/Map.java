@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Map extends Pane {
 
-    private List<walkingEnemySpawner> spawners = new ArrayList<>();
+    private List<WalkingEnemySpawner> spawners = new ArrayList<>();
     private Player player;
     private List<GameObject> gameObjects = new ArrayList<>();
     private List<ImageView> backgrounds = new ArrayList<>();
@@ -35,10 +35,8 @@ public class Map extends Pane {
         super();
         this.player = player;
         this.getChildren().add(player);
-        /*this.WIDTH = pane.getBoundsInParent().getWidth();
-        this.HEIGHT = pane.getBoundsInParent().getHeight();*/
-        this.WIDTH = 6000;
-        this.HEIGHT = 2000;
+        this.WIDTH = pane.getBoundsInParent().getWidth();
+        this.HEIGHT = pane.getBoundsInParent().getHeight();
         //this.setPrefWidth(pane.getPrefWidth());
         //this.setPrefHeight(pane.getPrefHeight());
 
@@ -56,11 +54,11 @@ public class Map extends Pane {
                     } else if(itemId.startsWith("lava")) {
                         gameObjects.add(new Lava((Rectangle) item));
                     } else if(itemId.startsWith("enemySpawner")) {
-                        walkingEnemySpawner walkingEnemySpawner;
+                        WalkingEnemySpawner walkingEnemySpawner;
                         if (itemId.endsWith("Left")) {
-                            walkingEnemySpawner = new walkingEnemySpawner(player, true);
+                            walkingEnemySpawner = new WalkingEnemySpawner(player, true);
                         } else {
-                            walkingEnemySpawner = new walkingEnemySpawner(player, false);
+                            walkingEnemySpawner = new WalkingEnemySpawner(player, false);
                         }
                         walkingEnemySpawner.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
                         enemies.add(walkingEnemySpawner);
@@ -149,7 +147,7 @@ public class Map extends Pane {
            }
         }
 
-        for (walkingEnemySpawner spawner : spawners) {
+        for (WalkingEnemySpawner spawner : spawners) {
             WalkingEnemy walkingEnemy = spawner.update();
             if (walkingEnemy != null) {
                 enemies.add(walkingEnemy);

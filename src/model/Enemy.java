@@ -18,6 +18,7 @@ public abstract class Enemy extends Entity {
     private boolean knockX = false;
     private boolean knockY = false;
     private static long DAMAGE_COOLDOWN = 1000;
+    boolean isAttacking = false;
     ImageView imageView;
     ColorAdjust colorAdjust = new ColorAdjust();
     Player player;
@@ -52,8 +53,6 @@ public abstract class Enemy extends Entity {
             } else if (velocity.getY() < 0) {
                 velocity = new Point2D(velocity.getX(),velocity.getY() + 1);
             }
-
-            //setVelocity(new Point2D((velocity.getX() > 0) ? velocity.getX() - 1 : velocity.getX() + 1, (velocity.getY() > 0) ? velocity.getY() - 1 : velocity.getY() + 1));
         }
         applyVelocity();
     }
@@ -67,18 +66,12 @@ public abstract class Enemy extends Entity {
         } else {
             setVelocity(new Point2D(-Math.cos(Math.toRadians(theta)) * knockback_this, -Math.sin(Math.toRadians(theta)) * knockback_this));
         }
-        /*if (this instanceof WalkingEnemy) {
-            if (velocity.getX() > 0) {
-                ((WalkingEnemy) this).setMovingRight(true);
-            } else {
-                ((WalkingEnemy) this).setMovingRight(false);
-            }
-        }*/
     }
 
     void intersect(Player player) {
-        if(this.getBoundsInParent().intersects(player.getBoundsInParent()) && !player.isFlashing && !isDying && !isDead) {
+        if(this.getBounds().intersects(player.getBounds()) && !player.isFlashing && !isDying && !isDead) {
             if (damage > 0) {
+                isAttacking = true;
                 player.redFlash();
                 player.health.setValue(player.health.getValue() - damage);
                 setKnockBack(false);

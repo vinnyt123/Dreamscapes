@@ -6,7 +6,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class walkingEnemySpawner extends Enemy {
+public class WalkingEnemySpawner extends Enemy {
 
     private static final Image SPRITE_SHEET_RIGHT = new Image("images/Spawner.png");
     private static final Image SPRITE_SHEET_LEFT = new Image("images/SpawnerLeft.png");
@@ -22,7 +22,7 @@ public class walkingEnemySpawner extends Enemy {
     private boolean isFacingLeft = true;
     private final int SPAWN_HEIGHT = 5;
 
-    public walkingEnemySpawner(Player player, boolean isFacingLeft) {
+    public WalkingEnemySpawner(Player player, boolean isFacingLeft) {
         super(player);
         knockback_player = 0;
         knockback_this = 0;

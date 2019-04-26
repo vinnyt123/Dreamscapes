@@ -10,7 +10,7 @@ public class Wall extends GameObject {
 
     Wall(Rectangle rectangle) {
         Rectangle newRectangle = new Rectangle(rectangle.getLayoutX(), rectangle.getLayoutY(), rectangle.getWidth(), rectangle.getHeight());
-        newRectangle.setOpacity(0);
+        newRectangle.setOpacity(1);
         this.getChildren().add(newRectangle);
     }
 
