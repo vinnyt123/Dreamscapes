@@ -107,7 +107,7 @@ public class Map extends Pane {
                     } else if (item.getId().startsWith("boss")) {
                         enemies.add(new Boss(player, item.getLayoutX(), item.getLayoutY()));
                     } else if (item.getId().startsWith("playerSpawn")) {
-                        if ((mapFrom != null && item.getId().endsWith(mapFrom)) || (mapFrom == null && item.getId().equals("playerSpawn"))) {
+                        if ((mapFrom != null && item.getId().endsWith(mapFrom)) || (mapFrom == null && item.getId().equals("playerSpawn")) || mapId.equals(PlayingState.bossArenaID)) {
                             player.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
                         }
                     }

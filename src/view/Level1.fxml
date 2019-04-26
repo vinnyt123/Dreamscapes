@@ -61,13 +61,13 @@
       <Line endX="-173.5" endY="-112.0" layoutX="2502.0" layoutY="400.0" startX="-186.0" startY="-112.0" />
       <Line endX="-168.0" endY="-112.00006103515625" layoutX="3000.0" layoutY="300.0" startX="-186.0" startY="-112.0" />
       <Rectangle id="enemySpawner__Left" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="116.0" layoutX="5592.0" layoutY="538.0" stroke="BLACK" strokeType="INSIDE" width="138.0" />
-      <Rectangle id="door1" arcHeight="5.0" arcWidth="5.0" fill="#ff13b4" height="110.0" layoutX="5904.0" layoutY="538.0" stroke="BLACK" strokeType="INSIDE" width="47.0" />
+      <Rectangle id="door_BossArena" arcHeight="5.0" arcWidth="5.0" fill="#ff13b4" height="110.0" layoutX="5904.0" layoutY="538.0" stroke="BLACK" strokeType="INSIDE" width="47.0" />
       <Line endX="-170.0" endY="-112.00003051757812" layoutX="4000.0" layoutY="500.0" startX="-184.0" startY="-112.00003051757812" />
       <Line endX="-170.0" endY="-112.00003051757812" layoutX="3800.0" layoutY="300.0" startX="-184.0" startY="-112.00003051757812" />
       <Line endX="-170.0" endY="-112.00003051757812" layoutX="4500.0" layoutY="400.0" startX="-184.0" startY="-112.00003051757812" />
       <Rectangle id="potion2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="1529.0" layoutY="3736.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
       <Rectangle id="potion2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="4724.0" layoutY="2087.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
       <Circle id="playerSpawn_Tutorial" fill="DODGERBLUE" layoutX="116.0" layoutY="3862.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle id="playerSpawn" fill="DODGERBLUE" layoutX="310.0" layoutY="3862.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="playerSpawn" fill="DODGERBLUE" layoutX="5826.0" layoutY="578.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>

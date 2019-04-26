@@ -106,6 +106,8 @@ public class Player extends Entity {
 
     @Override
     public void move() {
+        System.out.println("x: " + getTranslateX());
+        System.out.println("y: " + getTranslateY());
         if(isKnockback) {
             if(Math.round(velocity.getX()) == 0) {
                 isKnockback = false;
