@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Map extends Pane {
 
-    private List<walkingEnemySpawner> spawners = new ArrayList<>();
+    private List<WalkingEnemySpawner> spawners = new ArrayList<>();
     private Player player;
     private List<GameObject> gameObjects = new ArrayList<>();
     private List<ImageView> backgrounds = new ArrayList<>();
@@ -56,11 +56,11 @@ public class Map extends Pane {
                     } else if(itemId.startsWith("lava")) {
                         gameObjects.add(new Lava((Rectangle) item));
                     } else if(itemId.startsWith("enemySpawner")) {
-                        walkingEnemySpawner walkingEnemySpawner;
+                        WalkingEnemySpawner walkingEnemySpawner;
                         if (itemId.endsWith("Left")) {
-                            walkingEnemySpawner = new walkingEnemySpawner(player, true);
+                            walkingEnemySpawner = new WalkingEnemySpawner(player, true);
                         } else {
-                            walkingEnemySpawner = new walkingEnemySpawner(player, false);
+                            walkingEnemySpawner = new WalkingEnemySpawner(player, false);
                         }
                         walkingEnemySpawner.spawnAt(new Point2D(item.getLayoutX(), item.getLayoutY()));
                         enemies.add(walkingEnemySpawner);
@@ -68,7 +68,6 @@ public class Map extends Pane {
                     }
                 } else {
                     gameObjects.add(new Wall((Rectangle) item));
-                    System.out.println("XY");
                 }
 
             } else if (item instanceof Line) {
@@ -110,7 +109,7 @@ public class Map extends Pane {
         this.getChildren().remove(player);
         this.getChildren().add(player);
         //this.getChildren().add(darkness);
-        for (walkingEnemySpawner spawner : spawners) {
+        for (WalkingEnemySpawner spawner : spawners) {
             spawner.setUpCollisions();
         }
     }
@@ -129,7 +128,7 @@ public class Map extends Pane {
                 if (enemy instanceof WalkingEnemy) {
                     ((WalkingEnemy) enemy).decrementSpawnerCount();
                 }
-                if (enemy instanceof walkingEnemySpawner) {
+                if (enemy instanceof WalkingEnemySpawner) {
                     spawners.remove(enemy);
                 }
                 enemy.remove();
@@ -156,7 +155,7 @@ public class Map extends Pane {
            }
         }
 
-        for (walkingEnemySpawner spawner : spawners) {
+        for (WalkingEnemySpawner spawner : spawners) {
             WalkingEnemy walkingEnemy = spawner.update();
             if (walkingEnemy != null) {
                 enemies.add(walkingEnemy);

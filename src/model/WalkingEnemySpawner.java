@@ -12,7 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-public class walkingEnemySpawner extends Enemy {
+public class WalkingEnemySpawner extends Enemy {
 
     private static final Image SPRITE_SHEET_RIGHT = new Image("images/Spawner.png");
     private static final Image SPRITE_SHEET_LEFT = new Image("images/SpawnerLeft.png");
@@ -34,7 +34,7 @@ public class walkingEnemySpawner extends Enemy {
     private FadeTransition deadAnimation;
     private final int DYING_TIME = 1000;
 
-    public walkingEnemySpawner(Player player, boolean isFacingLeft) {
+    public WalkingEnemySpawner(Player player, boolean isFacingLeft) {
         super(player);
         this.isFacingLeft = isFacingLeft;
         knockback_player = 0;
