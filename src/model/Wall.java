@@ -100,6 +100,7 @@ public class Wall extends GameObject {
                 }
             }
         }
+
     }
 
     /*Wall(Image image, double layoutX, double layoutY) {
