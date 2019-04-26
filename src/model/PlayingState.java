@@ -26,8 +26,10 @@ public class PlayingState extends StackPane {
     public static String tutorialFile = "view/TutorialLevel.fxml";
     public static String level1ID = "Level1";
     public static String level1File = "view/Level1.fxml";
+    public static String bossArenaID = "BossArena";
+    public static String bossArenaFile = "view/BossArena.fxml";
 
-    public static final String STARTING_LEVEL = level1ID;
+    public static final String STARTING_LEVEL = bossArenaID;
 
     private PauseMenuController pm;
     private Timer gameTimer;
@@ -49,6 +51,7 @@ public class PlayingState extends StackPane {
         mapsMap.put(map1ID, map1File);
         mapsMap.put(tutorialID, tutorialFile);
         mapsMap.put(level1ID, level1File);
+        mapsMap.put(bossArenaID, bossArenaFile);
         this.getChildren().addAll(mapLayer, pauseMenuLayer);
     }
 
@@ -79,7 +82,7 @@ public class PlayingState extends StackPane {
         loader = new FXMLLoader(getClass().getClassLoader().getResource(mapsMap.get(name)));
         try {
             loaderRoot = loader.load();
-            currentMap = new Map(loaderRoot, player);
+            currentMap = new Map(loaderRoot, player, name);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -122,7 +125,7 @@ public class PlayingState extends StackPane {
     }
 
     void restartMap() {
-        currentMap = new Map(loaderRoot, player);
+        currentMap = new Map(loaderRoot, player, currentMap.getMapId());
         mapLayer.getChildren().clear();
         mapLayer.getChildren().add(currentMap);
     }

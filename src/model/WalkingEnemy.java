@@ -127,11 +127,11 @@ public class WalkingEnemy extends Enemy {
         }
 
 
-        if (inAir) {
+        animation.play();
+        /*if (inAir) {
             animation.stop();
         } else {
-            animation.play();
-        }
+        }*/
 
     }
 
