@@ -89,4 +89,10 @@ public abstract class Entity extends Group {
         this.setTranslateX(spawn.getX());
         this.setTranslateY(spawn.getY());
     }
+
+    public double distanceTo(Entity entity) {
+        Point2D thisPosition = new Point2D(getTranslateX(), getTranslateY());
+        Point2D entityPosition = new Point2D(entity.getTranslateX(), entity.getTranslateY());
+        return thisPosition.distance(entityPosition);
+    }
 }

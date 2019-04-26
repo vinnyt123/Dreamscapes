@@ -1,5 +1,6 @@
 package model;
 
+import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 
@@ -13,14 +14,14 @@ public abstract class GameObject extends Group {
         boolean movingRight = xDistance > 0;
 
         entity.setTranslateX(entity.getTranslateX() + entity.getLastMove().getX());
-        if(getBoundsInParent().intersects(entity.getBounds())) {
+        if(getBounds().intersects(entity.getBounds())) {
             if(movingRight) {
-                entity.setTranslateX(entity.getTranslateX() - (entity.getBounds().getMaxX() - this.getBoundsInParent().getMinX() + EXTRA_LIL_TRANSLATION));
+                entity.setTranslateX(entity.getTranslateX() - (entity.getBounds().getMaxX() - this.getBounds().getMinX() + EXTRA_LIL_TRANSLATION));
                 if (entity instanceof WalkingEnemy && ((WalkingEnemy) entity).getMovingRight()) {
                     ((WalkingEnemy) entity).changeDirection();
                 }
             } else {
-                entity.setTranslateX(entity.getTranslateX() - (entity.getBounds().getMinX() - this.getBoundsInParent().getMaxX() - EXTRA_LIL_TRANSLATION));
+                entity.setTranslateX(entity.getTranslateX() - (entity.getBounds().getMinX() - this.getBounds().getMaxX() - EXTRA_LIL_TRANSLATION));
                 if (entity instanceof WalkingEnemy && !((WalkingEnemy) entity).getMovingRight()) {
                     ((WalkingEnemy) entity).changeDirection();
                 }
@@ -35,13 +36,13 @@ public abstract class GameObject extends Group {
         double yDistance = entity.getLastMove().getY();
         boolean movingDown = yDistance > 0;
         entity.setTranslateY(entity.getTranslateY() + entity.getLastMove().getY());
-        if (getBoundsInParent().intersects(entity.getBounds())) {
+        if (getBounds().intersects(entity.getBounds())) {
             if (movingDown) {
                 entity.setInAir(false);
                 entity.setDoubleJumped(false);
-                entity.setTranslateY(entity.getTranslateY() - (entity.getBounds().getMaxY() - this.getBoundsInParent().getMinY() + EXTRA_LIL_TRANSLATION));
+                entity.setTranslateY(entity.getTranslateY() - (entity.getBounds().getMaxY() - this.getBounds().getMinY() + EXTRA_LIL_TRANSLATION));
             } else {
-                entity.setTranslateY(entity.getTranslateY() - (entity.getBounds().getMinY() - this.getBoundsInParent().getMaxY() - EXTRA_LIL_TRANSLATION));
+                entity.setTranslateY(entity.getTranslateY() - (entity.getBounds().getMinY() - this.getBounds().getMaxY() - EXTRA_LIL_TRANSLATION));
             }
             entity.setVelocity(new Point2D(entity.velocity.getX(), 0));
 
@@ -50,4 +51,9 @@ public abstract class GameObject extends Group {
             }
         }
     }
+
+    public Bounds getBounds() {
+        return this.getBoundsInParent();
+    }
+
 }

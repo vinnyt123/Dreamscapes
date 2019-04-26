@@ -35,10 +35,10 @@ public class Map extends Pane {
         super();
         this.player = player;
         this.getChildren().add(player);
-        /*this.WIDTH = pane.getBoundsInParent().getWidth();
-        this.HEIGHT = pane.getBoundsInParent().getHeight();*/
-        this.WIDTH = 6000;
-        this.HEIGHT = 2000;
+        this.WIDTH = pane.getBoundsInParent().getWidth();
+        this.HEIGHT = pane.getBoundsInParent().getHeight();
+        /*this.WIDTH = 6000;
+        this.HEIGHT = 2000;*/
         //this.setPrefWidth(pane.getPrefWidth());
         //this.setPrefHeight(pane.getPrefHeight());
 
@@ -68,6 +68,7 @@ public class Map extends Pane {
                     }
                 } else {
                     gameObjects.add(new Wall((Rectangle) item));
+                    System.out.println("XY");
                 }
 
             } else if (item instanceof Line) {
@@ -109,6 +110,9 @@ public class Map extends Pane {
         this.getChildren().remove(player);
         this.getChildren().add(player);
         //this.getChildren().add(darkness);
+        for (walkingEnemySpawner spawner : spawners) {
+            spawner.setUpCollisions();
+        }
     }
 
     void moveEntities() {
@@ -124,6 +128,9 @@ public class Map extends Pane {
             if(enemy.isDead) {
                 if (enemy instanceof WalkingEnemy) {
                     ((WalkingEnemy) enemy).decrementSpawnerCount();
+                }
+                if (enemy instanceof walkingEnemySpawner) {
+                    spawners.remove(enemy);
                 }
                 enemy.remove();
                 this.getChildren().remove(enemy);

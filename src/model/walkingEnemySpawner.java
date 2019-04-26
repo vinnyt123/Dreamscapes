@@ -1,10 +1,16 @@
 package model;
 
+import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
+import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 public class walkingEnemySpawner extends Enemy {
 
@@ -16,14 +22,21 @@ public class walkingEnemySpawner extends Enemy {
     private static final double HEALTH = 10;
 
     private int count = 0;
-    private int secondsBetweenSpawn = 4;
-    private int maxNumberOfEnemies = 5;
+    private double secondsBetweenSpawn = 1;
+    private final int maxNumberOfEnemies = 20;
     private int numberOfEnemies = 0;
     private boolean isFacingLeft = true;
-    private final int SPAWN_HEIGHT = 5;
+    private final int SPAWN_HEIGHT = -5;
+    private final int SPAWN_XVEL = 5;
+    private final double RANGE = 1500d;
+    private Wall wall = null;
+    private StackPane stackPane;
+    private FadeTransition deadAnimation;
+    private final int DYING_TIME = 1000;
 
     public walkingEnemySpawner(Player player, boolean isFacingLeft) {
         super(player);
+        this.isFacingLeft = isFacingLeft;
         knockback_player = 0;
         knockback_this = 0;
         damage = 0;
@@ -42,6 +55,15 @@ public class walkingEnemySpawner extends Enemy {
         imageView.setViewport(new Rectangle2D(0, 0, 138, 116));
         imageView.setFitWidth(WIDTH);
         imageView.setFitHeight(HEIGHT);
+        stackPane = new StackPane();
+        stackPane.getChildren().add(imageView);
+        wall = new Wall(new Rectangle(WIDTH, HEIGHT));
+        wall.setVisible(false);
+
+        deadAnimation = new FadeTransition(Duration.millis(DYING_TIME), this);
+        deadAnimation.setFromValue(1.0);
+        deadAnimation.setToValue(0);
+        deadAnimation.setCycleCount(1);
         this.getChildren().add(imageView);
     }
 
@@ -49,20 +71,28 @@ public class walkingEnemySpawner extends Enemy {
     public void move() {
     }
 
-    public WalkingEnemy update() {
-        count++;
 
-        if (count % (secondsBetweenSpawn * 60) == 0 && numberOfEnemies < maxNumberOfEnemies) {
-            numberOfEnemies++;
-            WalkingEnemy newWalkingEnemy = new WalkingEnemy(player, this);
-            newWalkingEnemy.setVelocity(new Point2D(0, SPAWN_HEIGHT));
-            if (isFacingLeft) {
-                newWalkingEnemy.spawnAt(new Point2D(this.getBoundsInParent().getMinX(), this.getBoundsInParent().getMinY() + this.getBoundsInParent().getHeight()/2));
-                newWalkingEnemy.changeDirection();
-            } else {
-                newWalkingEnemy.spawnAt(new Point2D(this.getBoundsInParent().getMaxX(), this.getBoundsInParent().getMinY() + this.getBoundsInParent().getHeight()/2));
+    public WalkingEnemy update() {
+        System.out.println(distanceTo(player));
+        if (this.distanceTo(player) < RANGE) {
+            count++;
+
+            if (count % (secondsBetweenSpawn * 60) == 0 && numberOfEnemies < maxNumberOfEnemies) {
+                numberOfEnemies++;
+                WalkingEnemy newWalkingEnemy = new WalkingEnemy(player, this);
+
+                if (isFacingLeft) {
+                    newWalkingEnemy.spawnAt(new Point2D(this.getBoundsInParent().getMinX(), this.getBoundsInParent().getMinY() + this.getBoundsInParent().getHeight() / 2));
+                    newWalkingEnemy.changeDirection();
+                    newWalkingEnemy.setVelocity(new Point2D(-SPAWN_XVEL, SPAWN_HEIGHT));
+                } else {
+                    newWalkingEnemy.spawnAt(new Point2D(this.getBoundsInParent().getMaxX(), this.getBoundsInParent().getMinY() + this.getBoundsInParent().getHeight() / 2));
+                    newWalkingEnemy.setVelocity(new Point2D(SPAWN_XVEL, SPAWN_HEIGHT));
+                }
+                return newWalkingEnemy;
             }
-            return newWalkingEnemy;
+        } else {
+            count = 0;
         }
         return null;
     }
@@ -74,11 +104,30 @@ public class walkingEnemySpawner extends Enemy {
 
     @Override
     public void deadAnimation() {
+        isDying = true;
+        if (deadAnimation.getStatus() != Animation.Status.RUNNING) {
+            deadAnimation.play();
+        }
+        timer.schedule(new dyingTimer(), DYING_TIME);
+    }
 
+    @Override
+    public void intersect(Player player) {
+        wall.intersect(player);
     }
 
     public void enemyDied() {
         numberOfEnemies--;
         count = 0;
     }
+
+    public void setUpCollisions() {
+        wall.setBounds(new BoundingBox(this.getBoundsInParent().getMinX(), this.getBoundsInParent().getMinY(), WIDTH - 40, HEIGHT));
+    }
+
+    /*@Override
+    public void spawnAt(Point2D spawn) {
+        this.setLayoutX(spawn.getX());
+        this.setLayoutY(spawn.getY());
+    }*/
 }
