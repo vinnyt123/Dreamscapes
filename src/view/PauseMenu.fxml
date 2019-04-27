@@ -14,7 +14,7 @@
             <Button layoutX="42.0" layoutY="114.0" mnemonicParsing="false" onAction="#resumeButtonPressed" prefHeight="103.0" prefWidth="350.0" text="Resume" />
          </children>
       </AnchorPane>
-      <Button fx:id="pauseButton" layoutX="1358.0" layoutY="17.0" mnemonicParsing="false" onAction="#pauseButtonClicked" onKeyPressed="#pauseButtonPressed" text="Pause" />
+      <Button fx:id="pauseButton" layoutX="1363.0" layoutY="29.0" mnemonicParsing="false" onAction="#pauseButtonClicked" onKeyPressed="#pauseButtonPressed" text="Pause" />
       <ProgressBar fx:id="healthBar" layoutX="26.0" layoutY="29.0" prefHeight="25.0" prefWidth="365.0" progress="0.0" />
       <Label layoutX="26.0" layoutY="15.0" text="Health" />
       <Label layoutX="26.0" layoutY="107.0" text="Deaths" />

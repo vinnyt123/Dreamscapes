@@ -85,7 +85,9 @@ public class Map extends Pane {
                 ImageView imageView = new ImageView(image);
                 imageView.setFitWidth(WIDTH);
                 imageView.setFitHeight(HEIGHT);
-                imageView.setTranslateX(-500);
+                if(!mapId.startsWith("Boss")) {
+                    imageView.setTranslateX(-500);
+                }
                 backgrounds.add(imageView);
 
             } else if (item instanceof Circle) {

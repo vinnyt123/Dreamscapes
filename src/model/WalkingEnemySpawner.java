@@ -75,7 +75,7 @@ public class WalkingEnemySpawner extends Enemy {
     }
 
 
-    public WalkingEnemy update() {
+    WalkingEnemy update() {
 
         double distanceX = player.getTranslateX() - this.getTranslateX();
         double distanceY = player.getTranslateY() - this.getTranslateY();

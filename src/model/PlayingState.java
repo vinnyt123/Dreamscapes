@@ -29,7 +29,7 @@ public class PlayingState extends StackPane {
     public static String bossArenaID = "BossArena";
     public static String bossArenaFile = "view/BossArena.fxml";
 
-    public static final String STARTING_LEVEL = level1ID;
+    public static final String STARTING_LEVEL = bossArenaID;
 
     private PauseMenuController pm;
     private Timer gameTimer;
@@ -78,6 +78,8 @@ public class PlayingState extends StackPane {
     void setMap(String name, String mapFrom) {
         if(name.equals(STARTING_LEVEL)) {
             secondsPassed = 0;
+        } else if (name.equals(bossArenaID)) {
+            pm.showBossBar();
         }
         loader = new FXMLLoader(getClass().getClassLoader().getResource(mapsMap.get(name)));
         try {

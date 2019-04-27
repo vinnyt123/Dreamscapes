@@ -14,6 +14,8 @@ public class PauseMenuController {
     @FXML private Button pauseButton;
     @FXML private AnchorPane pauseMenuBlock;
     @FXML private ProgressBar healthBar;
+    @FXML private ProgressBar bossBar;
+    @FXML private Label bossLabel;
     @FXML private Label deathCount;
     @FXML private Label timeCount;
 
@@ -21,11 +23,21 @@ public class PauseMenuController {
         return deathCount;
     }
 
+    public void initialize() {
+        bossBar.setVisible(false);
+        bossLabel.setVisible(false);
+    }
+
     @FXML
     private void pauseButtonPressed(KeyEvent e) {
         if(e.getCode().toString().equals("P")) {
             pauseGame();
         }
+    }
+
+    public void showBossBar() {
+        bossBar.setVisible(true);
+        bossLabel.setVisible(true);
     }
 
     public Label getTimeCount() {
