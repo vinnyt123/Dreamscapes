@@ -79,19 +79,15 @@ public class Map extends Pane {
                 }
 
             } else if (item instanceof Line) {
-                enemies.add(new FlyingEnemy(((Line) item).getLayoutX(), ((Line) item).getLayoutY(), player));
+                enemies.add(new FlyingEnemy(item.getLayoutX(), item.getLayoutY(), player));
             } else if(item instanceof ImageView) {
-                if(item.getId().startsWith("darkness")) {
-                    darkness = (ImageView) item;
-                }
-                else {
-                    Image image = ((ImageView) item).getImage();
-                    ImageView imageView = new ImageView(image);
-                    imageView.setFitWidth(WIDTH);
-                    imageView.setFitHeight(HEIGHT);
-                    //imageView.setTranslateX(-500);
-                    backgrounds.add(imageView);
-                }
+                Image image = ((ImageView) item).getImage();
+                ImageView imageView = new ImageView(image);
+                imageView.setFitWidth(WIDTH);
+                imageView.setFitHeight(HEIGHT);
+                imageView.setTranslateX(-500);
+                backgrounds.add(imageView);
+
             } else if (item instanceof Circle) {
                 if (item.getId() != null) {
                     if (item.getId().startsWith("walkingEnemy")) {

@@ -28,7 +28,8 @@ public abstract class Item extends Group {
                 "-fx-border-color : CYAN;" +
                 "-fx-border-width : 2px;" +
                 "-fx-border-radius : 3px;" +
-                "-fx-background-color : MAGENTA;");
+                "-fx-background-color : BLACK;" +
+                "-fx-background-radius : 3px;");
         this.getChildren().addAll(tileBorder, imageView);
         imageView.setTranslateX(getTranslateX() + 2.5);
         imageView.setTranslateY(getTranslateY() + 2.5);
