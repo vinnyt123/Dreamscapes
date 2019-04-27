@@ -29,7 +29,7 @@ public class PlayingState extends StackPane {
     public static String bossArenaID = "BossArena";
     public static String bossArenaFile = "view/BossArena.fxml";
 
-    public static final String STARTING_LEVEL = level1ID;
+    public static final String STARTING_LEVEL = map0ID;
 
     private PauseMenuController pm;
     private Timer gameTimer;

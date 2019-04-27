@@ -1,11 +1,17 @@
 package model;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.geometry.Point2D;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 import java.util.Timer;
-import java.util.TimerTask;
 
 public abstract class Enemy extends Entity {
 
@@ -22,12 +28,19 @@ public abstract class Enemy extends Entity {
     ImageView imageView;
     ColorAdjust colorAdjust = new ColorAdjust();
     Player player;
+    Timeline flashing;
 
     public abstract void move();
     public abstract void deadAnimation();
 
     public Enemy(Player player) {
         this.player = player;
+        flashing = new Timeline();
+        flashing.getKeyFrames().addAll(new KeyFrame(Duration.millis(100),
+                new KeyValue(colorAdjust.brightnessProperty(), -1)), new KeyFrame(Duration.millis(100),
+                new KeyValue(colorAdjust.brightnessProperty(), 0)));
+        flashing.setCycleCount(3);
+        flashing.setOnFinished(e -> colorAdjust.setBrightness(0));
     }
 
     void knockBack() {
@@ -81,32 +94,11 @@ public abstract class Enemy extends Entity {
     }
 
     void redFlash() {
-        Timer flashTimer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                for(int i = 0; i < 3; i++) {
-                    try {
-                        redFlashOn();
-                        Thread.sleep(100);
-                        redFlashOff();
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
+            if (!flashing.getStatus().equals(Animation.Status.RUNNING)) {
+                flashing.playFromStart();
             }
-        };
-        flashTimer.schedule(task, 0);
     }
 
-    void redFlashOn() {
-        colorAdjust.setBrightness(-1);
-    }
-
-    void redFlashOff() {
-        colorAdjust.setBrightness(0);
-    }
 
     void remove() {
         this.getChildren().remove(imageView);

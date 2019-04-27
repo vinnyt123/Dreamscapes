@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="2000.0" maxWidth="2000.0" prefHeight="2000.0" prefWidth="2000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="2000.0" maxWidth="2000.0" prefHeight="2000.0" prefWidth="2000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="back" fitHeight="2500.0" fitWidth="3094.0" layoutX="-107.0" layoutY="-154.0" pickOnBounds="true">
          <image>
@@ -36,7 +36,7 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="544.0" layoutY="225.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="836.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" width="801.0" />
       <Rectangle fx:id="door_Map1" arcHeight="5.0" arcWidth="5.0" fill="#ff1f9d" height="200.0" layoutX="1896.0" layoutY="1729.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
-      <Circle fill="#25ff1f" layoutX="167.0" layoutY="1831.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="playerSpawn" fill="#25ff1f" layoutX="167.0" layoutY="1831.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
       <ImageView fx:id="darkness" fitHeight="3418.0" fitWidth="3646.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/overlay.png" />
@@ -46,5 +46,6 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="1378.0" layoutY="1922.0" stroke="BLACK" strokeType="INSIDE" width="623.0" />
       <Rectangle fx:id="lava" arcHeight="5.0" arcWidth="5.0" fill="#ffb921" height="59.0" layoutX="1168.0" layoutY="1942.0" stroke="BLACK" strokeType="INSIDE" width="215.0" />
       <Rectangle fx:id="spikes1" arcHeight="5.0" arcWidth="5.0" fill="#ff1f28" height="79.0" layoutX="949.0" layoutY="1848.0" stroke="BLACK" strokeType="INSIDE" width="21.0" />
+      <Rectangle id="enemySpawner_Left" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="132.0" layoutX="651.0" layoutY="1590.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
    </children>
 </AnchorPane>

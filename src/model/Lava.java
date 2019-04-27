@@ -42,9 +42,9 @@ public class Lava extends GameObject {
     @Override
     public void intersect(Entity entity) {
         if(getBoundsInParent().intersects(entity.getBounds())) {
-            /*entity.undoMove();
+            entity.undoMove();
             moveX(entity);
-            moveY(entity);*/
+            moveY(entity);
             entity.setInAir(true);
             if(entity instanceof Player) {
                 ((Player) entity).redFlash();
