@@ -19,7 +19,6 @@ public class Map extends Pane {
     private Player player;
     private List<GameObject> gameObjects = new ArrayList<>();
     private List<ImageView> backgrounds = new ArrayList<>();
-    private ImageView foreground = new ImageView();
     private List<Enemy> enemies = new ArrayList<>();
     private List<Item> items = new ArrayList<>();
     private ImageView darkness;
@@ -84,13 +83,7 @@ public class Map extends Pane {
             } else if(item instanceof ImageView) {
                 if(item.getId().startsWith("darkness")) {
                     darkness = (ImageView) item;
-                } else if(item.getId().startsWith("still")) {
-                    Image image = ((ImageView) item).getImage();
-                    foreground = new ImageView(image);
-                    foreground.setFitWidth(WIDTH);
-                    foreground.setFitHeight(HEIGHT);
-                } //else if(item.getId().startsWith("platform")) {
-                   // gameObjects.add(new Wall(((ImageView) item).getImage(), item.getLayoutX(), item.getLayoutY()));
+                }
                 else {
                     Image image = ((ImageView) item).getImage();
                     ImageView imageView = new ImageView(image);
@@ -114,12 +107,12 @@ public class Map extends Pane {
                 }
             }
         }
+        System.out.println(backgrounds);
 
         this.getChildren().addAll(backgrounds);
         this.getChildren().addAll(enemies);
         this.getChildren().addAll(gameObjects);
         this.getChildren().addAll(items);
-        this.getChildren().add(foreground);
         //Remove and re-add player to ensure they're on top of image view
         this.getChildren().remove(player);
         this.getChildren().add(player);
