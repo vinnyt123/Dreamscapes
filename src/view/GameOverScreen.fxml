@@ -28,12 +28,12 @@
             <Font size="17.0" />
          </font>
       </Label>
+      <TextField layoutX="665.0" layoutY="453.0" promptText="Name" style="-fx-background-color: black; -fx-text-fill: white;" />
       <Label fx:id="deathsLabel" layoutX="788.0" layoutY="328.0" prefWidth="0.0" text="0">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <TextField layoutX="665.0" layoutY="453.0" promptText="Name" />
       <Label layoutX="697.0" layoutY="422.0" text="Save Score:">
          <font>
             <Font size="17.0" />

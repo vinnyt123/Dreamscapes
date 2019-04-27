@@ -6,7 +6,3 @@
     -fx-border-radius: 4px;
     -fx-background-radius: 4px;
 }
-
-.Button:hover {
-    -fx-border-color: grey;
-}

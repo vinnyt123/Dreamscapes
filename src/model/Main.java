@@ -29,6 +29,7 @@ public class Main extends Application {
             System.exit(0);
         });
         gameManager.setUp();
+        primaryStage.sizeToScene();
         primaryStage.setTitle("Dreamscapes");
         primaryStage.show();
     }

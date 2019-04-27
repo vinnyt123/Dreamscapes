@@ -6,16 +6,16 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="960.0" maxWidth="1480.0" minHeight="960.0" minWidth="1480.0" prefHeight="960.0" prefWidth="1480.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="900.0" maxWidth="1440.0" minHeight="900.0" minWidth="1440.0" prefHeight="900.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-       <ImageView fx:id="background" fitHeight="960.0" fitWidth="1480.0" pickOnBounds="true" preserveRatio="true">
+       <ImageView fx:id="background" fitHeight="900.0" fitWidth="1440.0" pickOnBounds="true" preserveRatio="true">
            <image>
                <Image url="@../images/Background.png" />
            </image>
        </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1008.0" layoutY="-48.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="994.0" layoutX="1400.0" layoutY="-34.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutY="860.0" stroke="BLACK" strokeType="INSIDE" width="1480.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1008.0" layoutY="-48.0" stroke="BLACK" strokeType="INSIDE" width="95.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="994.0" layoutX="1400.0" layoutY="-34.0" stroke="BLACK" strokeType="INSIDE" width="215.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="186.0" layoutX="93.0" layoutY="860.0" stroke="BLACK" strokeType="INSIDE" width="1309.0" />
       <Circle id="playerSpawn" fill="DODGERBLUE" layoutX="156.0" layoutY="773.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="boss" fill="DODGERBLUE" layoutX="1181.0" layoutY="677.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
