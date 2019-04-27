@@ -5,11 +5,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
 <AnchorPane prefHeight="4000.0" prefWidth="6000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="background11111" fitHeight="4000.0" fitWidth="6000.0" pickOnBounds="true" preserveRatio="true">
+      <!--<ImageView fx:id="background11111" fitHeight="4000.0" fitWidth="6000.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Backgrounds_Level1/Background2.png" />
          </image>
@@ -28,20 +26,19 @@
          <image>
             <Image url="@../images/Backgrounds_Level1/Background.png" />
          </image>
-      </ImageView>
-      <Rectangle id="door_Tutorial" arcHeight="5.0" arcWidth="5.0" fill="#ff13b4" height="110.0" layoutX="78.0" layoutY="3820.0" stroke="BLACK" strokeType="INSIDE" width="19.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="70.0" layoutX="2.0" layoutY="3929.0" stroke="BLACK" strokeType="INSIDE" width="6016.0" />
+      </ImageView>-->
+      <Rectangle id="door_Tutorial" arcHeight="5.0" arcWidth="5.0" fill="#ff13b4" height="74.0" layoutX="75.0" layoutY="3863.0" stroke="BLACK" strokeType="INSIDE" width="47.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="70.0" layoutX="2.0" layoutY="3930.0" stroke="BLACK" strokeType="INSIDE" width="6016.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="132.0" layoutX="510.0" layoutY="3867.0" stroke="BLACK" strokeType="INSIDE" width="864.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="223.0" layoutX="1374.0" layoutY="3776.0" stroke="BLACK" strokeType="INSIDE" width="373.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="221.0" layoutX="2004.0" layoutY="3778.0" stroke="BLACK" strokeType="INSIDE" width="540.0" />
       <Rectangle id="lava1" arcHeight="5.0" arcWidth="5.0" fill="#ff231f" height="182.0" layoutX="1747.0" layoutY="3793.0" stroke="BLACK" strokeType="INSIDE" width="258.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="3999.0" layoutX="2.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="76.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="3999.0" stroke="BLACK" strokeType="INSIDE" width="76.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="2820.0" layoutY="3839.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="319.0" layoutX="4314.0" layoutY="3680.0" stroke="BLACK" strokeType="INSIDE" width="1632.0" />
       <Rectangle id="lava1" arcHeight="5.0" arcWidth="5.0" fill="#ff231f" height="181.0" layoutX="3522.0" layoutY="3796.0" stroke="BLACK" strokeType="INSIDE" width="441.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="217.0" layoutX="3960.0" layoutY="3782.0" stroke="BLACK" strokeType="INSIDE" width="355.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="217.0" layoutX="3368.0" layoutY="3783.0" stroke="BLACK" strokeType="INSIDE" width="160.0" />
-      <Rectangle id="spikes1" arcHeight="5.0" arcWidth="5.0" fill="#e8ff1f" height="124.0" layoutX="3364.0" layoutY="3662.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+      <Rectangle id="spikes1" arcHeight="5.0" arcWidth="5.0" fill="#e8ff1f" height="163.0" layoutX="3362.0" layoutY="3624.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="3120.0" layoutY="3775.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="3610.0" layoutY="3658.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle id="enemySpawner_Left" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="116.0" layoutX="5171.0" layoutY="3213.0" stroke="BLACK" strokeType="INSIDE" width="138.0" />
@@ -81,15 +78,16 @@
       <Line endX="-173.5" endY="-112.0" layoutX="2502.0" layoutY="400.0" startX="-186.0" startY="-112.0" />
       <Line endX="-168.0" endY="-112.00006103515625" layoutX="3000.0" layoutY="300.0" startX="-186.0" startY="-112.0" />
       <Rectangle id="enemySpawner__Left" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="116.0" layoutX="5592.0" layoutY="538.0" stroke="BLACK" strokeType="INSIDE" width="138.0" />
-      <Rectangle id="door_BossArena" arcHeight="5.0" arcWidth="5.0" fill="#ff13b4" height="110.0" layoutX="5904.0" layoutY="538.0" stroke="BLACK" strokeType="INSIDE" width="47.0" />
+      <Rectangle id="door_BossArena" arcHeight="5.0" arcWidth="5.0" fill="#ff13b4" height="74.0" layoutX="5896.0" layoutY="575.0" stroke="BLACK" strokeType="INSIDE" width="47.0" />
       <Line endX="-170.0" endY="-112.00003051757812" layoutX="4000.0" layoutY="500.0" startX="-184.0" startY="-112.00003051757812" />
       <Line endX="-170.0" endY="-112.00003051757812" layoutX="3800.0" layoutY="300.0" startX="-184.0" startY="-112.00003051757812" />
       <Line endX="-170.0" endY="-112.00003051757812" layoutX="4500.0" layoutY="400.0" startX="-184.0" startY="-112.00003051757812" />
-      <Rectangle id="potion2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="1529.0" layoutY="3736.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+      <Rectangle id="potion2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="1529.0" layoutY="3737.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
       <Rectangle id="potion2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="4724.0" layoutY="2087.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
-      <Circle id="playerSpawn_Tutorial" fill="DODGERBLUE" layoutX="116.0" layoutY="3862.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle id="playerSpawn" fill="DODGERBLUE" layoutX="394.0" layoutY="3861.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="playerSpawn" fill="DODGERBLUE" layoutX="341.0" layoutY="3864.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="500.0" layoutX="5108.0" layoutY="2237.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d41fff" height="620.0" layoutX="1655.0" layoutY="927.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="217.0" layoutX="3362.0" layoutY="3782.0" stroke="BLACK" strokeType="INSIDE" width="160.0" />
+      <Circle id="playerSpawn_Tutorial" fill="DODGERBLUE" layoutX="89.0" layoutY="3864.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>

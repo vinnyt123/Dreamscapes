@@ -1,24 +1,38 @@
 package model;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+
 
 public class Door extends GameObject {
 
     private String mapToSwitch;
     private String mapDoorIsOn;
+    private static final Image DOOR_IMAGE = new Image("images/door.png");
+    private Line teleportLine;
+
 
     public Door(String mapToSwitch, Rectangle rectangle, String mapDoorIsOn) {
         this.mapToSwitch = mapToSwitch;
         this.mapDoorIsOn = mapDoorIsOn;
-        Rectangle newRectangle = new Rectangle(rectangle.getLayoutX(), rectangle.getLayoutY(), rectangle.getWidth(), rectangle.getHeight());
-        newRectangle.setFill(rectangle.getFill());
-        this.getChildren().add(newRectangle);
+        ImageView imageView = new ImageView(DOOR_IMAGE);
+        imageView.setLayoutX(rectangle.getLayoutX());
+        imageView.setLayoutY(rectangle.getLayoutY());
+        imageView.setFitWidth(rectangle.getWidth());
+        imageView.setFitHeight(rectangle.getHeight());
+        teleportLine = new Line(rectangle.getLayoutX() + rectangle.getWidth() / 2, rectangle.getLayoutY(),
+                rectangle.getLayoutX() + rectangle.getWidth() / 2, rectangle.getLayoutY() + rectangle.getHeight());
+        this.getChildren().add(imageView);
     }
 
     @Override
     public void intersect(Entity entity) {
-        if (entity instanceof Player && this.getBoundsInParent().intersects(entity.getBounds())) {
+        if (entity instanceof Player && teleportLine.getBoundsInParent().intersects(entity.getBounds())) {
             ((PlayingState) this.getScene().getRoot().getChildrenUnmodifiable().get(0)).setMap(mapToSwitch, mapDoorIsOn);
         }
     }
+
+
 }
