@@ -9,22 +9,12 @@
 
 <AnchorPane prefHeight="4000.0" prefWidth="6000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="background1" fitHeight="4000.0" fitWidth="6000.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="background11111" fitHeight="4000.0" fitWidth="6000.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Backgrounds_Level1/Background2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="background2" fitHeight="4000.0" fitWidth="6000.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Backgrounds_Level1/Background3.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="background11" fitHeight="4000.0" fitWidth="6000.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Backgrounds_Level1/Background4.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="background21" fitHeight="4000.0" fitWidth="6000.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="background1" fitHeight="4000.0" fitWidth="6000.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Backgrounds_Level1/Background3.png" />
          </image>
@@ -34,7 +24,7 @@
             <Image url="@../images/Backgrounds_Level1/Background4.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="background" fitHeight="4000.0" fitWidth="6000.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="background1111" fitHeight="4000.0" fitWidth="6000.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Backgrounds_Level1/Background.png" />
          </image>
