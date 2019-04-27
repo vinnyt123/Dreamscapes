@@ -12,7 +12,7 @@ public class WalkingEnemy extends Enemy {
     private static final double SPEED = 2;
     private static final double WIDTH = 60;
     private static final double HEIGHT = 47;
-    private static final double HEALTH = 10;
+    private static final double HEALTH = 0.32;
     private static final double DAMAGE = 0.1;
     private Bounds platformBounds;
     private static final Image SPRITE_SHEET = new Image("images/slime_sheet.png");

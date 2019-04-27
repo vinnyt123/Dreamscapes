@@ -5,6 +5,7 @@ import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
@@ -18,7 +19,7 @@ public class Boss extends Enemy {
     private static final Image SPRITE_SHEET = new Image("images/boss_sheet.png");
     private static final double WIDTH = 220;
     private static final double HEIGHT = 220;
-    private static final double HEALTH = 25;
+    private static final double HEALTH = 1.0;
     private double SPEED = 3;
 
     private SpriteAnimation animation;
@@ -41,6 +42,7 @@ public class Boss extends Enemy {
     private static final double DAMAGE3 = 0.3;
     private static final double KNOCKBACK_PLAYER = 24;
     private static final double KNOCKBACK_THIS = 8;
+    private ProgressBar bossBar = new ProgressBar();
     private int attackIndex = -1;
     private Point2D playerPos;
     private List<SpriteAnimation> attacks = new ArrayList<>();
@@ -81,13 +83,24 @@ public class Boss extends Enemy {
         damageLeft = new SpriteAnimation(imageView, Duration.millis(400), 3, 3, 96, 96, 1728);
 
         attacks.addAll(Arrays.asList(attack1Right, attack2Right, attack3Right, attack1Left, attack2Left, attack3Left));
+
+        bossBar.setTranslateX(65);
+        bossBar.setTranslateY(20);
+        bossBar.setMaxWidth(100);
+        bossBar.setMaxHeight(4);
+        bossBar.progressProperty().bind(health);
+        bossBar.setStyle("-fx-accent :  #A70505;" +
+                "-fx-background-color :  transparent;");
+
         animation = dieRight;
         animation.setCycleCount(1);
         this.getChildren().add(imageView);
+        this.getChildren().add(bossBar);
     }
 
     @Override
     public void move() {
+
         playerPos = new Point2D(player.getTranslateX() + (Player.WIDTH/2), player.getTranslateY() + (Player.HEIGHT/2));
         isRight = playerPos.getX() > getTranslateX()+WIDTH/2;
         theta = Math.toDegrees(Math.atan2(playerPos.getY() - this.getTranslateY() - (HEIGHT/2),  playerPos.getX() - this.getTranslateX() - (WIDTH/2)));
@@ -153,6 +166,7 @@ public class Boss extends Enemy {
     @Override
     public void deadAnimation() {
         isDying = true;
+        bossBar.setVisible(false);
         if(isRight) {
             animation = dieRight;
         } else {
