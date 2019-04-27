@@ -1,17 +1,25 @@
 package model;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
 public class Spikes extends GameObject {
 
     private static final double DAMAGE = 0.26;
+    private static final Image SPIKE_IMAGE = new Image("images/372x455_Spike.png");
 
     Spikes(Rectangle rectangle) {
-        Rectangle newRectangle = new Rectangle(rectangle.getLayoutX(), rectangle.getLayoutY(), rectangle.getWidth(), rectangle.getHeight());
-        newRectangle.setFill(rectangle.getFill());
-        this.getChildren().add(newRectangle);
-    }
+        ImageView imageView = new ImageView(SPIKE_IMAGE);
+        imageView.setLayoutX(rectangle.getLayoutX());
+        imageView.setLayoutY(rectangle.getLayoutY());
+        imageView.setFitWidth(rectangle.getWidth());
+        imageView.setFitHeight(rectangle.getHeight());
+        //Rectangle newRectangle = new Rectangle(rectangle.getLayoutX(), rectangle.getLayoutY(), rectangle.getWidth(), rectangle.getHeight());
 
+        //newRectangle.setFill(rectangle.getFill());
+        this.getChildren().add(imageView);
+    }
 
     @Override
     public void intersect(Entity entity) {
