@@ -46,11 +46,17 @@ public class Lava extends GameObject {
             moveX(entity);
             moveY(entity);
             entity.setInAir(true);
-            if(entity instanceof Player) {
-                ((Player) entity).redFlash();
-                ((Player) entity).knockBack(0, -10, true);
-            }
             entity.health.setValue(entity.health.getValue() - DAMAGE);
+            if(entity instanceof Player) {
+                if (!entity.isDying) {
+                    ((Player) entity).redFlash();
+                    ((Player) entity).knockBack(0, -10, true);
+                    if (entity.health.get() <= 0) {
+                        entity.setInAir(false);
+                    }
+                }
+            }
+
         } else if(entity.getVelocity().getY() > Map.GRAVITY) {
             entity.setInAir(true);
         }

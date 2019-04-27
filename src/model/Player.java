@@ -2,11 +2,15 @@ package model;
 
 import controllers.PauseMenuController;
 import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
+import javafx.util.Duration;
 
 import java.util.*;
 
@@ -116,40 +120,41 @@ public class Player extends Entity {
             applyVelocity();
             return;
         }
+        if (!this.isDying) {
+            if (keysPressed.contains(controls.getCrouchKey())) {
+                crouch();
+            }
 
-        if (keysPressed.contains(controls.getCrouchKey())) {
-            crouch();
-        }
+            if (keysPressed.contains(controls.getJumpKey())) {
+                jumpCount++;
+                jump();
+            } else {
+                jumpCount = 0;
+            }
 
-        if (keysPressed.contains(controls.getJumpKey())) {
-            jumpCount++;
-            jump();
-        } else {
-            jumpCount = 0;
-        }
+            if (keysPressed.contains(controls.getLeftKey())) {
+                moveLeft();
+            }
 
-        if (keysPressed.contains(controls.getLeftKey())) {
-            moveLeft();
-        }
+            if (keysPressed.contains(controls.getRightKey())) {
+                moveRight();
+            }
 
-        if (keysPressed.contains(controls.getRightKey())) {
-            moveRight();
-        }
+            if (keysPressed.contains(controls.getSwitchKey())) {
+                switchWeapon();
+            }
 
-        if (keysPressed.contains(controls.getSwitchKey())) {
-            switchWeapon();
-        }
-
-        if (keysPressed.contains(controls.getAttackKey())) {
-            attackCount++;
-            attack();
-        } else {
-            attackCount = 0;
+            if (keysPressed.contains(controls.getAttackKey())) {
+                attackCount++;
+                attack();
+            } else {
+                attackCount = 0;
+            }
         }
 
         applyGravity();
         applyVelocity();
-        if(!playerSprite.isAttacking() && !playerSprite.isDamaged()) {
+        if(!playerSprite.isAttacking() && !playerSprite.isDamaged() && !isDying) {
             playAnimation();
         }
     }
@@ -207,35 +212,31 @@ public class Player extends Entity {
     }
 
     void redFlash() {
-        Timer flashTimer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 3; i++) {
-                    playerSprite.redFlashOn();
-                    try {
-                        Thread.sleep(100);
-                        playerSprite.redFlashOff();
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-        flashTimer.schedule(task, 0);
+        playerSprite.startFlashing();
     }
 
     void resetPlayer() {
-        deathCount.setValue(deathCount.get() + 1);
-        health.setValue(1.0);
-        velocity = new Point2D(0, 0);
-        isFlashing = false;
-        isAttacking = false;
-        inAir = true;
-        isRight = true;
-        playAnimation();
-        playerSprite.setAttacking(false);
-        playerSprite.setDamaged(false);
+        if (!isDying) {
+            isDying = true;
+            playerSprite.die();
+            playerSprite.getCurrentAnimation().setOnFinished(e -> {
+                isDying = false;
+                deathCount.setValue(deathCount.get() + 1);
+                health.setValue(1.0);
+                velocity = new Point2D(0, 0);
+                isFlashing = false;
+                isAttacking = false;
+                inAir = true;
+                isRight = true;
+                playerSprite.setAttacking(false);
+                playerSprite.setDamaged(false);
+                playAnimation();
+                ((GameManager) this.getScene().getRoot()).restartLevel();
+            });
+        }
+        if (isDying && inAir == false) {
+            playerSprite.getCurrentAnimation().play();
+        }
     }
 }
+

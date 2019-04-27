@@ -10,7 +10,8 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-
+    public static final int SCENE_WIDTH = 1440;
+    public static final int SCENE_HEIGHT = 900;
 
     public static void main(String[] args) {
         launch(args);
@@ -27,7 +28,7 @@ public class Main extends Application {
             Platform.exit();
             System.exit(0);
         });
-        gameManager.setUpHashSet();
+        gameManager.setUp();
         primaryStage.setTitle("Dreamscapes");
         primaryStage.show();
     }
