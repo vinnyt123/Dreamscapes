@@ -35,6 +35,8 @@ public class GameManager extends StackPane {
         gameLoop.start();
     }
 
+
+
     void restartLevel() {
         playingState.restartMap();
     }
@@ -65,6 +67,7 @@ public class GameManager extends StackPane {
     }
 
     public void resumeGame() {
+        playingState.requestFocus();
         playingState.startTimer();
         gameLoop.start();
     }
