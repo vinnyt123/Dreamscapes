@@ -14,6 +14,8 @@ public class MainMenuState extends Pane {
     public static String GameOverID = "Game Complete";
     public static String GameOverFile = "view/GameOverScreen.fxml";
 
+    private FXMLLoader loader;
+
     private HashMap<String, Node> loadedScreens = new HashMap<>();
 
 
@@ -24,7 +26,7 @@ public class MainMenuState extends Pane {
     }
 
     public void loadScreen(String screenName, String fxmlPath) {
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(fxmlPath));
+        loader = new FXMLLoader(getClass().getClassLoader().getResource(fxmlPath));
         try {
             loadedScreens.put(screenName, loader.load());
         } catch (IOException e) {
@@ -41,5 +43,9 @@ public class MainMenuState extends Pane {
         } else {
             System.out.println("Screen " + name + " has not been loaded.");
         }
+    }
+
+    public FXMLLoader getLoader() {
+        return loader;
     }
 }

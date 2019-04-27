@@ -4,7 +4,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
-import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.effect.ColorAdjust;

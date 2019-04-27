@@ -52,7 +52,9 @@ public class PlayingState extends StackPane {
 
     private PauseMenuController pm;
     private Timer gameTimer;
+
     private long secondsPassed = 0;
+
     private HashMap<String, String> mapsMap = new HashMap<>();
     private FXMLLoader loader;
     private FXMLLoader pauseLoader;
@@ -84,7 +86,11 @@ public class PlayingState extends StackPane {
         pm = pauseLoader.getController();
     }
 
-    private String secondsConverter(long seconds) {
+    public long getSecondsPassed() {
+        return secondsPassed;
+    }
+
+    String secondsConverter(long seconds) {
         long minutes = seconds / 60;
         String time = "";
         time += minutes + ":";

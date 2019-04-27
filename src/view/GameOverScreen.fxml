@@ -8,37 +8,37 @@
 
 <AnchorPane maxHeight="960.0" maxWidth="1480.0" minHeight="960.0" minWidth="1480.0" prefHeight="960.0" prefWidth="1480.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GameCompleteController">
    <children>
-      <Label layoutX="622.0" layoutY="159.0" text="Game Complete!">
+      <Label layoutX="579.0" layoutY="159.0" text="Game Complete!">
          <font>
             <Font name="System Bold" size="41.0" />
          </font>
       </Label>
-      <Label layoutX="622.0" layoutY="297.0" text="Completion Time:">
+      <Label layoutX="640.0" layoutY="296.0" text="Completion Time:">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label layoutX="622.0" layoutY="327.0" text="Total Deaths: ">
+      <Label layoutX="640.0" layoutY="327.0" text="Total Deaths: ">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label fx:id="timeLabel" layoutX="777.0" layoutY="297.0" text="0:00">
+      <Label fx:id="timeLabel" layoutX="788.0" layoutY="297.0" text="0:00">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label fx:id="deathsLabel" layoutX="778.0" layoutY="328.0" text="0">
+      <Label fx:id="deathsLabel" layoutX="788.0" layoutY="328.0" prefWidth="0.0" text="0">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <TextField layoutX="622.0" layoutY="453.0" promptText="Name" />
-      <Label layoutX="622.0" layoutY="422.0" text="Save Score:">
+      <TextField layoutX="665.0" layoutY="453.0" promptText="Name" />
+      <Label layoutX="697.0" layoutY="422.0" text="Save Score:">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Button layoutX="622.0" layoutY="527.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="25.0" prefWidth="287.0" text="Return to Menu" />
+      <Button layoutX="596.0" layoutY="527.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="25.0" prefWidth="287.0" text="Return to Menu" />
    </children>
 </AnchorPane>
