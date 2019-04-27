@@ -1,6 +1,9 @@
 package model;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
@@ -29,6 +32,8 @@ public abstract class PlayerSprite extends Group {
     SpriteAnimation standLeft;
     SpriteAnimation attackRight;
     SpriteAnimation attackLeft;
+    SpriteAnimation die;
+    Timeline flashing;
     ColorAdjust colorAdjust;
     ImageView imageView;
 
@@ -38,6 +43,12 @@ public abstract class PlayerSprite extends Group {
         rotateTransition.setNode(this);
 
         colorAdjust = new ColorAdjust();
+        flashing = new Timeline();
+        flashing.getKeyFrames().addAll(new KeyFrame(Duration.millis(200),
+                new KeyValue(colorAdjust.contrastProperty(), 1)), new KeyFrame(Duration.millis(200),
+                new KeyValue(colorAdjust.contrastProperty(), 0)));
+        flashing.setCycleCount(3);
+        flashing.setOnFinished(e -> colorAdjust.setContrast(0));
     }
     public abstract void walkLeft();
 
@@ -61,6 +72,8 @@ public abstract class PlayerSprite extends Group {
 
     public abstract Bounds getBounds();
 
+    public abstract void die();
+
     public void flipLeft() {
         rotateTransition.setByAngle(-360);
         rotateTransition.play();
@@ -75,18 +88,8 @@ public abstract class PlayerSprite extends Group {
 
     public abstract void removeBoots();
 
-    void redFlashOn() {
-        colorAdjust.setContrast(1);
-        //colorAdjust.setHue(-0.2);
-        //colorAdjust.setBrightness(-0.1);
-        //colorAdjust.setSaturation(0.3);
-    }
-
-    void redFlashOff() {
-        colorAdjust.setContrast(0);
-        //colorAdjust.setHue(0);
-        //colorAdjust.setBrightness(0);
-        //colorAdjust.setSaturation(0);
+    void startFlashing() {
+        flashing.play();
     }
 
     SpriteAnimation getCurrentAnimation() {

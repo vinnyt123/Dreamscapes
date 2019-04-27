@@ -121,8 +121,6 @@ public class Map extends Pane {
     void moveEntities() {
         if(player.health.get() <= 0) {
             player.resetPlayer();
-            ((GameManager) player.getScene().getRoot()).restartLevel();
-            return;
         }
         player.move();
         Iterator<Enemy> it = enemies.iterator();
@@ -144,7 +142,9 @@ public class Map extends Pane {
                 enemy.deadAnimation();
             } else {
                 enemy.move();
-                enemy.intersect(player);
+                if (!player.isDying) {
+                    enemy.intersect(player);
+                }
             }
             if(player.isAttacking && player.getCurrentWeapon().getAttackBounds(player.isRight).intersects(enemy.getBoundsInParent()) && !enemy.isFlashing &&!enemy.isDying) {
                 enemy.redFlash();

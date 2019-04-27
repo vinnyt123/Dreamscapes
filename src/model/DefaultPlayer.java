@@ -35,6 +35,8 @@ public class DefaultPlayer extends PlayerSprite {
         damageRight = new SpriteAnimation(imageView, Duration.millis(400), 4, 4, 32, 32, 192);
         damageLeft = new SpriteAnimation(imageView, Duration.millis(400), 4, 4, 32, 32, 448);
 
+        die = new SpriteAnimation(imageView, Duration.millis(1000), 7, 7, 32, 32, 224);
+
         currentAnimation = standRight;
 
         imageView.setEffect(colorAdjust);
@@ -130,6 +132,11 @@ public class DefaultPlayer extends PlayerSprite {
     public Bounds getBounds() {
         return new BoundingBox(imageView.getBoundsInParent().getMinX() + 20, imageView.getBoundsInParent().getMinY() + 20, imageView.getBoundsInParent().getWidth() - 40, imageView.getBoundsInParent().getHeight() - 25);
         //return imageView.getBoundsInParent();
+    }
+
+    @Override
+    public void die() {
+        currentAnimation = die;
     }
 
 

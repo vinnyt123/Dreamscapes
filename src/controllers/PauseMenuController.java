@@ -21,13 +21,6 @@ public class PauseMenuController {
         return deathCount;
     }
 
-    @FXML
-    private void pauseButtonPressed(KeyEvent e) {
-        if(e.getCode().toString().equals("P")) {
-            pauseGame();
-        }
-    }
-
     public Label getTimeCount() {
         return timeCount;
     }
@@ -53,7 +46,7 @@ public class PauseMenuController {
         ((GameManager) pauseButton.getScene().getRoot()).resumeGame();
     }
 
-    private void pauseGame() {
+    public void pauseGame() {
         pauseMenuBlock.setVisible(true);
         ((GameManager) pauseButton.getScene().getRoot()).pauseGame();
     }

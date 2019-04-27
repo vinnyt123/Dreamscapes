@@ -5,9 +5,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <AnchorPane prefHeight="4000.0" prefWidth="6000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <!--<ImageView fx:id="background11111" fitHeight="4000.0" fitWidth="6000.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="background11111" fitHeight="4000.0" fitWidth="6000.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Backgrounds_Level1/Background2.png" />
          </image>
@@ -26,7 +28,7 @@
          <image>
             <Image url="@../images/Backgrounds_Level1/Background.png" />
          </image>
-      </ImageView>-->
+      </ImageView>
       <Rectangle id="door_Tutorial" arcHeight="5.0" arcWidth="5.0" fill="#ff13b4" height="74.0" layoutX="75.0" layoutY="3863.0" stroke="BLACK" strokeType="INSIDE" width="47.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="70.0" layoutX="2.0" layoutY="3930.0" stroke="BLACK" strokeType="INSIDE" width="6016.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="132.0" layoutX="510.0" layoutY="3867.0" stroke="BLACK" strokeType="INSIDE" width="864.0" />

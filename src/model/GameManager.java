@@ -13,10 +13,6 @@ public class GameManager extends StackPane {
 
     public GameManager() {
         super();
-        mainMenuState = new MainMenuState();
-        playingState = new PlayingState(keysPressed);
-        setUpGameLoop();
-        switchToMenu();
     }
 
     public void switchToMenu() {
@@ -26,10 +22,11 @@ public class GameManager extends StackPane {
     }
 
     public void switchToPlayingGame() {
-        playingState.newGame();
         this.getChildren().clear();
         this.getChildren().add(playingState);
+        playingState.newGame();
         playingState.getPlayer().createSprite();
+        playingState.requestFocus();
         gameLoop.start();
     }
 
@@ -56,11 +53,13 @@ public class GameManager extends StackPane {
         gameLoop = new AnimationTimer() {
             public void handle(long currentNanoTime) {
                 playingState.getCurrentMap().moveEntities();
+                playingState.checkKeys();
             }
         };
     }
 
     public void setUpHashSet() {
+
         this.setOnKeyPressed(e -> {
             keysPressed.add(e.getCode().toString());
         });
@@ -68,4 +67,11 @@ public class GameManager extends StackPane {
         this.setOnKeyReleased(e -> keysPressed.remove(e.getCode().toString()));
     }
 
+    public void setUp() {
+        mainMenuState = new MainMenuState();
+        playingState = new PlayingState(keysPressed);
+        setUpGameLoop();
+        switchToMenu();
+        setUpHashSet();
+    }
 }
