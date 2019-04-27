@@ -1,21 +1,25 @@
 package model;
 
+import javafx.animation.Animation;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Boss extends Enemy {
 
     private static final Image SPRITE_SHEET = new Image("images/boss_sheet.png");
     private static final double WIDTH = 220;
     private static final double HEIGHT = 220;
-    private static final double HEALTH = 50;
-    private double SPEED = 2;
+    private static final double HEALTH = 25;
+    private double SPEED = 3;
 
     private SpriteAnimation animation;
 
@@ -33,16 +37,23 @@ public class Boss extends Enemy {
     private SpriteAnimation damageLeft;
 
     private static final double DAMAGE1 = 0.1;
-    private static final double DAMAGE2 = 0.2;
+    private static final double DAMAGE2 = 0.1;
     private static final double DAMAGE3 = 0.3;
-    private static final double KNOCKBACK_PLAYER = 8;
-    private static final double KNOCKBACK_THIS = 5;
-    private boolean movingRight = false;
+    private static final double KNOCKBACK_PLAYER = 24;
+    private static final double KNOCKBACK_THIS = 8;
+    private int attackIndex = -1;
+    private Point2D playerPos;
+    private List<SpriteAnimation> attacks = new ArrayList<>();
+    private List<Double> damages = new ArrayList<>(Arrays.asList(DAMAGE1, DAMAGE2, DAMAGE3));
+    private boolean hasAttacked = false;
 
     public Boss(Player player, double spawnX, double spawnY) {
         super(player);
         setTranslateX(spawnX);
         setTranslateY(spawnY);
+        damage = DAMAGE1;
+        knockback_this = KNOCKBACK_THIS;
+        knockback_player = KNOCKBACK_PLAYER;
         health.setValue(HEALTH);
         velocity = new Point2D(SPEED, 0);
         createSprite();
@@ -69,23 +80,85 @@ public class Boss extends Enemy {
         damageRight = new SpriteAnimation(imageView, Duration.millis(400), 3, 3, 96, 96, 768);
         damageLeft = new SpriteAnimation(imageView, Duration.millis(400), 3, 3, 96, 96, 1728);
 
-        animation = damageRight;
+        attacks.addAll(Arrays.asList(attack1Right, attack2Right, attack3Right, attack1Left, attack2Left, attack3Left));
+        animation = dieRight;
         animation.setCycleCount(1);
         this.getChildren().add(imageView);
     }
 
     @Override
     public void move() {
+        playerPos = new Point2D(player.getTranslateX() + (Player.WIDTH/2), player.getTranslateY() + (Player.HEIGHT/2));
+        isRight = playerPos.getX() > getTranslateX()+WIDTH/2;
+        theta = Math.toDegrees(Math.atan2(playerPos.getY() - this.getTranslateY() - (HEIGHT/2),  playerPos.getX() - this.getTranslateX() - (WIDTH/2)));
+        if(!isAttacking && !isDying && !isDead) {
+            velocity = new Point2D((getTranslateX() + WIDTH/2 > player.getTranslateX() + Player.WIDTH/2)? -SPEED : SPEED, velocity.getY());
+        } else {
+            velocity = new Point2D(0, velocity.getY());
+        }
+
+        applyVelocity();
+        applyGravity();
+
+        if(!(animation.getStatus() == Animation.Status.RUNNING)) {
+            playAnimation();
+        }
+    }
+
+    void attack() {
+        if(isAttacking && (playerPos.getX() > getTranslateX()-10 && playerPos.getX() < getTranslateX()+WIDTH) && playerPos.getY() + Player.WIDTH/2 > getTranslateY() + 50 && !hasAttacked) {
+            player.redFlash();
+            hasAttacked = true;
+            player.health.setValue(player.health.getValue() - damage);
+            setKnockBack(false);
+            player.knockBack(Math.cos(Math.toRadians(theta)) * knockback_player, Math.sin(Math.toRadians(theta)) * knockback_player, true);
+        }
+    }
+
+    private void playAnimation() {
+
+        if(playerPos.getX() > getTranslateX()-10 && playerPos.getX() < getTranslateX()+WIDTH+10) {
+            animation = getAttackAnimation();
+            isAttacking = true;
+        } else if(isRight && !isAttacking) {
+            animation = walkRight;
+        } else if (!isAttacking) {
+            animation = walkLeft;
+        }
+
+        animation.setOnFinished(e -> {
+            isAttacking = false;
+            hasAttacked = false;
+        });
         animation.play();
+    }
+
+    private SpriteAnimation getAttackAnimation() {
+        attackIndex++;
+        if(attackIndex > 2) {
+            attackIndex = 0;
+        }
+        if(isRight) {
+            return attacks.get(attackIndex);
+        } else {
+            return attacks.get(attackIndex + 3);
+        }
     }
 
     @Override
     public Bounds getBounds() {
-        return new BoundingBox(getBoundsInParent().getMinX() + 10, getBoundsInParent().getMinY() + 10, getBoundsInParent().getWidth() - 20, getBoundsInParent().getHeight() - 20);
+        return new BoundingBox(getBoundsInParent().getMinX() + 50, getBoundsInParent().getMinY() + 80, getBoundsInParent().getWidth() - 100, getBoundsInParent().getHeight() - 160);
     }
 
     @Override
     public void deadAnimation() {
-
+        isDying = true;
+        if(isRight) {
+            animation = dieRight;
+        } else {
+            animation = dieLeft;
+        }
+        animation.setOnFinished(e -> isDead = true);
+        animation.play();
     }
 }

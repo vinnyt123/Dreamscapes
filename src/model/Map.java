@@ -110,8 +110,8 @@ public class Map extends Pane {
         }
 
         this.getChildren().addAll(backgrounds);
-        this.getChildren().addAll(enemies);
         this.getChildren().addAll(gameObjects);
+        this.getChildren().addAll(enemies);
         this.getChildren().addAll(items);
         //Remove and re-add player to ensure they're on top of image view
         this.getChildren().remove(player);
@@ -139,8 +139,10 @@ public class Map extends Pane {
                 if (enemy instanceof WalkingEnemySpawner) {
                     spawners.remove(enemy);
                 }
-                enemy.remove();
-                this.getChildren().remove(enemy);
+                if(!(enemy instanceof Boss)) {
+                    enemy.remove();
+                    this.getChildren().remove(enemy);
+                }
                 it.remove();
             } else if(enemy.health.get() < 0 && !enemy.isDying) {
                 enemy.deadAnimation();

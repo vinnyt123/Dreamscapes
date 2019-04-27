@@ -4,14 +4,11 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.geometry.Point2D;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-import java.util.Timer;
 
 public abstract class Enemy extends Entity {
 
@@ -90,6 +87,8 @@ public abstract class Enemy extends Entity {
                 setKnockBack(false);
                 player.knockBack(Math.cos(Math.toRadians(theta)) * knockback_player, Math.sin(Math.toRadians(theta)) * knockback_player, true);
             }
+        } else if(this instanceof Boss) {
+            ((Boss) this).attack();
         }
     }
 

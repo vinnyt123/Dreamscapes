@@ -16,7 +16,7 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1008.0" layoutY="-48.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="994.0" layoutX="1400.0" layoutY="-34.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutY="860.0" stroke="BLACK" strokeType="INSIDE" width="1480.0" />
-      <Circle id="playerSpawn" fill="DODGERBLUE" layoutX="278.0" layoutY="589.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="boss" fill="DODGERBLUE" layoutX="596.0" layoutY="374.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="playerSpawn" fill="DODGERBLUE" layoutX="156.0" layoutY="773.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="boss" fill="DODGERBLUE" layoutX="1181.0" layoutY="677.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>
