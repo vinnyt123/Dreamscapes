@@ -89,6 +89,7 @@ public class Map extends Pane {
                     ImageView imageView = new ImageView(image);
                     imageView.setFitWidth(WIDTH);
                     imageView.setFitHeight(HEIGHT);
+                    //imageView.setTranslateX(-500);
                     backgrounds.add(imageView);
                 }
             } else if (item instanceof Circle) {
@@ -107,7 +108,6 @@ public class Map extends Pane {
                 }
             }
         }
-        System.out.println(backgrounds);
 
         this.getChildren().addAll(backgrounds);
         this.getChildren().addAll(enemies);
@@ -211,17 +211,16 @@ public class Map extends Pane {
 
     private void scrollBackgrounds() {
         for(ImageView imageView : backgrounds) {
-            imageView.setTranslateX(player.getTranslateX() * 0.04 * (backgrounds.indexOf(imageView) + 1));
-            imageView.setTranslateY(0);
-
+            imageView.setTranslateX(player.getTranslateX() * 0.04 * (backgrounds.indexOf(imageView) + 1) - 100);
         }
+
         if (darkness != null) {
             darkness.setLayoutX(player.getTranslateX() - darkness.getBoundsInParent().getWidth() / 2);
             darkness.setLayoutY(player.getTranslateY() - darkness.getBoundsInParent().getHeight() / 2);
         }
     }
 
-    public String getMapId() {
+    String getMapId() {
         return mapId;
     }
 }
