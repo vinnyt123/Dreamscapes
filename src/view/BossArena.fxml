@@ -6,8 +6,8 @@
 
 <AnchorPane maxHeight="960.0" maxWidth="1480.0" minHeight="960.0" minWidth="1480.0" prefHeight="960.0" prefWidth="1480.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="960.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="960.0" layoutX="1400.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1008.0" layoutY="-48.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="994.0" layoutX="1400.0" layoutY="-34.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutY="860.0" stroke="BLACK" strokeType="INSIDE" width="1480.0" />
       <Circle id="playerSpawn" fill="DODGERBLUE" layoutX="278.0" layoutY="589.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="boss" fill="DODGERBLUE" layoutX="596.0" layoutY="374.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
