@@ -1,6 +1,5 @@
 package model;
 
-import controllers.PauseMenuController;
 import javafx.animation.Animation;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
@@ -85,10 +84,6 @@ public class Boss extends Enemy {
         animation = dieRight;
         animation.setCycleCount(1);
         this.getChildren().add(imageView);
-
-        GameManager gm = (GameManager) getScene().getRoot();
-        PauseMenuController pm = gm.getPlayingState().getPauseLoader().getController();
-        pm.getHealthBar().progressProperty().bind(health);
     }
 
     @Override
@@ -163,7 +158,10 @@ public class Boss extends Enemy {
         } else {
             animation = dieLeft;
         }
-        animation.setOnFinished(e -> isDead = true);
+        animation.setOnFinished(e -> {
+            isDead = true;
+            ((GameManager) this.getScene().getRoot()).endGame();
+        });
         animation.play();
     }
 }

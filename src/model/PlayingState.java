@@ -36,8 +36,6 @@ public class PlayingState extends StackPane {
     private final String NEXT_MAP_KEY = "END";
     private final String PREVIOUS_MAP_KEY = "HOME";
 
-
-
     public static String map0ID = "Map0";
     public static String map0File = "view/Map0.fxml";
     public static String pauseMenuFile = "view/PauseMenu.fxml";
@@ -102,6 +100,7 @@ public class PlayingState extends StackPane {
             loaderRoot = loader.load();
             currentMap = new Map(loaderRoot, player, name, mapFrom);
         } catch (IOException e) {
+            System.out.println("error");
             e.printStackTrace();
         }
         mapLayer.getChildren().clear();
@@ -178,6 +177,7 @@ public class PlayingState extends StackPane {
         if (currentMap.getMapId().equals(tutorialID)) {
             setMap(level1ID, null);
         } else if (currentMap.getMapId().equals(level1ID)) {
+            player.addDoubleJumpBoots();
             setMap(bossArenaID, null);
         }
     }
@@ -233,4 +233,5 @@ public class PlayingState extends StackPane {
         timeline2.setOnFinished(e -> this.getChildren().remove(pane));
 
     }
+
 }

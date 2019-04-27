@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="960.0" maxWidth="1480.0" minHeight="960.0" minWidth="1480.0" prefHeight="960.0" prefWidth="1480.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="model.Boss">
+<AnchorPane maxHeight="960.0" maxWidth="1480.0" minHeight="960.0" minWidth="1480.0" prefHeight="960.0" prefWidth="1480.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
        <ImageView fx:id="background" fitHeight="960.0" fitWidth="1480.0" pickOnBounds="true" preserveRatio="true">
            <image>

@@ -18,6 +18,7 @@ public class GameManager extends StackPane {
     public void switchToMenu() {
         this.getChildren().clear();
         this.getChildren().add(mainMenuState);
+        mainMenuState.setScreen(MainMenuState.mainMenuID);
         gameLoop.stop();
     }
 
@@ -32,6 +33,13 @@ public class GameManager extends StackPane {
 
     void restartLevel() {
         playingState.restartMap();
+    }
+
+    void endGame() {
+        gameLoop.stop();
+        this.getChildren().clear();
+        this.getChildren().add(mainMenuState);
+        mainMenuState.setScreen(MainMenuState.GameOverID);
     }
 
 

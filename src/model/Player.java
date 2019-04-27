@@ -234,7 +234,7 @@ public class Player extends Entity {
                 ((GameManager) this.getScene().getRoot()).restartLevel();
             });
         }
-        if (isDying && inAir == false) {
+        if (isDying && !inAir) {
             playerSprite.getCurrentAnimation().play();
         }
     }

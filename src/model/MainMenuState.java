@@ -11,12 +11,15 @@ public class MainMenuState extends Pane {
 
     public static String mainMenuID = "Main Menu";
     public static String mainMenuFile = "view/MainMenu.fxml";
+    public static String GameOverID = "Game Complete";
+    public static String GameOverFile = "view/GameOverScreen.fxml";
 
     private HashMap<String, Node> loadedScreens = new HashMap<>();
 
 
     public MainMenuState() {
         loadScreen(mainMenuID, mainMenuFile);
+        loadScreen(GameOverID, GameOverFile);
         setScreen(mainMenuID);
     }
 

@@ -14,8 +14,6 @@ public class PauseMenuController {
     @FXML private Button pauseButton;
     @FXML private AnchorPane pauseMenuBlock;
     @FXML private ProgressBar healthBar;
-    @FXML private ProgressBar bossBar;
-    @FXML private Label bossLabel;
     @FXML private Label deathCount;
     @FXML private Label timeCount;
 
