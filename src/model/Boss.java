@@ -37,7 +37,7 @@ public class Boss extends Enemy {
     private SpriteAnimation damageRight;
     private SpriteAnimation damageLeft;
 
-    private SoundEffect dieSound = new SoundEffect("/resources/sounds/boss_die.wav");
+    private SoundEffect dieSound = new SoundEffect("resources/sounds/boss_die.wav");
     private static final double DAMAGE1 = 0.1;
     private static final double DAMAGE2 = 0.1;
     private static final double DAMAGE3 = 0.3;

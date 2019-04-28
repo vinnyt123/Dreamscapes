@@ -16,7 +16,7 @@ public class WalkingEnemy extends Enemy {
     private static final double DAMAGE = 0.1;
     private Bounds platformBounds;
     private static final Image SPRITE_SHEET = new Image("images/slime_sheet.png");
-    private SoundEffect slimeSound = new SoundEffect("/resources/sounds/slime.wav");
+    private SoundEffect slimeSound = new SoundEffect("resources/sounds/slime.wav");
     private SpriteAnimation animation;
     private SpriteAnimation walkLeft;
     private SpriteAnimation walkRight;

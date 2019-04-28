@@ -1,18 +1,22 @@
 package model;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import java.io.Serializable;
 
 public class Score implements Comparable<Score>, Serializable {
-    private String timeString;
-    private int deathsCount;
-    private long timeSeconds;
-    private String playerName;
+    private final SimpleStringProperty timeString;
+    private final SimpleIntegerProperty deathsCount;
+    private final long timeSeconds;
+    private final SimpleStringProperty playerName;
 
     public Score(long timeSeconds, String timeString, int deathsCount, String playerName) {
-        this.timeString = timeString;
+        this.timeString = new SimpleStringProperty(timeString);
         this.timeSeconds = timeSeconds;
-        this.deathsCount = deathsCount;
-        this.playerName = playerName;
+        this.deathsCount = new SimpleIntegerProperty(deathsCount);
+        this.playerName = new SimpleStringProperty(playerName);
     }
 
     @Override
@@ -28,5 +32,17 @@ public class Score implements Comparable<Score>, Serializable {
             return -1;
         }
         return 0;
+    }
+
+    public SimpleStringProperty getTimeString() {
+        return playerName;
+    }
+
+    public SimpleIntegerProperty getDeathsCount() {
+         return deathsCount;
+    }
+
+    public SimpleStringProperty getPlayerName() {
+        return playerName;
     }
 }

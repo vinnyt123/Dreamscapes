@@ -1,15 +1,18 @@
 package model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class HighScores implements Serializable {
-    private List<Score> highScores;
+    private ObservableList<Score> highScores;
 
     public HighScores() {
-        highScores = new ArrayList<>();
+        highScores = FXCollections.observableArrayList();
     }
     public void addScore(Score score) {
         highScores.add(score);
