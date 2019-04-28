@@ -16,7 +16,7 @@ public class FlyingEnemy extends Enemy {
     private static final double HEIGHT = 60;
     private static final double DAMAGE = 0.21;
     private static final double KNOCKBACK_PLAYER = 8/Map.SCALE;
-    private static final double KNOCKBACK_THIS = 9/Map.SCALE;
+    private static final double KNOCKBACK_THIS = 4/Map.SCALE;
     private static final double HEALTH = 0.24;
     private static final Image SPRITE_SHEET = new Image("images/eye_sheet.png");
     private SpriteAnimation animation;

@@ -19,9 +19,9 @@ public class Player extends Entity {
     static final double WIDTH = 64;
     static final double HEIGHT = 64;
     IntegerProperty deathCount = new SimpleIntegerProperty();
-    private SoundEffect walkSound = new SoundEffect("/resources/sounds/walk.wav");
-    private SoundEffect attackSound = new SoundEffect("/resources/sounds/swish.wav");
-    private SoundEffect damageSound = new SoundEffect("/resources/sounds/damage.wav");
+    private SoundEffect walkSound = new SoundEffect("resources/sounds/walk.wav");
+    private SoundEffect attackSound = new SoundEffect("resources/sounds/swish.wav");
+    private SoundEffect damageSound = new SoundEffect("resources/sounds/damage.wav");
 
     private PlayerSprite playerSprite = new DefaultPlayer();
     private int attackCount = 0;
@@ -50,8 +50,6 @@ public class Player extends Entity {
         pm.getHealthBar().progressProperty().bind(health);
         pm.getDeathCount().textProperty().bind(deathCount.asString());
 
-        walkSound.setVolume(0.1);
-        damageSound.setVolume(0.2);
         this.getChildren().addAll(playerSprite);
     }
     public Weapon getCurrentWeapon() {

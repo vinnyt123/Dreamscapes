@@ -16,7 +16,7 @@ public class WalkingEnemy extends Enemy {
     private static final double DAMAGE = 0.1;
     private Bounds platformBounds;
     private static final Image SPRITE_SHEET = new Image("images/slime_sheet.png");
-    private SoundEffect slimeSound = new SoundEffect("/resources/sounds/slime.wav");
+    private SoundEffect slimeSound = new SoundEffect("resources/sounds/slime.wav");
     private SpriteAnimation animation;
     private SpriteAnimation walkLeft;
     private SpriteAnimation walkRight;
@@ -25,7 +25,7 @@ public class WalkingEnemy extends Enemy {
     private SpriteAnimation attackRight;
     private SpriteAnimation attackLeft;
     private static final double KNOCKBACK_PLAYER = 8/Map.SCALE;
-    private static final double KNOCKBACK_THIS = 5/Map.SCALE;
+    private static final double KNOCKBACK_THIS = 3/Map.SCALE;
     private boolean movingRight = true;
     private WalkingEnemySpawner walkingEnemySpawner;
 
@@ -45,7 +45,6 @@ public class WalkingEnemy extends Enemy {
 
 
     private void createSprite() {
-        slimeSound.setVolume(0.2);
         imageView = new ImageView(SPRITE_SHEET);
         imageView.setEffect(colorAdjust);
         imageView.setViewport(new Rectangle2D(0, 0, 72, 36));

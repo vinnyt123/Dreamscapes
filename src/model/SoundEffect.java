@@ -1,33 +1,34 @@
 package model;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javax.sound.sampled.*;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
-import java.net.URISyntaxException;
+class SoundEffect {
 
-public class SoundEffect {
-
-    private MediaPlayer mp;
+    private Clip clip;
 
     SoundEffect(String fileLocation) {
         try {
-            Media sound = new Media(SoundEffect.class.getResource(fileLocation).toURI().toString());
-            mp = new MediaPlayer(sound);
-            mp.setCycleCount(1);
-            mp.setOnEndOfMedia(() -> mp.stop());
-            mp.setVolume(0.50);
-        } catch (URISyntaxException e) {
+            URL url = getClass().getClassLoader().getResource(fileLocation);
+            assert url != null;
+            InputStream input = url.openStream();
+            InputStream audio = new BufferedInputStream(input);
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(audio);
+            clip = AudioSystem.getClip();
+            clip.open(audioInput);
+
+        } catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
             e.printStackTrace();
         }
     }
 
-    void setVolume(double volume) {
-        mp.setVolume(volume);
-    }
-
     void playSound() {
-        if(!(mp.getStatus() == MediaPlayer.Status.PLAYING)) {
-            mp.play();
+        if(!clip.isRunning()) {
+            clip.loop(1);
         }
     }
+
 }
