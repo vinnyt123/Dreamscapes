@@ -3,7 +3,7 @@ package model;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 
-public class WeaponFists extends Weapon {
+public class WeaponSword extends Weapon {
 
     private Player player;
     private static final double RANGE_ABOVE = 16;
@@ -11,7 +11,7 @@ public class WeaponFists extends Weapon {
     private static final double RANGE_HEIGHT = 80;
     private static final double DAMAGE = 0.08;
 
-    public WeaponFists(Player player) {
+    public WeaponSword(Player player) {
         super();
         this.player = player;
         damage = DAMAGE;

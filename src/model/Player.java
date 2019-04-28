@@ -38,7 +38,7 @@ public class Player extends Entity {
         this.keysPressed = keysPressed;
         deathCount.setValue(0);
         health.setValue(1);
-        currentWeapon = new WeaponFists(this);
+        currentWeapon = new WeaponSword(this);
         playerWeapons.add(currentWeapon);
     }
 
