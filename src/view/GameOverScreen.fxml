@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="960.0" maxWidth="1480.0" minHeight="960.0" minWidth="1480.0" prefHeight="960.0" prefWidth="1480.0" stylesheets="@../images/Styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GameCompleteController">
+<AnchorPane maxHeight="960.0" maxWidth="1480.0" minHeight="960.0" minWidth="1480.0" prefHeight="960.0" prefWidth="1480.0" stylesheets="@../resources/Styles.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.GameCompleteController">
    <children>
       <Label layoutX="579.0" layoutY="159.0" text="Game Complete!">
          <font>

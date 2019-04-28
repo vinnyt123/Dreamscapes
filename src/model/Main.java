@@ -3,6 +3,7 @@ package model;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -23,6 +24,7 @@ public class Main extends Application {
         GameManager gameManager = new GameManager();
         Scene scene = new Scene(gameManager);
         primaryStage.setScene(scene);
+        primaryStage.getIcons().add(new Image("/images/Icon.png"));
         primaryStage.setResizable(false);
         primaryStage.setOnCloseRequest(event -> {
             Platform.exit();

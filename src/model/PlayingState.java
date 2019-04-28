@@ -1,5 +1,6 @@
 package model;
 
+import controllers.MainMenuController;
 import controllers.PauseMenuController;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;

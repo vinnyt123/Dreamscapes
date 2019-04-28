@@ -3,6 +3,7 @@ package controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import model.GameManager;
+import model.MainMenuState;
 
 public class GameCompleteController {
 

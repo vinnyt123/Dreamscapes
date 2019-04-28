@@ -19,11 +19,10 @@ public class Player extends Entity {
     static final double WIDTH = 64;
     static final double HEIGHT = 64;
     IntegerProperty deathCount = new SimpleIntegerProperty();
+    private SoundEffect walkSound = new SoundEffect("/resources/sounds/walk.wav");
 
     private PlayerSprite playerSprite = new DefaultPlayer();
-
     private int attackCount = 0;
-
     private int jumpCount = 0;
     private List<Weapon> playerWeapons = new ArrayList<>();
     private Weapon currentWeapon;
@@ -130,10 +129,16 @@ public class Player extends Entity {
 
             if (keysPressed.contains(controls.getLeftKey())) {
                 moveLeft();
+                if(!inAir) {
+                    walkSound.playSound();
+                }
             }
 
             if (keysPressed.contains(controls.getRightKey())) {
                 moveRight();
+                if(!inAir) {
+                    walkSound.playSound();
+                }
             }
 
             if (keysPressed.contains(controls.getSwitchKey())) {

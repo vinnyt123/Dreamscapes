@@ -7,6 +7,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import model.GameManager;
+import model.MainMenuState;
 
 
 public class PauseMenuController {
