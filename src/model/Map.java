@@ -75,7 +75,7 @@ public class Map extends Pane {
                         spawners.add(walkingEnemySpawner);
                     }
                 } else {
-                    gameObjects.add(new Wall((Rectangle) item));
+                    gameObjects.add(new Wall((Rectangle) item, mapId.startsWith("Level1")));
                 }
 
             } else if (item instanceof Line) {

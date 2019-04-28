@@ -6,10 +6,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.effect.BoxBlur?>
-<AnchorPane maxHeight="2000.0" maxWidth="6000.0" minHeight="2000.0" minWidth="5999.0" prefHeight="2000.0" prefWidth="5999.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<AnchorPane maxHeight="2000.0" maxWidth="6000.0" minHeight="2000.0" minWidth="5999.0" prefHeight="2000.0" prefWidth="5999.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="background11" fitHeight="2000.0" fitWidth="6000.0" pickOnBounds="true">
          <image>
@@ -68,11 +65,11 @@
        <Rectangle id="spikes1" arcHeight="5.0" arcWidth="5.0" fill="#e8ff1f" height="75.0" layoutX="1068.0" layoutY="1534.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
        <Rectangle id="spikes2" arcHeight="5.0" arcWidth="5.0" fill="#e8ff1f" height="75.0" layoutX="2141.0" layoutY="994.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="546.0" layoutX="4157.0" layoutY="1017.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
+      <Rectangle id="lava1" arcHeight="5.0" arcWidth="5.0" fill="#ff231f" height="305.0" layoutX="1428.0" layoutY="1628.0" stroke="BLACK" strokeType="INSIDE" width="854.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="122.0" layoutY="1878.0" stroke="BLACK" strokeType="INSIDE" width="6000.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="301.0" layoutY="1774.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="608.0" layoutY="1690.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="331.0" layoutX="932.0" layoutY="1602.0" stroke="BLACK" strokeType="INSIDE" width="496.0" />
-      <Rectangle id="lava1" arcHeight="5.0" arcWidth="5.0" fill="#ff231f" height="305.0" layoutX="1428.0" layoutY="1628.0" stroke="BLACK" strokeType="INSIDE" width="753.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="1313.0" layoutY="1474.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
 
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="1730.0" layoutY="1474.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
@@ -85,18 +82,20 @@
 
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="1851.0" layoutY="755.0" stroke="BLACK" strokeType="INSIDE" width="94.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="2028.0" layoutY="623.0" stroke="BLACK" strokeType="INSIDE" width="152.0" />
+
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="117.0" layoutX="2470.0" layoutY="1364.0" stroke="BLACK" strokeType="INSIDE" width="21.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="2322.0" layoutY="683.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="2645.0" layoutY="542.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="3025.0" layoutY="453.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="250.0" layoutX="2200.0" layoutY="807.0" stroke="BLACK" strokeType="INSIDE" width="1010.0" />
-      <Rectangle id="lava2" arcHeight="5.0" arcWidth="5.0" fill="#ff231f" height="199.0" layoutX="3210.0" layoutY="827.0" stroke="BLACK" strokeType="INSIDE" width="757.0" />
+      <Rectangle id="lava2" arcHeight="5.0" arcWidth="5.0" fill="#ff231f" height="199.0" layoutX="3210.0" layoutY="827.0" stroke="BLACK" strokeType="INSIDE" width="870.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="33.0" layoutX="3209.0" layoutY="1024.0" stroke="BLACK" strokeType="INSIDE" width="758.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="249.0" layoutX="4156.0" layoutY="809.0" stroke="BLACK" strokeType="INSIDE" width="955.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="4437.0" layoutY="377.0" stroke="BLACK" strokeType="INSIDE" width="322.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="3492.0" layoutY="421.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <Rectangle id="lava3" arcHeight="5.0" arcWidth="5.0" fill="#ff231f" height="220.0" layoutX="2490.0" layoutY="1707.0" stroke="BLACK" strokeType="INSIDE" width="3507.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1930.0" layoutX="5923.0" stroke="BLACK" strokeType="INSIDE" width="76.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="5535.0" layoutY="882.0" stroke="BLACK" strokeType="INSIDE" width="116.0" />
-      <Rectangle id="lava3" arcHeight="5.0" arcWidth="5.0" fill="#ff231f" height="220.0" layoutX="2490.0" layoutY="1707.0" stroke="BLACK" strokeType="INSIDE" width="3451.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="4912.0" layoutY="1207.0" stroke="BLACK" strokeType="INSIDE" width="376.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="4183.0" layoutY="1538.0" stroke="BLACK" strokeType="INSIDE" width="340.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="4415.0" layoutY="1219.0" stroke="BLACK" strokeType="INSIDE" width="330.0" />
@@ -115,7 +114,5 @@
       <Circle id="playerSpawn" fill="DODGERBLUE" layoutX="154.0" layoutY="1768.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="2423.0" layoutY="1364.0" stroke="BLACK" strokeType="INSIDE" width="68.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1930.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="76.0" />
-
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="117.0" layoutX="2470.0" layoutY="1364.0" stroke="BLACK" strokeType="INSIDE" width="21.0" />
    </children>
 </AnchorPane>

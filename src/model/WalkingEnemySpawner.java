@@ -61,7 +61,7 @@ public class WalkingEnemySpawner extends Enemy {
         imageView.setFitHeight(HEIGHT);
         stackPane = new StackPane();
         stackPane.getChildren().add(imageView);
-        wall = new Wall(new Rectangle(WIDTH, HEIGHT));
+        wall = new Wall(new Rectangle(WIDTH, HEIGHT), true);
         wall.setVisible(false);
 
         deadAnimation = new FadeTransition(Duration.millis(DYING_TIME), this);

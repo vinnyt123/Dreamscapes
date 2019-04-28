@@ -4,6 +4,8 @@ import javafx.animation.Animation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
@@ -13,8 +15,8 @@ public class Lava extends GameObject {
     private final double WIDTH;
     private final double HEIGHT;
     private static final double KNOCKBACK = 10/Map.SCALE;
-    private static final Image LAVA_IMAGE = new Image("images/lava_sheet.png");
-    private final int IMAGEWIDTH = 16;
+    private static final Image LAVA_IMAGE = new Image("images/lava_32.png");
+    private final int IMAGEWIDTH = 32;
     private SpriteAnimation animation;
 
     Lava(Rectangle rectangle) {
@@ -27,16 +29,21 @@ public class Lava extends GameObject {
 
     private void createSprite() {
         int numberOfImageViews = (int) WIDTH / IMAGEWIDTH;
-        //for (int i = 0; i < numberOfImageViews; i++) {
+        Rectangle back = new Rectangle(WIDTH, HEIGHT-30);
+        back.setTranslateY(getTranslateY() + 32);
+        back.setFill(Paint.valueOf("#c64524"));
+        this.getChildren().add(back);
+        for (int i = 0; i < numberOfImageViews; i++) {
             ImageView imageView = new ImageView(LAVA_IMAGE);
-            imageView.setViewport(new Rectangle2D(0, 0, 16, 16));
-            imageView.setFitWidth(WIDTH);
-            imageView.setFitHeight(HEIGHT);
+            imageView.setViewport(new Rectangle2D(0, 0, 32, 32));
+            imageView.setFitWidth(32);
+            imageView.setFitHeight(32);
+            imageView.setTranslateX(i * 32);
             this.getChildren().add(imageView);
-            animation = new SpriteAnimation(imageView, Duration.millis(4500), 45, 45, 16, 16, 0);
+            animation = new SpriteAnimation(imageView, Duration.millis(4500), 16, 16, 32, 32, 0);
             animation.setCycleCount(Animation.INDEFINITE);
             animation.play();
-        //}
+        }
 
     }
 

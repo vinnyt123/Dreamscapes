@@ -7,31 +7,29 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Wall extends GameObject {
 
     private static final Image GRASSY_PLATFORM = new Image("images/Tutorial_platforms/100x25_GrassyPlatform.png");
     private static final Image GRASSY_CHUNK = new Image("images/Tutorial_platforms/100x66_GrassyChunk.png");
+    private static final Image GRASSY_PLATFORM_DARK = new Image("images/Tutorial_platforms/100x25_GrassyPlatformDark.png");
+    private static final Image GRASSY_CHUNK_DARK = new Image("images/Tutorial_platforms/100x66_GrassyChunkDark.png");
     private static final Image DIRT_CHUNK = new Image("images/Tutorial_platforms/100x66_DirtChunk.png");
 
-    private List<ImageView> imageViews = new ArrayList<>();
     private final double WIDTH;
     private final double HEIGHT;
     private Bounds bounds;
+    private boolean isDark;
     //private ImageView imageView;
 
-    public Wall(Rectangle rectangle) {
+    Wall(Rectangle rectangle, boolean isDark) {
+        this.isDark = isDark;
         WIDTH = rectangle.getWidth();
         HEIGHT = rectangle.getHeight();
         stitchPlatforms();
         this.setLayoutX(rectangle.getLayoutX());
         this.setLayoutY(rectangle.getLayoutY());
-        //Rectangle newRectangle = new Rectangle(rectangle.getLayoutX(), rectangle.getLayoutY(), rectangle.getWidth(), rectangle.getHeight());
-        //newRectangle.setOpacity(1);
-        //this.getChildren().add(newRectangle);
     }
 
     private void stitchPlatforms() {
@@ -41,13 +39,13 @@ public class Wall extends GameObject {
         int j;
         if (HEIGHT <= 25) {
             for (i = 0; i < wholePiecesNeeded; i++) {
-                ImageView newImageView = new ImageView(GRASSY_PLATFORM);
+                ImageView newImageView = new ImageView((isDark)? GRASSY_PLATFORM_DARK : GRASSY_PLATFORM);
                 newImageView.setViewport(new Rectangle2D(0, 0, 100, 25));
                 newImageView.setTranslateX(i * 100);
                 this.getChildren().add(newImageView);
             }
             if (widthOfRemainder > 0) {
-                ImageView lastImageView = new ImageView(GRASSY_PLATFORM);
+                ImageView lastImageView = new ImageView((isDark)? GRASSY_PLATFORM_DARK : GRASSY_PLATFORM);
                 lastImageView.setViewport(new Rectangle2D(0, 0, widthOfRemainder, 25));
                 lastImageView.setTranslateX(i * 100);
                 this.getChildren().add(lastImageView);
@@ -60,7 +58,7 @@ public class Wall extends GameObject {
             for (i = 0; i < wholePiecesNeeded; i++) {
                 for (j = 0; j < verticalPiecesNeeded; j++) {
                     if (j == 0) {
-                        imageView = new ImageView(GRASSY_CHUNK);
+                        imageView = new ImageView((isDark)? GRASSY_CHUNK_DARK : GRASSY_CHUNK);
                     } else {
                         imageView = new ImageView(DIRT_CHUNK);
                     }
@@ -82,7 +80,7 @@ public class Wall extends GameObject {
             if (widthOfRemainder > 0) {
                 for (j = 0; j < verticalPiecesNeeded; j++) {
                     if (j == 0) {
-                        imageView = new ImageView(GRASSY_CHUNK);
+                        imageView = new ImageView((isDark)? GRASSY_CHUNK_DARK : GRASSY_CHUNK);
                     } else {
                         imageView = new ImageView(DIRT_CHUNK);
                     }
@@ -102,13 +100,6 @@ public class Wall extends GameObject {
         }
 
     }
-
-    /*Wall(Image image, double layoutX, double layoutY) {
-        ImageView imageView = new ImageView(image);
-        imageView.setLayoutX(layoutX);
-        imageView.setLayoutY(layoutY);
-        this.getChildren().add(imageView);
-    }*/
 
     @Override
     public void intersect(Entity entity) {

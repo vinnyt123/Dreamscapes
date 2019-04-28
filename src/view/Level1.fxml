@@ -7,9 +7,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<AnchorPane prefHeight="4000.0" prefWidth="6000.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<AnchorPane prefHeight="4000.0" prefWidth="6000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="background11111" fitHeight="4000.0" fitWidth="6000.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -40,7 +38,7 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="3999.0" stroke="BLACK" strokeType="INSIDE" width="76.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="2820.0" layoutY="3839.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="319.0" layoutX="4314.0" layoutY="3680.0" stroke="BLACK" strokeType="INSIDE" width="1632.0" />
-      <Rectangle id="lava1" arcHeight="5.0" arcWidth="5.0" fill="#ff231f" height="181.0" layoutX="3522.0" layoutY="3796.0" stroke="BLACK" strokeType="INSIDE" width="441.0" />
+      <Rectangle id="lava1" arcHeight="5.0" arcWidth="5.0" fill="#ff231f" height="181.0" layoutX="3522.0" layoutY="3796.0" stroke="BLACK" strokeType="INSIDE" width="530.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="217.0" layoutX="3960.0" layoutY="3782.0" stroke="BLACK" strokeType="INSIDE" width="355.0" />
       <Rectangle id="spikes1" arcHeight="5.0" arcWidth="5.0" fill="#e8ff1f" height="163.0" layoutX="3362.0" layoutY="3624.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="3120.0" layoutY="3775.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
