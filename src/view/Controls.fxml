@@ -122,7 +122,7 @@
             </Label>
          </children>
       </HBox>
-      <Button fx:id="backButton" layoutX="45.0" layoutY="44.0" mnemonicParsing="false" onAction="#backBtnPressed" styleClass="Button" stylesheets="@../resources/Styles.css" text="◀">
+      <Button fx:id="backButton" layoutX="45.0" layoutY="44.0" mnemonicParsing="false" onAction="#backBtnPressed" styleClass="CustomButton" stylesheets="@../resources/Styles.css" text="◀">
          <font>
             <Font size="25.0" />
          </font>

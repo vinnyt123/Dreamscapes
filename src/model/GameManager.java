@@ -32,8 +32,9 @@ public class GameManager extends StackPane {
         this.getChildren().clear();
         this.getChildren().add(playingState);
         playingState.newGame();
-        playingState.getPlayer().createSprite();
-        playingState.requestFocus();
+    }
+
+    public void startGameLoop() {
         gameLoop.start();
     }
 

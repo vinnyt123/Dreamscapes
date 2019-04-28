@@ -38,7 +38,6 @@ public class Map extends Pane {
         this.player = player;
         this.mapId = mapId;
         this.mapFrom = mapFrom;
-        this.getChildren().add(player);
         this.WIDTH = pane.getBoundsInParent().getWidth();
         this.HEIGHT = pane.getBoundsInParent().getHeight();
         //this.setPrefWidth(pane.getPrefWidth());
@@ -111,9 +110,6 @@ public class Map extends Pane {
         this.getChildren().addAll(gameObjects);
         this.getChildren().addAll(enemies);
         this.getChildren().addAll(items);
-        //Remove and re-add player to ensure they're on top of image view
-        this.getChildren().remove(player);
-        this.getChildren().add(player);
         //this.getChildren().add(darkness);
         for (WalkingEnemySpawner spawner : spawners) {
             spawner.setUpCollisions();

@@ -26,7 +26,10 @@ public class Player extends Entity {
     private SoundEffect damageSound = new SoundEffect("resources/sounds/damage.wav");
     private SoundEffect jumpSound = new SoundEffect("resources/sounds/jump.wav");
 
+    private boolean createdSprite = false;
+
     private PlayerSprite playerSprite = new DefaultPlayer();
+
     private int attackCount = 0;
     private int jumpCount = 0;
     private List<Weapon> playerWeapons = new ArrayList<>();
@@ -35,7 +38,6 @@ public class Player extends Entity {
     boolean isAttacking = false;
     private HashSet<String> keysPressed;
     private boolean hasBoots = false;
-
     public Player(HashSet<String> keysPressed) {
         super();
         this.keysPressed = keysPressed;
@@ -45,9 +47,14 @@ public class Player extends Entity {
         playerWeapons.add(currentWeapon);
     }
 
+    public boolean isCreatedSprite() {
+        return createdSprite;
+    }
+
     //Cool effect for if the player is standing in water or something (creates reflection)
 
     void createSprite() {
+        createdSprite = true;
         GameManager gm = (GameManager) getScene().getRoot();
         PauseMenuController pm = gm.getPlayingState().getPauseLoader().getController();
         pm.getHealthBar().progressProperty().bind(health);

@@ -3,12 +3,15 @@ package model;
 import controllers.GameCompleteController;
 import controllers.MainMenuController;
 import controllers.PauseMenuController;
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -63,9 +66,13 @@ public class PlayingState extends StackPane {
     private Map currentMap;
     private Pane gameOverPane;
     private TimerTask task;
+    private TaskService service = new TaskService();
+    private String mapFrom;
+    private String nextMap;
 
     PlayingState(HashSet<String> keysPressed) {
         this.keysPressed = keysPressed;
+        mapLayer.setStyle("-fx-background-color: black;");
         loadPauseMenu();
         mapsMap.put(tutorialID, tutorialFile);
         mapsMap.put(level1ID, level1File);
@@ -117,15 +124,35 @@ public class PlayingState extends StackPane {
     }
 
     void setMap(String name, String mapFrom) {
+        this.mapFrom = mapFrom;
+        this.nextMap = name;
         loader = new FXMLLoader(getClass().getClassLoader().getResource(mapsMap.get(name)));
-        try {
-            loaderRoot = loader.load();
-            currentMap = new Map(loaderRoot, player, name, mapFrom);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        mapLayer.getChildren().clear();
-        mapLayer.getChildren().add(currentMap);
+        service.setOnSucceeded(e -> {
+            mapLayer.getChildren().clear();
+            currentMap.setOpacity(0);
+            mapLayer.getChildren().add(currentMap);
+            //Remove and re-add player to ensure they're on top of image view
+            currentMap.getChildren().remove(player);
+            currentMap.getChildren().add(player);
+            if(!(player.isCreatedSprite())) {
+                player.createSprite();
+            }
+            FadeTransition ft = new FadeTransition(Duration.millis(3000), currentMap);
+            ft.setFromValue(0.0);
+            ft.setToValue(1.0);
+            ft.setCycleCount(1);
+            ft.play();
+            requestFocus();
+            GameManager gm = (GameManager) getScene().getRoot();
+            gm.startGameLoop();
+        });
+        FadeTransition ft = new FadeTransition(Duration.millis(3000), currentMap);
+        ft.setFromValue(1.0);
+        ft.setToValue(0.0);
+        ft.setCycleCount(1);
+        ft.play();
+        service.restart();
+
     }
 
     public Player getPlayer() {
@@ -252,7 +279,24 @@ public class PlayingState extends StackPane {
 
 
         timeline2.setOnFinished(e -> this.getChildren().remove(pane));
+    }
 
+    private class TaskService extends Service<Void> {
+        @Override
+        protected Task<Void> createTask() {
+            return new Task<Void>() {
+                @Override
+                protected Void call() {
+                    try {
+                        loaderRoot = loader.load();
+                        currentMap = new Map(loaderRoot, player, nextMap, mapFrom);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+            };
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -7,7 +8,6 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import model.GameManager;
-import model.MainMenuState;
 
 
 public class PauseMenuController {
@@ -17,6 +17,8 @@ public class PauseMenuController {
     @FXML private ProgressBar healthBar;
     @FXML private Label deathCount;
     @FXML private Label timeCount;
+    @FXML private Button resumeButton;
+    @FXML private Button exitButton;
 
     public Label getDeathCount() {
         return deathCount;
@@ -42,13 +44,14 @@ public class PauseMenuController {
     }
 
     @FXML
-    private void resumeButtonPressed() {
+    private void resumeButtonPressed(Event e) {
         pauseMenuBlock.setVisible(false);
         ((GameManager) pauseButton.getScene().getRoot()).resumeGame();
     }
 
     public void pauseGame() {
         pauseMenuBlock.setVisible(true);
+        resumeButton.requestFocus();
         ((GameManager) pauseButton.getScene().getRoot()).pauseGame();
     }
 }
