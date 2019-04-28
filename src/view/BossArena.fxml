@@ -18,5 +18,6 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="186.0" layoutX="93.0" layoutY="860.0" stroke="BLACK" strokeType="INSIDE" width="1309.0" />
       <Circle id="playerSpawn" fill="DODGERBLUE" layoutX="156.0" layoutY="773.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="boss" fill="DODGERBLUE" layoutX="1181.0" layoutY="677.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+      <Rectangle fx:id="potion" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="1343.0" layoutY="818.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
    </children>
 </AnchorPane>
