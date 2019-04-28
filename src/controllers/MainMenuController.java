@@ -20,7 +20,7 @@ public class MainMenuController {
 
     @FXML
     private void editControlsPressed() {
-        ((GameManager) playBtn.getScene().getRoot()).switchToMenu();
+        ((GameManager) playBtn.getScene().getRoot()).getMainMenuState().setScreen(MainMenuState.controlsId);
     }
 
     @FXML

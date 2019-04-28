@@ -122,14 +122,11 @@ public class GameManager extends StackPane {
                 highScores = (HighScores) in.readObject();
                 in.close();
                 fileIn.close();
-                highScores.printScores();
             }
         } catch (IOException i) {
             highScores = new HighScores();
-            System.out.println("Please delete the file employee.ser.");
             return;
         } catch (ClassNotFoundException c) {
-            System.out.println("Employee class not found");
             c.printStackTrace();
             return;
         }
@@ -138,20 +135,13 @@ public class GameManager extends StackPane {
     public void serializeHighScores() {
         try {
             if (!highScores.isEmpty()) {
-                //The following line of code gets the path to the jar so may work on both windows and linux
-                //MyClass.class.getProtectionDomain().getCodeSource().getLocation().getPath()
                 File file = new File("employee.ser");
-                /*if (!file.exists()) {
-                    file.createNewFile();
-                }*/
-
                 FileOutputStream fileOut =
                         new FileOutputStream(file);
                 ObjectOutputStream out = new ObjectOutputStream(fileOut);
                 out.writeObject(highScores);
                 out.close();
                 fileOut.close();
-                System.out.printf("Serialized data is saved in /tmp/employee.ser");
             }
         } catch (IOException i) {
             i.printStackTrace();

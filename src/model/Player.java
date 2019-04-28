@@ -173,34 +173,32 @@ public class Player extends Entity {
                 playerSprite.getBounds().getMinY() + getTranslateY(), playerSprite.getBounds().getWidth(), playerSprite.getBounds().getHeight());
     }
 
-    private void playAnimation() {
-        //System.out.println("is attacking: " + isAttacking + " is flashing: " + isFlashing);
-        //System.out.println("in air: " + inAir + " is right: " + isRight + " controls pressed: " + controls.isAnyKeyPressed(keysPressed));
-        if (isFlashing && isRight) {
+    void playAnimation() {
+        if(isFlashing && isRight) {
             playerSprite.damageRight();
-        } else if (isFlashing) {
+        } else if(isFlashing) {
             playerSprite.damageLeft();
         } else if (isAttacking && isRight) {
             playerSprite.attackRight();
         } else if (isAttacking) {
             playerSprite.attackLeft();
-        } else if (!(controls.isAnyKeyPressed(keysPressed)) && !inAir && isRight) {
+        } else if(!(controls.isAnyKeyPressed(keysPressed)) && !inAir && isRight) {
             playerSprite.standRight();
-        } else if (!(controls.isAnyKeyPressed(keysPressed)) && !inAir) {
+        } else if(!(controls.isAnyKeyPressed(keysPressed)) && !inAir) {
             playerSprite.standLeft();
-        } else if (inAir && isRight) {
+        } else if(inAir && isRight) {
             playerSprite.jumpRight();
-        } else if (inAir) {
+        } else if(inAir) {
             playerSprite.jumpLeft();
-        } else if (keysPressed.contains(controls.getRightKey())) {
+        } else if(keysPressed.contains(controls.getRightKey())) {
             playerSprite.walkRight();
-        } else if (!inAir && keysPressed.contains(controls.getLeftKey())) {
+        } else if(!inAir && keysPressed.contains(controls.getLeftKey())) {
             playerSprite.walkLeft();
         } else if (health.get() <= 0) {
             playerSprite.standRight();
         }
 
-        if (!(playerSprite.getCurrentAnimation().getStatus() == Animation.Status.RUNNING)) {
+        if(!(playerSprite.getCurrentAnimation().getStatus() == Animation.Status.RUNNING)) {
             playerSprite.stopAll();
             playerSprite.getCurrentAnimation().play();
         }
@@ -209,7 +207,7 @@ public class Player extends Entity {
     @Override
     public void applyVelocity() {
         super.applyVelocity();
-        if (!isKnockback) {
+        if(!isKnockback) {
             setVelocity(new Point2D(0, velocity.getY()));
         }
     }

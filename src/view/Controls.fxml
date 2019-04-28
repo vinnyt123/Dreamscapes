@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControlsController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0c1122" height="129.0" layoutX="466.0" layoutY="124.0" stroke="0c1122" strokeType="INSIDE" width="534.0" />
+      <HBox alignment="CENTER" layoutX="-1.0" prefHeight="129.0" prefWidth="1440.0">
+         <children>
+            <Label style="-fx-font-weight: bold;" text="Controls" textFill="WHITE">
+               <font>
+                  <Font size="70.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutY="111.0" prefHeight="129.0" prefWidth="1440.0">
+         <children>
+            <Label style="-fx-font-weight: bold;" text="Attack" textFill="#c9cccb">
+               <font>
+                  <Font size="60.0" />
+               </font>
+            </Label>
+            <Label style="-fx-font-weight: bold;" text="SPACE" textFill="#8dd690">
+               <font>
+                  <Font size="60.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="60.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="-3.0" layoutY="240.0" prefHeight="129.0" prefWidth="1440.0">
+         <children>
+            <Label style="-fx-font-weight: bold;" text="Jump" textFill="#c9cccb">
+               <font>
+                  <Font size="60.0" />
+               </font>
+            </Label>
+            <Label style="-fx-font-weight: bold;" text="UP" textFill="#8dd690">
+               <font>
+                  <Font size="60.0" />
+               </font>
+               <padding>
+                  <Insets left="60.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="-3.0" layoutY="369.0" prefHeight="129.0" prefWidth="1440.0">
+         <children>
+            <Label style="-fx-font-weight: bold;" text="Move Left" textFill="#c9cccb">
+               <font>
+                  <Font size="60.0" />
+               </font>
+            </Label>
+            <Label style="-fx-font-weight: bold;" text="LEFT" textFill="#8dd690">
+               <font>
+                  <Font size="60.0" />
+               </font>
+               <padding>
+                  <Insets left="60.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="1.0" layoutY="492.0" prefHeight="129.0" prefWidth="1440.0">
+         <children>
+            <Label style="-fx-font-weight: bold;" text="Move Right" textFill="#c9cccb">
+               <font>
+                  <Font size="60.0" />
+               </font>
+            </Label>
+            <Label style="-fx-font-weight: bold;" text="RIGHT" textFill="#8dd690">
+               <font>
+                  <Font size="60.0" />
+               </font>
+               <padding>
+                  <Insets left="60.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="1.0" layoutY="621.0" prefHeight="129.0" prefWidth="1440.0">
+         <children>
+            <Label style="-fx-font-weight: bold;" text="Next Level" textFill="#c9cccb">
+               <font>
+                  <Font size="60.0" />
+               </font>
+            </Label>
+            <Label style="-fx-font-weight: bold;" text="END" textFill="#8dd690">
+               <font>
+                  <Font size="60.0" />
+               </font>
+               <padding>
+                  <Insets left="60.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="6.0" layoutY="750.0" prefHeight="129.0" prefWidth="1440.0">
+         <children>
+            <Label style="-fx-font-weight: bold;" text="Previous Level" textFill="#c9cccb">
+               <font>
+                  <Font size="60.0" />
+               </font>
+            </Label>
+            <Label style="-fx-font-weight: bold;" text="HOME" textFill="#8dd690">
+               <font>
+                  <Font size="60.0" />
+               </font>
+               <padding>
+                  <Insets left="60.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+      <Button fx:id="backButton" layoutX="45.0" layoutY="44.0" mnemonicParsing="false" onAction="#backBtnPressed" styleClass="Button" stylesheets="@../resources/Styles.css" text="◀">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

@@ -114,7 +114,6 @@ public class PlayingState extends StackPane {
             loaderRoot = loader.load();
             currentMap = new Map(loaderRoot, player, name, mapFrom);
         } catch (IOException e) {
-            System.out.println("error");
             e.printStackTrace();
         }
         mapLayer.getChildren().clear();
