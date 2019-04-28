@@ -9,10 +9,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class HighScores implements Serializable {
-    private ObservableList<Score> highScores;
+    public List<Score> getHighScores() {
+        return highScores;
+    }
+
+    private List<Score> highScores;
 
     public HighScores() {
-        highScores = FXCollections.observableArrayList();
+        highScores = new ArrayList<>();
     }
     public void addScore(Score score) {
         highScores.add(score);

@@ -1,5 +1,6 @@
 package model;
 
+import controllers.ScoresController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -15,6 +16,9 @@ public class MainMenuState extends StackPane {
     private static final String BACKGROUND_IMAGE_PATH = "images/MenuBackground.png";
     public static String mainMenuID = "Main Menu";
     public static String mainMenuFile = "view/MainMenu.fxml";
+    public static String scoresId = "Scores";
+    public static String scoresPath = "view/Scores.fxml";
+    private final GameManager gameManager;
 
     private FXMLLoader loader;
 
@@ -23,13 +27,15 @@ public class MainMenuState extends StackPane {
     private Pane controlsLayer = new Pane();
 
 
-    public MainMenuState() {
+    public MainMenuState(GameManager gameManager) {
         this.setPrefWidth(Main.SCENE_WIDTH);
         this.setPrefHeight(Main.SCENE_HEIGHT);
+        this.gameManager = gameManager;
 
         createBackground();
         this.getChildren().addAll(background, controlsLayer);
         loadScreen(mainMenuID, mainMenuFile);
+        loadScreen(scoresId,scoresPath);
         setScreen(mainMenuID);
         System.out.println(background.getBoundsInParent());
         System.out.println(controlsLayer.getBoundsInParent());
@@ -68,6 +74,9 @@ public class MainMenuState extends StackPane {
             controlsLayer.getChildren().add(loadedScreens.get(name));
         } else {
             System.out.println("Screen " + name + " has not been loaded.");
+        }
+        if (name == scoresId) {
+            ((ScoresController) loader.getController()).setTableData(gameManager.getHighscores().getHighScores());
         }
     }
 
