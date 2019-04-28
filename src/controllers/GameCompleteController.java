@@ -1,13 +1,19 @@
 package controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import model.GameManager;
 
 public class GameCompleteController {
 
     @FXML private Label timeLabel;
     @FXML private Label deathsLabel;
+    @FXML private Button saveScoreButton;
+    @FXML private TextField saveScoreTextField;
+    @FXML private Label scoreSavedLabel;
+
 
 
     @FXML
@@ -20,4 +26,11 @@ public class GameCompleteController {
         this.deathsLabel.setText(deathCount + "");
     }
 
+    @FXML
+    private void saveScoreButtonClicked() {
+        saveScoreButton.setDisable(true);
+        saveScoreTextField.setDisable(true);
+        scoreSavedLabel.setVisible(true);
+        ((GameManager) timeLabel.getScene().getRoot()).saveScore(saveScoreTextField.getText());
+    }
 }

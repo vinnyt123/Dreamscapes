@@ -25,6 +25,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.setOnCloseRequest(event -> {
+            gameManager.serializeHighScores();
             Platform.exit();
             System.exit(0);
         });

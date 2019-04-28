@@ -19,7 +19,7 @@ public class Boss extends Enemy {
     private static final Image SPRITE_SHEET = new Image("images/boss_sheet.png");
     private static final double WIDTH = 220;
     private static final double HEIGHT = 220;
-    private static final double HEALTH = 1.0;
+    private static final double HEALTH = 0.01;
     private double SPEED = 3;
 
     private SpriteAnimation animation;
