@@ -36,7 +36,7 @@ public class WalkingEnemySpawner extends Enemy {
     private Bounds bounds;
 
 
-    public WalkingEnemySpawner(Player player, boolean isFacingLeft, Point2D range) {
+    WalkingEnemySpawner(Player player, boolean isFacingLeft, Point2D range) {
         super(player);
         this.range = range;
         this.isFacingLeft = isFacingLeft;
@@ -123,19 +123,13 @@ public class WalkingEnemySpawner extends Enemy {
         wall.intersect(player);
     }
 
-    public void enemyDied() {
+    void enemyDied() {
         numberOfEnemies--;
         count = 0;
     }
 
-    public void setUpCollisions() {
+    void setUpCollisions() {
         bounds = new BoundingBox(this.getBoundsInParent().getMinX(), this.getBoundsInParent().getMinY(), WIDTH, HEIGHT - 25);
         wall.setBounds(new BoundingBox(this.getBoundsInParent().getMinX(), this.getBoundsInParent().getMinY(), WIDTH - 70, HEIGHT));
     }
-
-    /*@Override
-    public void spawnAt(Point2D spawn) {
-        this.setLayoutX(spawn.getX());
-        this.setLayoutY(spawn.getY());
-    }*/
 }

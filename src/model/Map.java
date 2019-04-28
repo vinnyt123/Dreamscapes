@@ -21,10 +21,9 @@ public class Map extends Pane {
     private List<ImageView> backgrounds = new ArrayList<>();
     private List<Enemy> enemies = new ArrayList<>();
     private List<Item> items = new ArrayList<>();
-    private ImageView darkness;
     private final double WIDTH;
     private final double HEIGHT;
-    public static final double SCALE = 0.5;
+    static final double SCALE = 0.5;
     static double GRAVITY = 0.4/(SCALE*SCALE);
     static double TERMINAL_VELOCITY = 15;
     private static final double VIEWPORTWIDTH = 740;
@@ -213,11 +212,6 @@ public class Map extends Pane {
     private void scrollBackgrounds() {
         for(ImageView imageView : backgrounds) {
             imageView.setTranslateX(player.getTranslateX() * 0.04 * (backgrounds.indexOf(imageView) + 1) - 100);
-        }
-
-        if (darkness != null) {
-            darkness.setLayoutX(player.getTranslateX() - darkness.getBoundsInParent().getWidth() / 2);
-            darkness.setLayoutY(player.getTranslateY() - darkness.getBoundsInParent().getHeight() / 2);
         }
     }
 

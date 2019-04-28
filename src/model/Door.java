@@ -14,7 +14,7 @@ public class Door extends GameObject {
     private Line teleportLine;
 
 
-    public Door(String mapToSwitch, Rectangle rectangle, String mapDoorIsOn) {
+    Door(String mapToSwitch, Rectangle rectangle, String mapDoorIsOn) {
         this.mapToSwitch = mapToSwitch;
         this.mapDoorIsOn = mapDoorIsOn;
         ImageView imageView = new ImageView(DOOR_IMAGE);

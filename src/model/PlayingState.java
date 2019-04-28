@@ -38,27 +38,20 @@ public class PlayingState extends StackPane {
     private final String NEXT_MAP_KEY = "END";
     private final String PREVIOUS_MAP_KEY = "HOME";
 
-    public static String map0ID = "Map0";
-    public static String map0File = "view/Map0.fxml";
-    public static String pauseMenuFile = "view/PauseMenu.fxml";
-    public static String map1ID = "Map1";
-    public static String map1File = "view/Map1.fxml";
-    public static String tutorialID = "Tutorial";
-    public static String tutorialFile = "view/TutorialLevel.fxml";
-    public static String level1ID = "Level1";
-    public static String level1File = "view/Level1.fxml";
-    public static String bossArenaID = "BossArena";
-    public static String bossArenaFile = "view/BossArena.fxml";
+    private static String pauseMenuFile = "view/PauseMenu.fxml";
+    private static String tutorialID = "Tutorial";
+    private static String tutorialFile = "view/TutorialLevel.fxml";
+    private static String level1ID = "Level1";
+    private static String level1File = "view/Level1.fxml";
+    static String bossArenaID = "BossArena";
+    private static String bossArenaFile = "view/BossArena.fxml";
+    private static String GameOverFile = "view/GameOverScreen.fxml";
 
-    public static String GameOverFile = "view/GameOverScreen.fxml";
-
-    public static final String STARTING_LEVEL = tutorialID;
+    private static final String STARTING_LEVEL = tutorialID;
 
     private PauseMenuController pm;
     private Timer gameTimer;
-
     private long secondsPassed = 0;
-
     private HashMap<String, String> mapsMap = new HashMap<>();
     private FXMLLoader loader;
     private FXMLLoader pauseLoader;
@@ -72,8 +65,6 @@ public class PlayingState extends StackPane {
     PlayingState(HashSet<String> keysPressed) {
         this.keysPressed = keysPressed;
         loadPauseMenu();
-        mapsMap.put(map0ID, map0File);
-        mapsMap.put(map1ID, map1File);
         mapsMap.put(tutorialID, tutorialFile);
         mapsMap.put(level1ID, level1File);
         mapsMap.put(bossArenaID, bossArenaFile);
@@ -90,7 +81,7 @@ public class PlayingState extends StackPane {
         pm = pauseLoader.getController();
     }
 
-    public long getSecondsPassed() {
+    long getSecondsPassed() {
         return secondsPassed;
     }
 
@@ -104,18 +95,18 @@ public class PlayingState extends StackPane {
         return time + ((seconds - 60 * minutes));
     }
 
-        public void addGameOverPane() {
+    void addGameOverPane() {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(GameOverFile));
-            try {
-                Pane pane = loader.load();
-                GameCompleteController gc = loader.getController();
-                gc.setLabels(secondsConverter(getSecondsPassed()), player.deathCount.get());
-                this.getChildren().add(pane);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(GameOverFile));
+        try {
+            Pane pane = loader.load();
+            GameCompleteController gc = loader.getController();
+            gc.setLabels(secondsConverter(getSecondsPassed()), player.deathCount.get());
+            this.getChildren().add(pane);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
 
     void setMap(String name, String mapFrom) {
         loader = new FXMLLoader(getClass().getClassLoader().getResource(mapsMap.get(name)));
@@ -171,7 +162,7 @@ public class PlayingState extends StackPane {
         mapLayer.getChildren().add(currentMap);
     }
 
-    public void checkKeys() {
+    void checkKeys() {
         if (keysPressed.contains(BOSS_LEVEL_KEY)) {
             keysPressed.remove(BOSS_LEVEL_KEY);
             advanceToBossLevel();
@@ -218,7 +209,7 @@ public class PlayingState extends StackPane {
         setMap(bossArenaID, currentMap.getMapId());
     }
 
-    public void createBootsOverLay() {
+    void createBootsOverLay() {
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(5.0);
         dropShadow.setOffsetX(3.0);
@@ -231,7 +222,7 @@ public class PlayingState extends StackPane {
 
         text.setFont(Font.font(null, FontWeight.BOLD, 60));
         Pane pane = new Pane(text);
-        text.setX(Main.SCENE_WIDTH / 2 - 282);
+        text.setX((Main.SCENE_WIDTH / 2) - 282);
         text.setY(-20);
         this.getChildren().add(pane);
         Timeline timeline = new Timeline();

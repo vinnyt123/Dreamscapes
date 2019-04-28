@@ -17,7 +17,7 @@ public abstract class Item extends Group {
     private static int TILE_SIZE = 40;
 
 
-    public Item(Image tileImage, Node node) {
+    Item(Image tileImage, Node node) {
         ImageView imageView = new ImageView(tileImage);
         imageView.setFitHeight(TILE_SIZE - 5);
         imageView.setFitWidth(TILE_SIZE - 5);

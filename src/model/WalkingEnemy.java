@@ -31,7 +31,7 @@ public class WalkingEnemy extends Enemy {
 
 
 
-    public WalkingEnemy(Player player, WalkingEnemySpawner walkingEnemySpawner) {
+    WalkingEnemy(Player player, WalkingEnemySpawner walkingEnemySpawner) {
         super(player);
         this.walkingEnemySpawner = walkingEnemySpawner;
         knockback_player = KNOCKBACK_PLAYER;
@@ -127,13 +127,7 @@ public class WalkingEnemy extends Enemy {
             animation = walkLeft;
         }
 
-
         animation.play();
-        /*if (inAir) {
-            animation.stop();
-        } else {
-        }*/
-
     }
 
     public void deadAnimation() {
@@ -149,17 +143,13 @@ public class WalkingEnemy extends Enemy {
     }
 
 
-    public void decrementSpawnerCount() {
+    void decrementSpawnerCount() {
         if (walkingEnemySpawner != null) {
             walkingEnemySpawner.enemyDied();
         }
     }
 
-    public void setMovingRight(Boolean movingRight) {
-        this.movingRight = movingRight;
-    }
-
-    public boolean getMovingRight() {
+    boolean getMovingRight() {
         return movingRight;
     }
 }

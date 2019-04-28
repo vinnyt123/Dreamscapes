@@ -8,14 +8,16 @@ import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 public class Player extends Entity {
 
-    private static final double JUMPHEIGHT = -12.5/Map.SCALE;
+    private static final double JUMPHEIGHT = -12.5 / Map.SCALE;
     private static final long DAMAGE_COOLDOWN = 800;
-    private static final double RUNSPEED = 5/Map.SCALE;
-    private static final double ATTACKSLIDE = 8/Map.SCALE;
+    private static final double RUNSPEED = 5 / Map.SCALE;
+    private static final double ATTACKSLIDE = 8 / Map.SCALE;
     static final double WIDTH = 64;
     static final double HEIGHT = 64;
     IntegerProperty deathCount = new SimpleIntegerProperty();
@@ -44,7 +46,7 @@ public class Player extends Entity {
 
     //Cool effect for if the player is standing in water or something (creates reflection)
 
-    public void createSprite() {
+    void createSprite() {
         GameManager gm = (GameManager) getScene().getRoot();
         PauseMenuController pm = gm.getPlayingState().getPauseLoader().getController();
         pm.getHealthBar().progressProperty().bind(health);
@@ -52,16 +54,17 @@ public class Player extends Entity {
 
         this.getChildren().addAll(playerSprite);
     }
-    public Weapon getCurrentWeapon() {
+
+    Weapon getCurrentWeapon() {
         return currentWeapon;
     }
 
-    public void crouch() {
+    private void crouch() {
 
     }
 
-    public void jump() {
-        if(!this.getInAir()) {
+    private void jump() {
+        if (!this.getInAir()) {
             this.setInAir(true);
             setVelocity(new Point2D(0, JUMPHEIGHT));
         } else if (hasBoots && !hasDoubleJumped && jumpCount == 1) {
@@ -75,29 +78,29 @@ public class Player extends Entity {
         }
     }
 
-    public void moveLeft() {
+    private void moveLeft() {
         setVelocity(new Point2D(-RUNSPEED, getVelocity().getY()));
         this.setRight(false);
     }
 
-    public void moveRight() {
+    private void moveRight() {
         setVelocity(new Point2D(RUNSPEED, getVelocity().getY()));
         this.setRight(true);
     }
 
-    public void attack() {
-        if(attackCount == 1) {
+    private void attack() {
+        if (attackCount == 1) {
             attackSound.playSound();
             isAttacking = true;
             velocity = new Point2D((isRight) ? ATTACKSLIDE : -ATTACKSLIDE, velocity.getY());
         }
     }
 
-    public void switchWeapon() {
+    private void switchWeapon() {
 
     }
 
-    public void knockBack(double xDistance, double yDistance, boolean isDamage) {
+    void knockBack(double xDistance, double yDistance, boolean isDamage) {
         isKnockback = true;
         setVelocity(new Point2D(xDistance, yDistance));
         if (isDamage) {
@@ -109,11 +112,11 @@ public class Player extends Entity {
 
     @Override
     public void move() {
-        if(isKnockback) {
-            if(Math.round(velocity.getX()) == 0) {
+        if (isKnockback) {
+            if (Math.round(velocity.getX()) == 0) {
                 isKnockback = false;
             } else {
-                setVelocity(new Point2D((velocity.getX() > 0) ? velocity.getX() - 1: velocity.getX() + 1, (velocity.getY() > 0) ? velocity.getY() - 1: velocity.getY() + 1));
+                setVelocity(new Point2D((velocity.getX() > 0) ? velocity.getX() - 1 : velocity.getX() + 1, (velocity.getY() > 0) ? velocity.getY() - 1 : velocity.getY() + 1));
             }
             applyGravity();
             applyVelocity();
@@ -133,14 +136,14 @@ public class Player extends Entity {
 
             if (keysPressed.contains(controls.getLeftKey())) {
                 moveLeft();
-                if(!inAir) {
+                if (!inAir) {
                     walkSound.playSound();
                 }
             }
 
             if (keysPressed.contains(controls.getRightKey())) {
                 moveRight();
-                if(!inAir) {
+                if (!inAir) {
                     walkSound.playSound();
                 }
             }
@@ -159,7 +162,7 @@ public class Player extends Entity {
 
         applyGravity();
         applyVelocity();
-        if(!playerSprite.isAttacking() && !playerSprite.isDamaged() && !isDying) {
+        if (!playerSprite.isAttacking() && !playerSprite.isDamaged() && !isDying) {
             playAnimation();
         }
     }
@@ -170,34 +173,34 @@ public class Player extends Entity {
                 playerSprite.getBounds().getMinY() + getTranslateY(), playerSprite.getBounds().getWidth(), playerSprite.getBounds().getHeight());
     }
 
-    void playAnimation() {
+    private void playAnimation() {
         //System.out.println("is attacking: " + isAttacking + " is flashing: " + isFlashing);
         //System.out.println("in air: " + inAir + " is right: " + isRight + " controls pressed: " + controls.isAnyKeyPressed(keysPressed));
-        if(isFlashing && isRight) {
+        if (isFlashing && isRight) {
             playerSprite.damageRight();
-        } else if(isFlashing) {
+        } else if (isFlashing) {
             playerSprite.damageLeft();
         } else if (isAttacking && isRight) {
             playerSprite.attackRight();
         } else if (isAttacking) {
             playerSprite.attackLeft();
-        } else if(!(controls.isAnyKeyPressed(keysPressed)) && !inAir && isRight) {
+        } else if (!(controls.isAnyKeyPressed(keysPressed)) && !inAir && isRight) {
             playerSprite.standRight();
-        } else if(!(controls.isAnyKeyPressed(keysPressed)) && !inAir) {
+        } else if (!(controls.isAnyKeyPressed(keysPressed)) && !inAir) {
             playerSprite.standLeft();
-        } else if(inAir && isRight) {
+        } else if (inAir && isRight) {
             playerSprite.jumpRight();
-        } else if(inAir) {
+        } else if (inAir) {
             playerSprite.jumpLeft();
-        } else if(keysPressed.contains(controls.getRightKey())) {
+        } else if (keysPressed.contains(controls.getRightKey())) {
             playerSprite.walkRight();
-        } else if(!inAir && keysPressed.contains(controls.getLeftKey())) {
+        } else if (!inAir && keysPressed.contains(controls.getLeftKey())) {
             playerSprite.walkLeft();
         } else if (health.get() <= 0) {
             playerSprite.standRight();
         }
 
-        if(!(playerSprite.getCurrentAnimation().getStatus() == Animation.Status.RUNNING)) {
+        if (!(playerSprite.getCurrentAnimation().getStatus() == Animation.Status.RUNNING)) {
             playerSprite.stopAll();
             playerSprite.getCurrentAnimation().play();
         }
@@ -206,7 +209,7 @@ public class Player extends Entity {
     @Override
     public void applyVelocity() {
         super.applyVelocity();
-        if(!isKnockback) {
+        if (!isKnockback) {
             setVelocity(new Point2D(0, velocity.getY()));
         }
     }
