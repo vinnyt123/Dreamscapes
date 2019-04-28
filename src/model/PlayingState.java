@@ -218,7 +218,6 @@ public class PlayingState extends StackPane {
         text.setX(Main.SCENE_WIDTH / 2 - 282);
         text.setY(-20);
         this.getChildren().add(pane);
-        System.out.println(text.getBoundsInParent());
         Timeline timeline = new Timeline();
         timeline.getKeyFrames().addAll(new KeyFrame(Duration.millis(200), new KeyValue(text.layoutYProperty(),100)));
 

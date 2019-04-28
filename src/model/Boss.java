@@ -20,7 +20,7 @@ public class Boss extends Enemy {
     private static final double WIDTH = 220;
     private static final double HEIGHT = 220;
     private static final double HEALTH = 1.0;
-    private double SPEED = 3;
+    private double SPEED = 3/Map.SCALE;
 
     private SpriteAnimation animation;
 

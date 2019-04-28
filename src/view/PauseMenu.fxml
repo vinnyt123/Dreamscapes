@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="900.0" maxWidth="1440.0" prefHeight="900.0" prefWidth="1440.0" style="-fx-background-color: rgba(0,0,0,0);" stylesheets="@../resources/Styles.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.PauseMenuController">
+<AnchorPane maxHeight="900.0" maxWidth="1440.0" prefHeight="900.0" prefWidth="1440.0" style="-fx-background-color: rgba(0,0,0,0);" stylesheets="@../resources/Styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PauseMenuController">
    <children>
       <AnchorPane fx:id="pauseMenuBlock" layoutX="499.0" layoutY="218.0" prefHeight="497.0" prefWidth="432.0" style="-fx-background-color: transparent;" visible="false">
          <children>
@@ -17,7 +17,7 @@
       </AnchorPane>
       <Button fx:id="pauseButton" focusTraversable="false" layoutX="1358.0" layoutY="17.0" mnemonicParsing="false" onAction="#pauseButtonClicked" styleClass="Button" text="Pause" />
       <ProgressBar fx:id="healthBar" layoutX="25.0" layoutY="29.0" prefHeight="25.0" prefWidth="365.0" progress="0.0" style="-fx-accent: #A70505; -fx-background-color: transparent;" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="82.0" layoutX="26.0" layoutY="53.0" stroke="#868282" strokeType="INSIDE" strokeWidth="0.0" style="-fx-background-radius: 4px;" width="75.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="82.0" layoutX="26.0" layoutY="53.0" stroke="#868282" strokeType="INSIDE" strokeWidth="0.0" style="-fx-background-radius: 4px;" width="100.0" />
       <Label layoutX="29.0" layoutY="33.0" text="Health" textFill="WHITE" />
       <Label layoutX="30.0" layoutY="95.0" text="Deaths" textFill="WHITE" />
       <Label fx:id="deathCount" layoutX="31.0" layoutY="111.0" text="0" textFill="WHITE">

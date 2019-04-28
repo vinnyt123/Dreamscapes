@@ -12,6 +12,7 @@ public class Lava extends GameObject {
     private static final double DAMAGE = 0.51;
     private final double WIDTH;
     private final double HEIGHT;
+    private static final double KNOCKBACK = 10/Map.SCALE;
     private static final Image LAVA_IMAGE = new Image("images/lava_sheet.png");
     private final int IMAGEWIDTH = 16;
     private SpriteAnimation animation;
@@ -50,7 +51,7 @@ public class Lava extends GameObject {
             if(entity instanceof Player) {
                 if (!entity.isDying) {
                     ((Player) entity).redFlash();
-                    ((Player) entity).knockBack(0, -10, true);
+                    ((Player) entity).knockBack(0, -KNOCKBACK, true);
                     if (entity.health.get() <= 0) {
                         entity.setInAir(false);
                     }

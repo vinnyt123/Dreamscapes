@@ -13,6 +13,7 @@ public class SoundEffect {
         try {
             Media sound = new Media(SoundEffect.class.getResource(fileLocation).toURI().toString());
             mp = new MediaPlayer(sound);
+            mp.setCycleCount(1);
             mp.setOnEndOfMedia(() -> mp.stop());
             mp.setVolume(0.50);
         } catch (URISyntaxException e) {

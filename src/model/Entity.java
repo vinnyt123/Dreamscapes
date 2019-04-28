@@ -23,6 +23,7 @@ public abstract class Entity extends Group {
     boolean isDead = false;
     boolean isDying = false;
     boolean hasDoubleJumped = false;
+    double dt;
 
     public abstract void move();
     public abstract Bounds getBounds();
@@ -54,8 +55,8 @@ public abstract class Entity extends Group {
     }
 
     public void applyVelocity() {
-        setTranslateX(getTranslateX() + velocity.getX());
-        setTranslateY(getTranslateY() + velocity.getY());
+        setTranslateX((getTranslateX() + velocity.getX()));
+        setTranslateY((getTranslateY() + velocity.getY()));
         lastMove = velocity;
     }
 

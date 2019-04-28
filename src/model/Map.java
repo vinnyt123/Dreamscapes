@@ -24,7 +24,8 @@ public class Map extends Pane {
     private ImageView darkness;
     private final double WIDTH;
     private final double HEIGHT;
-    static double GRAVITY = 0.4;
+    public static final double SCALE = 0.5;
+    static double GRAVITY = 0.4/(SCALE*SCALE);
     static double TERMINAL_VELOCITY = 15;
     private static final double VIEWPORTWIDTH = 740;
     private static final double VIEWPORTHEIGHT = 480;

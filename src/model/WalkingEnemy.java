@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 public class WalkingEnemy extends Enemy {
-    private static final double SPEED = 2;
+    private static final double SPEED = 2/Map.SCALE;
     private static final double WIDTH = 60;
     private static final double HEIGHT = 47;
     private static final double HEALTH = 0.32;
@@ -24,8 +24,8 @@ public class WalkingEnemy extends Enemy {
     private SpriteAnimation dieLeft;
     private SpriteAnimation attackRight;
     private SpriteAnimation attackLeft;
-    private static final double KNOCKBACK_PLAYER = 8;
-    private static final double KNOCKBACK_THIS = 5;
+    private static final double KNOCKBACK_PLAYER = 8/Map.SCALE;
+    private static final double KNOCKBACK_THIS = 5/Map.SCALE;
     private boolean movingRight = true;
     private WalkingEnemySpawner walkingEnemySpawner;
 
