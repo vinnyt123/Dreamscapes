@@ -61,6 +61,8 @@ public class PlayingState extends StackPane {
     private Pane mapLayer = new Pane();
     private Pane loaderRoot;
     private Map currentMap;
+    private Pane gameOverPane;
+    private TimerTask task;
 
     PlayingState(HashSet<String> keysPressed) {
         this.keysPressed = keysPressed;
@@ -99,12 +101,18 @@ public class PlayingState extends StackPane {
 
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(GameOverFile));
         try {
-            Pane pane = loader.load();
+            gameOverPane = loader.load();
             GameCompleteController gc = loader.getController();
             gc.setLabels(secondsConverter(getSecondsPassed()), player.deathCount.get());
-            this.getChildren().add(pane);
+            this.getChildren().add(gameOverPane);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    void removeGameOver() {
+        if (gameOverPane != null) {
+            this.getChildren().remove(gameOverPane);
         }
     }
 
@@ -133,7 +141,7 @@ public class PlayingState extends StackPane {
 
     void startTimer() {
         gameTimer = new Timer();
-        TimerTask task = new TimerTask() {
+        task = new TimerTask() {
             @Override
             public void run() {
                 secondsPassed++;
@@ -144,7 +152,8 @@ public class PlayingState extends StackPane {
     }
 
     void pauseTimer() {
-            gameTimer.cancel();
+        gameTimer.cancel();
+        task.cancel();
     }
 
     Map getCurrentMap() {

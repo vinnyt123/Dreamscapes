@@ -22,6 +22,7 @@ public class GameManager extends StackPane {
 
     public void switchToMenu() {
         this.getChildren().clear();
+        playingState.removeGameOver();
         this.getChildren().add(mainMenuState);
         mainMenuState.setScreen(MainMenuState.mainMenuID);
         gameLoop.stop();
