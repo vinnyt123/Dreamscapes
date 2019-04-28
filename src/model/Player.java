@@ -19,11 +19,12 @@ public class Player extends Entity {
     static final double WIDTH = 64;
     static final double HEIGHT = 64;
     IntegerProperty deathCount = new SimpleIntegerProperty();
+    private SoundEffect walkSound = new SoundEffect("/resources/sounds/walk.wav");
+    private SoundEffect attackSound = new SoundEffect("/resources/sounds/swish.wav");
+    private SoundEffect damageSound = new SoundEffect("/resources/sounds/damage.wav");
 
     private PlayerSprite playerSprite = new DefaultPlayer();
-
     private int attackCount = 0;
-
     private int jumpCount = 0;
     private List<Weapon> playerWeapons = new ArrayList<>();
     private Weapon currentWeapon;
@@ -49,6 +50,8 @@ public class Player extends Entity {
         pm.getHealthBar().progressProperty().bind(health);
         pm.getDeathCount().textProperty().bind(deathCount.asString());
 
+        walkSound.setVolume(0.1);
+        damageSound.setVolume(0.2);
         this.getChildren().addAll(playerSprite);
     }
     public Weapon getCurrentWeapon() {
@@ -86,6 +89,7 @@ public class Player extends Entity {
 
     public void attack() {
         if(attackCount == 1) {
+            attackSound.playSound();
             isAttacking = true;
             velocity = new Point2D((isRight) ? ATTACKSLIDE : -ATTACKSLIDE, velocity.getY());
         }
@@ -99,6 +103,7 @@ public class Player extends Entity {
         isKnockback = true;
         setVelocity(new Point2D(xDistance, yDistance));
         if (isDamage) {
+            damageSound.playSound();
             isFlashing = true;
             timer.schedule(new coolDownTimer(), DAMAGE_COOLDOWN);
         }
@@ -130,10 +135,16 @@ public class Player extends Entity {
 
             if (keysPressed.contains(controls.getLeftKey())) {
                 moveLeft();
+                if(!inAir) {
+                    walkSound.playSound();
+                }
             }
 
             if (keysPressed.contains(controls.getRightKey())) {
                 moveRight();
+                if(!inAir) {
+                    walkSound.playSound();
+                }
             }
 
             if (keysPressed.contains(controls.getSwitchKey())) {

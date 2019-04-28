@@ -1,13 +1,7 @@
 package model;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
-import javafx.util.Duration;
 
 
 public class DoubleJumpBoots extends Item  {

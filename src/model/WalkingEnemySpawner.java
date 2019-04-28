@@ -19,7 +19,7 @@ public class WalkingEnemySpawner extends Enemy {
 
     private static final double WIDTH = 138;
     private static final double HEIGHT = 116;
-    private static final double HEALTH = 10;
+    private static final double HEALTH = 0.32;
 
     private int count = 0;
     private double secondsBetweenSpawn = 1;
