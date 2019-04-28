@@ -8,6 +8,7 @@ import javafx.util.Duration;
 
 import java.io.*;
 import java.util.HashSet;
+import java.util.List;
 
 public class GameManager extends StackPane {
 
@@ -102,7 +103,7 @@ public class GameManager extends StackPane {
     }
 
     public void setUp() {
-        mainMenuState = new MainMenuState();
+        mainMenuState = new MainMenuState(this);
         playingState = new PlayingState(keysPressed);
         setUpGameLoop();
         switchToMenu();
@@ -155,5 +156,13 @@ public class GameManager extends StackPane {
         } catch (IOException i) {
             i.printStackTrace();
         }
+    }
+
+    public MainMenuState getMainMenuState() {
+        return mainMenuState;
+    }
+
+    public HighScores getHighscores() {
+        return highScores;
     }
 }
