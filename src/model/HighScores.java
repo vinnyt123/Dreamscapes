@@ -23,11 +23,6 @@ public class HighScores implements Serializable {
         Collections.sort(highScores);
     }
 
-    public void printScores() {
-        for (Score score : highScores) {
-            System.out.println(score);
-        }
-    }
 
     public boolean isEmpty() {
         return highScores.isEmpty();

@@ -171,8 +171,6 @@ public class Player extends Entity {
     }
 
     void playAnimation() {
-        //System.out.println("is attacking: " + isAttacking + " is flashing: " + isFlashing);
-        //System.out.println("in air: " + inAir + " is right: " + isRight + " controls pressed: " + controls.isAnyKeyPressed(keysPressed));
         if(isFlashing && isRight) {
             playerSprite.damageRight();
         } else if(isFlashing) {
