@@ -7,7 +7,7 @@ import javafx.scene.shape.Rectangle;
 public class Spikes extends GameObject {
 
     private static final double DAMAGE = 0.26;
-    private static double KNOCKBACK_X = 20;
+    private static double KNOCKBACK_X = 10;
     private static double KNOCKBACK_Y = 10;
     private static final Image SPIKE_IMAGE = new Image("images/372x455_Spike.png");
 
@@ -33,6 +33,9 @@ public class Spikes extends GameObject {
             if(entity instanceof Player) {
                 ((Player) entity).redFlash();
                 ((Player) entity).knockBack((entity.getLastMove().getX() < 0) ? KNOCKBACK_X : -KNOCKBACK_X, (entity.getLastMove().getY()<0) ? KNOCKBACK_Y : -KNOCKBACK_Y, true);
+                if (entity.isDying) {
+                    entity.setInAir(false);
+                }
             } else if( entity instanceof Enemy) {
                 ((Enemy) entity).redFlash();
             }
