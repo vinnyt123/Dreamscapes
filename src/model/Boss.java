@@ -37,6 +37,7 @@ public class Boss extends Enemy {
     private SpriteAnimation damageRight;
     private SpriteAnimation damageLeft;
 
+    private SoundEffect dieSound = new SoundEffect("/resources/sounds/boss_die.wav");
     private static final double DAMAGE1 = 0.1;
     private static final double DAMAGE2 = 0.1;
     private static final double DAMAGE3 = 0.3;
@@ -63,6 +64,7 @@ public class Boss extends Enemy {
 
     //TODO: make sprite not blurry by scaling the image in photoshop then using that, rather than scaling in java
     private void createSprite() {
+        dieSound.setVolume(0.25);
         imageView = new ImageView(SPRITE_SHEET);
         imageView.setSmooth(false);
         imageView.setEffect(colorAdjust);
@@ -165,6 +167,7 @@ public class Boss extends Enemy {
 
     @Override
     public void deadAnimation() {
+        dieSound.playSound();
         isDying = true;
         bossBar.setVisible(false);
         if(isRight) {

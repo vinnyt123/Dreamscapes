@@ -14,10 +14,14 @@ public class SoundEffect {
             Media sound = new Media(SoundEffect.class.getResource(fileLocation).toURI().toString());
             mp = new MediaPlayer(sound);
             mp.setOnEndOfMedia(() -> mp.stop());
-            mp.setVolume(0.25);
+            mp.setVolume(0.50);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
+    }
+
+    void setVolume(double volume) {
+        mp.setVolume(volume);
     }
 
     void playSound() {
