@@ -27,7 +27,8 @@ class SoundEffect {
 
     void playSound() {
         if(!clip.isRunning()) {
-            clip.loop(1);
+            clip.start();
+            clip.setFramePosition(0);
         }
     }
 
