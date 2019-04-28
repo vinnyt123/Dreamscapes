@@ -1,5 +1,6 @@
 package model;
 
+import controllers.GameCompleteController;
 import controllers.MainMenuController;
 import controllers.PauseMenuController;
 import javafx.animation.KeyFrame;
@@ -48,6 +49,8 @@ public class PlayingState extends StackPane {
     public static String level1File = "view/Level1.fxml";
     public static String bossArenaID = "BossArena";
     public static String bossArenaFile = "view/BossArena.fxml";
+
+    public static String GameOverFile = "view/GameOverScreen.fxml";
 
     public static final String STARTING_LEVEL = tutorialID;
 
@@ -100,6 +103,19 @@ public class PlayingState extends StackPane {
         }
         return time + ((seconds - 60 * minutes));
     }
+
+        public void addGameOverPane() {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(GameOverFile));
+            try {
+                Pane pane = loader.load();
+                GameCompleteController gc = loader.getController();
+                gc.setLabels(secondsConverter(getSecondsPassed()), player.deathCount.get());
+                this.getChildren().add(pane);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
     void setMap(String name, String mapFrom) {
         loader = new FXMLLoader(getClass().getClassLoader().getResource(mapsMap.get(name)));

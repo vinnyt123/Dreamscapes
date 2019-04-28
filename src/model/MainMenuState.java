@@ -15,8 +15,6 @@ public class MainMenuState extends StackPane {
     private static final String BACKGROUND_IMAGE_PATH = "images/MenuBackground.png";
     public static String mainMenuID = "Main Menu";
     public static String mainMenuFile = "view/MainMenu.fxml";
-    public static String GameOverID = "Game Complete";
-    public static String GameOverFile = "view/GameOverScreen.fxml";
 
     private FXMLLoader loader;
 
@@ -32,7 +30,6 @@ public class MainMenuState extends StackPane {
         createBackground();
         this.getChildren().addAll(background, controlsLayer);
         loadScreen(mainMenuID, mainMenuFile);
-        loadScreen(GameOverID, GameOverFile);
         setScreen(mainMenuID);
         System.out.println(background.getBoundsInParent());
         System.out.println(controlsLayer.getBoundsInParent());

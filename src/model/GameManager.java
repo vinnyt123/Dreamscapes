@@ -47,15 +47,12 @@ public class GameManager extends StackPane {
         mainMenuState.setOpacity(0.0);
         playingState.pauseTimer();
         FadeTransition ft = new FadeTransition(Duration.millis(3000), mainMenuState);
-        GameCompleteController gc = mainMenuState.getLoader().getController();
-        gc.setLabels(playingState.secondsConverter(playingState.getSecondsPassed()), playingState.getPlayer().deathCount.get());
         ft.setFromValue(0.0);
         ft.setToValue(1.0);
         ft.setCycleCount(1);
         ft.play();
         gameLoop.stop();
-        this.getChildren().add(mainMenuState);
-        mainMenuState.setScreen(MainMenuState.GameOverID);
+        playingState.addGameOverPane();
     }
 
     public void saveScore(String playerName) {
