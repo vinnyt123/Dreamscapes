@@ -9,11 +9,11 @@
 
 <AnchorPane onKeyPressed="#playBtnPressed" prefHeight="900.0" prefWidth="1440.0" stylesheets="@../resources/Styles.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.MainMenuController">
    <children>
-      <ImageView fx:id="imageView" fitHeight="925.0" fitWidth="1605.0" pickOnBounds="true" preserveRatio="true">
+      <!--<ImageView fx:id="imageView" fitHeight="925.0" fitWidth="1605.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/MenuBackground.png" />
          </image>
-      </ImageView>
+      </ImageView>-->
       <VBox layoutX="358.0" layoutY="127.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="322.0" spacing="50.0" AnchorPane.bottomAnchor="141.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="350.0">
          <children>
             <Button fx:id="playBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#playBtnPressed" prefHeight="50.0" prefWidth="300.0" styleClass="Button" text="Play">
