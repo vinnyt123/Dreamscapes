@@ -27,6 +27,7 @@ public class Main extends Application {
         primaryStage.getIcons().add(new Image("/images/Icon.png"));
         primaryStage.setResizable(false);
         primaryStage.setOnCloseRequest(event -> {
+            gameManager.serializeHighScores();
             Platform.exit();
             System.exit(0);
         });

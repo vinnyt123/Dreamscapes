@@ -6,6 +6,7 @@ import javafx.animation.FadeTransition;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
+import java.io.*;
 import java.util.HashSet;
 
 public class GameManager extends StackPane {
@@ -14,6 +15,7 @@ public class GameManager extends StackPane {
     private AnimationTimer gameLoop;
     private MainMenuState mainMenuState;
     private PlayingState playingState;
+    private HighScores highScores;
 
     public GameManager() {
         super();
@@ -45,17 +47,21 @@ public class GameManager extends StackPane {
         mainMenuState.setOpacity(0.0);
         playingState.pauseTimer();
         FadeTransition ft = new FadeTransition(Duration.millis(3000), mainMenuState);
-        GameCompleteController gc = mainMenuState.getLoader().getController();
-        gc.setLabels(playingState.secondsConverter(playingState.getSecondsPassed()), playingState.getPlayer().deathCount.get());
         ft.setFromValue(0.0);
         ft.setToValue(1.0);
         ft.setCycleCount(1);
         ft.play();
         gameLoop.stop();
-        this.getChildren().add(mainMenuState);
-        mainMenuState.setScreen(MainMenuState.GameOverID);
+        playingState.addGameOverPane();
     }
 
+    public void saveScore(String playerName) {
+
+        long secondsPassedNum = playingState.getSecondsPassed();
+        String secondsString = playingState.secondsConverter(secondsPassedNum);
+        int deathCount = playingState.getPlayer().deathCount.get();
+        highScores.addScore(new Score(secondsPassedNum,secondsString,deathCount, playerName));
+    }
 
     public PlayingState getPlayingState() {
         return playingState;
@@ -101,5 +107,53 @@ public class GameManager extends StackPane {
         setUpGameLoop();
         switchToMenu();
         setUpHashSet();
+        deserializeHighScores();
+    }
+
+    private void deserializeHighScores() {
+        try {
+            File file = new File("employee.ser");
+            if (!file.exists()) {
+                highScores = new HighScores();
+            } else {
+                FileInputStream fileIn = new FileInputStream(file);
+                ObjectInputStream in = new ObjectInputStream(fileIn);
+                highScores = (HighScores) in.readObject();
+                in.close();
+                fileIn.close();
+                highScores.printScores();
+            }
+        } catch (IOException i) {
+            highScores = new HighScores();
+            System.out.println("Please delete the file employee.ser.");
+            return;
+        } catch (ClassNotFoundException c) {
+            System.out.println("Employee class not found");
+            c.printStackTrace();
+            return;
+        }
+    }
+
+    public void serializeHighScores() {
+        try {
+            if (!highScores.isEmpty()) {
+                //The following line of code gets the path to the jar so may work on both windows and linux
+                //MyClass.class.getProtectionDomain().getCodeSource().getLocation().getPath()
+                File file = new File("employee.ser");
+                /*if (!file.exists()) {
+                    file.createNewFile();
+                }*/
+
+                FileOutputStream fileOut =
+                        new FileOutputStream(file);
+                ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                out.writeObject(highScores);
+                out.close();
+                fileOut.close();
+                System.out.printf("Serialized data is saved in /tmp/employee.ser");
+            }
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
     }
 }
