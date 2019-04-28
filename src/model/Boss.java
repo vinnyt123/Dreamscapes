@@ -38,6 +38,7 @@ public class Boss extends Enemy {
     private SpriteAnimation damageLeft;
 
     private SoundEffect dieSound = new SoundEffect("resources/sounds/boss_die.wav");
+    private SoundEffect damageSound = new SoundEffect("resources/sounds/boss_damage.wav");
     private static final double DAMAGE1 = 0.1;
     private static final double DAMAGE2 = 0.1;
     private static final double DAMAGE3 = 0.3;
@@ -121,6 +122,7 @@ public class Boss extends Enemy {
 
     void attack() {
         if(isAttacking && (playerPos.getX() > getTranslateX()-10 && playerPos.getX() < getTranslateX()+WIDTH) && playerPos.getY() + Player.WIDTH/2 > getTranslateY() + 50 && !hasAttacked) {
+            damageSound.playSound();
             player.redFlash();
             hasAttacked = true;
             player.health.setValue(player.health.getValue() - damage);

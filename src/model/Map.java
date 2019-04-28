@@ -63,9 +63,9 @@ public class Map extends Pane {
                         WalkingEnemySpawner walkingEnemySpawner;
                         if (itemId.endsWith("Left")) {
                             if (itemId.contains("__")) {
-                                walkingEnemySpawner = new WalkingEnemySpawner(player, true, new Point2D(2200, 200));
+                                walkingEnemySpawner = new WalkingEnemySpawner(player, true, new Point2D(2400, 300));
                             } else {
-                                walkingEnemySpawner = new WalkingEnemySpawner(player, true, new Point2D(1500, 500));
+                                walkingEnemySpawner = new WalkingEnemySpawner(player, true, new Point2D(2400, 500));
                             }
                         } else {
                             walkingEnemySpawner = new WalkingEnemySpawner(player, false, new Point2D(1500, 500));

@@ -19,6 +19,7 @@ public class FlyingEnemy extends Enemy {
     private static final double KNOCKBACK_THIS = 4/Map.SCALE;
     private static final double HEALTH = 0.24;
     private static final Image SPRITE_SHEET = new Image("images/eye_sheet.png");
+    private SoundEffect flyingSound = new SoundEffect("resources/sounds/flying_damage.wav");
     private SpriteAnimation animation;
     private SpriteAnimation flyRight;
     private SpriteAnimation flyLeft;
@@ -99,6 +100,7 @@ public class FlyingEnemy extends Enemy {
     }
 
     public void deadAnimation() {
+        flyingSound.playSound();
         isDying = true;
         if(isRight) {
             animation = dieRight;

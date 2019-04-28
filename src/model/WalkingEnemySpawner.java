@@ -16,6 +16,7 @@ public class WalkingEnemySpawner extends Enemy {
 
     private static final Image SPRITE_SHEET_RIGHT = new Image("images/Spawner.png");
     private static final Image SPRITE_SHEET_LEFT = new Image("images/SpawnerLeft.png");
+    private SoundEffect spawnSound = new SoundEffect("resources/sounds/spawn.wav");
 
     private static final double WIDTH = 138;
     private static final double HEIGHT = 116;
@@ -87,7 +88,7 @@ public class WalkingEnemySpawner extends Enemy {
             if (count % (secondsBetweenSpawn * 60) == 0 && numberOfEnemies < maxNumberOfEnemies) {
                 numberOfEnemies++;
                 WalkingEnemy newWalkingEnemy = new WalkingEnemy(player, this);
-
+                spawnSound.playSound();
                 if (isFacingLeft) {
                     newWalkingEnemy.spawnAt(new Point2D(this.getBoundsInParent().getMinX(), this.getBoundsInParent().getMinY() + this.getBoundsInParent().getHeight() / 2));
                     newWalkingEnemy.changeDirection();

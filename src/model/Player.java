@@ -24,6 +24,7 @@ public class Player extends Entity {
     private SoundEffect walkSound = new SoundEffect("resources/sounds/walk.wav");
     private SoundEffect attackSound = new SoundEffect("resources/sounds/swish.wav");
     private SoundEffect damageSound = new SoundEffect("resources/sounds/damage.wav");
+    private SoundEffect jumpSound = new SoundEffect("resources/sounds/jump.wav");
 
     private PlayerSprite playerSprite = new DefaultPlayer();
     private int attackCount = 0;
@@ -65,9 +66,11 @@ public class Player extends Entity {
 
     private void jump() {
         if (!this.getInAir()) {
+            jumpSound.playSound();
             this.setInAir(true);
             setVelocity(new Point2D(0, JUMPHEIGHT));
         } else if (hasBoots && !hasDoubleJumped && jumpCount == 1) {
+            jumpSound.playSound();
             hasDoubleJumped = true;
             if (isRight) {
                 playerSprite.flipRight();

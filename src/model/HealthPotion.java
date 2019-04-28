@@ -10,20 +10,22 @@ import javafx.util.Duration;
 public class HealthPotion extends Item {
 
     private static final Image TILE_IMAGE = new Image("images/hp_potion.png");
-    Timeline healthRestoreTranstion;
+    private SoundEffect itemSound = new SoundEffect("resources/sounds/item.wav");
+    Timeline healthRestoreTransition;
 
     public HealthPotion(Node node) {
         super(TILE_IMAGE, node);
-        healthRestoreTranstion = new Timeline();
+        healthRestoreTransition = new Timeline();
     }
 
     @Override
     public boolean intersect(Player player) {
         if (player.getBounds().intersects(this.getBoundsInParent()) && player.getHealth().get() != 1.0) {
-            healthRestoreTranstion.getKeyFrames().add(new KeyFrame(Duration.millis(2000),
+            itemSound.playSound();
+            healthRestoreTransition.getKeyFrames().add(new KeyFrame(Duration.millis(2000),
                     new KeyValue(player.getHealth(), 1.0)));
-            healthRestoreTranstion.setCycleCount(1);
-            healthRestoreTranstion.play();
+            healthRestoreTransition.setCycleCount(1);
+            healthRestoreTransition.play();
             return true;
         } else {
             return false;
