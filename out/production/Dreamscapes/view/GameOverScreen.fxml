@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="960.0" maxWidth="1480.0" minHeight="960.0" minWidth="1480.0" prefHeight="960.0" prefWidth="1480.0" stylesheets="@../resources/Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GameCompleteController">
+   <children>
+      <Label layoutX="579.0" layoutY="159.0" text="Game Complete!">
+         <font>
+            <Font name="System Bold" size="41.0" />
+         </font>
+      </Label>
+      <Label layoutX="640.0" layoutY="296.0" text="Completion Time:">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="640.0" layoutY="327.0" text="Total Deaths: ">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="timeLabel" layoutX="792.0" layoutY="296.0" text="0:00">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="saveScoreTextField" layoutX="642.0" layoutY="453.0" promptText="Name" style="-fx-background-color: black; -fx-text-fill: white;" />
+      <Label fx:id="deathsLabel" layoutX="788.0" layoutY="328.0" prefWidth="0.0" text="0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="676.0" layoutY="422.0" text="Save Score:">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Button layoutX="596.0" layoutY="527.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="25.0" prefWidth="287.0" styleClass="Button" text="Return to Menu">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button fx:id="saveScoreButton" layoutX="796.0" layoutY="449.0" mnemonicParsing="false" onAction="#saveScoreButtonClicked" styleClass="Button" text="Save" />
+      <Label fx:id="scoreSavedLabel" layoutX="684.0" layoutY="485.0" text="Score Saved ✓" textFill="#0af429" visible="false">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

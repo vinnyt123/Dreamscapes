@@ -25,7 +25,7 @@ public class Main extends Application {
         Scene scene = new Scene(gameManager);
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image("/images/Icon.png"));
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         primaryStage.setOnCloseRequest(event -> {
             gameManager.serializeHighScores();
             Platform.exit();
