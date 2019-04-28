@@ -1,6 +1,5 @@
 package model;
 
-import controllers.GameCompleteController;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.scene.layout.StackPane;
@@ -8,7 +7,6 @@ import javafx.util.Duration;
 
 import java.io.*;
 import java.util.HashSet;
-import java.util.List;
 
 public class GameManager extends StackPane {
 

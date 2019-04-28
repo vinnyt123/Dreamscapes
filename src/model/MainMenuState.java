@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class MainMenuState extends StackPane {
 
     private static final String BACKGROUND_IMAGE_PATH = "images/MenuBackground.png";
-    static String mainMenuID = "Main Menu";
+    public static String mainMenuID = "Main Menu";
     private static String mainMenuFile = "view/MainMenu.fxml";
     public static String scoresId = "Scores";
     public static String scoresPath = "view/Scores.fxml";
