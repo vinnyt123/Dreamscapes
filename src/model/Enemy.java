@@ -27,7 +27,6 @@ public abstract class Enemy extends Entity {
     Player player;
     Timeline flashing;
 
-    public abstract void move();
     public abstract void deadAnimation();
 
     public Enemy(Player player) {

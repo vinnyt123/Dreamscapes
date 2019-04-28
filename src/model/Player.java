@@ -12,10 +12,10 @@ import java.util.*;
 
 public class Player extends Entity {
 
-    private static final double JUMPHEIGHT = -12;
+    private static final double JUMPHEIGHT = -12.5/Map.SCALE;
     private static final long DAMAGE_COOLDOWN = 800;
-    private static final double RUNSPEED = 5;
-    private static final double ATTACKSLIDE = 8;
+    private static final double RUNSPEED = 5/Map.SCALE;
+    private static final double ATTACKSLIDE = 8/Map.SCALE;
     static final double WIDTH = 64;
     static final double HEIGHT = 64;
     IntegerProperty deathCount = new SimpleIntegerProperty();
@@ -38,7 +38,7 @@ public class Player extends Entity {
         this.keysPressed = keysPressed;
         deathCount.setValue(0);
         health.setValue(1);
-        currentWeapon = new WeaponFists(this);
+        currentWeapon = new WeaponSword(this);
         playerWeapons.add(currentWeapon);
     }
 
@@ -50,8 +50,6 @@ public class Player extends Entity {
         pm.getHealthBar().progressProperty().bind(health);
         pm.getDeathCount().textProperty().bind(deathCount.asString());
 
-        walkSound.setVolume(0.1);
-        damageSound.setVolume(0.2);
         this.getChildren().addAll(playerSprite);
     }
     public Weapon getCurrentWeapon() {

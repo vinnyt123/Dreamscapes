@@ -81,9 +81,14 @@ public class GameManager extends StackPane {
 
     private void setUpGameLoop() {
         gameLoop = new AnimationTimer() {
-            public void handle(long currentNanoTime) {
-                playingState.getCurrentMap().moveEntities();
-                playingState.checkKeys();
+            private long lastUpdate = 0 ;
+            @Override
+            public void handle(long now) {
+                if (now - lastUpdate >= 24_000_000) {
+                    playingState.getCurrentMap().moveEntities();
+                    playingState.checkKeys();
+                    lastUpdate = now ;
+                }
             }
         };
     }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane onKeyPressed="#playBtnPressed" prefHeight="900.0" prefWidth="1440.0" stylesheets="@../resources/Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainMenuController">
+   <children>
+      <!--<ImageView fx:id="imageView" fitHeight="925.0" fitWidth="1605.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/MenuBackground.png" />
+         </image>
+      </ImageView>-->
+      <VBox layoutX="358.0" layoutY="127.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="322.0" spacing="50.0" AnchorPane.bottomAnchor="141.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="350.0">
+         <children>
+            <Button fx:id="playBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#playBtnPressed" prefHeight="50.0" prefWidth="300.0" styleClass="Button" text="Play">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
+            <Button fx:id="scoresButton" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onScoresButtonPressed" prefHeight="50.0" prefWidth="300.0" styleClass="Button" text="Scores">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
+            <Button layoutX="10.0" layoutY="60.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#editControlsPressed" prefHeight="50.0" prefWidth="300.0" styleClass="Button" text="Controls">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

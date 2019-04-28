@@ -19,8 +19,8 @@ public class Boss extends Enemy {
     private static final Image SPRITE_SHEET = new Image("images/boss_sheet.png");
     private static final double WIDTH = 220;
     private static final double HEIGHT = 220;
-    private static final double HEALTH = 0.01;
-    private double SPEED = 3;
+    private static final double HEALTH = 1.0;
+    private double SPEED = 3/Map.SCALE;
 
     private SpriteAnimation animation;
 
@@ -64,7 +64,6 @@ public class Boss extends Enemy {
 
     //TODO: make sprite not blurry by scaling the image in photoshop then using that, rather than scaling in java
     private void createSprite() {
-        dieSound.setVolume(0.25);
         imageView = new ImageView(SPRITE_SHEET);
         imageView.setSmooth(false);
         imageView.setEffect(colorAdjust);

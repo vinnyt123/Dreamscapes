@@ -23,7 +23,7 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <Label fx:id="timeLabel" layoutX="788.0" layoutY="297.0" text="0:00">
+      <Label fx:id="timeLabel" layoutX="792.0" layoutY="296.0" text="0:00">
          <font>
             <Font size="17.0" />
          </font>

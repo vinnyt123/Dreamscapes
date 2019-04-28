@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane prefHeight="2000.0" prefWidth="3000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle fx:id="enemyPlatform1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="275.0" layoutY="1804.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="603.0" layoutY="1677.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="6.0" layoutY="1975.0" stroke="BLACK" strokeType="INSIDE" width="2994.0" />
+      <Circle fill="#25ff1f" layoutX="685.0" layoutY="1432.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
+      <Line endX="1230.0" endY="1680.0" startX="1230.0" startY="1680.0" />
+   </children>
+</AnchorPane>

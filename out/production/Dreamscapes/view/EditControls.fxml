@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="900.0" maxWidth="1440.0" minHeight="900.0" minWidth="1440.0" prefHeight="900.0" prefWidth="1440.0" stylesheets="@../resources/Styles.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.ControlsController">
+   <children>
+      <ImageView fitHeight="900.0" fitWidth="1440.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/MenuBackground.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="backButton" layoutX="671.0" layoutY="732.0" mnemonicParsing="false" onAction="#backBtnPressed" styleClass="Button" text="Save Changes" />
+   </children>
+</AnchorPane>

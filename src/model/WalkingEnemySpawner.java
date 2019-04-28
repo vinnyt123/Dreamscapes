@@ -26,8 +26,8 @@ public class WalkingEnemySpawner extends Enemy {
     private final int maxNumberOfEnemies = 20;
     private int numberOfEnemies = 0;
     private boolean isFacingLeft;
-    private final int SPAWN_HEIGHT = -5;
-    private final int SPAWN_XVEL = 5;
+    private final double SPAWN_HEIGHT = -5/Map.SCALE;
+    private final double SPAWN_XVEL = 5/Map.SCALE;
     private Point2D range;
     private Wall wall = null;
     private StackPane stackPane;
