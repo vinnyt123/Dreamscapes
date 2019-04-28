@@ -39,11 +39,11 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <Button layoutX="596.0" layoutY="527.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="25.0" prefWidth="287.0" styleClass="Button" text="Return to Menu">
+      <Button layoutX="596.0" layoutY="527.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="25.0" prefWidth="287.0" styleClass="CustomButton" text="Return to Menu">
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button fx:id="saveScoreButton" layoutX="796.0" layoutY="449.0" mnemonicParsing="false" onAction="#saveScoreButtonClicked" styleClass="Button" text="Save" />
+      <Button fx:id="saveScoreButton" layoutX="796.0" layoutY="449.0" mnemonicParsing="false" onAction="#saveScoreButtonClicked" styleClass="CustomButton" text="Save" />
       <Label fx:id="scoreSavedLabel" layoutX="684.0" layoutY="485.0" text="Score Saved ✓" textFill="#0af429" visible="false">
          <font>
             <Font size="17.0" />

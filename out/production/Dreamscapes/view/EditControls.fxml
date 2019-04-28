@@ -12,6 +12,6 @@
             <Image url="@../images/MenuBackground.png" />
          </image>
       </ImageView>
-      <Button fx:id="backButton" layoutX="671.0" layoutY="732.0" mnemonicParsing="false" onAction="#backBtnPressed" styleClass="Button" text="Save Changes" />
+      <Button fx:id="backButton" layoutX="671.0" layoutY="732.0" mnemonicParsing="false" onAction="#backBtnPressed" styleClass="CustomButton" text="Save Changes" />
    </children>
 </AnchorPane>

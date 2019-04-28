@@ -137,7 +137,7 @@ public class PlayingState extends StackPane {
             if(!(player.isCreatedSprite())) {
                 player.createSprite();
             }
-            FadeTransition ft = new FadeTransition(Duration.millis(3000), currentMap);
+            FadeTransition ft = new FadeTransition(Duration.millis(2000), currentMap);
             ft.setFromValue(0.0);
             ft.setToValue(1.0);
             ft.setCycleCount(1);
@@ -146,12 +146,14 @@ public class PlayingState extends StackPane {
             GameManager gm = (GameManager) getScene().getRoot();
             gm.startGameLoop();
         });
-        FadeTransition ft = new FadeTransition(Duration.millis(3000), currentMap);
+        FadeTransition ft = new FadeTransition(Duration.millis(2000), currentMap);
         ft.setFromValue(1.0);
         ft.setToValue(0.0);
         ft.setCycleCount(1);
         ft.play();
-        service.restart();
+        if(!service.isRunning()) {
+            service.restart();
+        }
 
     }
 

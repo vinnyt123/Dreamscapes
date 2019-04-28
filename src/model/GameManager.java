@@ -22,6 +22,7 @@ public class GameManager extends StackPane {
 
     public void switchToMenu() {
         this.getChildren().clear();
+        this.setStyle("-fx-background-color: black;");
         playingState.removeGameOver();
         this.getChildren().add(mainMenuState);
         mainMenuState.setScreen(MainMenuState.mainMenuID);
