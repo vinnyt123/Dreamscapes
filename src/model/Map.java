@@ -52,7 +52,9 @@ public class Map extends Pane {
                     if (itemId.startsWith("door")) {
                         gameObjects.add(new Door(item.getId().substring(item.getId().indexOf("_") + 1), (Rectangle) item, mapId));
                     } else if (itemId.startsWith("doubleJumpBoots")) {
-                        items.add(new DoubleJumpBoots(item));
+                        if (!player.hasDoubleJumpBoots()) {
+                            items.add(new DoubleJumpBoots(item));
+                        }
                     } else if (itemId.startsWith("spikes")) {
                         gameObjects.add(new Spikes((Rectangle) item));
                     } else if (itemId.startsWith("lava")) {

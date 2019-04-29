@@ -254,5 +254,9 @@ public class Player extends Entity {
             playerSprite.getCurrentAnimation().play();
         }
     }
+
+    public boolean hasDoubleJumpBoots() {
+        return hasBoots;
+    }
 }
 
