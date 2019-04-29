@@ -14,6 +14,7 @@ public class GameCompleteController {
     @FXML private Button saveScoreButton;
     @FXML private TextField saveScoreTextField;
     @FXML private Label scoreSavedLabel;
+    @FXML private Button returnToMenuButton;
 
 
 
@@ -34,4 +35,9 @@ public class GameCompleteController {
         scoreSavedLabel.setVisible(true);
         ((GameManager) timeLabel.getScene().getRoot()).saveScore(saveScoreTextField.getText());
     }
+
+    /*@FXML
+    public void initialize() {
+        saveScoreTextField.requestFocus();
+    }*/
 }

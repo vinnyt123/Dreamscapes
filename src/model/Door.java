@@ -33,7 +33,7 @@ public class Door extends GameObject {
         if (entity instanceof Player && teleportLine.getBoundsInParent().intersects(entity.getBounds())) {
             intersectCount++;
             if(intersectCount == 1) {
-                ((PlayingState) this.getScene().getRoot().getChildrenUnmodifiable().get(0)).setMap(mapToSwitch);
+                ((PlayingState) this.getScene().getRoot().getChildrenUnmodifiable().get(0)).setMap(mapToSwitch, mapDoorIsOn);
             }
         }
     }

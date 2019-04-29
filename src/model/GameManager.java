@@ -64,13 +64,6 @@ public class GameManager extends StackPane {
     }
 
     void endGame() {
-        mainMenuState.setOpacity(0.0);
-        playingState.pauseTimer();
-        FadeTransition ft = new FadeTransition(Duration.millis(3000), mainMenuState);
-        ft.setFromValue(0.0);
-        ft.setToValue(1.0);
-        ft.setCycleCount(1);
-        ft.play();
         gameLoop.stop();
         playingState.addGameOverPane();
     }

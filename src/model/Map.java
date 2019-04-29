@@ -24,10 +24,12 @@ public class Map extends Pane {
     private final double WIDTH;
     private final double HEIGHT;
     static final double SCALE = 0.5;
-    static double GRAVITY = 0.4/(SCALE*SCALE);
-    static double TERMINAL_VELOCITY = 15;
+    static double GRAVITY = 0.4/(SCALE * SCALE);
+    static double TERMINAL_VELOCITY = 15 / SCALE;
     private static final double VIEWPORTWIDTH = 740;
     private static final double VIEWPORTHEIGHT = 480;
+    private String mapFrom;
+    private Pane FXMLpane;
 
     private String mapId;
 
@@ -38,12 +40,13 @@ public class Map extends Pane {
         this.mapId = mapId;
         this.WIDTH = pane.getBoundsInParent().getWidth();
         this.HEIGHT = pane.getBoundsInParent().getHeight();
-        //this.setPrefWidth(pane.getPrefWidth());
-        //this.setPrefHeight(pane.getPrefHeight());
+        this.mapFrom = mapFrom;
+        this.FXMLpane = pane;
+    }
 
-        //Create list of rectangles that are walls/floors. Use line start to create enemy spawn point.
-        for(Node item : pane.getChildrenUnmodifiable()) {
-            if(item instanceof Rectangle) {
+    public void parseFXML() {
+        for(Node item : FXMLpane.getChildrenUnmodifiable()) {
+            if (item instanceof Rectangle) {
                 if (item.getId() != null) {
                     String itemId = item.getId();
                     if (itemId.startsWith("door")) {
@@ -52,11 +55,11 @@ public class Map extends Pane {
                         items.add(new DoubleJumpBoots(item));
                     } else if (itemId.startsWith("spikes")) {
                         gameObjects.add(new Spikes((Rectangle) item));
-                    } else if(itemId.startsWith("lava")) {
+                    } else if (itemId.startsWith("lava")) {
                         gameObjects.add(new Lava((Rectangle) item));
                     } else if (itemId.startsWith("potion")) {
                         items.add(new HealthPotion(item));
-                    } else if(itemId.startsWith("enemySpawner")) {
+                    } else if (itemId.startsWith("enemySpawner")) {
                         WalkingEnemySpawner walkingEnemySpawner;
                         if (itemId.endsWith("Left")) {
                             if (itemId.contains("__")) {
@@ -77,12 +80,12 @@ public class Map extends Pane {
 
             } else if (item instanceof Line) {
                 enemies.add(new FlyingEnemy(item.getLayoutX(), item.getLayoutY(), player));
-            } else if(item instanceof ImageView) {
+            } else if (item instanceof ImageView) {
                 Image image = ((ImageView) item).getImage();
                 ImageView imageView = new ImageView(image);
                 imageView.setFitWidth(WIDTH);
                 imageView.setFitHeight(HEIGHT);
-                if(!mapId.startsWith("Boss")) {
+                if (!mapId.startsWith("Boss")) {
                     imageView.setTranslateX(-500);
                 }
                 backgrounds.add(imageView);
@@ -103,18 +106,21 @@ public class Map extends Pane {
                 }
             }
         }
-
-        this.getChildren().addAll(backgrounds);
-        this.getChildren().addAll(gameObjects);
-        this.getChildren().addAll(enemies);
-        this.getChildren().addAll(items);
-        this.getChildren().add(this.player);
-        for (WalkingEnemySpawner spawner : spawners) {
-            spawner.setUpCollisions();
-        }
+            this.getChildren().addAll(backgrounds);
+            this.getChildren().addAll(gameObjects);
+            this.getChildren().addAll(enemies);
+            this.getChildren().addAll(items);
+            this.getChildren().add(this.player);
+            for (WalkingEnemySpawner spawner : spawners) {
+                spawner.setUpCollisions();
+            }
     }
 
     void moveEntities() {
+        if(!mapId.startsWith("BossArena")) {
+            moveCamera();
+        }
+
         if(player.health.get() <= 0) {
             player.resetPlayer();
         }
@@ -172,10 +178,6 @@ public class Map extends Pane {
                 this.getChildren().remove(item);
                 it2.remove();
             }
-        }
-
-        if(!mapId.startsWith("BossArena")) {
-            moveCamera();
         }
     }
 

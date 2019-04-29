@@ -115,10 +115,18 @@ public class PlayingState extends StackPane {
     void addGameOverPane() {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(GameOverFile));
         try {
+            pauseTimer();
+            this.getChildren().remove(pauseMenuLayer);
             gameOverPane = loader.load();
+            gameOverPane.setOpacity(0.0);
             GameCompleteController gc = loader.getController();
             gc.setLabels(secondsConverter(getSecondsPassed()), player.deathCount.get());
             this.getChildren().add(gameOverPane);
+            FadeTransition ft = new FadeTransition(Duration.millis(2000), gameOverPane);
+            ft.setFromValue(0.0);
+            ft.setToValue(1.0);
+            ft.setCycleCount(1);
+            ft.play();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -131,9 +139,11 @@ public class PlayingState extends StackPane {
         mapLayer.getChildren().clear();
     }
 
-    void setMap(String name) {
+    void setMap(String name, String mapFrom) {
         mapLayer.getChildren().clear();
-        currentMap = new Map(mapsMap.get(name), player, name, null);
+        currentMap = new Map(mapsMap.get(name), player, name, mapFrom);
+        currentMap.setOpacity(0.0);
+        currentMap.parseFXML();
         mapLayer.getChildren().add(currentMap);
         if(!player.isCreatedSprite()) {
             player.createSprite();
@@ -143,6 +153,7 @@ public class PlayingState extends StackPane {
         ft.setToValue(1.0);
         ft.setCycleCount(1);
         ft.play();
+
         requestFocus();
     }
 
@@ -153,7 +164,7 @@ public class PlayingState extends StackPane {
     void newGame() {
         secondsPassed = 0;
         player = new Player(keysPressed);
-        setMap(STARTING_LEVEL);
+        setMap(STARTING_LEVEL, null);
         startTimer();
     }
 
@@ -216,24 +227,24 @@ public class PlayingState extends StackPane {
 
     private void nextMap() {
         if (currentMap.getMapId().equals(tutorialID)) {
-            setMap(level1ID);
+            setMap(level1ID, null);
         } else if (currentMap.getMapId().equals(level1ID)) {
             player.addDoubleJumpBoots();
-            setMap(bossArenaID);
+            setMap(bossArenaID, null);
         }
     }
 
     private void previousMap() {
         if (currentMap.getMapId().equals(level1ID)) {
-            setMap(tutorialID);
+            setMap(tutorialID, null);
         } else if(currentMap.getMapId().equals(bossArenaID)) {
-            setMap(level1ID);
+            setMap(level1ID, null);
         }
     }
 
     private void advanceToBossLevel() {
         player.addDoubleJumpBoots();
-        setMap(bossArenaID);
+        setMap(bossArenaID, null);
     }
 
     void createBootsOverLay() {

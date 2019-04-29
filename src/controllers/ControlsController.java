@@ -3,6 +3,7 @@ package controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import model.GameManager;
+import model.MainMenuState;
 
 public class ControlsController {
 
@@ -10,9 +11,6 @@ public class ControlsController {
 
     @FXML
     private void backBtnPressed() {
-        ((GameManager) backButton.getScene().getRoot()).switchToMenu();
+        ((GameManager) backButton.getScene().getRoot()).getMainMenuState().setScreen(MainMenuState.mainMenuID);
     }
-
-
-
 }

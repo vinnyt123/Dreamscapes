@@ -33,7 +33,7 @@ public class Spikes extends GameObject {
             if(entity instanceof Player) {
                 ((Player) entity).redFlash();
                 ((Player) entity).knockBack((entity.getLastMove().getX() < 0) ? KNOCKBACK_X : -KNOCKBACK_X, (entity.getLastMove().getY()<0) ? KNOCKBACK_Y : -KNOCKBACK_Y, true);
-                if (entity.isDying) {
+                if (entity.health.get() >= 0) {
                     entity.setInAir(false);
                 }
             } else if( entity instanceof Enemy) {
