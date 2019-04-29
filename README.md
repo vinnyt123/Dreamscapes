@@ -8,4 +8,5 @@ cd Desktop
 
 java -jar Dreamscapes.jar
 
-After a brief pause the game will launch. For best results use on Windows, though it also does run Linux.
+After a brief pause the game will launch. For best results use on Windows, though it also does run Linux.  
+To run the code from source, simply open it with your IDE of choice and run through there.
