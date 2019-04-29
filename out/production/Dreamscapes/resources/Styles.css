@@ -23,6 +23,11 @@
 .table-view {
     -fx-border-color : #ffffff;
 }
+
+.table-view:empty {
+    -fx-background-color:  #18402a;
+}
+
 .table-view .column-header .label{
    -fx-text-fill: white;
    -fx-font-weight: bold;
