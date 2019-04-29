@@ -1,11 +1,13 @@
 package controllers;
 
+import javafx.application.Platform;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import model.GameManager;
-import model.MainMenuState;
 
 public class GameCompleteController {
 
@@ -14,7 +16,6 @@ public class GameCompleteController {
     @FXML private Button saveScoreButton;
     @FXML private TextField saveScoreTextField;
     @FXML private Label scoreSavedLabel;
-    @FXML private Button returnToMenuButton;
 
 
 
@@ -29,15 +30,24 @@ public class GameCompleteController {
     }
 
     @FXML
-    private void saveScoreButtonClicked() {
-        saveScoreButton.setDisable(true);
-        saveScoreTextField.setDisable(true);
-        scoreSavedLabel.setVisible(true);
-        ((GameManager) timeLabel.getScene().getRoot()).saveScore(saveScoreTextField.getText());
+    private void saveScoreButtonClicked(Event e) {
+        if(e instanceof KeyEvent) {
+            if(((KeyEvent) e).getCode().toString().equals("ENTER")) {
+                saveScoreButton.setDisable(true);
+                saveScoreTextField.setDisable(true);
+                scoreSavedLabel.setVisible(true);
+                ((GameManager) timeLabel.getScene().getRoot()).saveScore(saveScoreTextField.getText());
+            }
+        } else {
+            saveScoreButton.setDisable(true);
+            saveScoreTextField.setDisable(true);
+            scoreSavedLabel.setVisible(true);
+            ((GameManager) timeLabel.getScene().getRoot()).saveScore(saveScoreTextField.getText());
+        }
     }
 
-    /*@FXML
+    @FXML
     public void initialize() {
-        saveScoreTextField.requestFocus();
-    }*/
+        Platform.runLater(() -> saveScoreTextField.requestFocus());
+    }
 }
