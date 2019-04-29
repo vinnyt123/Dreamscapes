@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="2000.0" maxWidth="6000.0" minHeight="2000.0" minWidth="5999.0" prefHeight="2000.0" prefWidth="5999.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="2000.0" maxWidth="6000.0" minHeight="2000.0" minWidth="5999.0" prefHeight="2000.0" prefWidth="5999.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
    <children>
       <ImageView fx:id="background11" fitHeight="2000.0" fitWidth="6000.0" pickOnBounds="true">
          <image>
@@ -109,7 +109,7 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="3032.0" layoutY="1682.0" stroke="BLACK" strokeType="INSIDE" width="336.0" /><Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="683.0" layoutX="5034.0" layoutY="375.0" stroke="BLACK" strokeType="INSIDE" width="77.0" />
       <Rectangle id="door_Level1" arcHeight="5.0" arcWidth="5.0" fill="#ff13b4" height="74.0" layoutX="2424.0" layoutY="1389.0" stroke="BLACK" strokeType="INSIDE" width="47.0" />
        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="682.0" layoutX="3966.0" layoutY="375.0" stroke="BLACK" strokeType="INSIDE" width="232.0" />
-      <Circle id="playerSpawn_Level1" fill="DODGERBLUE" layoutX="2394.0" layoutY="1391.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="playerSpawn_Level1" fill="DODGERBLUE" layoutX="2322.0" layoutY="1377.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
       <Rectangle id="potion1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="4098.0" layoutY="1499.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
       <Circle id="playerSpawn" fill="DODGERBLUE" layoutX="154.0" layoutY="1768.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="2423.0" layoutY="1364.0" stroke="BLACK" strokeType="INSIDE" width="68.0" />

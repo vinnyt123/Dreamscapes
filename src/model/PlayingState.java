@@ -55,29 +55,37 @@ public class PlayingState extends StackPane {
     private PauseMenuController pm;
     private Timer gameTimer;
     private long secondsPassed = 0;
-    private HashMap<String, String> mapsMap = new HashMap<>();
+    private HashMap<String, Pane> mapsMap = new HashMap<>();
     private FXMLLoader loader;
     private FXMLLoader pauseLoader;
     private HashSet<String> keysPressed;
     private Player player;
     private Node pauseMenuLayer;
     private Pane mapLayer = new Pane();
-    private Pane loaderRoot;
     private Map currentMap;
     private Pane gameOverPane;
     private TimerTask task;
-    private TaskService service = new TaskService();
-    private String mapFrom;
-    private String nextMap;
+    private String mapFrom = "";
+    private String nextMap = "";
 
     PlayingState(HashSet<String> keysPressed) {
         this.keysPressed = keysPressed;
         mapLayer.setStyle("-fx-background-color: black;");
         loadPauseMenu();
-        mapsMap.put(tutorialID, tutorialFile);
-        mapsMap.put(level1ID, level1File);
-        mapsMap.put(bossArenaID, bossArenaFile);
         this.getChildren().addAll(mapLayer, pauseMenuLayer);
+    }
+
+    void loadMaps() {
+        try {
+            loader = new FXMLLoader(getClass().getClassLoader().getResource(tutorialFile));
+            mapsMap.put(tutorialID, loader.load());
+            loader = new FXMLLoader(getClass().getClassLoader().getResource(level1File));
+            mapsMap.put(level1ID, loader.load());
+            loader = new FXMLLoader(getClass().getClassLoader().getResource(bossArenaFile));
+            mapsMap.put(bossArenaID, loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadPauseMenu() {
@@ -105,7 +113,6 @@ public class PlayingState extends StackPane {
     }
 
     void addGameOverPane() {
-
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(GameOverFile));
         try {
             gameOverPane = loader.load();
@@ -121,40 +128,22 @@ public class PlayingState extends StackPane {
         if (gameOverPane != null) {
             this.getChildren().remove(gameOverPane);
         }
+        mapLayer.getChildren().clear();
     }
 
-    void setMap(String name, String mapFrom) {
-        this.mapFrom = mapFrom;
-        this.nextMap = name;
-        loader = new FXMLLoader(getClass().getClassLoader().getResource(mapsMap.get(name)));
-        service.setOnSucceeded(e -> {
-            mapLayer.getChildren().clear();
-            currentMap.setOpacity(0);
-            mapLayer.getChildren().add(currentMap);
-            //Remove and re-add player to ensure they're on top of image view
-            currentMap.getChildren().remove(player);
-            currentMap.getChildren().add(player);
-            if(!(player.isCreatedSprite())) {
-                player.createSprite();
-            }
-            FadeTransition ft = new FadeTransition(Duration.millis(2000), currentMap);
-            ft.setFromValue(0.0);
-            ft.setToValue(1.0);
-            ft.setCycleCount(1);
-            ft.play();
-            requestFocus();
-            GameManager gm = (GameManager) getScene().getRoot();
-            gm.startGameLoop();
-        });
+    void setMap(String name) {
+        mapLayer.getChildren().clear();
+        currentMap = new Map(mapsMap.get(name), player, name, null);
+        mapLayer.getChildren().add(currentMap);
+        if(!player.isCreatedSprite()) {
+            player.createSprite();
+        }
         FadeTransition ft = new FadeTransition(Duration.millis(2000), currentMap);
-        ft.setFromValue(1.0);
-        ft.setToValue(0.0);
+        ft.setFromValue(0.0);
+        ft.setToValue(1.0);
         ft.setCycleCount(1);
         ft.play();
-        if(!service.isRunning()) {
-            service.restart();
-        }
-
+        requestFocus();
     }
 
     public Player getPlayer() {
@@ -164,7 +153,7 @@ public class PlayingState extends StackPane {
     void newGame() {
         secondsPassed = 0;
         player = new Player(keysPressed);
-        setMap(STARTING_LEVEL, null);
+        setMap(STARTING_LEVEL);
         startTimer();
     }
 
@@ -194,9 +183,10 @@ public class PlayingState extends StackPane {
     }
 
     void restartMap() {
-        currentMap = new Map(loaderRoot, player, currentMap.getMapId(), null);
+        currentMap = new Map(mapsMap.get(currentMap.getMapId()), player, currentMap.getMapId(), null);
         mapLayer.getChildren().clear();
         mapLayer.getChildren().add(currentMap);
+        currentMap.bringPlayerForward();
     }
 
     void checkKeys() {
@@ -226,24 +216,24 @@ public class PlayingState extends StackPane {
 
     private void nextMap() {
         if (currentMap.getMapId().equals(tutorialID)) {
-            setMap(level1ID, null);
+            setMap(level1ID);
         } else if (currentMap.getMapId().equals(level1ID)) {
             player.addDoubleJumpBoots();
-            setMap(bossArenaID, null);
+            setMap(bossArenaID);
         }
     }
 
     private void previousMap() {
-        if (currentMap.getMapId().equals(bossArenaID)) {
-            setMap(level1ID, null);
-        } else if (currentMap.getMapId().equals(level1ID)) {
-            setMap(tutorialID, null);
+        if (currentMap.getMapId().equals(level1ID)) {
+            setMap(tutorialID);
+        } else if(currentMap.getMapId().equals(bossArenaID)) {
+            setMap(level1ID);
         }
     }
 
     private void advanceToBossLevel() {
         player.addDoubleJumpBoots();
-        setMap(bossArenaID, currentMap.getMapId());
+        setMap(bossArenaID);
     }
 
     void createBootsOverLay() {
@@ -282,23 +272,4 @@ public class PlayingState extends StackPane {
 
         timeline2.setOnFinished(e -> this.getChildren().remove(pane));
     }
-
-    private class TaskService extends Service<Void> {
-        @Override
-        protected Task<Void> createTask() {
-            return new Task<Void>() {
-                @Override
-                protected Void call() {
-                    try {
-                        loaderRoot = loader.load();
-                        currentMap = new Map(loaderRoot, player, nextMap, mapFrom);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    return null;
-                }
-            };
-        }
-    }
-
 }

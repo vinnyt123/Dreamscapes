@@ -1,15 +1,12 @@
 package controllers;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.GameManager;
-import model.HighScores;
 import model.MainMenuState;
 import model.Score;
 
@@ -17,19 +14,13 @@ import java.util.List;
 
 public class ScoresController {
 
-    @FXML
-    TableView tableView;
-    @FXML
-    TableColumn<Score, String> nameColumn;
-    @FXML
-    TableColumn timeColumn;
-    @FXML
-    TableColumn deathsColumn;
-    @FXML
-    Button backButton;
+    @FXML private TableView tableView;
+    @FXML private TableColumn<Score, String> nameColumn;
+    @FXML private TableColumn timeColumn;
+    @FXML private TableColumn deathsColumn;
+    @FXML private Button backToMenuButton;
 
     public void setTableData(List<Score> highScores) {
-
         tableView.setItems(FXCollections.observableArrayList(highScores));
         nameColumn.setCellValueFactory(new PropertyValueFactory<Score, String>("playerName"));
         timeColumn.setCellValueFactory(new PropertyValueFactory<Score, String>("timeString"));
@@ -39,6 +30,7 @@ public class ScoresController {
     @FXML
     public void initialize() {
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        backToMenuButton.requestFocus();
     }
 
     @FXML

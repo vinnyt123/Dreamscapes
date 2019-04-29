@@ -15,9 +15,20 @@ public class GameManager extends StackPane {
     private MainMenuState mainMenuState;
     private PlayingState playingState;
     private HighScores highScores;
+    FadeTransition ft;
 
     public GameManager() {
         super();
+    }
+
+    public void setUp() {
+        mainMenuState = new MainMenuState(this);
+        playingState = new PlayingState(keysPressed);
+        playingState.loadMaps();
+        setUpHashSet();
+        setUpGameLoop();
+        switchToMenu();
+        deserializeHighScores();
     }
 
     public void switchToMenu() {
@@ -25,21 +36,28 @@ public class GameManager extends StackPane {
         this.setStyle("-fx-background-color: black;");
         playingState.removeGameOver();
         this.getChildren().add(mainMenuState);
+        ft = new FadeTransition(Duration.millis(1000), mainMenuState);
+        ft.setFromValue(0.0);
+        ft.setToValue(1.0);
+        ft.setCycleCount(1);
+        ft.play();
         mainMenuState.setScreen(MainMenuState.mainMenuID);
         gameLoop.stop();
     }
 
     public void switchToPlayingGame() {
-        this.getChildren().clear();
-        this.getChildren().add(playingState);
-        playingState.newGame();
+        ft = new FadeTransition(Duration.millis(1000), mainMenuState);
+        ft.setFromValue(1.0);
+        ft.setToValue(0.0);
+        ft.setCycleCount(1);
+        ft.play();
+        ft.setOnFinished( e -> {
+            this.getChildren().clear();
+            this.getChildren().add(playingState);
+            playingState.newGame();
+            gameLoop.start();
+        });
     }
-
-    public void startGameLoop() {
-        gameLoop.start();
-    }
-
-
 
     void restartLevel() {
         playingState.restartMap();
@@ -96,20 +114,8 @@ public class GameManager extends StackPane {
 
     public void setUpHashSet() {
 
-        this.setOnKeyPressed(e -> {
-            keysPressed.add(e.getCode().toString());
-        });
-
+        this.setOnKeyPressed(e -> keysPressed.add(e.getCode().toString()));
         this.setOnKeyReleased(e -> keysPressed.remove(e.getCode().toString()));
-    }
-
-    public void setUp() {
-        mainMenuState = new MainMenuState(this);
-        playingState = new PlayingState(keysPressed);
-        setUpGameLoop();
-        switchToMenu();
-        setUpHashSet();
-        deserializeHighScores();
     }
 
     private void deserializeHighScores() {

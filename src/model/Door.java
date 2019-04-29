@@ -12,6 +12,7 @@ public class Door extends GameObject {
     private String mapDoorIsOn;
     private static final Image DOOR_IMAGE = new Image("images/door.png");
     private Line teleportLine;
+    private int intersectCount = 0;
 
 
     Door(String mapToSwitch, Rectangle rectangle, String mapDoorIsOn) {
@@ -30,7 +31,10 @@ public class Door extends GameObject {
     @Override
     public void intersect(Entity entity) {
         if (entity instanceof Player && teleportLine.getBoundsInParent().intersects(entity.getBounds())) {
-            ((PlayingState) this.getScene().getRoot().getChildrenUnmodifiable().get(0)).setMap(mapToSwitch, mapDoorIsOn);
+            intersectCount++;
+            if(intersectCount == 1) {
+                ((PlayingState) this.getScene().getRoot().getChildrenUnmodifiable().get(0)).setMap(mapToSwitch);
+            }
         }
     }
 

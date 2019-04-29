@@ -109,7 +109,7 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="3032.0" layoutY="1682.0" stroke="BLACK" strokeType="INSIDE" width="336.0" /><Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="683.0" layoutX="5034.0" layoutY="375.0" stroke="BLACK" strokeType="INSIDE" width="77.0" />
       <Rectangle id="door_Level1" arcHeight="5.0" arcWidth="5.0" fill="#ff13b4" height="74.0" layoutX="2424.0" layoutY="1389.0" stroke="BLACK" strokeType="INSIDE" width="47.0" />
        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="682.0" layoutX="3966.0" layoutY="375.0" stroke="BLACK" strokeType="INSIDE" width="232.0" />
-      <Circle id="playerSpawn_Level1" fill="DODGERBLUE" layoutX="2394.0" layoutY="1391.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="playerSpawn_Level1" fill="DODGERBLUE" layoutX="2322.0" layoutY="1377.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
       <Rectangle id="potion1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="4098.0" layoutY="1499.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
       <Circle id="playerSpawn" fill="DODGERBLUE" layoutX="154.0" layoutY="1768.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="2423.0" layoutY="1364.0" stroke="BLACK" strokeType="INSIDE" width="68.0" />

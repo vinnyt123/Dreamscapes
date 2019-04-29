@@ -30,14 +30,12 @@ public class Map extends Pane {
     private static final double VIEWPORTHEIGHT = 480;
 
     private String mapId;
-    private String mapFrom;
 
 
     public Map(Pane pane, Player player, String mapId, String mapFrom) {
         super();
         this.player = player;
         this.mapId = mapId;
-        this.mapFrom = mapFrom;
         this.WIDTH = pane.getBoundsInParent().getWidth();
         this.HEIGHT = pane.getBoundsInParent().getHeight();
         //this.setPrefWidth(pane.getPrefWidth());
@@ -110,7 +108,7 @@ public class Map extends Pane {
         this.getChildren().addAll(gameObjects);
         this.getChildren().addAll(enemies);
         this.getChildren().addAll(items);
-        //this.getChildren().add(darkness);
+        this.getChildren().add(this.player);
         for (WalkingEnemySpawner spawner : spawners) {
             spawner.setUpCollisions();
         }
@@ -213,5 +211,10 @@ public class Map extends Pane {
 
     String getMapId() {
         return mapId;
+    }
+
+    public void bringPlayerForward() {
+        this.getChildren().remove(player);
+        this.getChildren().add(player);
     }
 }
