@@ -3,6 +3,7 @@ package controllers;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -14,11 +15,17 @@ import java.util.List;
 
 public class ScoresController {
 
-    @FXML private TableView tableView;
-    @FXML private TableColumn<Score, String> nameColumn;
-    @FXML private TableColumn timeColumn;
-    @FXML private TableColumn deathsColumn;
-    @FXML private Button backToMenuButton;
+    @FXML
+    TableView tableView;
+    @FXML
+    TableColumn<Score, String> nameColumn;
+    @FXML
+    TableColumn timeColumn;
+    @FXML
+    TableColumn deathsColumn;
+
+    @FXML
+    Button backButton2;
 
     public void setTableData(List<Score> highScores) {
         tableView.setItems(FXCollections.observableArrayList(highScores));
@@ -30,7 +37,8 @@ public class ScoresController {
     @FXML
     public void initialize() {
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        backToMenuButton.requestFocus();
+        tableView.setPlaceholder(new Label("No High Scores Saved"));
+        //backButton2.requestFocus();
     }
 
     @FXML
