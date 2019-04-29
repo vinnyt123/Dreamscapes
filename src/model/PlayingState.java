@@ -162,6 +162,9 @@ public class PlayingState extends StackPane {
     }
 
     void newGame() {
+        if (!this.getChildren().contains(pauseMenuLayer)) {
+            this.getChildren().add(pauseMenuLayer);
+        }
         secondsPassed = 0;
         player = new Player(keysPressed);
         setMap(STARTING_LEVEL, null);
