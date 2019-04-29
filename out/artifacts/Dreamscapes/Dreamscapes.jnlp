@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Dreamscapes.jar" size="3216160" download="eager" />
+    <jar href="Dreamscapes.jar" size="3216203" download="eager" />
   </resources>
   <jfx:javafx-desc  width="1440" height="900" main-class="model.Main"  name="Dreamscapes" />
   <update check="background"/>
