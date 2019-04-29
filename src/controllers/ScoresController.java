@@ -26,8 +26,9 @@ public class ScoresController {
     TableColumn timeColumn;
     @FXML
     TableColumn deathsColumn;
+
     @FXML
-    Button backButton;
+    Button backButton2;
 
     public void setTableData(List<Score> highScores) {
 
@@ -41,6 +42,7 @@ public class ScoresController {
     public void initialize() {
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tableView.setPlaceholder(new Label("No High Scores Saved"));
+        //backButton2.requestFocus();
     }
 
     @FXML
