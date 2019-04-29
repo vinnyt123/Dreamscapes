@@ -12,7 +12,7 @@
    <children>
       <HBox alignment="CENTER" layoutY="137.0" prefHeight="700.0" prefWidth="1440.0">
          <children>
-            <TableView fx:id="tableView" prefHeight="100.0" prefWidth="660.0" stylesheets="@../resources/Styles.css">
+            <TableView fx:id="tableView" prefHeight="700.0" prefWidth="660.0" stylesheets="@../resources/Styles.css">
               <columns>
                 <TableColumn fx:id="nameColumn" prefWidth="218.0" resizable="false" text="Name" />
                 <TableColumn fx:id="timeColumn" prefWidth="218.0" resizable="false" text="Time" />
