@@ -2,10 +2,10 @@
 
 Rowan Hart and Vincent Tunnell.
 
-To run the jar, navigate to out > artifacts > Dreamscapes > Dreamscapes.jar and download it. Place the jar file on your desktop and use command prompt (or terminal) and type:
+To run the jar, first of all ensure you have Java installed. On GitHub navigate to out > artifacts > Dreamscapes > Dreamscapes.jar and download it. Place the jar file on your desktop and use command prompt (or terminal) and type:
 
 cd Desktop
 
 java -jar Dreamscapes.jar
 
-The game will automatically run. 
+After a brief pause the game will launch. For best results use on Windows, though it also does run Linux.
