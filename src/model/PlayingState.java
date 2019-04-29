@@ -38,8 +38,8 @@ public class PlayingState extends StackPane {
     private final String PAUSE_KEY = "P";
     private final String EXIT_KEY = "ESCAPE";
     private final String BOSS_LEVEL_KEY = "PAGE_DOWN";
-    private final String NEXT_MAP_KEY = "END";
-    private final String PREVIOUS_MAP_KEY = "HOME";
+    private final String NEXT_MAP_KEY = "W";
+    private final String PREVIOUS_MAP_KEY = "Q";
 
     private static String pauseMenuFile = "view/PauseMenu.fxml";
     private static String tutorialID = "Tutorial";
@@ -153,7 +153,6 @@ public class PlayingState extends StackPane {
         ft.setToValue(1.0);
         ft.setCycleCount(1);
         ft.play();
-
         requestFocus();
     }
 
@@ -198,6 +197,7 @@ public class PlayingState extends StackPane {
 
     void restartMap() {
         currentMap = new Map(mapsMap.get(currentMap.getMapId()), player, currentMap.getMapId(), null);
+        currentMap.parseFXML();
         mapLayer.getChildren().clear();
         mapLayer.getChildren().add(currentMap);
         currentMap.bringPlayerForward();
